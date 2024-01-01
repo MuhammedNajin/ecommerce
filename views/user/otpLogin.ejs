@@ -1,0 +1,43 @@
+<%- include('../layout/header.ejs') -%>
+
+    <div class="wrapper">
+
+        <div class="" style="margin-left: 4rem;">
+            <img src="img/logo.png" alt="">
+        </div>
+
+        <!-- <h2>Sign in</h2> -->
+
+        <form id="myform" action="/otp" method="get">
+
+            <div class="input-box">
+                <input type="text" name="email" placeholder="Enter your email" id="input" required>
+                <input type="text" name="is" hidden value="true">;
+            </div>
+            <div class="input-box button">
+                <input type="Submit" value="Verify">
+            </div>
+
+
+
+
+
+
+        </form>
+    </div>
+
+    <!-- <script>
+        const form = document.getElementById('myform');
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault(); 
+
+            const email = document.getElementById('input').value;
+
+            console.log(form);
+            form.action = "/otp?email=" + encodeURIComponent(email);
+            form.submit();
+        });
+    </script> -->
+
+    <%- include('../layout/footer.ejs') -%>

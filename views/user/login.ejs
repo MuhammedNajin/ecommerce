@@ -1,0 +1,46 @@
+<%- include('../layout/header.ejs') -%>
+
+<div class="wrapper">
+   
+    <div class="" style="margin-left: 4rem;">
+        <img src="img/logo.png" alt="">
+    </div>
+
+    <!-- <h2>Sign in</h2> -->
+
+    <form action="/login" method="post">
+     
+      <div class="input-box">
+        <input type="text" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="input-box">
+        <input type="password"  name="password" placeholder="Enter password" required>
+      </div>
+     
+      <div class="text">
+        <h3><a href="#" style="color: rgb(48, 94, 150); margin-left: 10rem">Forgotten password?</a></h3>
+      </div>
+
+      <!-- <div class="input-box button">
+        <input type="Submit" value="Log in">
+      </div> -->
+
+      <div class="btn-group pt-2" role="group" aria-label="Basic example">
+        <button type="submit" class="btn btn-outline-dark" style="padding: .7rem 4rem">Log in</button>
+        <a href="/otpLogin" class="btn btn-outline-dark"style="padding: .7rem 3.5rem">OTP Login</a>
+        
+      </div>
+
+      <div class="input-box" style="position: relative; ">
+        <img src="/img/google.png" alt="google logo"  style=" position:absolute; width: 30px; height:30px; top: .5rem; left: 9px;">
+        <a href="" class="btn btn-outline-dark" style="padding-top: .7rem;  padding-bottom: .7rem;  width: 22.5rem;">Log in with google</a>
+      </div>
+
+
+      <div class="text pt-1">
+        <h3>Don't have an account? <a href="/signup" style="color: rgb(48, 94, 150); ">Sign up</a></h3>
+      </div>
+    </form>
+  </div>
+
+<%- include('../layout/footer.ejs') -%>
