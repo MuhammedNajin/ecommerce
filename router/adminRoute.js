@@ -1,6 +1,10 @@
 const express = require('express');
 const admin_route = express();
-const admin_controller = require('../controller/adminController')
+const admin_controller = require('../controller/adminController');
+const product_controller = require('../controller/product');
+const cetagory_contorller = require('../controller/cetagoryController');
+
+const multer = require('../middleware/multer');
 
 
 
@@ -29,16 +33,23 @@ admin_route.get('/addProduct', admin_controller.loadAddProduct);
 
 // load cetagory 
 
-admin_route.get('/cetagory', admin_controller.loadCategory);
+admin_route.get('/cetagory', cetagory_contorller.loadCategory);
 
 // load add cetagory
 
-admin_route.post('/addCetagory', admin_controller.AddCetogory);
+admin_route.post('/addCetagory', cetagory_contorller.AddCetogory);
 
 // cetagory list / Unlist
 
-admin_route.post('/listCetagory', admin_controller.listCetagory);
+admin_route.post('/listCetagory', cetagory_contorller.listCetagory);
 
+// edit cetagory 
+
+admin_route.post('/editCetagory', cetagory_contorller.editCetagory);
+
+// add-product 
+
+admin_route.post('/add-product',multer.array('images'), product_controller.addproduct);
 
 
 

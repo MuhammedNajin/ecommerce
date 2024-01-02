@@ -149,7 +149,7 @@
                                         </div>
                                         <div class="col-lg-2 col-6">
                                             
-                                            <button class="btn btn-sm btn-dark" onclick="openModal()">Open Modal</button>
+                                            <button class="btn btn-sm btn-dark" onclick="openModal()">Add cetagory</button>
                                         </div>
                                         <div id="myModal" class="POPUP">
                                             <div class="popup-content">
@@ -159,6 +159,19 @@
                                               <button   onclick="sendMessage()" class="btn btn-sm btn-primary text-end mt-2">Add</button>
                                             </div>
                                         </div>
+
+
+                                        <div id="editmodal" class="POPUP">
+                                            <div class="popup-content">
+                                              <span class="close-btn" onclick="closeUpdate()">&times;</span>
+                                              <h2 class="mt-2 text-success">Add your wish</h2>
+                                              <input type="text" hidden value="" id="id">
+                                              <input type="text" class="form-control mt-2 text-primary"  name="cetagory" id="editFeild">
+                                              <button   onclick="editCetagory()" class="btn btn-sm btn-primary text-end mt-2">update</button>
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </header>
                                 <!-- card-header end// -->
@@ -186,6 +199,7 @@
                                                 <td><%= cetagory.isListed ? 'List' : 'Unlist' %></td>
                                                 <td class="text-end">
                                                     <button onclick="list('<%= cetagory._id %>')" id="list" data-id="<%= cetagory._id %>" class="btn  btn-dark font-sm "  ><%= cetagory.isListed ? 'Unlist' : 'list' %></button>
+                                                    <button onclick="edit('<%= cetagory.name %>', '<%= cetagory._id %>')" id="edit" data-id="<%= cetagory._id %>" data-update="<%= cetagory.name %>" class="btn  btn-outline-dark font-sm "  >Edit</button>
                                                 </td>
                                             </tr>
                                             
@@ -343,6 +357,61 @@ function openModal() {
   }
 
 
+
+  
+function edit(value, id) {
+    document.getElementById('editmodal').style.display = 'flex';
+    const btn = document.getElementById('edit');
+   
+    console.log(value);
+    console.log(id);
+    const idInput = document.getElementById('id');
+    const input = document.getElementById('editFeild');
+    // input.value = value;
+    idInput.value = id;
+
+
+  }
+
+  function closeUpdate() {
+    document.getElementById('editmodal').style.display = 'none';
+  }
+
+  function editCetagory() {
+    const id = document.getElementById('id');
+    const input = document.getElementById('editFeild');
+
+   var data = {
+    id: id.value,
+    data: input.value
+};
+    
+     console.log(input.value, 'POST')
+
+     if(data) {
+        $.ajax({
+            type: 'POST',
+            url: '/admin/editCetagory',
+            data: JSON.stringify(data),
+            contentType: 'application/JSON',
+            success: (res) => {
+                if(res.updated) {
+                    $('#AreaReload').load('/admin/cetagory #AreaReload');
+                } else {
+                    return console.log('error');
+                }
+            }
+
+        })
+     } else {
+        console.log('did not received data from edit cetagory');
+     }
+    closeUpdate();
+  }
+
+
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+

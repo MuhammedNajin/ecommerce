@@ -80,18 +80,18 @@
                         <div class="content-header">
                             <h2 class="content-title">Add New Product</h2>
                             <div>
-                                <button class="btn btn-light rounded font-sm mr-5 text-body hover-up">Save to draft</button>
-                                <button class="btn btn-md rounded font-sm hover-up">Publich</button>
+                                <button class="btn btn-dark font-sm mr-5 ">Save to draft</button>
+                                <!-- <button class="btn btn-md rounded font-sm hover-up">Publich</button> -->
                             </div>
                         </div>
                     </div>
                     <div class="col-lg-8">
                         <div class="card mb-4">
-                            <div class="card-header">
+                            <!-- <div class="card-header">
                                 <h4>Basic</h4>
-                            </div>
+                            </div> -->
                             <div class="card-body">
-                                <form>
+                                <form action="/admin/add-product" method="post" enctype="multipart/form-data">
                                     <div class="mb-4">
                                         <label for="product_name" class="form-label">Product title</label>
                                         <input type="text" placeholder="Type here" name="pname" class="form-control" id="product_name" />
@@ -105,26 +105,100 @@
                                             <div class="mb-4">
                                                 <label class="form-label">Regular price</label>
                                                 <div class="row gx-2">
-                                                    <input placeholder="$" type="text" class="form-control" />
+                                                    <input placeholder="₹" name="price" type="text" class="form-control" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-4">
                                                 <label class="form-label">Offer price</label>
-                                                <input placeholder="$" type="text" class="form-control" />
+                                                <input placeholder="₹" name="offer" type="text" class="form-control" />
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
+
+                                        <div class="col-sm-6 mb-3">
+                                            <label class="form-label">Category</label>
+                                            <select class="form-select" name="cetagory">
+
+                                                <%for(let i = 0; i < cetagory.length; i++) {%>
+                                                
+                                                    <option value=""><%= cetagory[i].name %></option>
+                                                    <%console.log(cetagory[i])%>
+                                                
+                                                <%}%>
+
+                                               <%console.log( cetagory[0].name) %>
+                                                
+                                            </select>
+                                        </div>
+                                        <!-- <div class="col-lg-4">
                                             <label class="form-label"></label>
                                             <input class=""></input>
-                                        </div>
+                                        </div> -->
                                     </div>
-                                    <div class="mb-4">
+                                     
+                                    <label class="form-label">Add Size</label>
+
+                                   <div class="row " style="margin-left: 1rem; margin-bottom: 1rem;">
+
+                                    <div class="form-check col-lg-2">
+                                        <input class="form-check-input" name="size" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                          S
+                                        </label>
+                                      </div>
+                                    <div class="form-check col-lg-2">
+                                        <input class="form-check-input" name="size" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                          M
+                                        </label>
+                                      </div>
+                                    <div class="form-check col-lg-2">
+                                        <input class="form-check-input" name="size" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                          L
+                                        </label>
+                                      </div>
+                                    <div class="form-check col-lg-2">
+                                        <input class="form-check-input" name="size" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                          XL
+                                        </label>
+                                      </div>
+                                    <div class="form-check col-lg-2">
+                                        <input class="form-check-input" name="size" type="checkbox" value="" id="defaultCheck1">
+                                        <label class="form-check-label" for="defaultCheck1">
+                                          XXL
+                                        </label>
+                                      </div>
+
+                                   </div>
+                                   
+                                      
+                                    <!-- <div class="mb-4">
                                         <label class="form-label">Tax rate</label>
                                         <input type="text" placeholder="%" class="form-control" id="product_name" />
+                                    </div> -->
+
+                                    <label class="form-label">Add images</label>
+
+                                    <div class="" style="display: flex; margin: 1rem;">
+                                        
+                                        <%for(let i = 0; i < 4; i++) {%>
+                                            
+                                            <div class="mb-4 col-lg-3 me-2">
+                                                <img src="" id="image + <%= i %>" alt="Product image" style="width: 100px; height: 100px; margin-bottom: 1.5rem;">
+                                                
+                                                 <input type="file" accept="image/*" placeholder="Add image" name="images" class="form-control" id="product_name" />
+                                             </div>
+                                         
+                                     <%}%>
+                                    
+                                    
                                     </div>
-                                   
+                                    
+                                    
+                                   <button class="btn btn-dark ">Add</button>
                                 </form>
                             </div>
                         </div>

@@ -127,92 +127,19 @@ module.exports.loadPoduct = (req, res) => {
 
 module.exports.loadAddProduct = (req, res) => {
     try {
-        res.render('addProduct');
-    } catch (error) {
-        console.log(error);
-    }
-}
 
-// load cetagory
-
-module.exports.loadCategory = (req, res) => {
-    try {
         return Catagery.find()
         .then((data) => {
-            if(data) {
-            res.render('Catagery', {cetagorys: data});
-            } 
-        })
-        
-    } catch (error) {
-        console.log(error);
-    }
-}
-
-// add cetagory
-
-module.exports.AddCetogory = (req, res) => {
-    try {
-
-        const data = req.body.data;
-        if(data) {
-            const cetagory = new Catagery({
-                name: data,
-                isListed: true,
-
-            })
-
-            return cetagory.save()
-            .then((saved) => {
-                if(saved) {
-                  res.json({saved: true});
-                }
-            })
-            .catch((err) => {
-                console.log('err');
-            })
-
-        } else {
-            console.log('data did not recived....');
-        }
-       
-
-    } catch (error) {
-        console.log(error)
-    }
-}
-
-module.exports.listCetagory = (req, res) => {
-    try {
-        console.log('Reiched at list?')
-        const id = req.body.data;
-        console.log(id);
-        return Catagery.findOne({_id: id})
-        .then((user) => {
-            if(user.isListed) {
-
-                return Catagery.updateOne({_id: id},{
-                    $set: {
-                        isListed: false,
-                    }
-                })
-
-            } else{
-                return Catagery.updateOne({_id: id}, {
-                    $set: {
-                        isListed: true,
-                    }
-                })
-            }
-        })
-        .then(() => {
-             res.json({listed: true});
+            console.log(data[1].name);
+            res.render('addProduct', {cetagory: data})
         })
         .catch((err) => {
             console.log(err);
         })
-        
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }
+
+
+
