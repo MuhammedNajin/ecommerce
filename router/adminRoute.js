@@ -52,6 +52,9 @@ admin_route.post('/editCetagory', cetagory_contorller.editCetagory);
 admin_route.post('/add-product',multer.array('images'), product_controller.addproduct);
 
 
+admin_route.post('/listProduct', product_controller.listProduct);
+
+
 
 
 

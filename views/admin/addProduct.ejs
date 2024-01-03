@@ -115,6 +115,18 @@
                                                 <input placeholder="₹" name="offer" type="text" class="form-control" />
                                             </div>
                                         </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-4">
+                                                <label class="form-label">Color</label>
+                                                <input placeholder="eg:- red, green, yellow" name="color" type="text" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4">
+                                            <div class="mb-4">
+                                                <label class="form-label">Stock</label>
+                                                <input placeholder="Add stock" name="stock" type="text" class="form-control" />
+                                            </div>
+                                        </div>
 
                                         <div class="col-sm-6 mb-3">
                                             <label class="form-label">Category</label>
@@ -122,8 +134,8 @@
 
                                                 <%for(let i = 0; i < cetagory.length; i++) {%>
                                                 
-                                                    <option value=""><%= cetagory[i].name %></option>
-                                                    <%console.log(cetagory[i])%>
+                                                    <option value="<%= cetagory[i].name %>"><%= cetagory[i].name %></option>
+                                                    
                                                 
                                                 <%}%>
 
@@ -142,31 +154,31 @@
                                    <div class="row " style="margin-left: 1rem; margin-bottom: 1rem;">
 
                                     <div class="form-check col-lg-2">
-                                        <input class="form-check-input" name="size" type="checkbox" value="" id="defaultCheck1">
+                                        <input class="form-check-input" name="size" type="checkbox" value="S" id="defaultCheck1">
                                         <label class="form-check-label" for="defaultCheck1">
                                           S
                                         </label>
                                       </div>
                                     <div class="form-check col-lg-2">
-                                        <input class="form-check-input" name="size" type="checkbox" value="" id="defaultCheck1">
+                                        <input class="form-check-input" name="size" type="checkbox" value="M" id="defaultCheck1">
                                         <label class="form-check-label" for="defaultCheck1">
                                           M
                                         </label>
                                       </div>
                                     <div class="form-check col-lg-2">
-                                        <input class="form-check-input" name="size" type="checkbox" value="" id="defaultCheck1">
+                                        <input class="form-check-input" name="size" type="checkbox" value="L" id="defaultCheck1">
                                         <label class="form-check-label" for="defaultCheck1">
                                           L
                                         </label>
                                       </div>
                                     <div class="form-check col-lg-2">
-                                        <input class="form-check-input" name="size" type="checkbox" value="" id="defaultCheck1">
+                                        <input class="form-check-input" name="size" type="checkbox" value="XL" id="defaultCheck1">
                                         <label class="form-check-label" for="defaultCheck1">
                                           XL
                                         </label>
                                       </div>
                                     <div class="form-check col-lg-2">
-                                        <input class="form-check-input" name="size" type="checkbox" value="" id="defaultCheck1">
+                                        <input class="form-check-input" name="size" type="checkbox" value="XXL" id="defaultCheck1">
                                         <label class="form-check-label" for="defaultCheck1">
                                           XXL
                                         </label>

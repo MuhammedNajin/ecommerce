@@ -2,6 +2,7 @@
 const User = require('../models/userModel');
 const Catagery = require('../models/cetagory');
 const bcrypt = require('bcrypt');
+const product = require('../models/product');
 
 
 
@@ -117,7 +118,11 @@ module.exports.blockUser = (req, res) => {
 // load product management page 
 module.exports.loadPoduct = (req, res) => {
     try {
-        res.render('adminProducts')
+        return product.find().populate('cetagory')
+        .then((data) => {
+            res.render('adminProducts', {products: data});
+        })
+        
     } catch (error) {
         console.log(error);
     }

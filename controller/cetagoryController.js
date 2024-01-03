@@ -1,4 +1,4 @@
-
+const Catagery = require('../models/cetagory')
 
 module.exports.loadCategory = (req, res) => {
     try {
