@@ -51,9 +51,22 @@ admin_route.post('/editCetagory', cetagory_contorller.editCetagory);
 
 admin_route.post('/add-product',multer.array('images'), product_controller.addproduct);
 
-
+// list / unlist product 
 admin_route.post('/listProduct', product_controller.listProduct);
 
+
+// load variant
+admin_route.get('/loadVariant/:id', product_controller.loadVariant);
+
+// add variant 
+
+admin_route.post('/addVariant', multer.array('images'), product_controller.addVariant);
+
+// load edit variant
+
+admin_route.get('/edit-variant', product_controller.LoadeditVariant);
+
+// 
 
 
 

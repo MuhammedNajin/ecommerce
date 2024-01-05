@@ -18,10 +18,7 @@ user_route.use(session({
 user_route.use(express.json());
 user_route.use(express.urlencoded({extended: true}));
 
-user_route.use((req, res, next) => {
-    console.log(req.url, req.method);
-    next()
-})
+
 
 user_route.use((req, res, next) => {
     res.locals.user = req.session.user || null;

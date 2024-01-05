@@ -162,9 +162,9 @@
                                                        <%= product.isListed ? 'Unlist' : 'List' %>
                                                     </button>
                                                     
-                                                    <button id="button" class="btn btn-sm btn-dark rounded font-sm mt-15" data-user-id="" data-status="" onclick="">
+                                                    <a href="/admin/loadVariant/<%= product._id %>" class="btn btn-sm btn-dark rounded font-sm mt-15" data-user-id="" data-status="">
                                                        variant
-                                                    </button>
+                                                    </a>
                                                 </td>
                                             </tr>
                                             <% }) %>
