@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
 
-// app.use((req, res, next) => {
-//     console.log( req.path, req.method);
-//     next()
-// })
+app.use((req, res, next) => {
+    console.log( req.path, req.method);
+    next()
+})
 
 app.set('view engine', 'ejs');
 

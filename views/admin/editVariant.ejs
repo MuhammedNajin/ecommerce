@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Nest Dashboard</title>
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="" />
-        <meta property="og:type" content="" />
-        <meta property="og:url" content="" />
-        <meta property="og:image" content="" />
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
-        <!-- Template CSS -->
-        <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
-    </head>
 
-    <body>
-        <%- include('../partials/sidenav.ejs') -%>
-        
+<head>
+    <meta charset="utf-8" />
+    <title>Nest Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
+    <!-- Template CSS -->
+    <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+    <%- include('../partials/sidenav.ejs') -%>
+
         <main class="main-wrap">
             <header class="main-header navbar">
                 <div class="col-search">
                     <form class="searchform">
                         <div class="input-group">
                             <input list="search_terms" type="text" class="form-control" placeholder="Search term" />
-                            <button class="btn btn-light bg" type="button"><i class="material-icons md-search"></i></button>
+                            <button class="btn btn-light bg" type="button"><i
+                                    class="material-icons md-search"></i></button>
                         </div>
                         <datalist id="search_terms">
                             <option value="Products"></option>
@@ -36,7 +38,8 @@
                     </form>
                 </div>
                 <div class="col-nav">
-                    <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"><i class="material-icons md-apps"></i></button>
+                    <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"><i
+                            class="material-icons md-apps"></i></button>
                     <ul class="nav">
                         <li class="nav-item">
                             <a class="nav-link btn-icon" href="#">
@@ -45,30 +48,44 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
+                            <a class="nav-link btn-icon darkmode" href="#"> <i
+                                    class="material-icons md-nights_stay"></i> </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
+                            <a href="#" class="requestfullscreen nav-link btn-icon"><i
+                                    class="material-icons md-cast"></i></a>
                         </li>
                         <li class="dropdown nav-item">
-                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
+                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
+                                aria-expanded="false"><i class="material-icons md-public"></i></a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                                <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png" alt="English" />English</a>
-                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png" alt="Français" />Français</a>
-                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png" alt="Français" />日本語</a>
-                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png" alt="Français" />中国人</a>
+                                <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png"
+                                        alt="English" />English</a>
+                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png"
+                                        alt="Français" />Français</a>
+                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png"
+                                        alt="Français" />日本語</a>
+                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png"
+                                        alt="Français" />中国人</a>
                             </div>
                         </li>
                         <li class="dropdown nav-item">
-                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="assets/imgs/people/avatar-2.png" alt="User" /></a>
+                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
+                                aria-expanded="false"> <img class="img-xs rounded-circle"
+                                    src="assets/imgs/people/avatar-2.png" alt="User" /></a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                                <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit Profile</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account Settings</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-account_balance_wallet"></i>Wallet</a>
+                                <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
+                                    Profile</a>
+                                <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
+                                    Settings</a>
+                                <a class="dropdown-item" href="#"><i
+                                        class="material-icons md-account_balance_wallet"></i>Wallet</a>
                                 <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a>
+                                <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
+                                    center</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#"><i class="material-icons md-exit_to_app"></i>Logout</a>
+                                <a class="dropdown-item text-danger" href="#"><i
+                                        class="material-icons md-exit_to_app"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -79,10 +96,7 @@
                     <div class="col-9">
                         <div class="content-header">
                             <h2 class="content-title">Add New Product</h2>
-                            <div>
-                                <button class="btn btn-dark font-sm mr-5 ">Save to draft</button>
-                                <!-- <button class="btn btn-md rounded font-sm hover-up">Publich</button> -->
-                            </div>
+
                         </div>
                     </div>
                     <div class="col-lg-8">
@@ -91,15 +105,26 @@
                                 <h4>Basic</h4>
                             </div> -->
                             <div class="card-body">
-                                <form action="/admin/add-product" method="post" enctype="multipart/form-data">
-                                    
-                                    
+                                <form action="/admin/editVariant" method="post" enctype="multipart/form-data">
+                                    <div class="mb-4">
+                                        <label for="product_name" class="form-label">Product title</label>
+                                        <input type="text" name="id" hidden value="<%= id %>">
+                                        <input type="text" name="index" hidden value="<%= index %>">
+                                        <input type="text" placeholder="Type here" name="pname" class="form-control"
+                                            id="product_name" />
+                                    </div>
+                                    <div class="mb-4">
+                                        <label class="form-label">Full description</label>
+                                        <textarea placeholder="Type here" name="description" class="form-control"
+                                            rows="4"></textarea>
+                                    </div>
                                     <div class="row">
                                         <div class="col-lg-4">
                                             <div class="mb-4">
                                                 <label class="form-label">Regular price</label>
                                                 <div class="row gx-2">
-                                                    <input placeholder="₹" value=""  name="price" type="text" class="form-control" />
+                                                    <input placeholder="₹" name="price" type="text"
+                                                        class="form-control" />
                                                 </div>
                                             </div>
                                         </div>
@@ -112,57 +137,64 @@
                                         <div class="col-lg-4">
                                             <div class="mb-4">
                                                 <label class="form-label">Color</label>
-                                                <input placeholder="eg:- red, green, yellow" name="color" type="text" class="form-control" />
+                                                <input placeholder="eg:- red, green, yellow" name="color" type="text"
+                                                    class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-4">
                                                 <label class="form-label">Stock</label>
-                                                <input placeholder="Add stock" name="stock" type="text" class="form-control" />
+                                                <input placeholder="Add stock" name="stock" type="text"
+                                                    class="form-control" />
                                             </div>
                                         </div>
 
                                         
                                     </div>
-                                     
+
                                     <label class="form-label">Add Size</label>
 
-                                   <div class="row " style="margin-left: 1rem; margin-bottom: 1rem;">
+                                    <div class="row " style="margin-left: 1rem; margin-bottom: 1rem;">
 
-                                    <div class="form-check col-lg-2">
-                                        <input class="form-check-input" name="size" type="checkbox" value="S" id="defaultCheck1">
-                                        <label class="form-check-label" for="defaultCheck1">
-                                          S
-                                        </label>
-                                      </div>
-                                    <div class="form-check col-lg-2">
-                                        <input class="form-check-input" name="size" type="checkbox" value="M" id="defaultCheck1">
-                                        <label class="form-check-label" for="defaultCheck1">
-                                          M
-                                        </label>
-                                      </div>
-                                    <div class="form-check col-lg-2">
-                                        <input class="form-check-input" name="size" type="checkbox" value="L" id="defaultCheck1">
-                                        <label class="form-check-label" for="defaultCheck1">
-                                          L
-                                        </label>
-                                      </div>
-                                    <div class="form-check col-lg-2">
-                                        <input class="form-check-input" name="size" type="checkbox" value="XL" id="defaultCheck1">
-                                        <label class="form-check-label" for="defaultCheck1">
-                                          XL
-                                        </label>
-                                      </div>
-                                    <div class="form-check col-lg-2">
-                                        <input class="form-check-input" name="size" type="checkbox" value="XXL" id="defaultCheck1">
-                                        <label class="form-check-label" for="defaultCheck1">
-                                          XXL
-                                        </label>
-                                      </div>
+                                        <div class="form-check col-lg-2">
+                                            <input class="form-check-input" name="size" type="checkbox" value="S"
+                                                id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                S
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-lg-2">
+                                            <input class="form-check-input" name="size" type="checkbox" value="M"
+                                                id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                M
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-lg-2">
+                                            <input class="form-check-input" name="size" type="checkbox" value="L"
+                                                id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                L
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-lg-2">
+                                            <input class="form-check-input" name="size" type="checkbox" value="XL"
+                                                id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                XL
+                                            </label>
+                                        </div>
+                                        <div class="form-check col-lg-2">
+                                            <input class="form-check-input" name="size" type="checkbox" value="XXL"
+                                                id="defaultCheck1">
+                                            <label class="form-check-label" for="defaultCheck1">
+                                                XXL
+                                            </label>
+                                        </div>
 
-                                   </div>
-                                   
-                                      
+                                    </div>
+
+
                                     <!-- <div class="mb-4">
                                         <label class="form-label">Tax rate</label>
                                         <input type="text" placeholder="%" class="form-control" id="product_name" />
@@ -171,30 +203,32 @@
                                     <label class="form-label">Add images</label>
 
                                     <div class="" style="display: flex; margin: 1rem;">
-                                        
-                                        <%for(let i = 0; i < 4; i++) {%>
-                                            
+
+                                        <%for(let i=0; i < 4; i++) {%>
+
                                             <div class="mb-4 col-lg-3 me-2">
-                                                <img src="" id="image + <%= i %>" alt="Product image" style="width: 100px; height: 100px; margin-bottom: 1.5rem;">
-                                                
-                                                 <input type="file" accept="image/*" placeholder="Add image" name="images" class="form-control" id="product_name" />
-                                             </div>
-                                         
-                                     <%}%>
-                                    
-                                    
+                                                <img src="" id="image + <%= i %>" alt="Product image"
+                                                    style="width: 100px; height: 100px; margin-bottom: 1.5rem;">
+
+                                                <input type="file" accept="image/*" placeholder="Add image"
+                                                    name="images" class="form-control" id="product_name" />
+                                            </div>
+
+                                            <%}%>
+
+
                                     </div>
-                                    
-                                    
-                                   <button class="btn btn-dark ">Add</button>
+
+
+                                    <button class="btn btn-dark ">Add</button>
                                 </form>
                             </div>
                         </div>
-                     
-                       
+
+
                         <!-- card end// -->
                     </div>
-                    
+
                 </div>
             </section>
             <!-- content-main end// -->
@@ -219,5 +253,6 @@
         <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
         <!-- Main Script -->
         <script src="assets/js/main.js?v=1.1" type="text/javascript"></script>
-    </body>
+</body>
+
 </html>

@@ -3,10 +3,13 @@ const admin_route = express();
 const admin_controller = require('../controller/adminController');
 const product_controller = require('../controller/product');
 const cetagory_contorller = require('../controller/cetagoryController');
+const helper = require('../middleware/helper');
 
 const multer = require('../middleware/multer');
 
 
+admin_route.use(express.json());
+admin_route.use(express.urlencoded({extended: true}));
 
 
 admin_route.set('veiw engine', 'ejs');
@@ -66,7 +69,12 @@ admin_route.post('/addVariant', multer.array('images'), product_controller.addVa
 
 admin_route.get('/edit-variant', product_controller.LoadeditVariant);
 
-// 
+// edit variant
+
+
+
+admin_route.post('/editVariant', multer.array('images'), product_controller.editVariant);
+
 
 
 

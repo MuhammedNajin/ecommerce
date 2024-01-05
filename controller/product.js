@@ -3,7 +3,7 @@ const Product = require('../models/product');
 const Catagery = require('../models/cetagory');
 const path = require('node:path');
 const sharp = require('sharp');
-const { profileEnd } = require('node:console');
+
 
 
 
@@ -196,7 +196,9 @@ module.exports.LoadeditVariant = async (req, res) => {
              .then((data) => {
                 console.log(data);
                   const product = data.variant[index];
-                  res.render('editVariant');
+                  const id = data._id;
+                  console.log(product);
+                  res.render('editVariant', {product: product, id: id, index: index});
              })
              .catch((err) => console.log(err));
 
@@ -205,7 +207,7 @@ module.exports.LoadeditVariant = async (req, res) => {
              
 
         } else {
-            console.log('id not recieved ');
+            console.log('id not recieved in load variant ');
         }
 
         
@@ -214,5 +216,60 @@ module.exports.LoadeditVariant = async (req, res) => {
         
     } catch (error) {
         console.log(error);
+    }
+}
+
+
+module.exports.editVariant = async (req, res) => {
+    try {
+        console.log('recccccccccccccccc')
+        const id = req.body.id
+        const name = req.body.name;
+        const description = req.body.description;
+        const index = req.body.index;
+        console.log(name, description);
+        console.log(req.body)
+
+        const newImage = [];
+
+        for(let i = 0; i < req.files.length; i++) {
+            newImage.push(req.files[i].filename);
+        }
+
+        
+              
+          return  Product.findOne({_id: id}, {variant: 1})
+
+          .then((data) => {
+            console.log(data);
+
+            const images = data.variant[index].images;
+            console.log(images);
+               return images
+          })
+          .then((images) => {
+              
+              return Product.updateOne({_id: id}, {
+                 $set: {
+                    [`variant.${index}.price`]: req.body.price,
+                    [`variant.${index}.offerPrice`]: req.body.offer,
+                    [`variant.${index}.color`]: req.body.color,
+                    [`variant.${index}.size`]: req.body.size,
+                    [`variant.${index}.images`]: newImage,
+                    [`variant.${index}.stock`]: req.body.stock,
+                    
+                 }
+              })
+          })
+          .then(() => {
+            res.redirect(`/admin/edit-variant?index=${index}&id=${id}`);
+          })
+          .catch((err) => {
+            console.log(err, 'errr');
+          })
+
+    
+    } catch (error) {
+        console.log(error)
     }
 }
