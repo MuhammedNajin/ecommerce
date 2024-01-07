@@ -2,14 +2,20 @@ const User = require('../models/userModel');
 const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const verifyOtp = require('../models/otpVerification');
-const e = require('express');
+const Product = require('../models/product');
+
 
 
 
 // load home page
-module.exports.loadHome = (req, res) => {
+module.exports.loadHome = async (req, res) => {
     try {
-        res.render('home');
+      const product = await Product.find();
+
+      if(product) {
+        res.render('home', {product: product});
+      }
+       
     } catch (error) {
         console.log(error)
     }
