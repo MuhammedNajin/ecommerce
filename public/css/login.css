@@ -61,6 +61,7 @@ h6 {
     margin-top: 30px;
   }
   .wrapper form .input-box{
+    position: relative;
     height: 52px;
     margin: 18px 0;
     margin-bottom: 1.5rem;
@@ -69,6 +70,7 @@ h6 {
     height: 100%;
     width: 100%;
     outline: none;
+    position: relative;
     padding: 0 15px;
     font-size: 17px;
     font-weight: 400;
@@ -119,4 +121,8 @@ h6 {
   }
   .error{
     display: block;
+  }
+
+  .custom_alert{
+
   }

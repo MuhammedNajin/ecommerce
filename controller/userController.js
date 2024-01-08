@@ -10,13 +10,33 @@ const Product = require('../models/product');
 // load home page
 module.exports.loadHome = async (req, res) => {
     try {
-      const product = await Product.find({isListed: true}).populate('cetagory')
+
+         
+            // if(req.xhr) {
+            //     if(req.body.user) {
+                        
+            //         const user = await User.findOne({ _id: req.body.user.id });
+            //            if(user.session) {
+            //               req.session.user = {
+            //                      _id: user._id,
+            //                      email: user.email,
+            //                      name: user.name    
+            //                }
+            //            }
+                    
+
+            //     }
+            // }
+           
+         
+
+      const product = await Product.find({ isListed: true }).populate('cetagory')
 
       console.log(product)
 
 
       if(product) {
-        res.render('home', {product: product});
+        res.render('home', { product: product,});
       }
        
     } catch (error) {
@@ -58,8 +78,11 @@ module.exports.userLogin = async (req, res) => {
                             name: user.name,
                             email: user.email
                         }
-                        res.redirect('/');
+                        
+                        res.redirect(`/`);
                     } else {
+                        req.flash('pass', 'Enter correct password');
+                        res.redirect('/login')
                         console.log('enter correct password');
                     }
                 }
@@ -68,6 +91,8 @@ module.exports.userLogin = async (req, res) => {
                 console.log('user not verified');
             }
         } else {
+            req.flash('found', 'Email not found');
+            res.redirect('/login')
             console.log('user not found');
         }
     } catch (error) {
@@ -126,7 +151,7 @@ module.exports.insertUser = async (req, res) => {
             // console.log(user.email);
             if (save) {
                 sentOtp(user.email);
-                res.redirect(`/otp?email=${user.email}`);
+                res.redirect(`/otp?email=${ user.email }`);
             } else {
                 console.log('not saved....');
             }
@@ -241,8 +266,10 @@ module.exports.verifyOTP = async (req, res) => {
                         email: user.email,
                         name: user.name
                     }
+                    await User.updateOne({_id: user._id}, {$set: {session: true}});
                     await verifyOtp.deleteOne({ email: email })
-                    res.redirect('/');
+                    
+                    res.redirect(`/`);
                 } else {
                     console.log('user not found');
                 }
@@ -284,6 +311,8 @@ module.exports.otpLogin = async (req, res) => {
                     name: user.name,
                     email: user.email
                 }
+
+                await User.updateOne({_id: user._id}, {$set: {session: true}});
                 res.redirect('/');
 
             } else {
@@ -302,10 +331,15 @@ module.exports.otpLogin = async (req, res) => {
 
 // user logout
 
-module.exports.userLogout = (req, res) => {
+module.exports.userLogout = async (req, res) => {
     try {
-        req.session.user = null;
-        res.redirect('/');
+        // if(req.body.id) {
+            // await User.updateOne({_id: req.body.id}, {$set: {session: false}});
+            req.session.user = null;
+            res.redirect('/');
+
+        // }
+       
     } catch (error) {
         console.log(error)
     }

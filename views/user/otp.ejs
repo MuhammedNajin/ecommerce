@@ -34,10 +34,27 @@
                     <input type="Submit" value="Log in">
                 </div>
                                                
-                <div class="text pt-2" style="text-align: center;">     
+                <div class="text pt-2" style="text-align: center; margin-top: 2rem;">     
                     <span id="timer" class="time"></span>
                     <a href="#" id="resend" style="color: rgb(48, 94, 150); margin: 5px;">Resend</a>
                 </div>
+                   
+                <%if(messages.incorrect) {%>
+
+                    <div class="text text-danger">
+                        <span><%= messages.incorrect %></span>
+                   </div>
+
+                <%}%>
+
+                <%if(messages.expired) {%>
+
+                    <div class="text text-danger">
+                        <span><%= messages.expired %></span>
+                   </div>
+
+                <%}%>
+               
 
             </form>
     </div>

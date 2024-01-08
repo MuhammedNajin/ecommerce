@@ -2,11 +2,27 @@
 
 <div class="wrapper">
    
-    <div class="" style="margin-left: 4rem;">
+    <div class="" style="margin-left: 4rem; margin-bottom: 2rem;">
         <img src="img/logo.png" alt="">
     </div>
 
-    <!-- <h2>Sign in</h2> -->
+    <%if(messages.blocked) {%>
+
+      <div class="alert alert-danger" role="alert"><%= messages.blocked %></div>
+
+    <%}%>
+    <%if(messages.pass) {%>
+
+      <div class="alert alert-danger" role="alert"><%= messages.pass %></div>
+
+    <%}%>
+    <%if(messages.found) {%>
+
+      <div class="alert alert-danger" role="alert"><%= messages.found %></div>
+
+    <%}%>
+
+    <!-- <h2>Log in</h2> -->
 
     <form action="/login" method="post">
      

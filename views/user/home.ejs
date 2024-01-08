@@ -130,12 +130,27 @@
                                 </button>
                                 <ul class="dropdown-menu">
                                     <li><a class="dropdown-item" href="#">Action</a></li>
-                                    <li><a class="dropdown-item" href="/login">Login</a></li>
+
+                                    <%if(!locals.logedIn) {%>
+
+                                        <li><a class="dropdown-item" href="/login">Login</a></li>
+
+                                    <%}%>
+                                    
                                     
                                     <li>
+                                       <%if(locals.logedIn) {%>
                                         <form action="/logout" method="post">
-                                            <button class="dropdown-item" type="submit">Logout</button>
+
+                                            <button class="dropdown-item" id="btn" type="submit">Logout</button>
+
+
                                         </form>
+                                        
+                                        <!-- <button class="dropdown-item" id="btn" type="button">Logout</button> -->
+                                       
+                                       <%}%>
+                                            
                                     </li>
                                 </ul>
                         </div>
@@ -153,6 +168,48 @@
         </div>
     </header>
     <!-- Header Section End -->
+
+    <!-- <%if(locals.logedIn) {%>
+        <script>
+             document.addEventListener('DOMContentLoaded', function() {
+
+                const value = "<%= locals.user._id%>"
+                  localStorage.setItem('id', value);
+
+             })
+            
+          </script>
+    <%}%> -->
+
+    <!-- <%if(!locals.logedIn) {%>
+
+        <script>
+            document.addEventListener('DOMContentLoaded', () => {
+              // Retrieve data from localStorage
+              const id = localStorage.getItem('id');
+        
+              // Check if the username is present in localStorage
+              if (id) {
+                // Make an HTTP POST request to the backend
+                fetch('http://localhost:3000', {
+                  method: 'GET',
+                  headers: {
+                    'Content-Type': 'application/json',
+                  },
+                  body: JSON.stringify({ id }),
+                })
+                // .then(response => response.json())
+                // .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+              }
+            });
+          </script>
+
+
+
+    <%}%> -->
+
+    
 
     <!-- Hero Section Begin -->
     <section class="hero">
@@ -779,3 +836,30 @@
 </body>
 
 </html>
+
+
+<!-- <script>
+
+
+document.addEventListener('DOMContentLoaded', () => {
+
+    const logout = document.getElementById('btn')
+     const id = localStorage.getItem('id');
+    logout.addEventListener('click' , () => {
+       
+        fetch('http://localhost:3000/logout', {
+            method: 'POST',
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify(id)
+        })
+
+    })
+    .catch((err) => {
+        console.log(err)
+    })
+
+})
+    
+</script> -->

@@ -34,6 +34,10 @@ const userSchema = mongoose.Schema({
         type: Boolean
     },
 
+    session: {
+        type: Boolean,
+        default: false,
+    },
     created: {
         type: Date,
         default: Date.now

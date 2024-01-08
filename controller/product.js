@@ -48,6 +48,7 @@ module.exports.addproduct = async (req, res) => {
             name: req.body.pname,
             description: req.body.description,
             cetagory: cetagory._id,
+            brand: req.body.brand,
             variant: variant
         })
 

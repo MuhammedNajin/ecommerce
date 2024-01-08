@@ -6,6 +6,7 @@ const product_controller = require('../controller/product');
 user_route.set('view engine', 'ejs');
 user_route.set('views', './views/user');
 const shop_controller = require('../controller/shop');
+const User = require('../models/userModel');
 
 
 
@@ -23,10 +24,35 @@ user_route.use(express.urlencoded({extended: true}));
 
 
 user_route.use((req, res, next) => {
-    res.locals.user = req.session.user || null;
+    res.locals.user = req.session.user || null; 
     res.locals.logedIn = req.session.user ? true : false;
     next();
 }); 
+
+user_route.use(async (req, res , next) => {
+    const id = req.session.user?._id;
+    
+        const user = await User.findOne({_id: id});
+
+        if(user) {
+            if(user.isBlocked) {
+                
+
+                fetch('http://localhost:3000/logout', {
+                    method: 'POST'
+                })
+                .catch((err) => {
+                    console.log(err)
+                })
+                
+ 
+             } 
+ 
+
+        }
+            
+            next();
+})
 // load home
 user_route.get('/', user_controller.loadHome);
 

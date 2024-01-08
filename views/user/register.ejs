@@ -11,7 +11,7 @@
         
           <div id="error" class="error alert alert-danger pt-2 d-flex justify-content-center "  >
             <span class="error"  style="margin-right: 3rem;"><%= messages.uname %></span>
-          <span id="cross" class="error" ><i class="fa-solid fa-x" class="error"></i></span>
+          <!-- <span id="cross" class="error" ><i class="fa-solid fa-x" class="error"></i></span> -->
           </div>
         
 
@@ -27,30 +27,30 @@
 
     
 
-    <form action="/signUp" method="post">
+    <form action="/signUp" method="post" onsubmit="return validate()">
 
-        <div class="input-box">
-            <div class="text-danger alert-style" id="uError">hahah</div>
-            <input type="text" name="uname" id="uname" placeholder="Enter your name" required style="position: relative; z-index: 10;">
+        <div class="input-box" style="">
+            <div class="text-danger " id="userError" style="position: absolute; top: -22px; left: 6px;"></div>
+            <input type="text" name="uname" id="uname" placeholder="Enter your name"  style="padding: 10px; margin: 1rem, 0; ">
           </div>
 
         <div class="input-box">
-          <div class="text-danger alert-style">heljfgii</div>
-            <input type="email" name="email" id="email" placeholder="Enter your email" required style="position: relative; z-index: 10;">
+          <div class="text-danger" style="position: absolute; top: -22px; left: 6px;"></div>
+            <input type="email" name="email" id="email" placeholder="Enter your email" required style="padding: 10px; margin: 1rem, 0; ">
           </div>
 
         <div class="input-box">
-          <div class="text-danger alert-style">heljfgii</div>
-            <input type="tel" name="phone" id="phone" placeholder="Enter your phone" required style="position: relative; z-index: 10;">
+          <div class="text-danger" id="phoneErr" style="position: absolute; top: -22px; left: 6px;"></div>
+            <input type="tel" name="phone" id="phone" placeholder="Enter your phone"  style="padding: 10px; margin: 1rem, 0; ">
           </div>
      
       <div class="input-box">
-        <div class="text-danger alert-style">heljfgii</div>
-        <input type="password" name="password" id="password" placeholder="Create password" required style="position: relative; z-index: 10;">
+        <div class="text-danger" id="passwordError" style="position: absolute; top: -22px; left: 6px;"></div>
+        <input type="password" name="password" id="password" placeholder="Create password"  style="padding: 10px; margin: 1rem, 0; ">
       </div>
       <div class="input-box">
-        <div class="text-danger alert-style">heljfgii</div>
-        <input type="password"  name="conform" id="conform" placeholder="Comform password" required style="position: relative; z-index: 10;">
+        <div class="text-danger" id="passwordError2" style="position: absolute; top: -22px; left: 6px;"></div>
+        <input type="password"  name="conform" id="conform" placeholder="Comform password" style="padding: 10px; margin: 1rem, 0; ">
       </div>
      
       
