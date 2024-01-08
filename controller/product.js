@@ -280,10 +280,17 @@ module.exports.productdetiles = async (req, res) => {
         const {id, index} = req.query;
         console.log(id, index);
 
+        const product = await Product.findOne({_id: id})
+            if(req.xhr) {
+                console.log('ajax')
+                res.json({product: product, index: index});
+            } else {
+                res.render('productDetails', {product: product, index: index,});
+            }
     
-            const product = await Product.findOne({_id: id}, {})
+           
             
-        res.render('productDetails', {product: product, index: index,});
+        
 
     } catch (error) {
         console.log(error);

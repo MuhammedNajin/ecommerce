@@ -26,3 +26,12 @@ function validate() {
         console.log(error);
     }
 }
+
+
+
+
+    document.getElementById('cross')
+    .addEventListener('click', () => {
+        document.querySelector('.error')
+        .style.display = "none";
+    }, );

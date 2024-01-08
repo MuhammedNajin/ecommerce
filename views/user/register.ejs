@@ -2,9 +2,28 @@
 
 <div class="wrapper">
    
-    <div class="" style="margin-left: 4rem;">                         
+    <div class="" style="margin-left: 4rem; margin-bottom: 2rem;">                         
         <img src="img/logo.png" alt="">
     </div>
+
+      <%if(messages.uname) {%>
+
+        
+          <div id="error" class="error alert alert-danger pt-2 d-flex justify-content-center "  >
+            <span class="error"  style="margin-right: 3rem;"><%= messages.uname %></span>
+          <span id="cross" class="error" ><i class="fa-solid fa-x" class="error"></i></span>
+          </div>
+        
+
+      <%}%>
+
+      <%if(messages.email) {%>
+
+        <div class="alert alert-danger" role="alert"><%= messages.email %></div>
+
+      <%}%>
+      
+      
 
     
 

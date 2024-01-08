@@ -117,3 +117,6 @@ h6 {
   .login {
     
   }
+  .error{
+    display: block;
+  }

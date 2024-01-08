@@ -10,7 +10,10 @@ const Product = require('../models/product');
 // load home page
 module.exports.loadHome = async (req, res) => {
     try {
-      const product = await Product.find();
+      const product = await Product.find({isListed: true}).populate('cetagory')
+
+      console.log(product)
+
 
       if(product) {
         res.render('home', {product: product});
@@ -41,6 +44,8 @@ module.exports.userLogin = async (req, res) => {
             if (user.verified) {
 
                 if (user.isBlocked) {
+                    req.flash('blocked', 'You are blocked by admin');
+                    res.redirect('/login');
                     console.log('User is blocked');
                 } else {
                     const enteredPass = req.body.password;
@@ -99,9 +104,11 @@ module.exports.insertUser = async (req, res) => {
         const email = await User.findOne({ email: req.body.email });
 
         if (uname) {
-            console.log("user alredy exists");
+            req.flash('uname', 'Username already exists');
+            res.redirect('/signUp');
         } else if (email) {
-            console.log("email already exists");
+            req.flash('email', 'Email already exists');
+            res.redirect('/signUp');
         } else {
             const passHash = await bcrypt.hash(req.body.password, 10);
 
@@ -188,7 +195,7 @@ module.exports.loadotp = async (req, res) => {
         }
         console.log(req.query.email);
         const email = req.query.email || '******gmail.com';
-        // console.log("re", email)
+        
         const user = await User.findOne({ email: email })
         res.render('otp', { email: email, user: user });
 
@@ -240,9 +247,13 @@ module.exports.verifyOTP = async (req, res) => {
                     console.log('user not found');
                 }
             } else {
+                req.flash('incorrect', 'please enter valid otp')
+                res.redirect('/otp')
                 console.log('OTP is incorrect')
             }
         } else {
+                req.flash('expired', 'OTP experied resend ');
+                res.redirect('/otp')
             console.log('otp expired')
         }
 

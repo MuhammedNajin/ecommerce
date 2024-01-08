@@ -207,27 +207,13 @@
                                     <span>Color:</span>
 
                                     <%product.variant.map((el, i) => {%>
-                                        <span style="width: 50px; height: 50px;" class="c-1" for="sp-1">
+                                        <span style="width: 50px; height: 50px;" onclick="selectVariant('<%= product._id%>', '<%= i %>')" class="c-1" for="sp-1">
 
                                             <img  src="/img/productImage/sharp/<%= el.images[0] %>" alt="">
                                             
                                         </span>
                                     <%})%>
-                                    <!-- <label class="c-1" for="sp-1">
-                                        <input type="radio" id="sp-1">
-                                    </label>
-                                    <label class="c-2" for="sp-2">
-                                        <input type="radio" id="sp-2">
-                                    </label>
-                                    <label class="c-3" for="sp-3">
-                                        <input type="radio" id="sp-3">
-                                    </label>
-                                    <label class="c-4" for="sp-4">
-                                        <input type="radio" id="sp-4">
-                                    </label>
-                                    <label class="c-9" for="sp-9">
-                                        <input type="radio" id="sp-9">
-                                    </label> -->
+                                    
                                 </div>
                             </div>
                             <div class="product__details__cart__option">
@@ -247,65 +233,7 @@
                     </div>
                 </div>
                 
-                <!-- <div class="row">
-                    <div class="col-lg-1 col-md-3 ml-lg-5">
-                        <ul class="nav nav-tabs" role="tablist">
-
-                            
-                            <li class="nav-item">
-                                <a class="nav-link active" data-toggle="tab" href="#tabs-1" role="tab">
-                                    
-                                    <div class="" data-setbg="/img/shop-details/thumb-1.png">
-                                        <img class="" src="/img/productImage/sharp/<%= product.variant[0].images[0] %>" alt="">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-2" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="/img/shop-details/thumb-2.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-3" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="/img/shop-details/thumb-3.png">
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" data-toggle="tab" href="#tabs-4" role="tab">
-                                    <div class="product__thumb__pic set-bg" data-setbg="/img/shop-details/thumb-4.png">
-                                        <i class="fa fa-play"></i>
-                                    </div>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="col-lg-4 col-md-9">
-                        <div class="tab-content">
-                            <div class="tab-pane active" id="tabs-1" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="/img/productImage/<%= product.variant[0].images[0] %>" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-2" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="/img/shop-details/product-big-3.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-3" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="/img/shop-details/product-big.png" alt="">
-                                </div>
-                            </div>
-                            <div class="tab-pane" id="tabs-4" role="tabpanel">
-                                <div class="product__details__pic__item">
-                                    <img src="/img/shop-details/product-big-4.png" alt="">
-                                    <a href="https://www.youtube.com/watch?v=8PJ3_p7VqHw&list=RD8PJ3_p7VqHw&start_radio=1" class="video-popup"><i class="fa fa-play"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div> -->
+               
 
                     
                 </div>
@@ -691,38 +619,33 @@
 
 <script>
 
-    function selectVariant(pIndex, pId) {
-        const data = {
-            id: pId,
-            index: pIndex,
+    function selectVariant(pId, pIndex) {
+        // const data = {
+        //     id: pId,
+        //     index: pIndex,
 
-        }
+        // }
         $.ajax({
             type: "Get",
-            url: '/productDetails',
-            data: JSON.stringify(data),
-            contentType: 'application/json',
+            url: `/productDetails?index=${pIndex}&id=${pId}`,
+            
+            
 
             success: ((response) => {
                if(response.product) {
-
-                // Assuming you have a JSON object containing the updated data
-const updatedImages = [
-    "new-image-1.jpg",
-    "new-image-2.jpg",
-    "new-image-3.jpg",
-    // Add more images as needed
-];
 
 // Update the navigation tabs
 const navTabs = document.querySelectorAll('.nav-tabs .nav-link');
 navTabs.forEach((tab, i) => {
     tab.classList.toggle('active', i === 0); // Activate the first tab
-    const setBg = tab.querySelector('.product__thumb__pic');
+    
     const img = tab.querySelector('img');
     
-    setBg.setAttribute('data-setbg', `/img/shop-details/thumb-${i + 1}.png`);
-    img.setAttribute('src', `/img/productImage/sharp/${updatedImages[i]}`);
+    console.log(response.index);
+    if(img) {
+        img.setAttribute('src', `/img/productImage/sharp/${response.product.variant[response.index].images[i]}`);
+    }
+    
 });
 
 // Update the tab content
@@ -730,7 +653,11 @@ const tabContent = document.querySelectorAll('.tab-content .tab-pane');
 tabContent.forEach((tab, i) => {
     tab.classList.toggle('active', i === 0); // Show the content of the first tab
     const img = tab.querySelector('img');
-    img.setAttribute('src', `/img/productImage/${updatedImages[i]}`);
+    if(img) {
+        console.log('hello')
+        img.setAttribute('src', `/img/productImage/${response.product.variant[response.index].images[i]}`);
+    }
+    
 });
 
 

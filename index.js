@@ -7,6 +7,12 @@ app.use((req, res, next) => {
     next()
 })
 
+
+
+const flash = require('express-flash');
+
+app.use(flash());
+
 app.set('view engine', 'ejs');
 
 

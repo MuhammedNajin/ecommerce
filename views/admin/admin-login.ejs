@@ -1,0 +1,70 @@
+
+
+
+
+<%- include('../layout/header.ejs') -%>
+
+<div class="wrapper">
+   
+    <div class="" style="margin-left: 4rem; margin-bottom: 2rem;">
+        <img src="/img/logo.png" alt="">
+    </div>
+    
+    <h2 style="margin-bottom: 2rem;">Admin Login</h2>
+
+    <%if(messages.passError) {%>
+
+        
+        <div id="error" class="error alert alert-danger pt-2 d-flex justify-content-center "  >
+          <span class="error"  style="margin-right: 3rem;"><%= messages.passError %></span>
+        <span id="cross" class="error" ><i class="fa-solid fa-x" class="error"></i></span>
+        </div>
+      
+
+    <%}%>
+    <%if(messages.admin) {%>
+
+        
+        <div id="error" class="error alert alert-danger pt-2 d-flex justify-content-center "  >
+          <span class="error"  style="margin-right: 3rem;"><%= messages.admin %></span>
+        <span id="cross" class="error" ><i class="fa-solid fa-x" class="error"></i></span>
+        </div>
+      
+
+    <%}%>
+    <%if(messages.found) {%>
+
+        
+        <div id="error" class="error alert alert-danger pt-2 d-flex justify-content-center "  >
+          <span class="error"  style="margin-right: 3rem;"><%= messages.found %></span>
+        <span id="cross" class="error" ><i class="fa-solid fa-x" class="error"></i></span>
+        </div>
+      
+
+    <%}%>
+
+
+
+    <form action="/admin/login" method="post">
+     
+      <div class="input-box">
+        <input type="text" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="input-box">
+        <input type="password"  name="password" placeholder="Enter password" required>
+      </div>
+     
+
+     
+
+      <div class="input-box " >
+        <input type="submit" class="btn btn-outline-dark btn-lg" placeholder="Log in">
+       
+        
+      </div>
+
+
+    </form>
+  </div>
+
+<%- include('../layout/footer.ejs') -%>

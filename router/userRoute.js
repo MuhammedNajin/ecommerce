@@ -5,6 +5,8 @@ const user_controller = require('../controller/userController');
 const product_controller = require('../controller/product');
 user_route.set('view engine', 'ejs');
 user_route.set('views', './views/user');
+const shop_controller = require('../controller/shop');
+
 
 
 const path = require('node:path');
@@ -57,7 +59,11 @@ user_route.post('/logout', user_controller.userLogout);
 
 user_route.post('/resend', user_controller.resend);
 
-user_route.get('/productDetails' , product_controller.productdetiles )
+user_route.get('/productDetails' , product_controller.productdetiles );
+
+
+user_route.get('/shop', shop_controller.loadShop);
+
 
 
 module.exports = user_route;

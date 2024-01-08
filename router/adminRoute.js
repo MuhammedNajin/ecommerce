@@ -6,6 +6,7 @@ const cetagory_contorller = require('../controller/cetagoryController');
 const helper = require('../middleware/helper');
 
 
+const adminAuth = require('../middleware/adminAuth');
 const multer = require('../middleware/multer');
 
 
@@ -16,7 +17,7 @@ admin_route.use(express.urlencoded({extended: true}));
 admin_route.set('veiw engine', 'ejs');
 admin_route.set('views', './views/admin')
 // load home page
-admin_route.get('/', admin_controller.loadAdmin);
+admin_route.get('/',adminAuth.islogin, adminAuth.logged, admin_controller.loadAdmin);
 
 // load user management
 
@@ -75,6 +76,18 @@ admin_route.get('/edit-variant', product_controller.LoadeditVariant);
 
 
 admin_route.post('/editVariant', multer.array('images'), product_controller.editVariant);
+
+// load admin login
+admin_route.get('/login',admin_controller.loadLogin)
+
+
+// login
+admin_route.post('/login',adminAuth.logged,  admin_controller.login);
+
+
+admin_route.get('/logout', admin_controller.logout);
+
+
 
 
 

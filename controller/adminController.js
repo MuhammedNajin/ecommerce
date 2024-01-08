@@ -24,7 +24,7 @@ module.exports.loadAdmin = (req, res) => {
 
 module.exports.loadLogin = (req, res) => {
     try {
-        res.render('adminLogin');
+        res.render('admin-login');
     } catch (error) {
         console.log(error);
     }
@@ -34,26 +34,32 @@ module.exports.loadLogin = (req, res) => {
 module.exports.login = async (req, res) => {
     try {
         const email = req.body.email;
-        const pass = req.body.password
+        const passwod = req.body.password
         if(email) {
             const admin = await User.findOne({email: email});
             if(admin) {
                     if(admin.isAdmin) {
-                             const pass = await bcrypt.compare(pass, admin.password);
+                             const pass = await bcrypt.compare(passwod, admin.password);
                              if(pass) {
                                 req.session.admin = {
                                     _id: admin._id,
                                     name: admin.name,
                                     email: admin.email,
                                 } 
-                                res.redirect('/');
+                                res.redirect('/admin/');
                              } else{
+                                req.flash('passError', 'Incorrect password');
+                                res.redirect('/admin/login');
                                 console.log('incorrect password')
                              }
                     } else {
+                        req.flash('admin' , 'you are not an admin');
+                        res.redirect('/admin/login');
                         console.log('you are not an admin')
                     }
             } else {
+                req.flash('found', 'No such credantial');
+                res.redirect('/admin/login')
                 console.log('credential cant found')
             }
         } else {
@@ -145,6 +151,17 @@ module.exports.loadAddProduct = (req, res) => {
         console.log(error);
     }
 }
+
+module.exports.logout = (req, res) => {
+    try {
+        req.session.admin = null;
+        res.redirect('/admin/login');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+
 
 
 
