@@ -199,7 +199,8 @@ const sentOtp = async (email) => {
 // load otp page
 module.exports.loadotp = async (req, res) => {
     try {
-        if (req.query.is) {
+        console.log(req.query.is,'is');
+        if (req.query.is && req.query.first) {
             sentOtp(req.query.email);
         }
         console.log(req.query.email);
@@ -207,9 +208,9 @@ module.exports.loadotp = async (req, res) => {
         
         const user1 = await User.findOne({ email: email })
         console.log(user1)
-        //   const verify = user1.verified; 
-        //   console.log(verify);
-        res.render('otp', { email: email});
+          const verify = user1.verified; 
+          console.log(verify);
+        res.render('otp', { email: email, verify: verify});
 
     } catch (error) {
         console.log(error);
@@ -261,13 +262,13 @@ module.exports.verifyOTP = async (req, res) => {
                     console.log('user not found');
                 }
             } else {
-                req.flash('incorrect', 'please enter valid otp')
-                res.redirect('/otp')
-                console.log('OTP is incorrect')
+                req.flash('incorrect', 'please enter valid otp');
+                res.redirect(`/otp?email=${email}`);
+                console.log('OTP is incorrect');
             }
         } else {
                 req.flash('expired', 'OTP experied resend ');
-                res.redirect('/otp')
+                res.redirect(`/otp?email=${email}`);
             console.log('otp expired')
         }
 
@@ -304,14 +305,16 @@ module.exports.otpLogin = async (req, res) => {
 
             } else {
 
-                req.flash('otperr', 'Enter valid otp');
-                console.log('OTP incorrect')
+                req.flash('incorrect', 'Enter valid otp');
+                res.redirect(`/otp?email=${email}&is=${true}`);
+                console.log('OTP incorrect', 'from otp login')
 
             }
 
         } else {
-            req.flash('otpexpried', 'Enter valid otp');
-            console.log('otp expired')
+            req.flash('expired', 'Enter valid otp');
+            res.redirect(`/otp?email=${email}&is=${true}`);
+            console.log('otp expired', 'from otp login')
         }
     } catch (error) {
         console.log(error);

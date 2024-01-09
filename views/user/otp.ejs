@@ -32,10 +32,10 @@
                    </div>
 
                 <%}%>
+        
+                <% const route = verify ? '/otpLogin?email=' + encodeURIComponent(email) : '/otp?email=' + encodeURIComponent(email); %>
 
-         
-
-            <form action="/otp?email=<%= email%>" method="post">
+            <form action="<%= route %>" method="post">
 
                 <div class="d-flex pt-2" id="inputs">
                     <input class="otp m-2 text-center form-control rounded py-4" type="text" name="otp1" placeholder=""
