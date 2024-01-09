@@ -15,13 +15,13 @@ module.exports.islogin = (req, res, next) => {
     }
 }
 
-module.exports.logged = (req, res) => {
+module.exports.logged = (req, res, next) => {
     try {
 
         if(!req.session.admin) {
            next();
         } else {
-            res.redirect('/admin/home');
+            res.redirect('/admin/');
         }
         
     } catch (error) {

@@ -12,23 +12,7 @@ module.exports.loadHome = async (req, res) => {
     try {
 
          
-            // if(req.xhr) {
-            //     if(req.body.user) {
-                        
-            //         const user = await User.findOne({ _id: req.body.user.id });
-            //            if(user.session) {
-            //               req.session.user = {
-            //                      _id: user._id,
-            //                      email: user.email,
-            //                      name: user.name    
-            //                }
-            //            }
-                    
-
-            //     }
-            // }
            
-         
 
       const product = await Product.find({ isListed: true }).populate('cetagory')
 
@@ -221,8 +205,11 @@ module.exports.loadotp = async (req, res) => {
         console.log(req.query.email);
         const email = req.query.email || '******gmail.com';
         
-        const user = await User.findOne({ email: email })
-        res.render('otp', { email: email, user: user });
+        const user1 = await User.findOne({ email: email })
+        console.log(user1)
+        //   const verify = user1.verified; 
+        //   console.log(verify);
+        res.render('otp', { email: email});
 
     } catch (error) {
         console.log(error);
@@ -312,14 +299,18 @@ module.exports.otpLogin = async (req, res) => {
                     email: user.email
                 }
 
-                await User.updateOne({_id: user._id}, {$set: {session: true}});
+                
                 res.redirect('/');
 
             } else {
 
+                req.flash('otperr', 'Enter valid otp');
+                console.log('OTP incorrect')
+
             }
 
         } else {
+            req.flash('otpexpried', 'Enter valid otp');
             console.log('otp expired')
         }
     } catch (error) {
@@ -333,12 +324,9 @@ module.exports.otpLogin = async (req, res) => {
 
 module.exports.userLogout = async (req, res) => {
     try {
-        // if(req.body.id) {
-            // await User.updateOne({_id: req.body.id}, {$set: {session: false}});
+       
             req.session.user = null;
             res.redirect('/');
-
-        // }
        
     } catch (error) {
         console.log(error)
@@ -351,8 +339,9 @@ module.exports.resend = async (req, res) => {
         const email = req.query.email;
         console.log(email);
         if(email) {
-            const otp = await verifyOtp.deleteMany({Email: email});
-            sentOtp(email);
+          await verifyOtp.deleteMany({Email: email});
+             sentOtp(email);
+             res.json({ok: true});
         } else {
             console.log('Email doest receiced');
         }

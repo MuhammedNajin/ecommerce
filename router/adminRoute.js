@@ -4,6 +4,15 @@ const admin_controller = require('../controller/adminController');
 const product_controller = require('../controller/product');
 const cetagory_contorller = require('../controller/cetagoryController');
 const helper = require('../middleware/helper');
+const nocache = require('nocache');
+
+
+admin_route.use(nocache());
+
+admin_route.use((req, res, next) => {
+    res.header('Cache-Control', 'no-store, private, must-revalidate');
+    next();
+});
 
 
 const adminAuth = require('../middleware/adminAuth');
@@ -17,11 +26,11 @@ admin_route.use(express.urlencoded({extended: true}));
 admin_route.set('veiw engine', 'ejs');
 admin_route.set('views', './views/admin')
 // load home page
-admin_route.get('/',adminAuth.islogin, adminAuth.logged, admin_controller.loadAdmin);
+admin_route.get('/', adminAuth.islogin, admin_controller.loadAdmin);
 
 // load user management
 
-admin_route.get('/user', admin_controller.loadUser);
+admin_route.get('/user',adminAuth.islogin, admin_controller.loadUser);
 
 // block user
 
@@ -30,15 +39,15 @@ admin_route.post('/blockUser', admin_controller.blockUser);
 
 // load product 
 
-admin_route.get('/product', admin_controller.loadPoduct);
+admin_route.get('/product',adminAuth.islogin, admin_controller.loadPoduct);
 
 // load add Product 
 
-admin_route.get('/addProduct', admin_controller.loadAddProduct);
+admin_route.get('/addProduct',adminAuth.islogin, admin_controller.loadAddProduct);
 
 // load cetagory 
 
-admin_route.get('/cetagory', cetagory_contorller.loadCategory);
+admin_route.get('/cetagory',adminAuth.islogin, cetagory_contorller.loadCategory);
 
 // load add cetagory
 
@@ -61,7 +70,7 @@ admin_route.post('/listProduct', product_controller.listProduct);
 
 
 // load variant
-admin_route.get('/loadVariant/:id', product_controller.loadVariant);
+admin_route.get('/loadVariant/:id',adminAuth.islogin, product_controller.loadVariant);
 
 // add variant 
 
@@ -69,7 +78,7 @@ admin_route.post('/addVariant', multer.array('images'), product_controller.addVa
 
 // load edit variant
 
-admin_route.get('/edit-variant', product_controller.LoadeditVariant);
+admin_route.get('/edit-variant',adminAuth.islogin, product_controller.LoadeditVariant);
 
 // edit variant
 
@@ -78,14 +87,14 @@ admin_route.get('/edit-variant', product_controller.LoadeditVariant);
 admin_route.post('/editVariant', multer.array('images'), product_controller.editVariant);
 
 // load admin login
-admin_route.get('/login',admin_controller.loadLogin)
+admin_route.get('/login', adminAuth.logged, admin_controller.loadLogin);
 
 
 // login
-admin_route.post('/login',adminAuth.logged,  admin_controller.login);
+admin_route.post('/login',  admin_controller.login);
 
 
-admin_route.get('/logout', admin_controller.logout);
+admin_route.post('/logout', admin_controller.logout);
 
 
 

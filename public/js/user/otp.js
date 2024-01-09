@@ -61,13 +61,13 @@ document.getElementById("resend").onclick = function () {
 
 document.getElementById('resend').addEventListener('click', () => {
 	try {
-		const currentUrl = window.location.href;
+		// const currentUrl = window.location.href;
 	
 		const urlParams = new URLSearchParams(window.location.search);
 		const email = urlParams.get("email");
-		const {email: testmail} = urlParams;
+		
 		console.log(email);
-		console.log('destrustured', testmail);
+		
 	
 	   
 		const postUrl = "/resend" + (email ? `?email=${encodeURIComponent(email)}` : "");
