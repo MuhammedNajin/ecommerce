@@ -312,7 +312,7 @@ module.exports.otpLogin = async (req, res) => {
             }
 
         } else {
-            req.flash('expired', 'Enter valid otp');
+            req.flash('expired', 'OTP expired resend otp');
             res.redirect(`/otp?email=${email}&is=${true}`);
             console.log('otp expired', 'from otp login')
         }

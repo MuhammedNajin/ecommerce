@@ -156,7 +156,7 @@
                                 <li class="nav-item">
                                     <a class="nav-link <%= i === 0 ? 'active' : '' %>" data-toggle="tab" href="#tabs-<%= i + 1 %>" role="tab">
                                         <div class="" data-setbg="/img/shop-details/thumb-<%= i + 1 %>.png">
-                                            <img class="" src="/img/productImage/sharp/<%= product.variant[index].images[i] %>" alt="">
+                                            <img class=""  src="/img/productImage/sharp/<%= product.variant[index].images[i] %>" alt="">
                                         </div>
                                     </a>
                                 </li>
@@ -168,12 +168,15 @@
                             <% for (let i = 0; i < product.variant[index].images.length; i++) { %>
                                 <div class="tab-pane <%= i === 0 ? 'active' : '' %>" id="tabs-<%= i + 1 %>" role="tabpanel">
                                     <div class="product__details__pic__item">
-                                        <img src="/img/productImage/<%= product.variant[index].images[i] %>" alt="">
+                                        <img class="zoom-trigger" src="/img/productImage/<%= product.variant[index].images[i] %>" alt="">
                                     </div>
                                 </div>
                             <% } %>
                         </div>
                     </div>
+
+
+                  
 
                     <div class="col-lg-5">
                         <div class="product__details__text">
@@ -666,3 +669,5 @@ tabContent.forEach((tab, i) => {
         })
     }
 </script>
+
+

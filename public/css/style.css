@@ -3851,3 +3851,9 @@ ol {
 		height: 250px;
 	}
 }
+.zoom-image{
+	display: none ;
+}
+.zoom-trigger :hover .zoom-image{
+	 display: block;
+}

@@ -90,4 +90,21 @@ document.getElementById('resend').addEventListener('click', () => {
 	}
 	});
 
+   function reset(btn) {
 
+	  setTimeout(() => {
+		btn.classList.remove('text-danger');
+
+	  },3000)
+   }
+
+
+	const btn = document.getElementById('resend');
+
+	btn.addEventListener('click', () => {
+		btn.classList.add('text-danger');
+		reset(btn);
+	})
+    
+
+	 

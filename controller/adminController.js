@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const Catagery = require('../models/cetagory');
 const bcrypt = require('bcrypt');
 const product = require('../models/product');
+require('dotenv').config()
 
 
 
@@ -33,41 +34,31 @@ module.exports.loadLogin = (req, res) => {
 
 module.exports.login = async (req, res) => {
     try {
-        const email = req.body.email;
-        const passwod = req.body.password
-        if(email) {
-            const admin = await User.findOne({email: email});
-            if(admin) {
-                    if(admin.isAdmin) {
-                             const pass = await bcrypt.compare(passwod, admin.password);
-                             if(pass) {
-                                req.session.admin = {
-                                    _id: admin._id,
-                                    name: admin.name,
-                                    email: admin.email,
-                                } 
-                                res.redirect('/admin/');
-                             } else{
-                                req.flash('passError', 'Incorrect password');
-                                res.redirect('/admin/login');
-                                console.log('incorrect password')
-                             }
-                    } else {
-                        req.flash('admin' , 'you are not an admin');
-                        res.redirect('/admin/login');
-                        console.log('you are not an admin')
-                    }
+         
+        const email = process.env.email;
+        const password = process.env.password;
+        console.log(email, password)
+
+        if(req.body.email == email) {
+            if(req.body.password == password) {
+                req.session.admin = email;
+                res.redirect('/admin/');
+
             } else {
-                req.flash('found', 'No such credantial');
+                req.flash('password', 'incorrect password');
                 res.redirect('/admin/login')
-                console.log('credential cant found')
+                console.log('Incorrect password');
             }
         } else {
-            console.log('admin Email didt recived ')
+            req.flash('email', 'Enter valid email address');
+            res.redirect('/admin/login')
+            console.log('incorrect email');
         }
+
     } catch (error) {
-        console.log(error)
+        
     }
+   
 }
 
 
