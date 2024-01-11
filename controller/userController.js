@@ -72,6 +72,7 @@ module.exports.userLogin = async (req, res) => {
                 }
 
             } else {
+                res.redirect(`/otp?email=${email}&is=${true}&first=${true}`);
                 console.log('user not verified');
             }
         } else {

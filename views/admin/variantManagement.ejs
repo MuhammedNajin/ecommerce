@@ -114,7 +114,7 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <form action="/admin/addVariant" method="post" id="myform"
+                                    <form action="/admin/addVariant" onsubmit="return variantValidate()" method="post" id="myform"
                                         enctype="multipart/form-data">
 
                                         <div class="row">
@@ -123,7 +123,7 @@
                                                     <label class="form-label">Regular price</label>
                                                     <div class="row gx-2">
                                                         <input type="text" name="id" hidden value="<%= product._id %>">
-                                                        <input placeholder="₹" name="price" type="text"
+                                                        <input placeholder="₹" name="price" id="price" type="text"
                                                             class="form-control" />
                                                     </div>
                                                 </div>
@@ -131,21 +131,21 @@
                                             <div class="col-lg-4">
                                                 <div class="mb-4">
                                                     <label class="form-label">Offer price</label>
-                                                    <input placeholder="₹" name="offerPrice" type="text"
+                                                    <input placeholder="₹" id="offerPrice" name="offerPrice" type="text"
                                                         class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="mb-4">
                                                     <label class="form-label">Color</label>
-                                                    <input placeholder="eg:- red, green, yellow" name="color"
+                                                    <input placeholder="eg:- red, green, yellow" id="color" name="color"
                                                         type="text" class="form-control" />
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="mb-4">
                                                     <label class="form-label">Stock</label>
-                                                    <input placeholder="Add stock" name="stock" type="text"
+                                                    <input placeholder="Add stock" id="stock" name="stock" type="text"
                                                         class="form-control" />
                                                 </div>
                                             </div>
@@ -208,7 +208,7 @@
                                                         style="width: 100px; height: 100px; margin-bottom: 1.5rem;">
     
                                                     <input type="file" accept="image/*" placeholder="Add image"
-                                                        name="images" onclick="previewImage2(this, 'imagePreview2<%= i %>')" class="form-control" id="product_name" />
+                                                        name="images" onclick="previewImage2(this, 'imagePreview2<%= i %>')" class="form-control" id="image<%= i + 1%>" />
                                                 </div>
     
                                                 <%}%>
@@ -434,6 +434,90 @@
             reader.readAsDataURL(file);
         } else {
             preview.src = "#";
+        }
+    }
+</script>
+
+
+<script>
+
+    function variantValidate() {
+
+
+        
+        let price = document.getElementById("price");
+        let oprice = document.getElementById("offerPrice");
+        let color = document.getElementById('color');
+        let stock = document.getElementById('stock');
+        let image = document.getElementById('image1');
+        
+        
+
+
+
+
+        
+     if (price.value.trim() === '' || Number(price.value) <= 0 || isNaN(price.value)) {
+
+            price.style.border = 'solid 1px red';
+           
+            setTimeout(function () {
+                price.style.border = '';
+               
+            }, 3000);
+            return false;
+        }
+
+
+
+        else if (oprice.value.trim() === '' || Number(oprice.value) <= 0 || isNaN(oprice.value)) {
+            oprice.style.border = 'solid 1px red';
+           
+            setTimeout(function () {
+               oprice.style.border = '';
+                
+            }, 3000);
+            return false;
+        }
+
+        
+        else if (color.value.trim() === '') {
+                 color.style.border = 'solid 1px red';
+           
+            setTimeout(function () {
+                color.style.border = '';
+                
+            }, 3000);
+            return false
+
+        }
+        
+        else if (stock.value.trim() === '' || Number(stock.value) <= 0 || isNaN(stock.value)) {
+                 stock.style.border = 'solid 1px red';
+           
+            setTimeout(function () {
+                stock.style.border = '';
+                
+            }, 3000);
+            return false
+
+        }
+       
+    
+        else if (!image.files[0] || !image.files[1] || !image.files[2] || !image.files[3]) {
+            console.log('erororr')
+                 image.style.border = 'solid 1px red';
+           
+            setTimeout(function () {
+                image.style.border = '';
+                
+            }, 3000);
+            return false
+
+        }
+        else {
+
+            true;
         }
     }
 </script>

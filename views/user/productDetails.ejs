@@ -155,8 +155,8 @@
                             <% for (let i = 0; i < product.variant[index].images.length; i++) { %>
                                 <li class="nav-item">
                                     <a class="nav-link <%= i === 0 ? 'active' : '' %>" data-toggle="tab" href="#tabs-<%= i + 1 %>" role="tab">
-                                        <div class="" data-setbg="/img/shop-details/thumb-<%= i + 1 %>.png">
-                                            <img class=""  src="/img/productImage/sharp/<%= product.variant[index].images[i] %>" alt="">
+                                        <div class="div focus" data-setbg="/img/shop-details/thumb-<%= i + 1 %>.png">
+                                            <img  src="/img/productImage/sharp/<%= product.variant[index].images[i] %>" alt="">
                                         </div>
                                     </a>
                                 </li>
@@ -192,7 +192,7 @@
                   
 
                     <div class="col-lg-5">
-                        <div class="product__details__text">
+                        <div class=" ">
                             <h4>Hooded thermal anorak</h4>
                             <div class="rating">
                                 <i class="fa fa-star"></i>
@@ -205,10 +205,8 @@
                             <%const discount = (product.variant[index].price - product.variant[index].offerPrice) / product.variant[index].price%>
                              <%const percentageDiscount = discount * 100%>
                              <%const off = Math.floor(percentageDiscount)%>
-                            <h3>₹<%= product.variant[index].offerPrice%><span> ₹<%= product.variant[index].price%></span> <span class="" style="color: rgb(51, 181, 51); text-decoration: none;"><%= off %>% off</span></h3>
-                            <p>Coat with quilted lining and an adjustable hood. Featuring long sleeves with adjustable
-                                cuff tabs, adjustable asymmetric hem with elastic side tabs and a front zip fastening
-                            with placket.</p>
+                            <h3>₹<%= product.variant[index].offerPrice%><span> ₹<%= product.variant[index].price%></span> <span class="" style="color: rgb(51, 181, 51); text-decoration: none; font-size: 16px;"><%= off %>% off</span></h3>
+                            <p ><%= product.description%></p>
                             <div class="product__details__option">
                                 <div class="product__details__option__size">
                                     <span>Size:</span>
@@ -223,7 +221,7 @@
                                     <span>Color:</span>
 
                                     <%product.variant.map((el, i) => {%>
-                                        <span style="width: 50px; height: 50px;" onclick="selectVariant('<%= product._id%>', '<%= i %>')" class="c-1" for="sp-1">
+                                        <span style="width: 50px; height: 50px;" onclick="selectVariant('<%= product._id%>', '<%= i %>')" class="c-1 variant" for="sp-1">
 
                                             <img  src="/img/productImage/sharp/<%= el.images[0] %>" alt="">
                                             
@@ -683,6 +681,49 @@ tabContent.forEach((tab, i) => {
     }
 </script>
 
+<script>
+   
+    
+     const div = document.querySelectorAll('.focus');
+     console.log(div)
+    
+     div.forEach(function (img, i) {
+        
+        img.addEventListener('click', function (event) {
+              
+            for(let i = 0; i < div.length; i++) {
+                div[i].style.border = '';
+            }
+
+             this.style.border = '2px solid red'
+             img.firstChild.style.transform = 'scale(.2)'
+            
+        });
+        
+    });
+     const span = document.querySelectorAll('.variant');
+     console.log(div)
+    
+     span.forEach(function (img, i) {
+        
+        img.addEventListener('click', function (event) {
+              
+            for(let i = 0; i < span.length; i++) {
+                span[i].style.border = '';
+            }
+
+             this.style.border = '2px solid red'
+             img.firstChild.style.transform = 'scale(.2)'
+            
+        });
+        
+    });
+
+
+
+
+
+</script>
 
 
 <script>
