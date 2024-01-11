@@ -163,12 +163,25 @@
                             <% } %>
                         </ul>
                     </div>
+                    <!-- <div class="col-lg-4 col-md-9">
+                        <div class="tab-content">
+                            <% for (let i = 0; i < product.variant[index].images.length; i++) { %>
+                                <div class="tab-pane <%= i === 0 ? 'active' : '' %>" id="tabs-<%= i + 1 %>" role="tabpanel">
+                                    <div class="product__details__pic__item image-zoom-container" style="overflow: hidden;">
+                                        <img class="zoom-image" src="/img/productImage/<%= product.variant[index].images[i] %>" alt="">
+                                    </div>
+                                </div>
+                            <% } %>
+                        </div>
+                    </div> -->
+
                     <div class="col-lg-4 col-md-9">
                         <div class="tab-content">
                             <% for (let i = 0; i < product.variant[index].images.length; i++) { %>
                                 <div class="tab-pane <%= i === 0 ? 'active' : '' %>" id="tabs-<%= i + 1 %>" role="tabpanel">
-                                    <div class="product__details__pic__item">
-                                        <img class="zoom-trigger" src="/img/productImage/<%= product.variant[index].images[i] %>" alt="">
+                                    <div class="product__details__pic__item image-zoom-container" style="overflow: hidden;">
+                                        <!-- Use unique IDs for each image and class 'zoom-trigger' for event binding -->
+                                        <img id="zoom-image-<%= i + 1 %>" class="zoom-trigger" src="/img/productImage/<%= product.variant[index].images[i] %>" alt="">
                                     </div>
                                 </div>
                             <% } %>
@@ -667,6 +680,39 @@ tabContent.forEach((tab, i) => {
                }
             })
         })
+    }
+</script>
+
+
+
+<script>
+    // Use a class to select all images
+    document.querySelectorAll('.zoom-trigger').forEach(function (img) {
+        img.addEventListener('mouseover', function () {
+            const myimage = this; // 'this' refers to the current image
+            imageZoom(myimage);
+        });
+    });
+
+    function imageZoom(img) {
+        var container = img.parentElement;
+
+        container.addEventListener('mousemove', function (e) {
+            var rect = container.getBoundingClientRect();
+            var x = e.clientX - rect.left; // X position within the container
+            var y = e.clientY - rect.top; // Y position within the container
+
+            var percentX = (x / container.offsetWidth) * 100;
+            var percentY = (y / container.offsetHeight) * 100;
+
+            img.style.transformOrigin = percentX + '% ' + percentY + '%';
+
+            img.style.transform = 'scale(2)';
+        });
+
+        container.addEventListener('mouseleave', function () {
+            img.style.transform = 'scale(1)';
+        });
     }
 </script>
 

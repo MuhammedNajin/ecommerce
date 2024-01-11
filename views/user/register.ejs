@@ -5,38 +5,23 @@
     <div class="" style="margin-left: 4rem; margin-bottom: 2rem;">                         
         <img src="img/logo.png" alt="">
     </div>
-
-      <%if(messages.uname) {%>
-
-        
-          <div id="error" class="error alert alert-danger pt-2 d-flex justify-content-center "  >
-            <span class="error"  style="margin-right: 3rem;"><%= messages.uname %></span>
-          <!-- <span id="cross" class="error" ><i class="fa-solid fa-x" class="error"></i></span> -->
-          </div>
-        
-
-      <%}%>
-
-      <%if(messages.email) {%>
-
-        <div class="alert alert-danger" role="alert"><%= messages.email %></div>
-
-      <%}%>
-      
-      
-
     
-
     <form action="/signUp" method="post" onsubmit="return validate()">
 
-        <div class="input-box" style="">
+        <div class="input-box">
+            <%if(messages.uname) {%> 
+              <div class="text-danger serverError" style="position: absolute; top: -22px; left: 6px;"><%= messages.uname %></div> 
+            <%}%>
             <div class="text-danger " id="userError" style="position: absolute; top: -22px; left: 6px;"></div>
             <input type="text" name="uname" id="uname" placeholder="Enter your name"  style="padding: 10px; margin: 1rem, 0; ">
-          </div>
+        </div>
 
         <div class="input-box">
-          <div class="text-danger" style="position: absolute; top: -22px; left: 6px;"></div>
-            <input type="email" name="email" id="email" placeholder="Enter your email" required style="padding: 10px; margin: 1rem, 0; ">
+          <%if(messages.email) {%>
+             <div class="text-danger serverError"  style="position: absolute; top: -22px; left: 6px;"><%= messages.email %></div> 
+            <%}%>
+          <div class="text-danger" id="emailError" style="position: absolute; top: -22px; left: 6px;"></div>
+            <input type="text" name="email" id="email" placeholder="Enter your email"  style="padding: 10px; margin: 1rem, 0; ">
           </div>
 
         <div class="input-box">
