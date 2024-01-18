@@ -7,6 +7,8 @@ user_route.set('view engine', 'ejs');
 user_route.set('views', './views/user');
 const shop_controller = require('../controller/shop');
 const User = require('../models/userModel');
+const cart_controller = require('../controller/cartCotroller');
+const order_controller = require('../controller/orderController')
 
 
 
@@ -21,16 +23,9 @@ user_route.use(session({
 user_route.use(express.json());
 user_route.use(express.urlencoded({extended: true}));
 
-
-
-user_route.use((req, res, next) => {
-    res.locals.user = req.session.user || null; 
-    res.locals.logedIn = req.session.user ? true : false;
-    next();
-}); 
-
 user_route.use(async (req, res , next) => {
     const id = req.session.user?._id;
+    console.log(id, 'middleware')
     
         const user = await User.findOne({_id: id});
 
@@ -53,6 +48,14 @@ user_route.use(async (req, res , next) => {
             
             next();
 })
+
+user_route.use((req, res, next) => {
+    res.locals.user = req.session.user || null; 
+    res.locals.logedIn = req.session.user ? true : false;
+    next();
+}); 
+
+
 // load home
 user_route.get('/', user_controller.loadHome);
 
@@ -91,6 +94,18 @@ user_route.get('/productDetails' , product_controller.productdetiles );
 user_route.get('/shop', shop_controller.loadShop);
 
 
+user_route.get('/cart', cart_controller.loadCart);
+
+user_route.post('/add-cart', cart_controller.addToCart);
+
+user_route.post('/checkSession', user_controller.checkSession);
+
+user_route.get('/check-out', cart_controller.proceedToCheckout);
+
+
+user_route.post('/add-Address', order_controller.addAddress )
+
+user_route.post('/place-order', order_controller.placeOrder )
 
 module.exports = user_route;
 

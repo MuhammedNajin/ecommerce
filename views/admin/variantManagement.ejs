@@ -15,7 +15,7 @@
     <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
     <!-- Template CSS -->
     <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
-    
+
 </head>
 
 <body>
@@ -101,7 +101,7 @@
                     </div>
 
 
-                    
+
 
                     <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
                         aria-hidden="true">
@@ -114,8 +114,8 @@
                                 </div>
                                 <div class="modal-body">
 
-                                    <form action="/admin/addVariant" onsubmit="return variantValidate()" method="post" id="myform"
-                                        enctype="multipart/form-data">
+                                    <form action="/admin/addVariant" onsubmit="return variantValidate()" method="post"
+                                        id="myform" enctype="multipart/form-data">
 
                                         <div class="row">
                                             <div class="col-lg-4">
@@ -204,13 +204,15 @@
                                             <%for(let i=0; i < 4; i++) {%>
 
                                                 <div class="mb-4 col-lg-3 me-2">
-                                                    <img  id="imagePreview2<%= i %>" alt="Product image"
+                                                    <img id="imagePreview2<%= i %>" alt="Product image"
                                                         style="width: 100px; height: 100px; margin-bottom: 1.5rem;">
-    
+
                                                     <input type="file" accept="image/*" placeholder="Add image"
-                                                        name="images" onclick="previewImage2(this, 'imagePreview2<%= i %>')" class="form-control" id="image<%= i + 1%>" />
+                                                        name="images"
+                                                        onclick="previewImage2(this, 'imagePreview2<%= i %>')"
+                                                        class="form-control" id="image<%= i + 1%>" />
                                                 </div>
-    
+
                                                 <%}%>
 
 
@@ -279,27 +281,29 @@
                                 <tbody>
 
 
-                                    <% if(product.variant.length > 0) {%>
+                                    <% if(product.variant.length> 0) {%>
 
-                                        <% product.variant.map((item, i) => {%>
+                                        <% product.variant.map((item, i)=> {%>
                                             <tr>
-                                                <td><%= i + 1 %></td>
+                                                <td>
+                                                    <%= i + 1 %>
+                                                </td>
                                                 <td width="40%">
                                                     <a href="#" class="itemside">
 
-                                                        <% for(let i = 0; i < item.images.length; i++) {%>
+                                                        <% for(let i=0; i < item.images.length; i++) {%>
 
                                                             <div class="left me-2">
-                                                               
-                                                                    <img src="/img/productImage/<%= item.images[i] %>"
-                                                                        class="img-sm" alt="Userpic" />
+
+                                                                <img src="/img/productImage/<%= item.images[i] %>"
+                                                                    class="img-sm" alt="Userpic" />
                                                             </div>
 
 
 
-                                                        <%}%>
-                                                       
-                                                        
+                                                            <%}%>
+
+
                                                     </a>
                                                 </td>
                                                 <td>
@@ -321,13 +325,15 @@
                                                 <td>
                                                     <%= item.size %>
                                                 </td>
-                                                
+
                                                 <td class="text-end">
-                                                    <a id="button" href="/admin/edit-variant?index=<%= i %>&id=<%= product._id %>" class="btn btn-sm btn-dark  font-sm ">
+                                                    <a id="button"
+                                                        href="/admin/edit-variant?index=<%= i %>&id=<%= product._id %>"
+                                                        class="btn btn-sm btn-dark  font-sm ">
                                                         Edit
                                                     </a>
 
-                                                   
+
 
 
 
@@ -348,7 +354,7 @@
                         </div>
                     </div>
 
-                    
+
                     <!-- card-body end// -->
                 </div>
                 <!-- card end// -->
@@ -403,7 +409,7 @@
 
 
 <script>
-      function previewImage(input, imageId) {
+    function previewImage(input, imageId) {
         const preview = document.getElementById(imageId);
         const file = input.files[0];
 
@@ -444,26 +450,26 @@
     function variantValidate() {
 
 
-        
+
         let price = document.getElementById("price");
         let oprice = document.getElementById("offerPrice");
         let color = document.getElementById('color');
         let stock = document.getElementById('stock');
         let image = document.getElementById('image1');
-        
-        
 
 
 
 
-        
-     if (price.value.trim() === '' || Number(price.value) <= 0 || isNaN(price.value)) {
+
+
+
+        if (price.value.trim() === '' || Number(price.value) <= 0 || isNaN(price.value)) {
 
             price.style.border = 'solid 1px red';
-           
+
             setTimeout(function () {
                 price.style.border = '';
-               
+
             }, 3000);
             return false;
         }
@@ -472,45 +478,32 @@
 
         else if (oprice.value.trim() === '' || Number(oprice.value) <= 0 || isNaN(oprice.value)) {
             oprice.style.border = 'solid 1px red';
-           
+
             setTimeout(function () {
-               oprice.style.border = '';
-                
+                oprice.style.border = '';
+
             }, 3000);
             return false;
         }
 
-        
+
         else if (color.value.trim() === '') {
-                 color.style.border = 'solid 1px red';
-           
+            color.style.border = 'solid 1px red';
+
             setTimeout(function () {
                 color.style.border = '';
-                
+
             }, 3000);
             return false
 
         }
-        
+
         else if (stock.value.trim() === '' || Number(stock.value) <= 0 || isNaN(stock.value)) {
-                 stock.style.border = 'solid 1px red';
-           
+            stock.style.border = 'solid 1px red';
+
             setTimeout(function () {
                 stock.style.border = '';
-                
-            }, 3000);
-            return false
 
-        }
-       
-    
-        else if (!image.files[0] || !image.files[1] || !image.files[2] || !image.files[3]) {
-            console.log('erororr')
-                 image.style.border = 'solid 1px red';
-           
-            setTimeout(function () {
-                image.style.border = '';
-                
             }, 3000);
             return false
 

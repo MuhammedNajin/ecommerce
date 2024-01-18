@@ -16,7 +16,7 @@ module.exports.loadHome = async (req, res) => {
 
       const product = await Product.find({ isListed: true }).populate('cetagory')
 
-      console.log(product)
+    //   console.log(product)
 
 
       if(product) {
@@ -42,7 +42,7 @@ module.exports.loadLogin = (req, res) => {
 
 module.exports.userLogin = async (req, res) => {
     try {
-        console.log(req.body.email)
+        const email = req.body.email;
         const user = await User.findOne({ email: req.body.email });
         if (user) {
             if (user.verified) {
@@ -172,7 +172,7 @@ const sentOtp = async (email) => {
             from: 'najinn675@gmail.com',
             to: email,
             subject: 'OTP Verification',
-            html: `Your otp is${createdOTP}`
+            html: `Your otp is ${createdOTP}`
         }
 
         await transport.sendMail(mailOption);
@@ -328,7 +328,7 @@ module.exports.otpLogin = async (req, res) => {
 
 module.exports.userLogout = async (req, res) => {
     try {
-       
+         
             req.session.user = null;
             res.redirect('/');
        
@@ -352,5 +352,22 @@ module.exports.resend = async (req, res) => {
           
     } catch (error) {
         console.log(error)
+    }
+
+
+}
+
+// check session 
+
+module.exports.checkSession = (req, res) => {
+    try {
+        if(req.session) {
+            res.json({session: true});
+        } else {
+            res.json({session: false});
+        }
+        
+    } catch (error) {
+        console.log(error);
     }
 }
