@@ -1,24 +1,50 @@
 
-var INITIAL_COUNT = 0;
+
 
 function addToDb(productid, vIndex) {
-  const data = {
-    productId: productid,
-    index: vIndex
-  }
-    $.ajax({
-        type: "POST",
-        url: '/add-cart',
-        data: JSON.stringify(data),
-        contentType: 'application/json',
-        success: (response) => {
-            if(response.added) {
-              console.log('ok done')
-              // const no =  document.getElementById('count');
-              // no.innerHTML = INITIAL_COUNT++;
+
+ 
+    // Get the selected size value
+    var selectedSize = document.querySelector('input[name="size"]:checked');
+     
+    const qunt = document.getElementById('quantity').value;
+    console.log(qunt);
+
+    // Check if a size is selected
+    if (selectedSize) {
+      console.log('Selected size:', selectedSize.value);
+      const data = {
+        productId: productid,
+        index: vIndex,
+        size: selectedSize.value,
+        quantity: qunt,
+      }
+        $.ajax({
+            type: "POST",
+            url: '/add-cart',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: (response) => {
+                if(response.added) {
+                  console.log('ok done')
+                 
+                }
             }
-        }
-    });
+        });
+    } else {
+      const size = document.getElementById('size');
+      size.style.color = 'red';
+      size.textContent = 'Please select size';
+        
+      setTimeout(() => {
+        size.style.color = '';
+        size.textContent = ''; 
+      }, 6000)
+      return;
+    }
+  
+
+  
 }
 
 

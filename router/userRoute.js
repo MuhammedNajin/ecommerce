@@ -98,6 +98,10 @@ user_route.get('/cart', cart_controller.loadCart);
 
 user_route.post('/add-cart', cart_controller.addToCart);
 
+user_route.post('/removeFormCart', cart_controller.removeFromCart);
+
+user_route.post('/counter', cart_controller.changeQuantity);
+
 user_route.post('/checkSession', user_controller.checkSession);
 
 user_route.get('/check-out', cart_controller.proceedToCheckout);

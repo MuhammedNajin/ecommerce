@@ -16,7 +16,7 @@ module.exports.loadHome = async (req, res) => {
 
       const product = await Product.find({ isListed: true }).populate('cetagory')
 
-    //   console.log(product)
+    //   console.log(product)`
 
 
       if(product) {

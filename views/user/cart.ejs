@@ -61,72 +61,7 @@
     <!-- Offcanvas Menu End -->
 
     <!-- Header Section Begin -->
-    <header class="header">
-        <div class="header__top">
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-6 col-md-7">
-                        <div class="header__top__left">
-                            <p>Free shipping, 30-day return or refund guarantee.</p>
-                        </div>
-                    </div>
-                    <div class="col-lg-6 col-md-5">
-                        <div class="header__top__right">
-                            <div class="header__top__links">
-                                <a href="#">Sign in</a>
-                                <a href="#">FAQs</a>
-                            </div>
-                            <div class="header__top__hover">
-                                <span>Usd <i class="arrow_carrot-down"></i></span>
-                                <ul>
-                                    <li>USD</li>
-                                    <li>EUR</li>
-                                    <li>USD</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-3">
-                    <div class="header__logo">
-                        <a href="./index.html"><img src="img/logo.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-6 col-md-6">
-                    <nav class="header__menu mobile-menu">
-                        <ul>
-                            <li><a href="./index.html">Home</a></li>
-                            <li class="active"><a href="./shop.html">Shop</a></li>
-                            <li><a href="#">Pages</a>
-                                <ul class="dropdown">
-                                    <li><a href="./about.html">About Us</a></li>
-                                    <li><a href="./shop-details.html">Shop Details</a></li>
-                                    <li><a href="./shopping-cart.html">Shopping Cart</a></li>
-                                    <li><a href="./checkout.html">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Details</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="./blog.html">Blog</a></li>
-                            <li><a href="./contact.html">Contacts</a></li>
-                        </ul>
-                    </nav>
-                </div>
-                <div class="col-lg-3 col-md-3">
-                    <div class="header__nav__option">
-                        <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-                        <a href="#"><img src="img/icon/heart.png" alt=""></a>
-                        <a href="#"><img src="img/icon/cart.png" alt=""> <span>0</span></a>
-                        <div class="price">$0.00</div>
-                    </div>
-                </div>
-            </div>
-            <div class="canvas__open"><i class="fa fa-bars"></i></div>
-        </div>
-    </header>
+    <%- include('../partials/nav.ejs') -%>
     <!-- Header Section End -->
 
     <!-- Breadcrumb Section Begin -->
@@ -137,8 +72,8 @@
                     <div class="breadcrumb__text">
                         <h4>Shopping Cart</h4>
                         <div class="breadcrumb__links">
-                            <a href="./index.html">Home</a>
-                            <a href="./shop.html">Shop</a>
+                            <a href="/">Home</a>
+                            <a href="/shop">Shop</a>
                             <span>Shopping Cart</span>
                         </div>
                     </div>
@@ -149,15 +84,17 @@
     <!-- Breadcrumb Section End -->
      
 
-    <%if(products) {%>
+    
            
 
 
-        <section class="shopping-cart spad">
+        <section class="shopping-cart spad" id="ReloadArea">
+
+            <%if(products && products.length > 0) {%>
             <div class="container">
                 <div class="row">
                     <div class="col-lg-8">
-                        <div class="shopping__cart__table">
+                        <div class="shopping__cart__table" id="Reload">
                             <table>
                                 <thead>
                                     <tr>
@@ -171,7 +108,9 @@
                                 <tbody>
     
                                     
-                                       
+                                       <% let totalAmount = 0%>
+                                       <% let total = 0%>
+                                       <% let items = 0%>
                                     <%products.forEach((item, i) => {%>
     
                                        
@@ -184,17 +123,35 @@
                                             <div class="product__cart__item__text">
                                                 <h6 style="font-size: 12px;"><%= item.productId.name %></h6>
                                                 <h5 style="font-size: 15px;">₹<%= item.price%></h5>
+                                                 
+                                                <% const match = [['S', 'Small'], ['M', 'Medium'], ['L', "Large"], ['XL', 'Exel'], ['XXL', 'Double exel']]%>
+                                                <%const size = match.find((size) => (size[0] === item.size)) %>
+                                                <%console.log(size)%>
+                                                <span>Size: <%= size[1]%></span>
                                             </div>
                                         </td>
                                         <td class="quantity__item">
-                                            <div class="quantity">
+                                            <!-- <div class="quantity">
                                                 <div class="pro-qty-2">
                                                     <input type="text" value="1">
+                                                    <span style="transform: rotate(90deg ); margin-top: 6px;" class="fa fa-angle-left dec qtybtn"></span>
+                                                    <span style="transform: rotate(90deg); margin-top: 3px;" class="fa fa-angle-right inc qtybtn"></span>
+                                                </div>
+                                            </div> -->
+                                            <div class="quantity">
+                                                <div class="pro-qty-2" id="newID">
+                                                    <span  id="minus" class="fa fa-angle-left   counter"></span>
+                                                    <input type="text" id="ctn" value="<%= item.quantity%>" data-productId="<%= item.productId._id%>" data-size="<%= item.size%>" data-index="<%= item.product%>">
+                                                    <span  id="plus" class="fa fa-angle-right  counter"></span>
                                                 </div>
                                             </div>
                                         </td>
-                                        <td class="cart__price">₹<%= item.price%></td>
-                                        <td class="cart__close" id="remove"><i class="fa fa-close"></i></td>
+                                        <%total += (item.productId.variant[item.product].price * item.quantity)%>
+                                        <% items += item.quantity%>
+                                        <%totalAmount += item.totalPrice%>
+                                        <td class="cart__price">₹<%= item.totalPrice%></td>
+                                       
+                                        <td class="cart__close" onclick="remove_from_cart('<%= item.productId._id%>','<%= item.product%>')"><i class="fa fa-close"></i></td>
                                     </tr>
     
                                     <%})%>
@@ -204,14 +161,10 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6">
                                 <div class="continue__btn">
-                                    <a href="#">Continue Shopping</a>
+                                    <a class="btn btn-outline-dark" href="/shop">Continue Shopping</a>
                                 </div>
                             </div>
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="continue__btn update__btn">
-                                    <a href="#"><i class="fa fa-spinner"></i> Update cart</a>
-                                </div>
-                            </div>
+                            
                         </div>
                     </div>
                     <div class="col-lg-4">
@@ -222,23 +175,34 @@
                                 <button type="submit">Apply</button>
                             </form>
                         </div>
-                        <div class="cart__total">
+                        <div class="cart__total" id="price">
                             <h6>Cart total</h6>
                             <ul>
-                                <li>Subtotal <span>$ 169.50</span></li>
-                                <li>Total <span>$ 169.50</span></li>
+                                
+
+                                <li>Price (<%= items %> <%= items > 1? "items" : "item"%>)<span style="color: black;">₹<%= total%></span></li>
+                                <li>Discount <span style="color: green;">-₹<%= total - totalAmount%></span></li>
+
+                                <%if(totalAmount > 1000) {%>
+
+                                    <li>Delivery Charges<span style="color: green;"><del style="color: black;">₹80</del> Free</span></li>
+                            
+                                <%} else{%>
+
+                                    <li>Delivery Charges<span style="color: black;">₹80</span></li>
+
+                                <%}%>
+                                
+                                <li style="font-size: larger; font-weight: 800;">Total <span style="color: black;">₹<%= totalAmount%></span></li>
                             </ul>
                             <a href="/check-out" class="primary-btn">Proceed to checkout</a>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
 
 
-
-
-
+            
         <%} else {%>
            
 
@@ -251,6 +215,12 @@
             </div>
 
         <%}%>
+     </section>
+
+
+
+
+
     <!-- Shopping Cart Section Begin -->
     
     <!-- Shopping Cart Section End -->
@@ -334,7 +304,7 @@
     <!-- Search End -->
 
     <!-- Js Plugins -->
-    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>
     <script src="js/jquery.nicescroll.min.js"></script>
@@ -347,3 +317,122 @@
 </body>
 
 </html>
+
+
+
+<script>
+     function remove_from_cart(productId, index) {
+
+        console.log(productId, index)
+         const data = {productId: productId, index: index}
+         console.log(data)
+       try {
+
+        $.ajax({
+            type: 'POST',
+            url: '/removeFormCart',
+            data: JSON.stringify(data),
+            contentType: 'application/Json',
+            success: (response) => {
+                   
+                if(response.removed) {
+                    $('#Reload').load('/cart #Reload');
+                    $('#price').load('/cart #price');
+                    $('#ReloadArea').load('/cart #ReloadArea');
+                }
+            }
+        })
+        
+       } catch (error) {
+        console.log(error)
+       }
+
+     }
+</script>
+
+<script>
+
+
+const parentElement = document.querySelector('.pro-qty-2');
+
+parentElement.addEventListener('click', (event) => {
+    try {
+        const input = document.getElementById('ctn');
+        const productId = input.getAttribute('data-productId');
+        const index = input.getAttribute('data-index');
+        const size = input.getAttribute('data-size');
+        
+        if (event.target.classList.contains('counter')) {
+            const decision = event.target.id === "plus" ? 'plus' : 'minus';
+            
+            const data = { status: decision, productId, index, size };
+
+            $.ajax({
+                type: 'POST',
+                url: '/counter',
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: (response) => {
+                    if (response.changed) {
+                        $('#newID').load('/cart #newID');
+                        $('#price').load('/cart #price');
+                    } else {
+                        console.log('Error');
+                    }
+                }
+            });
+        }
+    } catch (error) {
+        console.log(error);
+    }
+});
+
+
+
+
+
+
+    // const btn = document.querySelectorAll('.counter')
+    //  btn.forEach((el) => {
+    //     el.addEventListener('click', (event) => {
+    //     try {
+
+    //         const input = document.getElementById('ctn')
+    //         const productId = input.getAttribute('data-productId');
+    //         const index = input.getAttribute('data-index');
+    //         const size = input.getAttribute('data-size');
+
+
+    //           var decition = '';
+    //         if(event.target.id === "plus") {
+    //             console.log('plus');
+    //             decition = 'plus';
+    //         } else if(event.target.id === 'minus') {
+    //             console.log('minus');
+    //             decition = 'minus';
+    //         }
+    //         const data = {status: decition, productId: productId, index: index, size: size};
+    //         $.ajax({
+    //             type: 'POST',
+    //             url: '/counter',
+    //             data: JSON.stringify(data),
+    //             contentType: 'application/Json',
+    //             success:(response) => {
+
+    //                 if(response.changed) {
+    //                     $('#ctn').load('/cart #ctn');
+    //                     $('#price').load('/cart #price');
+                   
+                        
+    //                 } else {
+    //                     console.log('errrrrrrrrrrrrrrrrr')
+    //                 }
+
+    //             }
+    //         })
+    //     } catch (error) {
+    //         console.log(error);
+    //     }
+    // })
+    //  })
+</script>
