@@ -3,6 +3,7 @@ const User = require('../models/userModel');
 const Catagery = require('../models/cetagory');
 const bcrypt = require('bcrypt');
 const product = require('../models/product');
+const Order = require('../models/order');
 require('dotenv').config()
 
 
@@ -154,5 +155,51 @@ module.exports.logout = (req, res) => {
 
 
 
+module.exports.loadOrder = async (req, res) => {
+    try {
+        
+        const order = await Order
+        .find()
+        .populate('user')
+        .populate('products.productId')
+        .sort({ date: -1 });
+                console.log(order);
+        res.render('order-details', { order: order });
+    } catch (error) {
+        console.log(error)
+    }
+}
 
 
+module.exports.loadsingleOrder = async (req, res) => {
+    try {
+        const { orderId } = req.query;
+        const orderDetails = await Order.findById({ _id: orderId }).populate('user').populate('products.productId');
+        console.log(orderDetails)
+        res.render('singleOrderDetials', { order: orderDetails })
+    } catch (error) {
+       console.log(error); 
+    }
+}
+
+module.exports.changeOrderStatus = async (req, res) => {
+    console.log('hellllllllllllllllllllllllllllllllleeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee')
+    try {
+        const { orderId, productId, index, status, userId } = req.body;
+        
+        console.log(req.body);
+        return Order.updateOne({_id: orderId, user: userId, "products.productId": productId}, {
+            $set: {
+                [`products.${index}.status`]: status,
+            }
+        })
+        .then(() => {
+            res.json({ success: true, status: status});
+        })
+        .catch((error) => {
+            console.log(error);
+        })
+    } catch (error) {
+        console.log(error);
+    }
+}

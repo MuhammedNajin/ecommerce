@@ -93,7 +93,7 @@
                                     <a class="nav-link <%= i === 0 ? 'active' : '' %>" data-toggle="tab"
                                         href="#tabs-<%= i + 1 %>" role="tab">
                                         <div class="div focus" data-setbg="/img/shop-details/thumb-<%= i + 1 %>.png">
-                                            <img src="/img/productImage/sharp/<%= product.variant[index].images[i] %>"
+                                            <img class="hower" src="/img/productImage/sharp/<%= product.variant[index].images[i] %>"
                                                 alt="">
                                         </div>
                                     </a>
@@ -648,6 +648,8 @@
 
                     });
 
+                    
+
 
                 }
             })
@@ -664,6 +666,7 @@
     div.forEach(function (img, i) {
            div[0].style.border = '2px solid red';
            img.style.opacity = 0.5;
+           
         img.addEventListener('click', function (event) {
          
             for (let i = 0; i < div.length; i++) {
@@ -680,6 +683,15 @@
         });
         div[0].style.opacity = 1;
 
+        // img.addEventListener('mouseover', () => {
+        //     div[i].style.opacity = 1;
+          
+
+        // })
+        // img.addEventListener('mouseleave', () => {
+        //     div[i].style = '';
+        // })
+       
     });
     const span = document.querySelectorAll('.variant');
     console.log(div)

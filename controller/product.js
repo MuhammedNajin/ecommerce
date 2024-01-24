@@ -34,14 +34,16 @@ module.exports.addproduct = async (req, res) => {
         }
         console.log(images,);
         console.log(sizes);
-
+        const price = parseInt(req.body.price);
+        const offerPrice = parseInt(req.body.offer);
+        const stock = parseInt(req.body.stock);
         const variant = {
-            price: req.body.price,
-            offerPrice: req.body.offer,
+            price: price ,
+            offerPrice: offerPrice,
             color: req.body.color,
             size: sizes,
             images: images,
-            stock: req.body.stock,
+            stock: stock,
         }
 
         const product = new Product({
@@ -104,7 +106,7 @@ module.exports.listProduct = async (req, res) => {
 }
 
 
-// load variant page]
+// load variant page
 
 module.exports.loadVariant = async (req, res) => {
 
@@ -152,13 +154,16 @@ module.exports.addVariant = async (req, res) => {
 
             }
             console.log(images, sizes)
+            const price = parseInt(req.body.price);
+            const offerPrice = parseInt(req.body.offer);
+            const stock = parseInt(req.body.stock);
             const variant = {
-                price: req.body.price,
-                offerPrice: req.body.offerPrice,
+                price: price,
+                offerPrice: offerPrice,
                 color: req.body.color,
                 size: sizes,
                 images: images,
-                stock: req.body.stock,
+                stock: stock,
 
             }
 
@@ -243,19 +248,21 @@ module.exports.editVariant = async (req, res) => {
 
         }
 
-
+        const price = parseInt(req.body.price);
+        const offerPrice = parseInt(req.body.offer);
+        const stock = parseInt(req.body.stock);
 
         return Product.findOne({ _id: id }, { variant: 1 })
             .then(() => {
 
                 return Product.updateOne({ _id: id }, {
                     $set: {
-                        [`variant.${index}.price`]: req.body.price,
-                        [`variant.${index}.offerPrice`]: req.body.offer,
+                        [`variant.${index}.price`]: price,
+                        [`variant.${index}.offerPrice`]: offerPrice,
                         [`variant.${index}.color`]: req.body.color,
                         [`variant.${index}.size`]: req.body.size,
                         [`variant.${index}.images`]: newImage,
-                        [`variant.${index}.stock`]: req.body.stock,
+                        [`variant.${index}.stock`]: stock,
 
                     }
                 })

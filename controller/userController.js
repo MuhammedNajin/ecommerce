@@ -371,3 +371,11 @@ module.exports.checkSession = (req, res) => {
         console.log(error);
     }
 }
+
+module.exports.loadMyAccount = async(req, res) => {
+    try {
+        res.render('myAccount');
+    } catch (error) {
+        console.log(error)
+    }
+}

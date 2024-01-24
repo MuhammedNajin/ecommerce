@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="zxx">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Male_Fashion Template">
+    <meta name="keywords" content="Male_Fashion, unica, creative, html">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Male-Fashion | Template</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+        rel="stylesheet">
+
+    <!-- Css Styles -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
+    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        a {
+            text-decoration: none;
+
+        }
+
+        .status-checkboxes {
+            margin-top: .5rem;
+
+        }
+
+        .status-checkboxes .form-check {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        .status-checkboxes .form-check-input {
+            margin-top: 0;
+            margin-right: 5px;
+            /* Adjust spacing between checkbox and label */
+        }
+
+        .status-checkboxes .form-check-label {
+            margin-bottom: 0;
+        }
+
+        .progress-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 70%;
+            margin: 50px auto;
+        }
+
+        .step {
+            width: 12px;
+            height: 12px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+        }
+
+        .step.active {
+            background-color: #26a541;
+            color: white;
+            border-color: #26a541;
+        }
+
+        .line {
+            flex-grow: 1;
+            height: 3px;
+            background-color: #ddd;
+        }
+    </style>
+</head>
+
+<body class="bg-body-tertiary">
+
+    <%- include('../partials/nav.ejs') -%>
+        <div class="container">
+            <div class="container-fluid">
+
+
+                <!-- Button trigger modal -->
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                ...
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary">Understood</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+
+
+
+
+                <div
+                    style="padding: 24px; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08); margin-top: 2rem;">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="">
+                                <div class=""><span class="">Delivery Address</span></div>
+                                <div class="">
+                                    <div class="">
+                                        <div class="">
+                                            <%= address.fullName%>
+                                        </div>
+                                    </div>
+                                    <div class="">
+                                        <%= address.email%>
+                                    </div>
+                                    <div class="">
+                                        <%= address.address%>
+                                    </div>
+                                    <div class="">
+                                        <div><span class="">phone Number</span>
+                                            <div class="">
+                                                <%= address.phone%>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-3"><span class="">Your Rewards</span><a class="">
+                                <div class=""><img
+                                        src="https://rukminim1.flixcart.com/www/80/80/promos/15/07/2022/b24f2613-b89e-4e0a-8140-1316ad11f394.png?q=100"
+                                        class="">
+                                    <div class="_2kcozy">
+                                        <div>8 SuperCoins Cashback</div>
+                                        <div class="-gBnNp">Use it to save on your next order</div>
+                                    </div>
+                                </div>
+                            </a></div>
+                        <div class="col-5"><span class="">More actions</span>
+                            <div class="row ">
+                                <div class=""><img
+                                        src="//static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/downloadInvoice_e0f744.png"
+                                        class="">
+                                    <div><span class="">Download Invoice</span></div>
+                                </div><button class=""><span>Download</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+                <div class="mt-3">
+                    <div class=""
+                        style="background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08); padding: 24px;">
+                        <div class="">
+                            <div class="row">
+                                <div class="col-3">
+                                    <div class="row" style="position: relative;">
+                                        <div class="col-4"><a href="" target="_blank" rel="noopener noreferrer">
+                                                <div class="" style="height: 75px; width: 75px;">
+                                                    <img class="" alt=""
+                                                        src="/img/productImage/sharp/<%= product.productId.variant[product.product].images[0]%>">
+                                                </div>
+                                            </a></div>
+                                        <div class="col-8"><a class="" href="" target="_blank" style="font-size: 12px;">
+                                                <%= product.productId.name%>
+                                            </a>
+                                            <div class="d-flex ">
+                                                <p class="me-2"><span>Color: </span>
+                                                    <%= product.productId.variant[product.product].color%>
+                                                </p>
+                                                <p><span>Size: </span>
+                                                    <%= product.size%>
+                                                </p>
+                                            </div>
+                                            <div class="d-flex " style="font-size: 13px;"><span class="">Seller: </span>
+                                                <%= product.productId.brand%><span class=""></span>
+                                            </div>
+                                            <div class="">
+                                                <div class="d-flex">
+                                                    <span class="">₹451</span>
+                                                    <span class="">6 Offers Applied</span>
+                                                    <span class="">?</span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5 ">
+
+                                    <div style="padding: 50px;">
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <div class="step active">
+
+                                            </div>
+                                            <div class="line"></div>
+                                            <div class="step">2</div>
+                                            <div class="line"></div>
+                                            <div class="step">3</div>
+                                            <div class="line"></div>
+                                            <div class="step">4</div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class=" col-4">
+                                    <%console.log(product.status)%>
+                                    <%if(product.status === 'delivered') {%>
+                   
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class=""><i class="fa-solid fa-star" style="color: #00328a;"></i></i></span>
+                                            <button type="button" class="btn " style="color:  #00328a;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                Rate & review product
+                                              </button>
+                                        </div>
+
+                                    <%}%>
+                                    
+                                    <div>
+                                        <div class=" row"></div>
+                                        <div class=" row"><span class="">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=""></div>
+                            <div></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+            crossorigin="anonymous"></script>
+</body>
+
+</html>

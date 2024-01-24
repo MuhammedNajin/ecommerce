@@ -76,3 +76,32 @@ const addToCart = (productid,) =>  {
    
 
 }
+
+function proccedTOCheckOut() {
+  try {
+      const session = document.getElementById('btn').getAttribute('data-session');
+      console.log(session)
+      // if(!session) {
+
+      //   Swal.fire({
+      //     title: "LogIn",
+      //     text: "Please login to procced",
+      //     icon: "warning"
+      //   }).then((result) => {
+      //      if(result.isConfirmed) {
+      //         window.location = '/login';
+      //      }
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   })
+      // }
+    
+        window.location = '/check-out'
+    
+      
+  } catch (error) {
+    console.log(error)
+  }
+}
+

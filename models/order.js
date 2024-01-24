@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
   user:{
-   type:mongoose.Types.ObjectId
+   type: mongoose.Schema.Types.ObjectId,
+   required: true,
+   ref: 'User'
   },
   deliveryDetails: {
     type: Object,
@@ -10,28 +12,36 @@ const orderSchema = new mongoose.Schema({
   },
   products: [
     {
-      productId: {
-        type: String,
-        required: true,
-        ref: "Product",
-      },
-      count: {
-        type: Number,
-        default: 1,
-      },
-      price: {
-        type: Number,
-        required: true,
-      },
-      totalPrice: {
-        type: Number,
-        required: true,
-      },
-      status: {
-        type: String,
-      }
-    },
-  ],
+        productId: {
+            type: mongoose.Schema.Types.ObjectId,
+            required: true,
+            ref: 'Product',
+        },
+        product: {
+            type: String,
+        },
+        price: {
+            type: Number,
+            required: true,
+        },
+        quantity: {
+            type: Number,
+            default: 1,
+        },
+        totalPrice: {
+            type: Number,
+            required: true,
+        },
+        size: {
+            type: String
+        },
+        status: {
+           type: String,
+           enum: ['placed', 'outfordelivery', 'shipped', 'delivered'],
+           default: 'placed',
+        }
+    }
+],
   
   cancelReason: {
     type: String
@@ -45,28 +55,23 @@ const orderSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
+    required: true
+  },
+  expected_delivery: {
+    type: String,
+    required: true
   },
   status: {
     type: String,
+    required: true
   },
   paymentMethod: {
     type: String,
-  },
-  orderId: {
-    type: String,
+    required: true
   },
   paymentId: {
     type: String
   },
-  shippingMethod: {
-    type: String,
-  },
-  shippingAmount: {
-    type: Number,
-  },
-  couponDiscount: {
-    type: Number,
-  }
 });
 
 module.exports = mongoose.model("Order", orderSchema);

@@ -345,7 +345,7 @@ module.exports.proceedToCheckout = async (req, res) => {
 
         const address = await Address.findOne({ user: userid });
 
-
+          console.log(address);
         const cart = await Cart.findOne({ user: userid }).populate('products.productId');
         console.log(cart)
         res.render('checkOut', { address: address, products: cart.products });
@@ -353,6 +353,7 @@ module.exports.proceedToCheckout = async (req, res) => {
     } catch (error) {
         console.log(error);
     }
+    
 }
 
 module.exports.changeQuantity = async (req, res) => {

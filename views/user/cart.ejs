@@ -141,7 +141,7 @@
                                             <div class="quantity">
                                                 <div class="pro-qty-2" id="newID">
                                                     <span  id="minus" class="fa fa-angle-left   counter"></span>
-                                                    <input type="text" id="ctn" value="<%= item.quantity%>" data-productId="<%= item.productId._id%>" data-size="<%= item.size%>" data-index="<%= item.product%>">
+                                                    <input type="text" id="ctn" value="<%= item.quantity%>" data-productId="<%= item.productId._id%>" data-size="<%= item.size%>" readonly data-index="<%= item.product%>">
                                                     <span  id="plus" class="fa fa-angle-right  counter"></span>
                                                 </div>
                                             </div>
@@ -195,7 +195,7 @@
                                 
                                 <li style="font-size: larger; font-weight: 800;">Total <span style="color: black;">₹<%= totalAmount%></span></li>
                             </ul>
-                            <a href="/check-out" class="primary-btn">Proceed to checkout</a>
+                            <button type="button" id="btn" data-session="<%= logedIn %>" onclick="proccedTOCheckOut()" class="primary-btn">Proceed to checkout</button>
                         </div>
                     </div>
                 </div>
@@ -313,7 +313,9 @@
     <script src="js/jquery.slicknav.js"></script>
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
-    <script src="js/main.js"></script>
+    <script src="/js/main.js"></script>
+    <script src="js/user/cart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 
 </html>

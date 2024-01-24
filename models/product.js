@@ -22,47 +22,38 @@ const ProductSchema = mongoose.Schema({
         type: String,
         required: true,
     },
-    variant: {
-        type: Array,
-        required: true,
-        fields: [
-          {
-            name: 'price',
-            type: Number,
-            required: true
-          },
-          {
-            name: 'offerPrice',
-            type: Number,
-            required: true
-          },
-          {
-            name: 'color',
-            type: String,
-            required: true
-          },
-          {
-            name: 'size',
-            type: Array,
-            required: true
-          },
-          {
-            name: 'images',
-            type: Array,
-            validate: [arrayLimit, 'should be four images']
-          },
-          {
-            name: 'stock',
-            type: Number,
-            default: 1
-          },
-          {
-            name: 'created',
-            type: Date,
-            default: Date.now
-          }
-        ]
+    variant: [
+      {
+        price: {
+          type: Number,
+          required: true,
+        },
+        offerPrice: {
+          type: Number,
+          required: true,
+        },
+        color: {
+          type: String,
+          required: true,
+        },
+        size: {
+          type: Array,
+          required: true,
+        },
+        images: {
+          type: Array,
+          validate: [arrayLimit, 'should be four images'],
+        },
+        stock: {
+          type: Number,
+          default: 1,
+        },
+        created: {
+          type: Date,
+          default: Date.now,
+        },
       }
+    ],
 });
 
 

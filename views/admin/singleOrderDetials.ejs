@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Nest Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <!-- Favicon -->
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="/assets/imgs/theme/favicon.svg" /> -->
+    <!-- Template CSS -->
+    <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+</head>
+
+<body class="bg-info-subtle">
+    <main class="">
+
+
+        <!-- ... Your existing code ... -->
+
+        <!-- ... Your existing code ... -->
+
+        <section class="content-main bg-body-tertiary">
+            <div class="content-header justify-content-center py-3">
+                <div class="text-center">
+                    <h2 class="content-title fs-3 text-dark" style="font-weight: 800;">Admin Purchase Details</h2>
+                    <p class="text-muted" style="font-size: large;">Get an overview of recent shopping experiences from
+                        users.</p>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body" id="Reload">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <!-- Add user details here, you can customize this section -->
+                            <h5>User Details</h5>
+                            <p><strong>Name:</strong>
+                                <%= order.deliveryDetails.fullName %>
+                            </p>
+                            <p><strong>Email:</strong>
+                                <%= order.deliveryDetails.email %>
+                            </p>
+                            <p><strong>Address:</strong>
+                                <%= order.deliveryDetails.address %>, <%= order.deliveryDetails.city %>, <%=
+                                            order.deliveryDetails.state %>, <%= order.deliveryDetails.pincode %>
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <select class="form-select">
+                                <option>Show 20</option>
+                                <option>Show 30</option>
+                                <option>Show 40</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <div id="reload">
+                            <table class="table table-hover" id="ReloadTable">
+                                <thead>
+                                    <tr>
+                                        <th>Index</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col" class="text-end">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% order.products.forEach((el, i)=> {%>
+                                        <tr>
+                                            <td>
+                                                <%= i + 1%>
+                                            </td>
+                                            <td>
+                                                <b>
+                                                    <img src="/img/productImage/sharp/<%= el.productId.variant[el.product].images[0]%>"
+                                                        alt="" style="width: 80px; height: 80px;">
+                                                </b>
+                                            </td>
+                                            <td>
+                                                <%= el.productId.name%>
+                                            </td>
+                                            <td>
+                                                <%= el.totalPrice%>
+                                            </td>
+                                            <td><span class="badge rounded-pill alert-warning">
+                                                    <%= el.status%>
+                                                </span></td>
+                                            <% const formattedDate=order.date.toLocaleString('en-US', { weekday: 'short'
+                                                , month: 'short' , day: 'numeric' , year: 'numeric' , hour: 'numeric' ,
+                                                minute: 'numeric' , second: 'numeric' , hour12: true }); %>
+                                                <td>
+                                                    <%= formattedDate%>
+                                                </td>
+                                                <td class="text-end">
+
+                                                    <%if(el.status==='delivered' ) {%>
+                                                        <select data-orderId="<%= order._id%>"
+                                                            data-productId="<%= el.productId._id%>" data-index="<%= i%>"
+                                                            data-userId="<%= order.user._id%>"
+                                                            class="form-select orderStatus" id="orderStatus"
+                                                            name="orderStatus" disabled>
+                                                            <option style="color: rgba(65, 189, 27, 0.781);"
+                                                                value="delivered">Delivered</option>
+                                                        </select>
+
+                                                        <%} else {%>
+
+                                                            <select data-orderId="<%= order._id%>"
+                                                                data-productId="<%= el.productId._id%>"
+                                                                data-index="<%= i%>" data-userId="<%= order.user._id%>"
+                                                                class="form-select orderStatus" id="orderStatus"
+                                                                name="orderStatus">
+                                                                <option value="shipped">Shipped</option>
+                                                                <option value="outfordelivery">outfordelivery</option>
+                                                                <option value="delivered">Delivered</option>
+                                                            </select>
+
+                                                        <%}%>
+
+                                                </td>
+                                        </tr>
+                                        <%})%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ... Your existing code ... -->
+
+
+        <!-- ... Your existing code ... -->
+
+
+
+        <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                    &copy; Nest - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">All rights reserved</div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="/assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/vendors/select2.min.js"></script>
+    <script src="/assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="/assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <script src="/https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- Main Script -->
+    <script src="assets/js/main.js?v=1.1" type="text/javascript"></script>
+</body>
+
+</html>
+
+
+<!-- <script>
+  
+        const stat = document.querySelectorAll('.orderStatus');
+                
+        stat.forEach((select) => {
+            console.log('hi', select)
+           select.addEventListener('change', () => {
+            const orderId = select.getAttribute('data-orderId')
+            const productId = select.getAttribute('data-productId')
+            const index = select.getAttribute('data-index')
+            const userId = select.getAttribute('data-userId');
+            console.log(orderId, productId, index, userId);
+            console.log(select.value);
+
+            if(orderId && productId && index && userId) {
+                const data = { orderId: orderId, productId: productId, index: index, status: select.value, userId: userId }
+                $.ajax({
+                    type: "POST",
+                    url: "/admin/change-orderStatus",
+                    data: JSON.stringify(data),
+                    contentType: 'application/json',
+                    success: (response) => { 
+                        if(response.success) {
+                            console.log('success');
+                            $('#ReloadTable').load(`/admin/single-orderDetails?orderId=${orderId} #ReloadTable`);
+                            
+                        }
+                    
+                    }
+                })
+            }
+        })   
+        })
+          
+
+    
+</script> -->
+
+<script>
+    function attachEventListeners() {
+        const stat = document.querySelectorAll('.orderStatus');
+
+        stat.forEach((select) => {
+            console.log('hi', select)
+            select.addEventListener('change', () => {
+                const orderId = select.getAttribute('data-orderId')
+                const productId = select.getAttribute('data-productId')
+                const index = select.getAttribute('data-index')
+                const userId = select.getAttribute('data-userId');
+                console.log(orderId, productId, index, userId);
+                console.log(select.value);
+
+                if (orderId && productId && index && userId) {
+                    const data = { orderId: orderId, productId: productId, index: index, status: select.value, userId: userId }
+                    $.ajax({
+                        type: "POST",
+                        url: "/admin/change-orderStatus",
+                        data: JSON.stringify(data),
+                        contentType: 'application/json',
+                        success: (response) => {
+                            if (response.success) {
+                                console.log('success');
+                                $('#ReloadTable').load(`/admin/single-orderDetails?orderId=${orderId} #ReloadTable`, () => {
+                                    // Reattach event listeners after content is loaded
+                                    attachEventListeners();
+                                });
+                            }
+                        }
+                    });
+                }
+            });
+        });
+    }
+
+    // Initial attachment of event listeners
+    attachEventListeners();
+</script>

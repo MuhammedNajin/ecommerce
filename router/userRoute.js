@@ -106,10 +106,16 @@ user_route.post('/checkSession', user_controller.checkSession);
 
 user_route.get('/check-out', cart_controller.proceedToCheckout);
 
+user_route.get('/account', user_controller.loadMyAccount);
+user_route.get('/my-order', order_controller.loadMyOrder);
 
-user_route.post('/add-Address', order_controller.addAddress )
+user_route.get('/single-product', order_controller.loadSingleProduct)
 
-user_route.post('/place-order', order_controller.placeOrder )
+
+user_route.post('/add-Address', order_controller.addAddress );
+
+user_route.post('/place-order', order_controller.placeOrder );
+user_route.get('/order-success', order_controller.loadOrderSucces );
 
 module.exports = user_route;
 
