@@ -182,7 +182,7 @@
                                
                                     <div class="product__item__pic set-bg" >
 
-                                        <a href="/productDetails?id=<%= el._id %>&index=0"><img class="product__item__pic set-bg" style="width: 19rem;" src="/img/productImage/sharp/<%= el.variant[i].images[0] %>" alt=""></a>
+                                        <a href="/productDetails?id=<%= el._id %>&index=0"><img class="product__item__pic set-bg" style="width: 19rem;" src="/img/productImage/sharp/<%= el.variant[0].images[0] %>" alt=""></a>
         
                                         <span class="label">New</span>
                                         <ul class="product__hover">
@@ -203,7 +203,7 @@
                                         <i class="fa fa-star-o"></i>
                                         <i class="fa fa-star-o"></i>
                                     </div>
-                                    <h5><%= el.variant[i].price %></h5>
+                                    <h5><%= el.variant[0].price %></h5>
                                     <div class="product__color__select">
                                         <label for="pc-1">
                                             <input type="radio" id="pc-1">

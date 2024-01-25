@@ -9,6 +9,7 @@ const shop_controller = require('../controller/shop');
 const User = require('../models/userModel');
 const cart_controller = require('../controller/cartCotroller');
 const order_controller = require('../controller/orderController')
+const review_Controller = require('../controller/reviewContoller');
 
 
 
@@ -116,6 +117,13 @@ user_route.post('/add-Address', order_controller.addAddress );
 
 user_route.post('/place-order', order_controller.placeOrder );
 user_route.get('/order-success', order_controller.loadOrderSucces );
+
+
+
+
+// ==================================================================== //
+
+user_route.post('/addReview', review_Controller.addReview)
 
 module.exports = user_route;
 

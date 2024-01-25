@@ -3,6 +3,7 @@ const Product = require('../models/product');
 const Catagery = require('../models/cetagory');
 const path = require('node:path');
 const sharp = require('sharp');
+const Review = require('../models/reviewModal');
 
 
 
@@ -153,10 +154,12 @@ module.exports.addVariant = async (req, res) => {
                 await sharp(req.files[i].path).resize(500, 500).toFile(dirPath);
 
             }
+            console.log('offer', req.body.offerPrice)
             console.log(images, sizes)
             const price = parseInt(req.body.price);
-            const offerPrice = parseInt(req.body.offer);
+            const offerPrice = parseInt(req.body.offerPrice);
             const stock = parseInt(req.body.stock);
+             console.log(stock, price, offerPrice)
             const variant = {
                 price: price,
                 offerPrice: offerPrice,
@@ -287,18 +290,15 @@ module.exports.productdetiles = async (req, res) => {
     try {
         const {id, index} = req.query;
         console.log(id, index);
-
+        
         const product = await Product.findOne({_id: id})
             if(req.xhr) {
                 console.log('ajax')
                 res.json({product: product, index: index});
             } else {
-                res.render('productDetails', {product: product, index: index,});
+                const review = await Review.find({productId: id}).populate('user').populate('productId');
+                res.render('productDetails', {product: product, index: index, review: review});
             }
-    
-           
-            
-        
 
     } catch (error) {
         console.log(error);

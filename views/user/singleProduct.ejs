@@ -91,6 +91,96 @@
             height: 3px;
             background-color: #ddd;
         }
+
+
+        .container1 {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            width: 400px;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0;
+        }
+
+        .rating {
+            font-size: 20px;
+            margin: 10px 0;
+        }
+
+        .stars {
+            font-size: 30px;
+            margin: 10px 0;
+        }
+
+        .star {
+            cursor: pointer;
+            margin: 0 5px;
+        }
+
+        .one {
+            color: rgb(255, 0, 0);
+        }
+
+        .two {
+            color: rgb(255, 106, 0);
+        }
+
+        .three {
+            color: rgb(251, 255, 120);
+        }
+
+        .four {
+            color: rgb(255, 255, 0);
+        }
+
+        .five {
+            color: rgb(24, 159, 14);
+        }
+
+        textarea {
+            width: 90%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .reviews {
+            margin-top: 20px;
+            text-align: left;
+        }
+
+        .review {
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            padding: 10px;
+            margin: 10px 0;
+        }
+
+        .review p {
+            margin: 0;
+        }
+
+        .hide {
+            display: none;
+        }
     </style>
 </head>
 
@@ -110,17 +200,37 @@
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <h1 class="modal-title fs-5" id="staticBackdropLabel">Modal title</h1>
+
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                ...
+
+                                <div style="margin-left: 2rem;">
+                                    <div class="container1">
+                                        <h1>Rate & review product</h1>
+                                        <div class="rating">
+                                            <span id="rating">0</span>/5
+                                        </div>
+                                        <div class="stars" id="stars">
+                                            <span class="star" data-value="1">★</span>
+                                            <span class="star" data-value="2">★</span>
+                                            <span class="star" data-value="3">★</span>
+                                            <span class="star" data-value="4">★</span>
+                                            <span class="star" data-value="5">★</span>
+                                        </div>
+                                        <p>Share your review:</p>
+                                        <textarea id="review" placeholder="Write your review here"></textarea>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button id="submit" class="btn btn-primary">Submit</button>
+                                        <div class="reviews" id="reviews">
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary">Understood</button>
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -198,7 +308,8 @@
                                                         src="/img/productImage/sharp/<%= product.productId.variant[product.product].images[0]%>">
                                                 </div>
                                             </a></div>
-                                        <div class="col-8"><a class="" href="" target="_blank" style="font-size: 12px;">
+                                        <div class="col-8"><a class="" href="" id="productId" target="_blank"
+                                                style="font-size: 12px;" data-productId="<%= product.productId._id%>">
                                                 <%= product.productId.name%>
                                             </a>
                                             <div class="d-flex ">
@@ -241,25 +352,28 @@
                                     </div>
 
                                 </div>
-                                <div class=" col-4">
-                                    <%console.log(product.status)%>
-                                    <%if(product.status === 'delivered') {%>
-                   
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <span class=""><i class="fa-solid fa-star" style="color: #00328a;"></i></i></span>
-                                            <button type="button" class="btn " style="color:  #00328a;" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                Rate & review product
-                                              </button>
-                                        </div>
+                                <div class=" col-4" id="editReview" data-rating="<%= review.rating %>" data-review="<%= review.review %>" >
+                                    <%=console.log(review, 'review')%>
+                                        <%if(product.status==='delivered' ) {%>
 
-                                    <%}%>
-                                    
-                                    <div>
-                                        <div class=" row"></div>
-                                        <div class=" row"><span class="">
+                                            <div  class="d-flex justify-content-center align-items-center">
+                                                <span class=""><i class="fa-solid fa-star"
+                                                        style="color: #00328a;"></i></i></span>
+                                                <button type="button"   class="btn" style="color:  #00328a;"
+                                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                                                 
+                                                    <%= review ? 'Edit review and rating' : ' Rate & review product' %>
+                                                </button>
+                                            </div>
 
-                                        </div>
-                                    </div>
+                                            <%}%>
+
+                                                <div>
+                                                    <div class=" row"></div>
+                                                    <div class=" row"><span class="">
+
+                                                    </div>
+                                                </div>
                                 </div>
                             </div>
                             <div class=""></div>
@@ -270,9 +384,136 @@
             </div>
         </div>
 
+        <script src="js/jquery-3.3.1.min.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/jquery.nice-select.min.js"></script>
+        <script src="js/jquery.nicescroll.min.js"></script>
+        <script src="js/jquery.magnific-popup.min.js"></script>
+        <script src="js/jquery.countdown.min.js"></script>
+        <script src="js/jquery.slicknav.js"></script>
+        <script src="js/mixitup.min.js"></script>
+        <script src="js/owl.carousel.min.js"></script>
+        <script src="js/main.js"></script>
+
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
             crossorigin="anonymous"></script>
 </body>
 
 </html>
+
+<script>
+    const stars = document.querySelectorAll(".star");
+    const rating = document.getElementById("rating");
+    const reviewText = document.getElementById("review");
+    const submitBtn = document.getElementById("submit");
+    const reviewsContainer = document.getElementById("reviews");
+
+    const dbrating = document.getElementById('editReview').getAttribute('data-rating');
+    const review = document.getElementById('editReview').getAttribute('data-review');
+          
+    if(review && dbrating) {
+   console.log('hi')
+   console.log(review , typeof dbrating)
+   stars.forEach((s, index) => {
+                if (index < parseInt(dbrating)) {
+                    s.classList.add(getStarColorClass(parseInt(dbrating)));
+                }
+            });
+
+        reviewText.textContent = review;
+        rating.innerHTML = dbrating;
+    }
+
+    stars.forEach((star) => {
+        star.addEventListener("click", () => {
+            const value = parseInt(star.getAttribute("data-value"));
+            rating.innerText = value;
+
+            // Remove all existing classes from stars
+            stars.forEach((s) => s.classList.remove("one",
+                "two",
+                "three",
+                "four",
+                "five"));
+
+            // Add the appropriate class to 
+            // each star based on the selected star's value
+            stars.forEach((s, index) => {
+                if (index < value) {
+                    s.classList.add(getStarColorClass(value));
+                }
+            });
+
+            // Remove "selected" class from all stars
+            stars.forEach((s) => s.classList.remove("selected"));
+            // Add "selected" class to the clicked star
+            star.classList.add("selected");
+        });
+    });
+
+    submitBtn.addEventListener("click", () => {
+        const review = reviewText.value;
+        const userRating = parseInt(rating.innerText);
+
+        if (!userRating || !review) {
+
+
+            return;
+        }
+        const productId = document.getElementById('productId').getAttribute('data-productId');
+        const data = { productId: productId, rating: userRating, ureview: review }
+        console.log(data);
+        $.ajax({
+            type: 'POST',
+            url: '/addReview',
+            data: JSON.stringify(data),
+            contentType: 'application/json',
+            success: (response) => {
+
+                if (response.success) {
+                    window.location.reload();
+                }
+
+            }
+        })
+
+
+
+        // if (userRating > 0) {
+        //     const reviewElement = document.createElement("div");
+        //     reviewElement.classList.add("review");
+        //     reviewElement.innerHTML =
+        //         `<p><strong>Rating: ${userRating}/5</strong></p><p>${review}</p>`;
+        //     reviewsContainer.appendChild(reviewElement);
+
+        //     // Reset styles after submitting
+        //     reviewText.value = "";
+        //     rating.innerText = "0";
+        //     stars.forEach((s) => s.classList.remove("one",
+        //         "two",
+        //         "three",
+        //         "four",
+        //         "five",
+        //         "selected"));
+        // }
+    });
+
+    function getStarColorClass(value) {
+        switch (value) {
+            case 1:
+                return "one";
+            case 2:
+                return "two";
+            case 3:
+                return "three";
+            case 4:
+                return "four";
+            case 5:
+                return "five";
+            default:
+                return "";
+        }
+    }
+
+</script>

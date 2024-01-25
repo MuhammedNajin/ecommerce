@@ -1,9 +1,9 @@
 
 const Address = require('../models/address');
 const Cart = require('../models/cartModel');
-const order = require('../models/order');
 const Order = require('../models/order');
 const Product = require('../models/product');
+const Review = require('../models/reviewModal');
 
 module.exports.addAddress = async (req, res) => {
     try {
@@ -164,7 +164,9 @@ module.exports.loadSingleProduct = async (req, res) => {
         console.log(products);
         const product = detials.products.find((pro) =>  pro.product === index && pro.size === size);
         console.log(product, 'render data')
-        res.render('singleProduct', {product: product, address: detials.deliveryDetails });
+        const review = await Review.findOne({user: userId, productId: productId})
+        
+        res.render('singleProduct', {product: product, address: detials.deliveryDetails, review: review });
     } catch (error) {
         console.log(error)
     }
