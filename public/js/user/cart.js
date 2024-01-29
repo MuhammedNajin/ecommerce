@@ -26,7 +26,8 @@ function addToDb(productid, vIndex) {
             contentType: 'application/json',
             success: (response) => {
                 if(response.added) {
-                  console.log('ok done')
+                  console.log('hi')
+                  showToast();   
                  
                 }
             }
@@ -105,3 +106,9 @@ function proccedTOCheckOut() {
   }
 }
 
+
+function showToast() {
+  var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}

@@ -308,18 +308,33 @@ module.exports.removeFromCart = async (req, res) => {
     try {
 
         const userId = req.session.user?._id;
-        const { productId, index } = req.body;
-
+        const { productId, index, size } = req.body;
+         console.log(req.body)
 
         if (userId) {
 
 
 
-            await Cart.findOneAndUpdate(
-                { 'user': userId, 'products.productId': productId, 'products.product': index },
-                { $pull: { 'products': { 'productId': productId, 'product': index } } },
+            // await Cart.findOneAndUpdate(
+            //     { 'user': userId, 'products.productId': productId, 'products.product': index, 'products.size': size },
+            //     { $pull: { 'products': { 'productId': productId, 'product': index, 'size': size } } },
 
-            );
+            // );
+        //    const result =  await Cart.updateOne(
+        //         { 'user': userId, "products.productId": productId, "products.product": index, "products.size": size },
+        //         { $pull: { 'products.$[elem]': { 'productId': productId, 'product': index, 'size': size } } },
+        //         { arrayFilters: [{ 'elem.productId': productId, 'elem.product': index, 'elem.size': size }] }
+        //     );
+        //     console.log(result)
+
+        const result = await Cart.updateOne(
+            { 'user': userId, "products.productId": productId, "products.product": index, "products.size": size },
+            { $pull: { 'products': { 'productId': productId, 'product': index, 'size': size } } },
+            { arrayFilters: [{ 'elem.productId': productId, 'elem.product': index, 'elem.size': size }] }
+        );
+        console.log(result);
+        
+            
             res.json({ removed: true });
 
 

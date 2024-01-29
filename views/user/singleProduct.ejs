@@ -70,8 +70,8 @@
         }
 
         .step {
-            width: 12px;
-            height: 12px;
+            width: 20px;
+            height: 20px;
             border: 2px solid #ddd;
             border-radius: 50%;
             display: flex;
@@ -181,6 +181,59 @@
         .hide {
             display: none;
         }
+
+        .fill1 {
+            position: absolute;
+            background-color: #26a541;
+            animation: fill-1 5s forwards, colors 5s forwards;
+            animation-iteration-count: 1;
+        }
+
+        .fill2 {
+            position: absolute;
+            background-color: #26a541;
+            animation: fill-1 5s forwards;
+            animation-iteration-count: 1;
+            animation-delay: 4s;
+            visibility: hidden;
+        }
+
+        .fill3 {
+            width: 0;
+            position: absolute;
+            background-color: #26a541;
+            animation: fill-1 5s forwards;
+            animation-iteration-count: 1;
+            animation-delay: 8s;
+            visibility: hidden;
+        }
+        .active-cancel {
+            background-color: red;
+        }
+        .step-cancel {
+            width: 20px;
+            height: 20px;
+            border: 2px solid #ddd;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+
+        }
+
+        @keyframes fill-1 {
+            0% {
+                width: 0;
+                visibility: visible;
+            }
+
+
+            100% {
+                width: 110px;
+                visibility: visible;
+            }
+        }
     </style>
 </head>
 
@@ -226,6 +279,74 @@
                                         <button id="submit" class="btn btn-primary">Submit</button>
                                         <div class="reviews" id="reviews">
                                         </div>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <!-- modal for order cancelation -->
+                <div class="modal fade" id="orderCancelation" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div style="margin-left: 2rem;" id="cancelDetails" data-orderId="<%= orderId%>"
+                                    data-index="<%= index%>" data-productId="<%= product.productId._id%>">
+                                    <div class="container1">
+                                        <h1>Order cancelation request</h1>
+
+                                        <p>Reason for your cancelation</p>
+                                        <textarea id="cancelReason"
+                                            placeholder="Write your cancelation reason"></textarea>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button id="cancel" class="btn btn-primary">Submit</button>
+
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+                <!-- product return -->
+                <div class="modal fade" id="returnProduct" data-bs-backdrop="static" data-bs-keyboard="false"
+                    tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                    aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+
+                                <div style="margin-left: 2rem;" id="cancelDetails" data-orderId="<%= orderId%>"
+                                    data-index="<%= index%>" data-productId="<%= product.productId._id%>">
+                                    <div class="container1">
+                                        <h1>Product return request</h1>
+
+                                        <p>Reason for your return</p>
+                                        <textarea id="returnReason"
+                                            placeholder="Write your return reason"></textarea>
+                                        <button type="button" class="btn btn-secondary"
+                                            data-bs-dismiss="modal">Close</button>
+                                        <button id="return" class="btn btn-primary">Submit</button>
+
                                     </div>
                                 </div>
 
@@ -336,44 +457,186 @@
                                 </div>
                                 <div class="col-5 ">
 
-                                    <div style="padding: 50px;">
-                                        <div class="d-flex justify-content-center align-items-center">
-                                            <div class="step active">
+                                    <%if(product.status==='canceled' ) {%>
+
+                                        <div style="padding: 50px;">
+
+                                            <div class="d-flex justify-content-center align-items-center "
+                                                style="position: relative;" id="status"
+                                                data-status="<%= product.status%>">
+
+
+                                                <div class="text-muted"
+                                                    style="position: absolute; top: -25px; left: -14px; font-size: 15px;">
+                                                    Ordered</div>
+                                                <div class="step-cancel active">
+                                                    <% const options={ weekday: 'short' , month: 'short' ,
+                                                        day: 'numeric' }%>
+                                                        <% const formattedDate=order.date.toLocaleDateString('en-US',
+                                                            options)%>
+                                                            <div class="text-muted"
+                                                                style="position: absolute; top: 25px; left: -14px; font-size: 15px;">
+                                                                <%= formattedDate%>
+                                                            </div>
+
+                                                </div>
+                                                <div class="line" style="position:relative ;">
+                                                    <div class="fill1"
+                                                        style="padding: 2px; "></div>
+                                                </div>
+                                                <div class="text-muted"
+                                                    style="position: absolute; top: -25px; left: 350px; font-size: 15px;">
+                                                    Canceled</div>
+                                                <div class="step "></div>
+
 
                                             </div>
-                                            <div class="line"></div>
-                                            <div class="step">2</div>
-                                            <div class="line"></div>
-                                            <div class="step">3</div>
-                                            <div class="line"></div>
-                                            <div class="step">4</div>
+
 
                                         </div>
-                                    </div>
 
-                                </div>
-                                <div class=" col-4" id="editReview" data-rating="<%= review.rating %>" data-review="<%= review.review %>" >
-                                    <%=console.log(review, 'review')%>
-                                        <%if(product.status==='delivered' ) {%>
+                                        <%} else {%>
+                                            <div style="padding: 50px;">
+                                                <div class="d-flex justify-content-center align-items-center "
+                                                    style="position: relative;" id="status"
+                                                    data-status="<%= product.status%>">
+                                                    <div class="text-muted"
+                                                        style="position: absolute; top: -25px; left: -14px; font-size: 15px;">
+                                                        Ordered</div>
+                                                    <div class="step active">
+                                                        <% const options={ weekday: 'short' , month: 'short' ,
+                                                            day: 'numeric' }%>
+                                                            <% const
+                                                                formattedDate=order.date.toLocaleDateString('en-US',
+                                                                options)%>
+                                                                <div class="text-muted"
+                                                                    style="position: absolute; top: 25px; left: -14px; font-size: 15px;">
+                                                                    <%= formattedDate%>
+                                                                </div>
 
-                                            <div  class="d-flex justify-content-center align-items-center">
-                                                <span class=""><i class="fa-solid fa-star"
-                                                        style="color: #00328a;"></i></i></span>
-                                                <button type="button"   class="btn" style="color:  #00328a;"
-                                                    data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                                                 
-                                                    <%= review ? 'Edit review and rating' : ' Rate & review product' %>
-                                                </button>
+                                                    </div>
+                                                    <div class="line" style="position:relative ;">
+                                                        <div class=" <%= (product.status === 'shipped' || product.status === 'delivered' || product.status === 'outfordelivery' ) ? 'fill1' : '' %> "
+                                                            style="padding: 2px; "></div>
+                                                    </div>
+                                                    <div class="text-muted"
+                                                        style="position: absolute; top: -25px; left: 105px; font-size: 15px;">
+                                                        Shipped</div>
+                                                    <div class="step"></div>
+                                                    <% const originalDate=new Date(formattedDate);
+                                                        originalDate.setDate(originalDate.getDate() + 2); const
+                                                        options2={ weekday: 'short' , month: 'short' , day: 'numeric' };
+                                                        const increasedDate=originalDate.toLocaleDateString('en-US',
+                                                        options2); %>
+
+                                                        <div class="text-muted"
+                                                            style="position: absolute; top: 25px; left: 105px; font-size: 15px;">
+                                                            <%= increasedDate%>
+                                                        </div>
+
+
+                                                        <div class="line">
+                                                            <div class="<%= (product.status === 'delivered' || product.status === 'outfordelivery') ? 'fill2' : '' %> "
+                                                                id="fill2" style="padding: 2px; "></div>
+                                                        </div>
+                                                        <div class="text-muted"
+                                                            style="position: absolute; top: -25px; left: 217px; font-size: 15px;">
+                                                            Outfordelivery
+                                                        </div>
+
+                                                        <div class="step"></div>
+                                                        <% const originalDate1=new Date(increasedDate);
+                                                            originalDate1.setDate(originalDate1.getDate() + 2); const
+                                                            options3={ weekday: 'short' , month: 'short' ,
+                                                            day: 'numeric' }; const
+                                                            increasedDate2=originalDate.toLocaleDateString('en-US',
+                                                            options3); %>
+                                                            <div class="text-muted"
+                                                                style="position: absolute; top: 25px; left: 221px; font-size: 15px;">
+                                                                <%= increasedDate%>
+                                                            </div>
+                                                            <div class="line">
+                                                                <div class=" <%= product.status === 'delivered' ? 'fill3' : '' %>"
+                                                                    id="fill3" style="padding: 2px;"></div>
+                                                            </div>
+                                                            <div class="text-muted"
+                                                                style="position: absolute; top: -25px; left: 365px; font-size: 15px;">
+                                                                Delivery</div>
+
+                                                            <div class="step"></div>
+                                                            <% const options1={ weekday: 'short' , month: 'short' ,
+                                                                day: 'numeric' }%>
+                                                                <% const deliveryDate=new
+                                                                    Date(order.expected_delivery)%>
+                                                                    <% const
+                                                                        formattedDate3=deliveryDate.toLocaleDateString('en-US',
+                                                                        options1)%>
+                                                                        <div class="text-muted d-flex"
+                                                                            style="position: absolute; top: 25px; left: 321px; font-size: 15px;">
+                                                                            <span>
+                                                                                <%= formattedDate3%>
+                                                                            </span>
+                                                                        </div>
+
+
+                                                </div>
                                             </div>
+
 
                                             <%}%>
 
-                                                <div>
-                                                    <div class=" row"></div>
-                                                    <div class=" row"><span class="">
 
-                                                    </div>
+
+                                </div>
+                                <div class=" col-4" id="editReview" data-rating="<%= review?.rating %>"
+                                    data-review="<%= review?.review %>">
+
+                                    <%if(product.status==='delivered' ) {%>
+
+                                        <div class="d-flex justify-content-center align-items-center">
+                                            <span class=""><i class="fa-solid fa-star"
+                                                    style="color: #00328a;"></i></i></span>
+                                            <button type="button" class="btn" style="color:  #00328a;"
+                                                data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+
+                                                <%= review ? 'Edit review and rating' : ' Rate & review product' %>
+                                            </button>
+                                        </div>
+
+                                        <%}%>
+
+                                            <%if(product.status !=='canceled' && product.status !=='delivered' ) {%>
+
+                                                <div class="d-flex justify-content-center align-items-center"
+                                                    style="margin-right: 6rem;">
+                                                    <span class="" style="border: 1px solid; padding: 0px 5px;"><i
+                                                            class="fa-solid fa-xmark fa-lg"
+                                                            style="color: #164088;"></i></span>
+                                                    <button type="button" class="btn" style="color:  #00328a;"
+                                                        data-bs-toggle="modal" data-bs-target="#orderCancelation">
+                                                        Cancel
+                                                    </button>
                                                 </div>
+
+                                                <%}%>
+                                            <%if(product.status ==='delivered') {%>
+
+                                                <div class="d-flex justify-content-center align-items-center"
+                                                    style="">
+                                                    <span class="" style="border: 1px solid; padding: 0px 5px;"><i
+                                                            class="fa-solid fa-rotate-left fa-lg"
+                                                            style="color: #164088;"></i>
+                                                        </span>
+                                                    <button type="button" class="btn" style="color:  #00328a;"
+                                                        data-bs-toggle="modal" data-bs-target="#returnProduct">
+                                                        Return your product
+                                                    </button>
+                                                </div>
+
+                                                <%}%>
+
+                                                   
+                                                
                                 </div>
                             </div>
                             <div class=""></div>
@@ -411,15 +674,15 @@
 
     const dbrating = document.getElementById('editReview').getAttribute('data-rating');
     const review = document.getElementById('editReview').getAttribute('data-review');
-          
-    if(review && dbrating) {
-   console.log('hi')
-   console.log(review , typeof dbrating)
-   stars.forEach((s, index) => {
-                if (index < parseInt(dbrating)) {
-                    s.classList.add(getStarColorClass(parseInt(dbrating)));
-                }
-            });
+
+    if (review && dbrating) {
+        console.log('hi')
+        console.log(review, typeof dbrating)
+        stars.forEach((s, index) => {
+            if (index < parseInt(dbrating)) {
+                s.classList.add(getStarColorClass(parseInt(dbrating)));
+            }
+        });
 
         reviewText.textContent = review;
         rating.innerHTML = dbrating;
@@ -515,5 +778,103 @@
                 return "";
         }
     }
+
+</script>
+
+<script>
+    const cancelSubmit = document.getElementById('cancel');
+    cancelSubmit.addEventListener('click', () => {
+        const reason = document.getElementById('cancelReason').value;
+        console.log('hello')
+        if (reason) {
+            const orderId = document.getElementById('cancelDetails').getAttribute('data-orderId');
+            const index = document.getElementById('cancelDetails').getAttribute('data-index');
+            const productId = document.getElementById('cancelDetails').getAttribute('data-productId');
+
+            const data = { orderId: orderId, productId: productId, index: index, cancelReason: reason };
+            console.log(data)
+            $.ajax({
+                type: "POST",
+                url: "/order-cancel",
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: (response) => {
+                    if (response.canceled) {
+                        window.location.reload();
+                    }
+                }
+            })
+        }
+    })
+
+    const returnSubmit = document.getElementById('return');
+    cancelSubmit.addEventListener('click', () => {
+        const reason = document.getElementById('returnReason').value;
+        console.log('hello')
+        if (reason) {
+            const orderId = document.getElementById('cancelDetails').getAttribute('data-orderId');
+            const index = document.getElementById('cancelDetails').getAttribute('data-index');
+            const productId = document.getElementById('cancelDetails').getAttribute('data-productId');
+
+            const data = { orderId: orderId, productId: productId, index: index, returnReason: reason };
+            console.log(data)
+            $.ajax({
+                type: "POST",
+                url: "/product-return",
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: (response) => {
+                    if (response.return) {
+                        window.location.reload();
+                    }
+                }
+            })
+        }
+    })
+
+
+
+
+</script>
+
+
+<script>
+    const status = document.getElementById('status').getAttribute('data-status')
+    const step_cancel =document.getElementById('step-cancel');
+    const fill2 = document.getElementById('fill2')
+    const fill3 = document.getElementById('fill3')
+    const step = document.querySelectorAll('.step');
+    if (status === 'outfordelivery' || status === 'shipped' || status === 'delivered') {
+
+        setTimeout(() => {
+            step[1].classList.add('active');
+
+        }, 3000);
+
+    }
+    if (status === 'outfordelivery' || status === 'delivered') {
+
+        setTimeout(() => {
+            step[2].classList.add('active');
+
+        }, 7000);
+
+    }
+    if (status === 'delivered') {
+
+        setTimeout(() => {
+            step[3].classList.add('active');
+
+        }, 11000);
+    }
+    if (status === 'canceled') {
+
+        setTimeout(() => {
+            cancel[1].classList.add('active-cancel');
+
+        }, 11000);
+
+    }
+
 
 </script>

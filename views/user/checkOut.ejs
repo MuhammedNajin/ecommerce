@@ -26,6 +26,33 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
 
+    <style>
+        .cards-container::-webkit-scrollbar {
+            display: none;
+            /* Hide the scrollbar in WebKit browsers */
+        }
+
+        .sticky-element {
+            position: -webkit-sticky;
+            /* For Safari */
+            position: sticky;
+            bottom: 0;
+            /* Stick it to the bottom */
+
+            padding: 10px;
+
+
+        }
+
+        @media screen and (min-width: 480px) {
+
+            .sticky-element {
+                margin-left: 10rem;
+            }
+        }
+    </style>
+
+
 </head>
 
 <body>
@@ -189,8 +216,9 @@
                                     </div>
                                     <div class="checkout__input">
                                         <p>Address<span>*</span></p>
-                                        <input type="text" id="address" name="address" placeholder="Street Address" class="checkout__input__add">
-                                       
+                                        <input type="text" id="address" name="address" placeholder="Street Address"
+                                            class="checkout__input__add">
+
                                     </div>
                                     <div class="checkout__input">
                                         <p>Town/City<span>*</span></p>
@@ -256,81 +284,96 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
                                     <button class="accordion-button "
-                                        style="background-color: #111111 !important; color: #f3f2ee; border-color: none !important;" type="button"
-                                        data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne"
-                                        aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
+                                        style="background-color: #111111 !important; color: #f3f2ee; border-color: none !important;"
+                                        type="button" data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+                                        aria-controls="panelsStayOpen-collapseOne">
                                         SELECT ADDRESS
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
                                     <div class="accordion-body" style="background-color: #f3f2ee;">
 
-                                        <div class="row">
+                                        <div class="cards-container"
+                                            style="display: flex; flex-wrap: nowrap;  gap: 2rem; overflow: scroll; ">
                                             <%if(address) {%>
                                                 <%address.address.forEach((el, i)=> {%>
                                                     <%console.log(el)%>
-    
-                                                    <div class="card text-center mb-3"
-                                                        style="width: 18rem; margin-left: 2rem; ">
-    
-                                                        <div class="card-body" >
-                                                            <h5 class="card-title"
-                                                                style="color: #111111; font-weight: 800;">Address <%= i +
-                                                                    1%>
-                                                            </h5>
-                                                            <address>
-                                                                <p style="text-align: left; margin: 0;">
-    
-                                                                    <span style="font-weight: bold;">Name:</span>
-                                                                    <%= el.fullName %><br>
-                                                                        <span style="font-weight: bold;">Country:</span>
-                                                                        <%= el.country %><br>
-                                                                            <span style="font-weight: bold;">House
-                                                                                Name:</span>
-                                                                            <%= el.address %><br>
-                                                                                <span
-                                                                                    style="font-weight: bold;">State:</span>
-                                                                                <%= el.state %><br>
+
+                                                        <div class="card text-center mb-3"
+                                                            style="max-width: 18rem; margin-left: 2rem;  flex: 1 0 18rem; ">
+
+                                                            <div class="card-body">
+                                                                <h5 class="card-title"
+                                                                    style="color: #111111; font-weight: 800;">Address
+                                                                    <%= i + 1%>
+                                                                </h5>
+                                                                <address>
+                                                                    <p style="text-align: left; margin: 0;">
+
+                                                                        <span style="font-weight: bold;">Name:</span>
+                                                                        <%= el.fullName %><br>
+                                                                            <span
+                                                                                style="font-weight: bold;">Country:</span>
+                                                                            <%= el.country %><br>
+                                                                                <span style="font-weight: bold;">House
+                                                                                    Name:</span>
+                                                                                <%= el.address %><br>
                                                                                     <span
-                                                                                        style="font-weight: bold;">City:</span>
-                                                                                    <%= el.city %><br>
+                                                                                        style="font-weight: bold;">State:</span>
+                                                                                    <%= el.state %><br>
                                                                                         <span
-                                                                                            style="font-weight: bold;">Pincode:</span>
-                                                                                        <%= el.pincode %><br>
+                                                                                            style="font-weight: bold;">City:</span>
+                                                                                        <%= el.city %><br>
                                                                                             <span
-                                                                                                style="font-weight: bold;">Phone:</span>
-                                                                                            <%= el.phone %><br>
+                                                                                                style="font-weight: bold;">Pincode:</span>
+                                                                                            <%= el.pincode %><br>
                                                                                                 <span
-                                                                                                    style="font-weight: bold;">Email:</span>
-                                                                                                <%= el.email %><br>
-                                                                     </p>
-                                                            </address>
-                                                            
-                                                            <div class="" role="group" aria-label="Basic radio toggle button group">
-                                                                <input type="radio" class="btn-check" value="<%= i + 1%>" name="address" id="btnradio<%= i + 1%>" autocomplete="off">
-                                                                <label class="btn btn-outline-dark px-4"  for="btnradio<%= i + 1%>">Select</label>
-                                                              </div>
+                                                                                                    style="font-weight: bold;">Phone:</span>
+                                                                                                <%= el.phone %><br>
+                                                                                                    <span
+                                                                                                        style="font-weight: bold;">Email:</span>
+                                                                                                    <%= el.email %><br>
+                                                                    </p>
+                                                                </address>
+
+                                                                <div class="" role="group"
+                                                                    aria-label="Basic radio toggle button group">
+                                                                    <input type="radio" class="btn-check"
+                                                                        value="<%= i + 1%>" name="address"
+                                                                        id="btnradio<%= i + 1%>" autocomplete="off">
+                                                                    <label class="btn btn-outline-dark px-4"
+                                                                        for="btnradio<%= i + 1%>">Select</label>
+                                                                </div>
+                                                            </div>
                                                         </div>
-                                                    </div>
-    
-                                                <%})%>
 
-                                            <%} else {%>
-                                                <div class="d-flex flex-column align-items-center">
-                                                    <img src="\img\noAddress..jpeg" alt="No address found" style="max-width: 150px; margin-bottom: 10px;">
-                                                    <p style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 2px;">No address found</p>
-                                                    <span style="color: #555; margin-bottom: 2rem;">Please add new address</span>
-                                                </div>
-                                                
-                                                
-                                            <%}%>
-                                            
+                                                        <%})%>
 
-                                                    <div class="d-grid gap-2">
-                                                        <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal" data-bs-whatever="@mdo"
-                                                            style="background-color: #111111; color: #f3f2ee;"
-                                                            type="button">ADD NEW ADDRESS</button>
-                                                    </div>
+                                                            <%} else {%>
+                                                                <div class="d-flex flex-column align-items-center">
+                                                                    <img src="\img\noAddress..jpeg"
+                                                                        alt="No address found"
+                                                                        style="max-width: 150px; margin-bottom: 10px;">
+                                                                    <p
+                                                                        style="font-size: 18px; font-weight: bold; color: #333; margin-bottom: 2px;">
+                                                                        No address found</p>
+                                                                    <span
+                                                                        style="color: #555; margin-bottom: 2rem;">Please
+                                                                        add new address</span>
+                                                                </div>
+
+
+                                                                <%}%>
+
+
+
+                                        </div>
+                                        <div class="d-grid gap-2">
+                                            <button class="btn" data-bs-toggle="modal" data-bs-target="#exampleModal"
+                                                data-bs-whatever="@mdo"
+                                                style="background-color: #111111; color: #f3f2ee;" type="button">ADD NEW
+                                                ADDRESS</button>
                                         </div>
 
                                     </div>
@@ -346,39 +389,42 @@
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse">
-                                    <div class="accordion-body"  style="background-color: #f3f2ee;">
-                                        
-                                        
-                                        
-                                        
+                                    <div class="accordion-body" style="background-color: #f3f2ee;">
+
+
+
+
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header">
-                                    <button class="accordion-button collapsed"  style="background-color: #111111 !important; color: #f3f2ee;" type="button" data-bs-toggle="collapse"
-                                        data-bs-target="#panelsStayOpen-collapseThree" aria-expanded="false"
-                                        aria-controls="panelsStayOpen-collapseThree">
+                                    <button class="accordion-button collapsed"
+                                        style="background-color: #111111 !important; color: #f3f2ee;" type="button"
+                                        data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseThree"
+                                        aria-expanded="false" aria-controls="panelsStayOpen-collapseThree">
                                         PAYMENT OPTIONS
                                     </button>
                                 </h2>
                                 <div id="panelsStayOpen-collapseThree" class="accordion-collapse collapse">
                                     <div class="accordion-body" style="background-color: #f3f2ee;">
                                         <table class="table" style="background-color: #f3f2ee;">
-                                           
+
                                             <tbody>
                                                 <tr>
                                                     <td style="background-color: #f3f2ee;">
                                                         <div class="" style="background-color: #f3f2ee;">
-                                                            <input type="radio" id="paypal1" value="paypal" name="payment_method">
+                                                            <input type="radio" id="paypal1" value="paypal"
+                                                                name="payment_method">
                                                             <label for="paypal1">Paypal</label>
                                                         </div>
                                                     </td>
                                                 </tr>
                                                 <tr>
-                                                    <td  style="background-color: #f3f2ee;">
+                                                    <td style="background-color: #f3f2ee;">
                                                         <div class="" style="background-color: #f3f2ee;">
-                                                            <input type="radio" id="cod1" value="COD" name="payment_method">
+                                                            <input type="radio" id="cod1" value="COD"
+                                                                name="payment_method">
                                                             <label for="cod1">Cash on Delivery</label>
                                                         </div>
                                                     </td>
@@ -395,45 +441,58 @@
                     <div class="col-lg-4 col-md-6">
                         <div class="checkout__order">
                             <h4 class="order__title" style="border-bottom: none;">Your order</h4>
-                           
-                            
-
-                                <% let subtotal = 0, totalItem = 0 %>
-
-                                    <%products.forEach((product, index)=> {%>
-                                        <%subtotal += product.totalPrice%>
-                                       
-                                            <%totalItem += product.quantity %>
-                                                <%})%>
-
-                                                
-                           
-                            <ul class="checkout__total__all">
-                                <li>Price (<%= totalItem%> <%= totalItem > 1 ? "items" : "item"%>)<span style="color: #111111;" >₹<%= subtotal%></span></li>
-
-                                <%if(subtotal > 1000) {%>
-
-                                    <li>Delivery Charges<span style="color: green;"><del style="color: black;">₹80</del> Free</span></li>
-                            
-                                <%} else{%>
-
-                                    <li>Delivery Charges<span style="color: black;">₹80</span></li>
-
-                                <%}%>
-                                
-                                <li style="font-weight: 600;" id="subtotal">Amount payaple<span style="color: #111111;">₹<%= subtotal%>
-                                    </span></li>
-                               
 
 
-                           
-                            <button type="button" onclick="placeOrder('<%= subtotal%>')" class="site-btn">PLACE ORDER</button>
+
+                            <% let subtotal=0, totalItem=0 %>
+
+                                <%products.forEach((product, index)=> {%>
+                                    <%subtotal +=product.totalPrice%>
+
+                                        <%totalItem +=product.quantity %>
+                                            <%})%>
+
+
+
+                                                <ul class="checkout__total__all">
+                                                    <li>Price (<%= totalItem%>
+                                                            <%= totalItem> 1 ? "items" : "item"%>)<span
+                                                                    style="color: #111111;">₹<%= subtotal%></span></li>
+
+                                                    <%if(subtotal> 1000) {%>
+
+                                                        <li>Delivery Charges<span style="color: green;"><del
+                                                                    style="color: black;">₹80</del> Free</span></li>
+
+                                                        <%} else{%>
+
+                                                            <li>Delivery Charges<span style="color: black;">₹80</span>
+                                                            </li>
+
+                                                            <%}%>
+
+                                                                <li style="font-weight: 600;" id="subtotal">Amount
+                                                                    payaple<span style="color: #111111;">₹<%= subtotal%>
+                                                                    </span></li>
+
+
+
+
+
                         </div>
                     </div>
                 </div>
                 </form>
             </div>
         </div>
+        <div class="sticky-element " style="max-width: 50%;">
+            <div class="d-grid gap-2 " style="">
+                <button class="btn " onclick="placeOrder('<%= subtotal%>')"
+                    style=" color: #f3f2ee; padding: 1rem; background-color: #fd7e14;" type="button">PLACE
+                    ORDER</button>
+            </div>
+        </div>
+        <!-- <button type="button" onclick="placeOrder('<%= subtotal%>')" class="site-btn ">PLACE ORDER</button> -->
     </section>
     <!-- Checkout Section End -->
 
@@ -535,57 +594,78 @@
 
 
 <script>
-    
+
 
     function placeOrder(total) {
         try {
-
+            console.log('clicked')
             const radioBtn = document.querySelector('input[name="address"]:checked');
-             const  index = radioBtn ? radioBtn.value : null;
-            if(index) {
-                
+            const index = radioBtn ? radioBtn.value : null;
+            if (index) {
+
                 const payment = document.querySelector('input[name="payment_method"]:checked');
                 const paymet_method = payment ? payment.value : null;
 
-                if(paymet_method) {
+                if (paymet_method) {
 
                     const subtotal = total;
-                if(subtotal) {
+                    if (subtotal) {
 
-                    const data = {
-                        index: index,
-                        payment_method: paymet_method,
-                        subtotal: subtotal,
-                    }
-                    console.log(data)
-                    $.ajax({
-                        type: 'POST',
-                        url: '/place-order',
-                        data: JSON.stringify(data),
-                        contentType: 'application/JSON',
-                        success: (response) => {
-                             if(response.success) {
-                                location.href = '/order-success';
-                             }
+                        const data = {
+                            index: index,
+                            payment_method: paymet_method,
+                            subtotal: subtotal,
                         }
+                        console.log(data)
+                        $.ajax({
+                            type: 'POST',
+                            url: '/place-order',
+                            data: JSON.stringify(data),
+                            contentType: 'application/JSON',
+                            success: (response) => {
+                                if (response.success) {
+                                    location.href = '/order-success';
+                                } else if (response.order) {
 
+                                    razorPay(response.order);
+                                }
+                            }
+
+                        })
+
+                    } else {
+                        console.log('total amount not recived...');
+
+                    }
+
+                } else {
+                    console.log('please select payment method');
+                    Swal.fire({
+
+                        title: "Select payament method",
+                        text: "Please select payament method!",
+                        icon: "warning",
+                        showConfirmButton: false,
+                        timer: 1500
                     })
 
-                } else {
-                    console.log('total amount not recived...');
                 }
 
-                } else {
-                    console.log('please select payment method')
-                }
 
-                
 
             } else {
-                console.log('please select address');
+                Swal.fire({
+
+                    title: "Select address",
+                    text: "Please select address!",
+                    icon: "warning",
+                    showConfirmButton: false,
+                    timer: 1500
+                })
+
             }
 
-           
+
         } catch (error) {
             console.log(error);
         }
@@ -593,3 +673,87 @@
 
 
 </script>
+
+
+
+
+<script>
+    function razorPay(order) {
+        try {
+           console.log(order);
+            var options = {
+                "key": "rzp_test_at0lMzCavdHpBO", // Enter the Key ID generated from the Dashboard
+                "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
+                "currency": "INR",
+                "name": "Male fashion", //your business name
+                "description": "Test Transaction",
+                "image": "https://example.com/your_logo",
+                "order_id": order.id, //This is a sample Order ID. Pass the `id` obtained in the response of Step 1
+                handler: (responce) => {
+                    verifyPayament(responce, order);
+                },
+                "prefill": { //We recommend using the prefill parameter to auto-fill customer's contact information especially their phone number
+                    "name": "Male fashion", //your customer's name
+                    "email": "najinn675@gmail.com",
+                    "contact": "9000090000" //Provide the customer's phone number for better conversion rates 
+                },
+                "notes": {
+                    "address": "Male fashion"
+                },
+                "theme": {
+                    "color": "#3399cc"
+                }
+            };
+
+
+            var rzp1 = new Razorpay(options);
+
+            rzp1.on('payment.failed', (err) => {
+                console.log(err);
+            })
+            rzp1.open();
+
+
+
+        } catch (error) {
+            console.log(error)
+        }
+    }
+
+
+    function verifyPayament(payment, order) {
+        try {
+            
+            $.ajax({
+                type: 'POST',
+                url: '/verifyPayment',
+                data: {
+                    payment: payment,
+                    order: order,
+                },
+                success: (responce) => {
+                    if (responce.payment_successful) {
+                        window.location.href = '/order-success';
+                    } else {
+                        swal.fire({
+                            positon: "center",
+                            icon: "error",
+                            title: "Payment failed",
+                            showConfirmButton: false,
+                            timer: 1500,
+                        });
+                    }
+                }
+            })
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>

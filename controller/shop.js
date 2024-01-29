@@ -12,3 +12,28 @@ module.exports.loadShop = async (req, res) => {
         console.log(error);
     }
 }
+
+
+
+///// search filter sort /////////
+
+
+module.exports.filter = async (req, res) => {
+    try {
+        console.log('hello')
+       
+        
+         const search = req.body.search ? req.body.search : "";
+         const sort = req.body.sort === 'increacing' ? 1 : -1;
+
+        const products = await Product.find({
+            name: {$regex: search, $options: 'i'}
+        }).sort({"variant.0.price": sort})
+        console.log(products);
+        if(products) {
+            res.status(200).json({pass: true, product: products})
+        }
+    } catch (error) {
+        console.log(error);
+    }
+}

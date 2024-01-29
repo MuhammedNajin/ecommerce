@@ -37,18 +37,18 @@ const orderSchema = new mongoose.Schema({
         },
         status: {
            type: String,
-           enum: ['placed', 'outfordelivery', 'shipped', 'delivered'],
+           enum: ['placed', 'outfordelivery', 'shipped', 'delivered', 'canceled', 'return',],
            default: 'placed',
-        }
+        },
+        cancelReason: {
+          type: String
+        },
+        returnReason: {
+          type: String
+        },
     }
 ],
-  
-  cancelReason: {
-    type: String
-  },
-  returnReason: {
-    type: String
-  },
+
   totalAmount: {
     type: Number,
     required: true,

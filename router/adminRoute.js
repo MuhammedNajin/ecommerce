@@ -99,10 +99,12 @@ admin_route.post('/logout', admin_controller.logout);
 
 // order 
 
-admin_route.get('/order', admin_controller.loadOrder)
-admin_route.get('/single-orderDetails', admin_controller.loadsingleOrder );
+admin_route.get('/order', adminAuth.islogin, admin_controller.loadOrder)
+admin_route.get('/single-orderDetails', adminAuth.islogin, admin_controller.loadsingleOrder );
 
 admin_route.post('/change-orderStatus', admin_controller.changeOrderStatus)
+
+admin_route.get('/returns', admin_controller.loadReturns);
 
 
 

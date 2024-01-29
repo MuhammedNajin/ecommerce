@@ -203,3 +203,12 @@ module.exports.changeOrderStatus = async (req, res) => {
         console.log(error);
     }
 }
+
+
+module.exports.loadReturns = async (req, res) => {
+    try {
+        res.render('returnRequest')
+    } catch (error) {
+        console.log(error);
+    }
+}

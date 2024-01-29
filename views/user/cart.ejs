@@ -131,13 +131,6 @@
                                             </div>
                                         </td>
                                         <td class="quantity__item">
-                                            <!-- <div class="quantity">
-                                                <div class="pro-qty-2">
-                                                    <input type="text" value="1">
-                                                    <span style="transform: rotate(90deg ); margin-top: 6px;" class="fa fa-angle-left dec qtybtn"></span>
-                                                    <span style="transform: rotate(90deg); margin-top: 3px;" class="fa fa-angle-right inc qtybtn"></span>
-                                                </div>
-                                            </div> -->
                                             <div class="quantity">
                                                 <div class="pro-qty-2" id="newID">
                                                     <span  id="minus" class="fa fa-angle-left   counter"></span>
@@ -151,7 +144,7 @@
                                         <%totalAmount += item.totalPrice%>
                                         <td class="cart__price">₹<%= item.totalPrice%></td>
                                        
-                                        <td class="cart__close" onclick="remove_from_cart('<%= item.productId._id%>','<%= item.product%>')"><i class="fa fa-close"></i></td>
+                                        <td class="cart__close" onclick="remove_from_cart('<%= item.productId._id%>','<%= item.product%>', '<%= item.size%>')"><i class="fa fa-close"></i></td>
                                     </tr>
     
                                     <%})%>
@@ -323,10 +316,10 @@
 
 
 <script>
-     function remove_from_cart(productId, index) {
+     function remove_from_cart(productId, index, size) {
 
         console.log(productId, index)
-         const data = {productId: productId, index: index}
+         const data = {productId: productId, index: index, size: size}
          console.log(data)
        try {
 
@@ -376,8 +369,8 @@ parentElement.addEventListener('click', (event) => {
                 contentType: 'application/json',
                 success: (response) => {
                     if (response.changed) {
-                        $('#newID').load('/cart #newID');
-                        $('#price').load('/cart #price');
+                      $('#newID').load('/cart #newID');
+                      $('#price').load('/cart #price');
                     } else {
                         console.log('Error');
                     }

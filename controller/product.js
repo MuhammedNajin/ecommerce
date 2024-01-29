@@ -304,3 +304,6 @@ module.exports.productdetiles = async (req, res) => {
         console.log(error);
     }
 }
+
+
+

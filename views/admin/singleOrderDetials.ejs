@@ -92,7 +92,7 @@
                                             <td>
                                                 <%= el.totalPrice%>
                                             </td>
-                                            <td><span class="badge rounded-pill alert-warning">
+                                            <td><span class=" " style="font-weight: 900;">
                                                     <%= el.status%>
                                                 </span></td>
                                             <% const formattedDate=order.date.toLocaleString('en-US', { weekday: 'short'
@@ -107,12 +107,19 @@
                                                         <select data-orderId="<%= order._id%>"
                                                             data-productId="<%= el.productId._id%>" data-index="<%= i%>"
                                                             data-userId="<%= order.user._id%>"
-                                                            class="form-select orderStatus" id="orderStatus"
+                                                            class="form-select orderStatus bg-success" id="orderStatus"
                                                             name="orderStatus" disabled>
-                                                            <option style="color: rgba(65, 189, 27, 0.781);"
+                                                            <option style="color: rgba(248, 249, 248, 0.954);"
                                                                 value="delivered">Delivered</option>
                                                         </select>
 
+                                                        <%} else if(el.status==='canceled' ) {%>
+
+                                                            <select class="bg-danger form-select" name="" id="" disabled>
+                                                                <option class="text-light " style="color: #fff !important; font-weight: 900;">Cancelled</option>
+
+                                                            </select>
+                                     
                                                         <%} else {%>
 
                                                             <select data-orderId="<%= order._id%>"
@@ -120,6 +127,7 @@
                                                                 data-index="<%= i%>" data-userId="<%= order.user._id%>"
                                                                 class="form-select orderStatus" id="orderStatus"
                                                                 name="orderStatus">
+                                                                <option>Change status</option>
                                                                 <option value="shipped">Shipped</option>
                                                                 <option value="outfordelivery">outfordelivery</option>
                                                                 <option value="delivered">Delivered</option>
