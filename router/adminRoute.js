@@ -105,6 +105,7 @@ admin_route.get('/single-orderDetails', adminAuth.islogin, admin_controller.load
 admin_route.post('/change-orderStatus', admin_controller.changeOrderStatus)
 
 admin_route.get('/returns', admin_controller.loadReturns);
+admin_route.post('/returns', admin_controller.returns)
 
 
 

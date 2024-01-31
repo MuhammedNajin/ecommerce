@@ -167,9 +167,9 @@ module.exports.loadMyOrder = async (req, res) => {
     try {
         const userid = req.session.user?._id;
         console.log(typeof userid, userid);
-        const order = await Order.find({ user: userid }).populate('user').populate('products.productId');
+        const order = await Order.find({ user: userid }).populate('user');
         console.log(order)
-        res.render('orderDetails', { myOrder: order });
+        res.render('myOrder', { order: order });
     } catch (error) {
         console.log(error);
     }
@@ -182,14 +182,9 @@ module.exports.loadSingleProduct = async (req, res) => {
         console.log(req.query);
         const userId = req.session.user?._id;
         const { productId, index, size, orderId } = req.query;
-        const detials = await Order.findOne({ _id: orderId, user: userId }).populate('user').populate('products.productId')
-        // console.log(detials);
-        const products = detials.products.filter((pro) => pro.productId._id == productId);
-        console.log(products);
-        const product = detials.products.find((pro) => pro.product === index && pro.size === size);
-        console.log(product, 'render data')
-        const review = await Review.findOne({ user: userId, productId: productId })
-
+        const detials = await Order.findOne({ _id: orderId, user: userId }).populate('user').populate('products.productId');
+        const product = detials.products.find((pro, i) => i === parseInt(index));
+        const review = await Review.findOne({ user: userId, productId: productId });
         res.render('singleProduct', { product: product, address: detials.deliveryDetails, review: review, orderId: orderId, index: index, order: detials });
     } catch (error) {
         console.log(error)
@@ -201,11 +196,11 @@ module.exports.orderCancelation = async (req, res) => {
         console.log('ssssssssss')
         const { orderId, productId, index, cancelReason } = req.body;
         const userId = req.session.user?._id;
-
+         console.log(req.body)
 
         if (userId) {
 
-            return Order.findOneAndUpdate({ _id: orderId, "products.productId": productId }, {
+            return Order.findByIdAndUpdate({ _id: orderId, "products.productId": productId }, {
                 $set: {
                     [`products.${index}.status`]: 'canceled',
                     [`products.${index}.cancelReason`]: cancelReason,
@@ -243,17 +238,19 @@ module.exports.verifyPayment = async (req, res) => {
         const hmacValue = hmac.digest("hex");
        
          if(hmacValue === payment.razorpay_signature ){
-
+            
             const cart = await Cart.findOne({ user: userId }).populate('products.productId');
             const products = cart.products;
+            console.log('payemnt verifycation successful',products[0].productId._id )
             // decreasing the quatity of products
             for (let i = 0; i < cart.products.length; i++) {
                 {
-                    const productId = products[i].productId;
+                    const productId = products[i].productId._id;
+                  
                     const index = products[i].product;
                     const productQuantity = products[i].quantity;
                     console.log(typeof productQuantity, productQuantity)
-                    await Product.updateOne({ _id: productId }, {
+                    await Product.findByIdAndUpdate({ _id: productId }, {
                         $inc: {
                             [`variant.${index}.stock`]: - productQuantity
                         }
@@ -280,6 +277,36 @@ module.exports.verifyPayment = async (req, res) => {
 module.exports.productReturn = async (req, res) => {
     try {
         const { orderId, productId, index, returnReason } = req.body;
+
+        const userId = req.session.user?._id;
+             console.log(req.body, userId)
+        if(userId) {
+            return Order.findOneAndUpdate({ _id: orderId, "products.productId": productId }, {
+                $set: {
+                    [`products.${index}.returnRequest`]: "requested",
+                    [`products.${index}.returnReason`]: returnReason,
+                }
+            })
+            .then(() => {
+                res.json({return : true})
+            }) 
+        }
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+module.exports.singleOrderDetials = async (req, res) => {
+    try {
+        const userId = req.session.user?._id;
+        if(userId) {
+            const { orderId } = req.query;
+            const order = await Order.findById({_id: orderId }).populate('user').populate('products.productId');
+            console.log(order)
+            res.render('orderDetails', {myOrder: order});
+        }
     } catch (error) {
         console.log(error)
     }

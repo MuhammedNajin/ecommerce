@@ -1,0 +1,205 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Nest Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <!-- Favicon -->
+    <!-- <link rel="shortcut icon" type="image/x-icon" href="/assets/imgs/theme/favicon.svg" /> -->
+    <!-- Template CSS -->
+    <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
+    
+</head>
+
+<body class="bg-info-subtle">
+    <main class="">
+
+
+        <!-- ... Your existing code ... -->
+
+        <!-- ... Your existing code ... -->
+
+        <section class="content-main bg-body-tertiary">
+            <div class="content-header justify-content-center py-3">
+                <div class="text-center">
+                    <h2 class="content-title fs-3 text-dark" style="font-weight: 800;">Return request</h2>
+                    <p class="text-muted" style="font-size: large;">Get an overview of recent shopping experiences from
+                        users.</p>
+                </div>
+            </div>
+            <div class="card mb-4">
+                <div class="card-body" id="Reload">
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <!-- Add user details here, you can customize this section -->
+                            <h5>User Details</h5>
+                            <p><strong>Name:</strong>
+                                <%= order.deliveryDetails.fullName %>
+                            </p>
+                            <p><strong>Email:</strong>
+                                <%= order.deliveryDetails.email %>
+                            </p>
+                            <p><strong>Address:</strong>
+                                <%= order.deliveryDetails.address %>, <%= order.deliveryDetails.city %>, <%=
+                                            order.deliveryDetails.state %>, <%= order.deliveryDetails.pincode %>
+                            </p>
+                        </div>
+                        <div class="col-md-6 text-end">
+                            <select class="form-select">
+                                <option>Show 20</option>
+                                <option>Show 30</option>
+                                <option>Show 40</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="table-responsive">
+                        <div id="reload">
+                            <table class="table table-hover" id="ReloadTable">
+                                <thead>
+                                    <tr>
+                                        <th>Index</th>
+                                        <th scope="col">Image</th>
+                                        <th scope="col">Name</th>
+                                        <th scope="col">Total</th>
+                                        <th scope="col">Status</th>
+                                        <th scope="col">Date</th>
+                                        <th scope="col" class="text-end">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <% order.products.forEach((el, i)=> {%>
+                                         <%if(el.returnRequest) {%>
+                                            <tr>
+                                                <td>
+                                                    <%= i + 1%>
+                                                </td>
+                                                <td>
+                                                    <b>
+                                                        <img src="/img/productImage/sharp/<%= el.productId.variant[el.product].images[0]%>"
+                                                            alt="" style="width: 80px; height: 80px;">
+                                                    </b>
+                                                </td>
+                                                <td>
+                                                    <%= el.productId.name%>
+                                                </td>
+                                                <td>
+                                                    <%= el.totalPrice%>
+                                                </td>
+                                                <td><span class=" " style="font-weight: 900;">
+                                                        <%= el.status%>
+                                                    </span></td>
+                                                <% const formattedDate=order.date.toLocaleString('en-US', { weekday: 'short'
+                                                    , month: 'short' , day: 'numeric' , year: 'numeric' , hour: 'numeric' ,
+                                                    minute: 'numeric' , second: 'numeric' , hour12: true }); %>
+                                                    <td>
+                                                        <%= formattedDate%>
+                                                    </td>
+                                                    <td class="text-end">
+
+                                                        <button onclick="deny('<%= order._id%>', '<%= el.productId?._id%>', '<%= i %>')" class="btn btn-outline-danger btn-sm me-2">
+                                                            <span class="me-2"><i class="fa-solid fa-xmark" style="color: #ae0505; font-size: 1rem;"></i></span>
+                                                            Deny
+                                                        </button>
+                                                        <button onclick=" return accept('<%= order._id%>', '<%= el.productId?._id%>', '<%= i %>');" class="btn btn-outline-success btn-sm">
+                                                            <span class="me-2"><i class="fa-solid fa-check" style="color: #029611;"></i></span>
+                                                            Accept
+                                                        </button>
+    
+                                                       
+                                                    </td>
+                                            </tr>
+                                         <%}%>
+                                        <%})%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ... Your existing code ... -->
+
+
+        <!-- ... Your existing code ... -->
+
+
+
+        <!-- content-main end// -->
+        <footer class="main-footer font-xs">
+            <div class="row pb-30 pt-15">
+                <div class="col-sm-6">
+                    <script>
+                        document.write(new Date().getFullYear());
+                    </script>
+                    &copy; Nest - HTML Ecommerce Template .
+                </div>
+                <div class="col-sm-6">
+                    <div class="text-sm-end">All rights reserved</div>
+                </div>
+            </div>
+        </footer>
+    </main>
+    <script src="/assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/vendors/select2.min.js"></script>
+    <script src="/assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="/assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <script src="/https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
+
+    <!-- Main Script -->
+    <script src="assets/js/main.js?v=1.1" type="text/javascript"></script>
+</body>
+
+</html>
+
+
+<script>
+    function accept(orderId, productId, index,) {
+        console.log('accept');
+        const decision = 'accepted'
+        $.ajax({
+            type: "post",
+            url: "/admin/returns",
+            data: {
+                orderId,
+                productId,
+                index,
+                decision,
+            },
+            success: (res) => {
+                if(res.success) {
+                  
+                }
+            }
+        })
+    }
+    function deny(orderId, productId, index,) {
+        const decision = 'denied'
+        $.ajax({
+            type: "post",
+            url: "/admin/returns",
+            data: {
+                orderId,
+                productId,
+                index,
+                decision,
+            },
+            success: (res) => {
+                if(res.success) {
+                    
+                }
+            }
+        })
+    }
+</script>

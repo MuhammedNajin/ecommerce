@@ -177,6 +177,7 @@ module.exports.addToCart = async (req, res) => {
         const product = await Product.findOne({ _id: productId });
         const price = product.variant[index].price;
         const offerPrice = product.variant[index].offerPrice;
+        console.log(offerPrice, price)
 
 
         const qnt = quantity ? quantity : 1;

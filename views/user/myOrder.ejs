@@ -60,6 +60,35 @@
         .status-checkboxes .form-check-label {
             margin-bottom: 0;
         }
+      
+
+        .menu-itemmm {
+
+            margin-bottom: 20px;
+            padding-left: 21px
+        }
+
+        .menu-itemmm a {
+            color: black;
+            text-decoration: none;
+            text-transform: capitalize;
+            font-size: .9rem;
+            font-family: 'Quicksand';
+        }
+
+        .menu-headinggg {
+            font-size: .7rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: rgba(127, 127, 127, 1);
+            padding-left: 10px;
+        }
+         table td {
+            padding: 24px;
+        }
+        tr{
+            margin-top: 2rem;
+        }
     </style>
 </head>
 
@@ -69,7 +98,7 @@
         <div class="bg-body-tertiary" style=" margin:0 auto; padding: 15px 15px;">
             <!-- <div class="container-fluid"> -->
             <div class="row">
-                <div class="col-md-3" style="">
+                <!-- <div class="col-md-3" style="">
                     <div style="padding: 16px; margin-bottom: 12px; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);">
                         <div class="d-flex" style="flex-wrap: wrap;  padding: 16px; margin-bottom: 12px;">
 
@@ -117,6 +146,68 @@
                     </div>
 
 
+                </div> -->
+                <div class="col-md-3" style="padding: 16px; margin-bottom: 12px;">
+                    <div style="">
+                        <div class="d-flex"
+                            style="flex-wrap: wrap; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08); padding: 16px; margin-bottom: 12px;">
+                            <img src="/img/profileImage.jpg.png"
+                                style="width: 50px; height: 50px; vertical-align: middle;" alt="">
+                            <div style="display: flex; flex-grow: 1;">
+                                <div
+                                    style=" flex-grow: 1; padding-top: 10px;padding-left: 5px; padding-right: 40px; font-weight: 900;">
+                                    Hello
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div style="">
+                        <div class="div"
+                            style=" border-radius: 2px; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);">
+                            <div class="menu-headinggg" style="padding-top: 1rem;">General</div>
+
+                            <div class="menu-itemmm"><a href="/addresses">Manage Address</a></div>
+
+
+                            <div class="menu-itemmm"><a href="/my-order">MY ORDERS</a></div>
+
+
+                            <div class="menu-itemmm"><a href="/wishlist">MY Wishlist</a></div>
+
+                            <div class="menu-itemmm"><a href="/wallet">MY Wallet</a></div>
+
+
+                            <div class="menu-headinggg">Legal</div>
+                            <div class="menu-itemmm"><a href="">Terms of Use</a></div>
+
+                            <div class="menu-itemmm"><a href="#">Privacy Policy</a></div>
+
+
+                            <div class="menu-headinggg">Personal</div>
+                            <div class="menu-itemmm"><a href="#">Report a Bug</a></div>
+
+                            <div class="menu-itemmm " style="display: flex; padding-bottom: 1rem;">
+                                <a href="">
+
+                                    <svg width="24" height="24" class="" viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg">
+                                        <path fill="#2874F0" stroke-width="0.3" stroke="#2874F0"
+                                            d="M13 3h-2v10h2V3zm4.83 2.17l-1.42 1.42C17.99 7.86 19 9.81 19 12c0 3.87-3.13 7-7 7s-7-3.13-7-7c0-2.19 1.01-4.14 2.58-5.42L6.17 5.17C4.23 6.82 3 9.26 3 12c0 4.97 4.03 9 9 9s9-4.03 9-9c0-2.74-1.23-5.18-3.17-6.83z">
+                                        </path>
+                                    </svg>
+                                    <span style="font-weight: 600; padding-left: 10px;">Logout</span>
+
+
+                                </a>
+
+
+                            </div>
+                        </div>
+
+
+                    </div>
                 </div>
                 <div class="col-md-9">
                     <div class="d-flex flex-column">
@@ -129,91 +220,58 @@
                             </div>
                         </div>
 
-                        <%if(myOrder) {%>
-
-                  
-
+                        <div class="card-body mt-4">
+                            <div class="table-responsive">
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Index</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Action</th>
+                                        
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                    <%if(order) {%>
+                                         <%order.forEach((item, i) => {%>
+                                              
+                                            <tr style="margin-bottom: 2rem;"> 
+                                                <td style="padding: 24px;"><%= i + 1%></td>
+                                                <td style="padding: 24px;"><b><%= item.user.name%></b></td>
+                                                <td style="padding: 24px;"><%= item.user.name%></td>
+                                                <td style="padding: 24px;"><%= item.totalAmount%></td>
+                                                <td style="padding: 24px;"><span class="badge rounded-pill alert-warning"><%= item.status%></span></td>
+                                                <% const formattedDate = item.date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }); %>
+                                                <td style="padding: 24px;"><%= formattedDate%></td>
+                                                <td style="padding: 24px;">
+                                                   <a href="/single-orderDetails?orderId=<%= item._id%>">More details</a>
+                                                    <!-- dropdown //end -->
+                                                </td>
+                                               
+                                            </tr>
+    
+    
+    
+                                         <%})%>
+                                        
+    
+                                    <%} else {%>
+                                        
+    
+    
+                                    <%}%>
+    
+                                        
                                        
-                                <%myOrder.products.forEach( (el, i) => {%>
-
-                                    <div onclick="singleOrder('<%= el.productId._id%>', '<%= i%>', '<%= el.size%>', '<%= myOrder._id%>')" style="background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08); margin-top: 2rem;">
-                                        <div style="padding: 16px;">
-                                           
-                                                <div class="row">
-                                                   
-                                                    <div class="col-6">
-                                                        <div class="row">
-                                                            <div class="col-3">
-                                                                <div class="d-flex" style="">
-                                                                    <div style="margin: 0 auto;">
-                                                                        <img src="/img/productImage/sharp/<%= el.productId.variant[el.product].images[0]%>" style="width: 75%; height: 75%;" alt="">
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-8">
-                                                                <div>
-                                                                    <span><%= el.productId.name%></span>
-                                                            <div class="d-flex">
-                                                                <% const match = [['S', 'Small'], ['M', 'Medium'], ['L', "Large"], ['XL', 'Exel'], ['XXL', 'Double exel']]%>
-                                                                <%const size = match.find((size) => (size[0] === el.size)) %>
-                                                                <p class="me-2"><span>Color: </span><%= el.productId.variant[el.product].color%></p>
-                                                                <p><span>Size: </span><%= size[1]%></p>
-                                                            </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-            
-                                                    </div>
-                                                    <div class="col-2">
-                                                       ₹<%= el.price%>
-            
-                                                    </div>
-                                                    <div class="col-4">
-                                                        <div class="d-flex" style="align-items: center; ">
-                                                            <div class="<%= el.status === 'delivered' ? 'bg-success' : ''%>  <%= el.status === 'placed' ? 'border border-success' : '' %>   " style="width: 10px; height: 10px;  margin-bottom: 13px; margin-right: 1rem; border-radius: 50%; border: 2px;"></div>
-                                                            <div> <p class="text-muted">your product as delivered</p></div>
-            
-                                                        </div>
-                                                        <!-- <div class="d-flex">
-                                                            <span class="me-2"><i class="fa-solid fa-star" style="color: #00328a;"></i></i></span>
-                                                            
-                                                           <a href="" style="text-decoration: none;">
-                                                           
-                                                            <span style="color: #00328a;">Rate & review product</span>
-                                                           </a>
-                                                        </div> -->
-                                                    </div>
-            
-                                                    <div>
-            
-                                                    </div>
-                                                    <div>
-            
-                                                    </div>
-                                          
-                                                </div>
-                                            
-                                        </div>
-            
-                                    </div>
-                                    
-                                <%})%>
-
-
-                                
-
-
-
-                             
-
-                        <%} else {%>
-                             
-                            <div style="background-color: #111111;">
-                                <p style="color: #fff;">No order found</p>
+                                    </tbody>
+                                </table>
                             </div>
-
-                        <%}%>
+                            <!-- table-responsive //end -->
+                        </div>
 
                         
 
@@ -242,14 +300,3 @@
 
 </html>
 
-
-<script>
-    function singleOrder(productId, index, size, orderId) {
-        try {
-            console.log(productId, index, size, orderId);
-            location.href = `/single-product?productId=${productId}&index=${index}&size=${size}&orderId=${orderId}`
-        } catch (error) {
-            console.log(error)
-        }
-    }
-</script>

@@ -121,7 +121,9 @@ user_route.get('/order-success', order_controller.loadOrderSucces );
 
 
 user_route.post('/search', shop_controller.filter);
-user_route.post('/order-cancel', order_controller.orderCancelation)
+user_route.post('/order-cancel', order_controller.orderCancelation);
+
+user_route.get('/single-orderDetails', order_controller.singleOrderDetials)
 
 // ==================================================================== //
 
@@ -129,7 +131,7 @@ user_route.post('/addReview', review_Controller.addReview)
 
 user_route.post('/verifyPayment', order_controller.verifyPayment);
 
-user_route.post('/product-return', order_controller.)
+user_route.post('/product-return', order_controller.productReturn)
 
 module.exports = user_route;
 

@@ -37,7 +37,7 @@ const orderSchema = new mongoose.Schema({
         },
         status: {
            type: String,
-           enum: ['placed', 'outfordelivery', 'shipped', 'delivered', 'canceled', 'return',],
+           enum: ['placed', 'outfordelivery', 'shipped', 'delivered', 'canceled', 'returned',],
            default: 'placed',
         },
         cancelReason: {
@@ -46,6 +46,10 @@ const orderSchema = new mongoose.Schema({
         returnReason: {
           type: String
         },
+        returnRequest: {
+          type: String,
+          enum: ['requested', 'accepted', 'denied'],
+        }
     }
 ],
 

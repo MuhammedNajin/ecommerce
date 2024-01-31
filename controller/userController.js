@@ -3,6 +3,7 @@ const bcrypt = require('bcrypt');
 const nodemailer = require('nodemailer');
 const verifyOtp = require('../models/otpVerification');
 const Product = require('../models/product');
+const Wallect = require('../models/walletModal');
 
 
 
@@ -247,7 +248,9 @@ module.exports.verifyOTP = async (req, res) => {
             const compare = await bcrypt.compare(otp, hashed);
             console.log(compare);
             if (compare) {
+
                 const user = await User.findOne({ email: email });
+
                 if (user) {
                     await User.findByIdAndUpdate({ _id: user._id }, { $set: { verified: true } });
                     req.session.user = {
@@ -255,10 +258,13 @@ module.exports.verifyOTP = async (req, res) => {
                         email: user.email,
                         name: user.name
                     }
+
                     await User.updateOne({_id: user._id}, {$set: {session: true}});
                     await verifyOtp.deleteOne({ email: email })
-                    
+                    const wallect = new Wallect({user: user._id});
+                    await wallect.save();    
                     res.redirect(`/`);
+
                 } else {
                     console.log('user not found');
                 }
