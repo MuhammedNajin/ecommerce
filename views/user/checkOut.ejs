@@ -490,7 +490,7 @@
 
 
                                                                 <li style="font-weight: 600;" id="subtotal">Amount
-                                                                    payaple<span style="color: #111111;">₹<%= subtotal%>
+                                                                    payaple<span id="discountedAmount" style="color: #111111;">₹<%= subtotal%>
                                                                     </span></li>
 
                         </div>
@@ -623,6 +623,8 @@
 
                 if (paymet_method) {
                     const total = document.getElementById('place-order').getAttribute('data-subtotal')
+                    const isCouponApplied = document.getElementById('place-order').getAttribute('data-couponApplied');
+                    const value = isCouponApplied ? document.getElementById('place-order').getAttribute('data-subtotal') : false;
                     console.log(total)
                     const subtotal = total;
                     if (subtotal) {
@@ -631,6 +633,7 @@
                             index: index,
                             payment_method: paymet_method,
                             subtotal: subtotal,
+                            isCoupon: value
                         }
 
                         console.log(data)
@@ -789,6 +792,7 @@
         const couponCode = document.getElementById('applyCoupon').value;
         console.log(couponCode)
         if (couponCode) {
+            document.getElementById('place-order').setAttribute('data-couponCode', `${couponCode}`);
               const data = { couponCode: couponCode }
             $.ajax({
                 type: "POST",
@@ -817,9 +821,12 @@
                         fireSwal(responce.massage);
 
                     } else if(responce.success) {
+                        console.log('hel')
+                        console.log(responce)
 
                         document.getElementById('place-order').setAttribute('data-subtotal', `${responce.subtotal}`);
-                        document.getElementById('subtotal').innerText = `${responce.subtotal}`
+                        document.getElementById('discountedAmount').innerText = `${responce.subtotal}`
+                        document.getAnimations('place-order').setAttribute('data-couponApplied', '1')
                     }
                 }
             })

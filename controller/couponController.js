@@ -1,4 +1,4 @@
-const  Cart = require('../models/cartModel');
+const Cart = require('../models/cartModel');
 const Coupon = require('../models/couponModel');
 
 module.exports.loadCoupon = async (req, res) => {
@@ -54,86 +54,116 @@ module.exports.createCoupon = async (req, res) => {
 
 module.exports.checkCoupon = async (req, res) => {
     try {
-        
+
         const { couponCode } = req.body;
         console.log(couponCode)
         const userId = req.session.user?._id;
 
-        const coupon = await Coupon.findOne({ couponCode: couponCode});
+        const coupon = await Coupon.findOne({ couponCode: couponCode });
 
 
-        if(coupon) {
-        const alreadyUsed = coupon.userUsed.find((user) => user === userId);
-        console.log(alreadyUsed)
-            // formating date 
-        const today = new Date();
-        const active = new Date(coupon.activationDate);
-        console.log(active, 'active');
-        const expire = new Date(coupon.expiresDate);
-        console.log(expire, 'hello');
+        if (coupon) {
+            const alreadyUsed = coupon.userUsed.find((user) => user === userId);
+            console.log(alreadyUsed)
+            const count = coupon.limit < coupon.userUsed;
+            const limitOfCoupon = coupon.limit === -1 ? false : count;
+    
+            let dateStrings = [coupon.activationDate, coupon.expiresDate]; // Add your date strings here
+            let isoDateStrings = [];
+            
+            for (let dateString of dateStrings) {
+                let dateArray = dateString.split("-");
+                let isoDateString = `${dateArray[2]}-${dateArray[1]}-${dateArray[0]}T00:00:00.000Z`;
+                isoDateStrings.push(isoDateString);
+            }
+            
+            let convertedDates = isoDateStrings.map(dateString => new Date(dateString));
+            
+            console.log(convertedDates);
+            
+            const today = new Date();
+            console.log(today)
+            const active = new Date(coupon.activationDate);
+            console.log(active, 'active');
+            const expire = new Date(coupon.expiresDate);
+            console.log(expire, 'hello');
 
-         if (alreadyUsed) {
+            if (alreadyUsed) {
 
-            res.json({used: true, massage: 'This coupon is already used'});
+                res.json({ used: true, massage: 'This coupon is already used' });
 
-        } else if(coupon.limit !== -1 || coupon.limit < coupon.userUsed.length) {
+            } else if (limitOfCoupon) {
 
-            res.json({ limit: true, massage: 'Coupon is expried' })
+                res.json({ limit: true, massage: 'Coupon is expried' })
 
-        } else if(today >= active && today <= expire) {
+            } else if (!( today >= convertedDates[0] && today <= convertedDates[1] )) {
 
-            res.json({ expired: true, massage: 'Coupon expired' });
+                res.json({ expired: true, massage: 'Coupon expired' });
 
-        } else if(cartAmount >= 500) {
+            }  else {
+              console.log("reached")
 
-            res.json({ min: true, massage: 'Minimum ₹500 needed' });
+                // taking amount 
 
-        } else {
+                const cart = await Cart.findOne({ user: userId });
+
+                let discount = 0;
+                let cartAmount = 0
+                console.log(coupon.discountAmount, "discount amount")
+
+                if (coupon.percentage) {
 
 
-             // taking amount 
 
-        const cart = await Cart.findOne({user: userId});
-       
-        let discount = 0;
+                } else if (coupon.discountAmount) {
 
-        if(coupon.percentage){
+                      console.log(coupon.discountAmount, cart.products.length )
 
-           
+                    const div = coupon.discountAmount / cart.products.length;
+                    discount = Math.round(div);
+                    console.log(discount + 'discount', 'div: ' + div)
 
-        } else if(coupon.discountAmount) {
-
-           const div = Coupon.discountAmount / cart.products.length;
-           discount = Math.round(div);
-
-        }
-        const cartAmount = cart.products.filter((acc, crr) => {
-                    if( crrcrr.totalPrice >= discount ) {
-                        return acc += ( crr.totalPrice - discount )
+                }
+                    const  total = cart.products.reduce((acc, crr) => acc += crr.totalPrice );
+                   cartAmount = cart.products.reduce((acc, crr) => {
+                    console.log(crr)
+                    if (crr.totalPrice >= discount) {
+                        return acc += (crr.totalPrice - discount)
                     } else {
-                        
+
                         return acc += crr.totalPrice;
 
                     }
-        }, 0);
+
+                }, 0);
+
+                  if (total <= 500) {
+
+                    res.json({ min: true, massage: 'Minimum ₹500 needed' });
+    
+                } else {
+
+                    res.json({ success: true, subtotal: cartAmount });
+
+
+                }
 
 
 
-            res.json({ success: true, subtotal: cartAmount });
-
-        }
+                
+            }
 
         } else {
 
-            res.json({notAvailable: true, massage: 'No coupon  available'});
+            res.json({ notAvailable: true, massage: 'No coupon  available' });
 
         }
-        
-       
-        
-       
 
-        
+
+
+
+
+
 
 
     } catch (error) {
