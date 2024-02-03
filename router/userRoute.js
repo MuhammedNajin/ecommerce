@@ -11,6 +11,7 @@ const cart_controller = require('../controller/cartCotroller');
 const order_controller = require('../controller/orderController')
 const review_Controller = require('../controller/reviewContoller');
 const user_middleware = require('../middleware/userAuth');
+const coupon_controller = require('../controller/couponController');
 
 
 
@@ -131,7 +132,9 @@ user_route.post('/addReview', review_Controller.addReview)
 
 user_route.post('/verifyPayment', order_controller.verifyPayment);
 
-user_route.post('/product-return', order_controller.productReturn)
+user_route.post('/product-return', order_controller.productReturn);
+
+user_route.post('/check-coupon', coupon_controller.checkCoupon)
 
 module.exports = user_route;
 

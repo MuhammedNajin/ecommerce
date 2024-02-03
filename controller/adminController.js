@@ -239,7 +239,7 @@ module.exports.returns = async (req, res) => {
 
                  if(data.paymentMethod === 'razorpay' || 'paypal') {
                     const amount = data.totalAmount;
-                    console.log(amount);
+                    console.log(typeof amount, amount);
                     await Wallect.updateOne({ user: data.user }, {
                         $inc: {
                             amount: amount,

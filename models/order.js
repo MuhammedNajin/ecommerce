@@ -49,6 +49,12 @@ const orderSchema = new mongoose.Schema({
         returnRequest: {
           type: String,
           enum: ['requested', 'accepted', 'denied'],
+        },
+        coupon: {
+          type: Number,
+        },
+        offer: {
+           type: Number,
         }
     }
 ],

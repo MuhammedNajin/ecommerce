@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="css/nice-select.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
@@ -429,6 +429,15 @@
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                <tr>
+                                                    <td style="background-color: #f3f2ee;">
+                                                        <div class="" style="background-color: #f3f2ee;">
+                                                            <input type="radio" id="cod1" value="wallet"
+                                                                name="payment_method">
+                                                            <label for="cod1">Wallet</label>
+                                                        </div>
+                                                    </td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -439,6 +448,13 @@
                     </div>
 
                     <div class="col-lg-4 col-md-6">
+
+                        <div class="cart__discount" style="margin-bottom: 30px !important;">
+                            <h6>Discount codes</h6>
+                            <input type="text" id="applyCoupon" placeholder="Coupon code">
+                            <button type="button" onclick="return applyCoupon();">Apply</button>
+                        </div>
+
                         <div class="checkout__order">
                             <h4 class="order__title" style="border-bottom: none;">Your order</h4>
 
@@ -471,13 +487,11 @@
 
                                                             <%}%>
 
+
+
                                                                 <li style="font-weight: 600;" id="subtotal">Amount
                                                                     payaple<span style="color: #111111;">₹<%= subtotal%>
                                                                     </span></li>
-
-
-
-
 
                         </div>
                     </div>
@@ -487,7 +501,8 @@
         </div>
         <div class="sticky-element " style="max-width: 50%;">
             <div class="d-grid gap-2 " style="">
-                <button class="btn " onclick="placeOrder('<%= subtotal%>')"
+                <button class="btn" id="place-order" data-subtotal="<%= subtotal%>" data-productPrice=""
+                    onclick="placeOrder('<%= subtotal%>')"
                     style=" color: #f3f2ee; padding: 1rem; background-color: #fd7e14;" type="button">PLACE
                     ORDER</button>
             </div>
@@ -596,7 +611,7 @@
 <script>
 
 
-    function placeOrder(total) {
+    function placeOrder() {
         try {
             console.log('clicked')
             const radioBtn = document.querySelector('input[name="address"]:checked');
@@ -607,7 +622,8 @@
                 const paymet_method = payment ? payment.value : null;
 
                 if (paymet_method) {
-
+                    const total = document.getElementById('place-order').getAttribute('data-subtotal')
+                    console.log(total)
                     const subtotal = total;
                     if (subtotal) {
 
@@ -616,6 +632,7 @@
                             payment_method: paymet_method,
                             subtotal: subtotal,
                         }
+
                         console.log(data)
                         $.ajax({
                             type: 'POST',
@@ -626,8 +643,20 @@
                                 if (response.success) {
                                     location.href = '/order-success';
                                 } else if (response.order) {
-
                                     razorPay(response.order);
+                                } else if (response.wallet) {
+
+                                    location.href = '/order-success';
+                                } else {
+
+                                    Swal.fire({
+
+                                        title: "Wallet don't have enough money",
+                                        text: "Please choose another payment option",
+                                        icon: "error",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    })
                                 }
                             }
 
@@ -680,7 +709,7 @@
 <script>
     function razorPay(order) {
         try {
-           console.log(order);
+            console.log(order);
             var options = {
                 "key": "rzp_test_at0lMzCavdHpBO", // Enter the Key ID generated from the Dashboard
                 "amount": order.amount, // Amount is in currency subunits. Default currency is INR. Hence, 50000 refers to 50000 paise
@@ -723,7 +752,7 @@
 
     function verifyPayament(payment, order) {
         try {
-            
+
             $.ajax({
                 type: 'POST',
                 url: '/verifyPayment',
@@ -735,7 +764,7 @@
                     if (responce.payment_successful) {
                         window.location.href = '/order-success';
                     } else {
-                        swal.fire({
+                        Swal.fire({
                             positon: "center",
                             icon: "error",
                             title: "Payment failed",
@@ -752,6 +781,71 @@
     }
 
 
+</script>
+
+<script>
+    function applyCoupon() {
+          
+        const couponCode = document.getElementById('applyCoupon').value;
+        console.log(couponCode)
+        if (couponCode) {
+              const data = { couponCode: couponCode }
+            $.ajax({
+                type: "POST",
+                url: "/check-coupon",
+                data: JSON.stringify(data),
+                contentType: 'application/json',
+                success: (responce) => {
+                    if (responce.used) {
+                       
+                        fireSwal(responce.massage);
+
+                    } else if(responce.limit) {
+
+                        fireSwal(responce.massage);
+                        
+                    } else if(responce.expired) {
+
+                        fireSwal(responce.massage);
+
+                    } else if(responce.min) {
+
+                        fireSwal(responce.massage);
+
+                    } else if(responce.notAvailable) {
+
+                        fireSwal(responce.massage);
+
+                    } else if(responce.success) {
+
+                        document.getElementById('place-order').setAttribute('data-subtotal', `${responce.subtotal}`);
+                        document.getElementById('subtotal').innerText = `${responce.subtotal}`
+                    }
+                }
+            })
+
+        } else {
+            console.log('coupon not applied');
+
+        }
+
+
+    }
+</script>
+
+
+<script>
+    function fireSwal(text) {
+
+        Swal.fire({
+            positon: "center",
+            icon: "error",
+            title: `${text}`,
+            showConfirmButton: false,
+            timer: 1500,
+        });
+
+    }
 </script>
 
 

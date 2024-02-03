@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const { array } = require('../middleware/multer');
 
 
 const wallet = mongoose.Schema({
@@ -12,6 +13,11 @@ const wallet = mongoose.Schema({
     amount: {
         type: Number,
         default: 0,
+    },
+
+    walletHistory: {
+        type: Array,
+
     }
 
 });

@@ -166,7 +166,7 @@ const sentOtp = async (email) => {
 
         })
 
-        const createdOTP = `${Math.floor(1000 + Math.random() * 9000)}`
+        const createdOTP = `${Math.floor(1000 + Math.random() * 9000)}`;
 
 
         const mailOption = {

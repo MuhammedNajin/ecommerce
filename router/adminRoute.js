@@ -3,6 +3,7 @@ const admin_route = express();
 const admin_controller = require('../controller/adminController');
 const product_controller = require('../controller/product');
 const cetagory_contorller = require('../controller/cetagoryController');
+const coupon_controller = require('../controller/couponController');
 const helper = require('../middleware/helper');
 const nocache = require('nocache');
 
@@ -107,6 +108,11 @@ admin_route.post('/change-orderStatus', admin_controller.changeOrderStatus)
 admin_route.get('/returns', admin_controller.loadReturns);
 admin_route.post('/returns', admin_controller.returns)
 
+
+// coupon management 
+
+admin_route.get('/load-coupon', coupon_controller.loadCoupon);
+admin_route.put('/create-coupon', coupon_controller.createCoupon);
 
 
 
