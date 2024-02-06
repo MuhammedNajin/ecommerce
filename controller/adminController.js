@@ -4,7 +4,7 @@ const Catagery = require('../models/cetagory');
 const bcrypt = require('bcrypt');
 const product = require('../models/product');
 const Order = require('../models/order');
-const Wallect = require('../models/walletModal');
+const Wallet = require('../models/walletModal');
 require('dotenv').config()
 
 
@@ -193,12 +193,25 @@ module.exports.changeOrderStatus = async (req, res) => {
         const { orderId, productId, index, status, userId } = req.body;
 
         console.log(req.body);
-        return Order.updateOne({ _id: orderId, user: userId, "products.productId": productId }, {
+        
+        return Order.findByIdAndUpdate({ _id: orderId, user: userId, "products.productId": productId }, 
+        {
             $set: {
                 [`products.${index}.status`]: status,
             }
-        })
-            .then(() => {
+            
+           
+        },
+        { 
+            new: true 
+         },
+        )
+        .then(async (data) => {
+            if(status === 'canceled') {
+                const amount =  data.products[index].coupon > 0 ? data.products[index].coupon : data.products[index].price;
+                await Wallet.updateOne({user: userId}, {$set: { amount: amount}});
+            }
+                
                 res.json({ success: true, status: status });
             })
             .catch((error) => {
@@ -237,16 +250,16 @@ module.exports.returns = async (req, res) => {
              )
              .then( async (data) => {
 
-                 if(data.paymentMethod === 'razorpay' || 'paypal') {
-                    const amount = data.totalAmount;
+                 
+                    const amount =  data.products[index].coupon > 0 ? data.products[index].coupon : data.products[index].price;
                     console.log(typeof amount, amount);
-                    await Wallect.updateOne({ user: data.user }, {
+                    await Wallet.findOneAndUpdate({ user: data.user }, {
                         $inc: {
                             amount: amount,
                         }
                     })
 
-                 }
+                 
                 const quantity = data.products[index].quantity;
                 return product.findOneAndUpdate({ _id: productId }, {
                     $inc: {

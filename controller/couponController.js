@@ -170,3 +170,12 @@ module.exports.checkCoupon = async (req, res) => {
         console.log(error);
     }
 }
+
+module.exports.loadMyCoupon = async(req, res) => {
+    try {
+        const coupon = await Coupon.find();
+        res.render('myCoupon', { coupon: coupon });
+    } catch (error) {
+        console.log(error);
+    }
+}

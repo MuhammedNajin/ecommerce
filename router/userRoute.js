@@ -12,6 +12,17 @@ const order_controller = require('../controller/orderController')
 const review_Controller = require('../controller/reviewContoller');
 const user_middleware = require('../middleware/userAuth');
 const coupon_controller = require('../controller/couponController');
+const { loadData } = require('../middleware/userMiddilware');
+
+const nocache = require('nocache');
+
+
+user_route.use(nocache());
+
+user_route.use((req, res, next) => {
+    res.header('Cache-Control', 'no-store, private, must-revalidate');
+    next();
+});
 
 
 
@@ -47,8 +58,7 @@ user_route.use(async (req, res , next) => {
              } 
  
 
-        }
-            
+        }    
             next();
 })
 
@@ -58,6 +68,7 @@ user_route.use((req, res, next) => {
     next();
 }); 
 
+user_route.use(loadData);
 
 // load home
 user_route.get('/', user_controller.loadHome);
@@ -135,6 +146,7 @@ user_route.post('/verifyPayment', order_controller.verifyPayment);
 user_route.post('/product-return', order_controller.productReturn);
 
 user_route.post('/check-coupon', coupon_controller.checkCoupon)
+user_route.get('/my-coupon', coupon_controller.loadMyCoupon)
 
 module.exports = user_route;
 

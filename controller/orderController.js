@@ -114,45 +114,52 @@ module.exports.placeOrder = async (req, res) => {
         // make this as common function 
 
         const coupon = await Coupon.findOne({ couponCode: isCoupon });
-        if (isCoupon && coupon.limit >= coupon.userUsed.length) {
+        if (isCoupon) {
+
+            if (coupon.limit >= coupon.userUsed.length) {
+
+                const cart = await Cart.findOne({ user: userId });
+
+                let discount = 0;
+                console.log(coupon.discountAmount, "discount amount")
+
+                if (coupon.percentage) {
 
 
-            const cart = await Cart.findOne({ user: userId });
 
-            let discount = 0;
-            let cartAmount = 0
-            console.log(coupon.discountAmount, "discount amount")
+                } else if (coupon.discountAmount) {
 
-            if (coupon.percentage) {
+                    console.log(coupon.discountAmount, cart.products.length)
+
+                    const div = coupon.discountAmount / cart.products.length;
+                    discount = Math.round(div);
+                    console.log(discount + 'discount', 'div: ' + div)
+
+                }
+
+                cartAmount = cart.products.forEach(async (el, i) => {
+                    console.log(el)
+
+                    await Order.findByIdAndUpdate({ _id: oderId }, {
+                        $set: {
+                            [`products.${i}.coupon`]: el.totalPrice >= discount ? el.totalPrice - discount : el.totalPrice,
+                        }
+                    })
+                });
+                await Coupon.updateOne({couponCode: isCoupon}, { $set: { userUsed: userId }})
+
+            } else {
+
+                res.json({fail: true, massage: 'Coupon limit exceeds'});
 
 
-
-            } else if (coupon.discountAmount) {
-
-                console.log(coupon.discountAmount, cart.products.length)
-
-                const div = coupon.discountAmount / cart.products.length;
-                discount = Math.round(div);
-                console.log(discount + 'discount', 'div: ' + div)
 
             }
-
-            cartAmount = cart.products.forEach(async (el, i) => {
-                console.log(el)
-
-                await Order.findByIdAndUpdate({ _id: oderId }, {
-                    $set: {
-                        [`products.${i}.coupon`]: el.totalPrice >= discount ? el.totalPrice - discount : el.totalPrice,
-                    }
-                })
-            });
-
-        } else {
-            res.json({ failed: true })
         }
 
         // Cash on delivery
         if (order_details.status === 'placed') {
+            console.log('cod')
 
             await Cart.deleteOne({ user: userId });
 
@@ -174,6 +181,7 @@ module.exports.placeOrder = async (req, res) => {
             res.json({ success: true });
             // wallect pay 
         } else if (payment_method == 'wallet') {
+            console.log('heloo')
             console.log(userId)
             const wallet = await Wallet.findOne({ user: userId })
             console.log(wallet);
@@ -290,17 +298,22 @@ module.exports.orderCancelation = async (req, res) => {
             },
                 { new: true }
             )
-                .then((data) => {
+                .then( async(data) => {
                     console.log(data, 'goooooooooooooot');
                     const quantity = data.products[index].quantity;
+                    if(data.paymentMethod === 'razorpay' || 'wallet') {
+                        const amount =  data.products[index].coupon > 0 ? data.products[index].coupon : data.products[index].price;
+                        await Wallet.updateOne({user: userId}, {$set: { amount: amount }});
+
+                    }
+                   
                     return Product.findOneAndUpdate({ _id: productId }, {
                         $inc: {
                             [`variant.${index}.stock`]: quantity
                         }
                     })
-
                 })
-                .then((data) => {
+                .then(() => {
                     res.json({ canceled: true });
                 })
         }

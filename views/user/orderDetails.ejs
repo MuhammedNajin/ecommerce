@@ -171,10 +171,14 @@
                                                     </div>
                                                     <div class="col-4">
                                                         <div class="d-flex" style="align-items: center; ">
-                                                            <div class="<%= el.status === 'delivered' ? 'bg-success' : ''%>  <%= el.status === 'placed' ? 'border border-success' : '' %>   " style="width: 10px; height: 10px;  margin-bottom: 13px; margin-right: 1rem; border-radius: 50%; border: 2px;"></div>
-                                                            <div> <p class="text-muted">your product as delivered</p></div>
+                                                            <div class="<%= el.status === 'delivered' ? 'bg-success' : ''%>  <%= el.status === 'placed' ? 'border border-success' : '' %> <%= el.status === 'canceled' ? 'bg-danger' : '' %> <%= el.status === 'returned' ? 'fa-solid fa-arrow-left fa-2xs' : '' %>  " style="width: 10px; height: 10px;  margin-bottom: 13px; margin-right: 1rem; border-radius: 50%; border: 2px;"></div>
+
+                                                            <% const status = [['placed', 'your product as placed'], ['outfordelivery', 'your seems to come soon'], ['shipped', 'your product is shipped'], ['delivered', 'your product as delivered'], ['canceled', 'product as canceled'], ['returned', 'product as returned']]%>
+                                                            <%const text = status.find(( text ) => ( text[0] === el.status)) %>
+                                                            
+                                                            <div> <p class="text-muted"><%= text[1]%></p></div>
             
-                                                        </div>
+                                                       
                                                         <!-- <div class="d-flex">
                                                             <span class="me-2"><i class="fa-solid fa-star" style="color: #00328a;"></i></i></span>
                                                             

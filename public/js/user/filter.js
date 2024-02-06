@@ -13,6 +13,18 @@ $(document).ready(function () {
         searchFilterSort();
     });
 
+    // cetagory 
+
+    const cetagory = document.querySelectorAll('.cetagory');
+    
+    cetagory.forEach((el) => {
+           console.log(el)
+        el.addEventListener('click', (event) => {
+            console.log('cet')
+              data.cetagory = event.target.innerHTML;
+              searchFilterSort();
+        })
+    })
 
     const btn = document.getElementById('searchBtn');
 btn.addEventListener('click', () => {
@@ -29,10 +41,7 @@ function searchFilterSort(searchData) {
     if(searchData) {
        data.search = searchData;
     }
-   
-       
-    
-   
+
    console.log(data, 'hello');
     $.ajax({
         type: "POST",

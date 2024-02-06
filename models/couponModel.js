@@ -20,7 +20,8 @@ const couponSchema = mongoose.Schema({
         required: true,
     },
     discountAmount: {
-        type: Number,  
+        type: Number, 
+         
     },
     percentage: {
         type: String,

@@ -414,9 +414,9 @@
                                                 <tr>
                                                     <td style="background-color: #f3f2ee;">
                                                         <div class="" style="background-color: #f3f2ee;">
-                                                            <input type="radio" id="paypal1" value="paypal"
+                                                            <input type="radio" id="paypal1" value="razorpay"
                                                                 name="payment_method">
-                                                            <label for="paypal1">Paypal</label>
+                                                            <label for="paypal1">Razorpay</label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -432,9 +432,9 @@
                                                 <tr>
                                                     <td style="background-color: #f3f2ee;">
                                                         <div class="" style="background-color: #f3f2ee;">
-                                                            <input type="radio" id="cod1" value="wallet"
+                                                            <input type="radio" id="wallet" value="wallet"
                                                                 name="payment_method">
-                                                            <label for="cod1">Wallet</label>
+                                                            <label for="wallet">Wallet</label>
                                                         </div>
                                                     </td>
                                                 </tr>
@@ -451,8 +451,8 @@
 
                         <div class="cart__discount" style="margin-bottom: 30px !important;">
                             <h6>Discount codes</h6>
-                            <input type="text" id="applyCoupon" placeholder="Coupon code">
-                            <button type="button" onclick="return applyCoupon();">Apply</button>
+                            <input type="text" class="form-control" id="applyCoupon" placeholder="Coupon code">
+                            <button type="button" class="btn btn-dark" onclick="return applyCoupon();">Apply</button>
                         </div>
 
                         <div class="checkout__order">
@@ -490,7 +490,8 @@
 
 
                                                                 <li style="font-weight: 600;" id="subtotal">Amount
-                                                                    payaple<span id="discountedAmount" style="color: #111111;">₹<%= subtotal%>
+                                                                    payaple<span id="discountedAmount"
+                                                                        style="color: #111111;">₹<%= subtotal%>
                                                                     </span></li>
 
                         </div>
@@ -624,7 +625,9 @@
                 if (paymet_method) {
                     const total = document.getElementById('place-order').getAttribute('data-subtotal')
                     const isCouponApplied = document.getElementById('place-order').getAttribute('data-couponApplied');
-                    const value = isCouponApplied ? document.getElementById('place-order').getAttribute('data-subtotal') : false;
+                    console.log(isCouponApplied)
+                    const value = isCouponApplied ? document.getElementById('place-order').getAttribute('data-couponCode') : false;
+                    console.log(value);
                     console.log(total)
                     const subtotal = total;
                     if (subtotal) {
@@ -650,8 +653,10 @@
                                 } else if (response.wallet) {
 
                                     location.href = '/order-success';
+                                } else if (response.fail) {
+                                    fireSwal(response.massage);
                                 } else {
-
+                                    console.log('money error')
                                     Swal.fire({
 
                                         title: "Wallet don't have enough money",
@@ -788,12 +793,12 @@
 
 <script>
     function applyCoupon() {
-          
+
         const couponCode = document.getElementById('applyCoupon').value;
         console.log(couponCode)
         if (couponCode) {
             document.getElementById('place-order').setAttribute('data-couponCode', `${couponCode}`);
-              const data = { couponCode: couponCode }
+            const data = { couponCode: couponCode }
             $.ajax({
                 type: "POST",
                 url: "/check-coupon",
@@ -801,32 +806,32 @@
                 contentType: 'application/json',
                 success: (responce) => {
                     if (responce.used) {
-                       
-                        fireSwal(responce.massage);
-
-                    } else if(responce.limit) {
-
-                        fireSwal(responce.massage);
-                        
-                    } else if(responce.expired) {
 
                         fireSwal(responce.massage);
 
-                    } else if(responce.min) {
+                    } else if (responce.limit) {
 
                         fireSwal(responce.massage);
 
-                    } else if(responce.notAvailable) {
+                    } else if (responce.expired) {
 
                         fireSwal(responce.massage);
 
-                    } else if(responce.success) {
+                    } else if (responce.min) {
+
+                        fireSwal(responce.massage);
+
+                    } else if (responce.notAvailable) {
+
+                        fireSwal(responce.massage);
+
+                    } else if (responce.success) {
                         console.log('hel')
                         console.log(responce)
 
                         document.getElementById('place-order').setAttribute('data-subtotal', `${responce.subtotal}`);
                         document.getElementById('discountedAmount').innerText = `${responce.subtotal}`
-                        document.getAnimations('place-order').setAttribute('data-couponApplied', '1')
+                        document.getElementById('place-order').setAttribute('data-couponApplied', '1')
                     }
                 }
             })

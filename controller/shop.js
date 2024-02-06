@@ -25,13 +25,21 @@ module.exports.filter = async (req, res) => {
         
          const search = req.body.search ? req.body.search : "";
          const sort = req.body.sort === 'increacing' ? 1 : -1;
+         const cetagory = req.body.cetagory ? req.body.cetagory : [];
 
         const products = await Product.find({
-            name: {$regex: search, $options: 'i'}
+            name: {$regex: search, $options: 'i'},
         }).sort({"variant.0.price": sort})
         console.log(products);
         if(products) {
-            res.status(200).json({pass: true, product: products})
+            if(cetagory) {
+                const product = products.filter((el, i) => el.cetagory.name === cetagory);
+                 res.status(200).json({pass: true, product: product})
+
+            } else {
+                res.status(200).json({pass: true, product: products})
+
+            }
         }
     } catch (error) {
         console.log(error);

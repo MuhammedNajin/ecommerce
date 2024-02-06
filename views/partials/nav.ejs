@@ -106,7 +106,7 @@
                     <div class="price" style="position: relative;">
                        
                         <i class="fa-solid fa-cart-shopping"></i>
-                        <span id="count" style="position: absolute; top: -8px; left: 13px; background-color: #010102; border-radius: 50%; padding: 2px 6px; color: #f8f1f1; font-size: 12px;">0</span>
+                        <span id="count" style="position: absolute; top: -8px; left: 13px; background-color: #010102; border-radius: 50%; padding: 2px 6px; color: #f8f1f1; font-size: 12px;"><%= cart?.products.length || 0%> </span>
                        
                     </div>
                 </a>
@@ -114,6 +114,5 @@
                 </div>
             </div>
         </div>
-        <!-- <div class="canvas__open"><i class="fa fa-bars"></i></div> -->
     </div>
 </header>

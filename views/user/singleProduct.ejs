@@ -207,8 +207,19 @@
             animation-delay: 8s;
             visibility: hidden;
         }
-        .active-cancel {
-            background-color: red;
+        .fill4 {
+            width: 0;
+            position: absolute;
+            background-color: #26a541;
+            animation: fill-2 2s forwards;
+            animation-iteration-count: 1;
+       
+            visibility: hidden;
+        }
+        .step.active-cancel {
+            background-color: rgb(228, 49, 49);
+          
+            border-color: rgb(228, 49, 49);
         }
         .step-cancel {
             width: 20px;
@@ -231,6 +242,18 @@
 
             100% {
                 width: 110px;
+                visibility: visible;
+            }
+        }
+        @keyframes fill-2 {
+            0% {
+                width: 0;
+                visibility: visible;
+            }
+
+
+            100% {
+                width: 356px;
                 visibility: visible;
             }
         }
@@ -355,14 +378,6 @@
                         </div>
                     </div>
                 </div>
-
-
-
-
-
-
-
-
                 <div
                     style="padding: 24px; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08); margin-top: 2rem;">
                     <div class="row">
@@ -456,8 +471,8 @@
                                     </div>
                                 </div>
                                 <div class="col-5 ">
-                                    <h1><%= product.status%></h1>
-                                    <%if(product.status==='canceled' ) {%>
+                                 
+                                    <%if(product.status === 'canceled' || 'returned' ) {%>
 
                                         <div style="padding: 50px;">
 
@@ -469,8 +484,8 @@
                                                 <div class="text-muted"
                                                     style="position: absolute; top: -25px; left: -14px; font-size: 15px;">
                                                     Ordered</div>
-                                                <div class="step-cancel active">
-                                                    <% const options={ weekday: 'short' , month: 'short' ,
+                                                <div class="step active" >
+                                                    <% const options={ weekday: 'short' , month: 'short',
                                                         day: 'numeric' }%>
                                                         <% const formattedDate=order.date.toLocaleDateString('en-US',
                                                             options)%>
@@ -481,13 +496,14 @@
 
                                                 </div>
                                                 <div class="line" style="position:relative ;">
-                                                    <div class="fill1"
+                                                    <div class="fill4"
                                                         style="padding: 2px; "></div>
                                                 </div>
                                                 <div class="text-muted"
                                                     style="position: absolute; top: -25px; left: 350px; font-size: 15px;">
-                                                    Canceled</div>
-                                                <div class="step "></div>
+                                                    <%= product.status === 'canceled' ? 'Canceled' : 'Returned'%>
+                                                    </div>
+                                                <div class="step " id="cancel"></div>
 
 
                                             </div>
@@ -591,7 +607,7 @@
                                 <div class=" col-4" id="editReview" data-rating="<%= review?.rating %>"
                                     data-review="<%= review?.review %>">
 
-                                    <%if(product.status==='delivered' ) {%>
+                                    <%if(product.status === 'delivered') {%>
 
                                         <div class="d-flex justify-content-center align-items-center">
                                             <span class=""><i class="fa-solid fa-star"
@@ -859,6 +875,7 @@
     const fill2 = document.getElementById('fill2')
     const fill3 = document.getElementById('fill3')
     const step = document.querySelectorAll('.step');
+    const cancel = document.getElementById('cancel')
     if (status === 'outfordelivery' || status === 'shipped' || status === 'delivered') {
 
         setTimeout(() => {
@@ -885,9 +902,13 @@
     if (status === 'canceled') {
 
         setTimeout(() => {
-            cancel[1].classList.add('active-cancel');
+            step[1].classList.add('active');
 
-        }, 11000);
+        }, 2000);
+        setTimeout(() => {
+            step[1].classList.add('active-cancel');
+
+        }, 3000);
 
     }
 
