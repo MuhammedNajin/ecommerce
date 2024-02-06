@@ -17,7 +17,7 @@
 	1.4	Reset
 2.  Helper Css
 3.  Header Section
-4.  Hero Section
+4.  Hero Section 
 5.  Banner Section
 6.  Product Section
 7.  Intagram Section
@@ -1252,6 +1252,15 @@ ol {
 .shop__sidebar__categories ul li a,
 .shop__sidebar__price ul li a,
 .shop__sidebar__brand ul li a {
+	color: #b7b7b7;
+	font-size: 15px;
+	line-height: 32px;
+	-webkit-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+}
+
+.shop_filters {
 	color: #b7b7b7;
 	font-size: 15px;
 	line-height: 32px;
