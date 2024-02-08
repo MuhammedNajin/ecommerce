@@ -73,6 +73,53 @@
               from {bottom: 30px; opacity: 1;}
               to {bottom: 0; opacity: 0;}
             }
+
+            #wishlist {
+              visibility: hidden;
+              min-width: 400px;
+              margin-left: -125px;
+              background-color: #000000;
+              color: #fff;
+              text-align: center;
+              border-radius: 2px;
+              padding: 40px;
+              position: fixed;
+              z-index: 1;
+              left: 50%;
+              bottom: 30px;
+              font-size: 17px;
+            }
+            
+            #wishlist.show {
+              visibility: visible;
+              -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+              animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            }
+            .show {
+                visibility: visible;
+              -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+              animation: fadein 0.5s, fadeout 0.5s 2.5s;
+            }
+            
+            @-webkit-keyframes fadein {
+              from {bottom: 0; opacity: 0;} 
+              to {bottom: 30px; opacity: 1;}
+            }
+            
+            @keyframes fadein {
+              from {bottom: 0; opacity: 0;}
+              to {bottom: 30px; opacity: 1;}
+            }
+            
+            @-webkit-keyframes fadeout {
+              from {bottom: 30px; opacity: 1;} 
+              to {bottom: 0; opacity: 0;}
+            }
+            
+            @keyframes fadeout {
+              from {bottom: 30px; opacity: 1;}
+              to {bottom: 0; opacity: 0;}
+            }
             </style>
 </head>
 
@@ -262,8 +309,8 @@
                                                     class="primary-btn">add to cart</button>
                                             </div>
                                             <div class="product__details__btns__option">
-                                                <a href="#"><i class="fa fa-heart"></i> add to wishlist</a>
-                                                <a href="#"><i class="fa fa-exchange"></i> Add To Compare</a>
+                                                <button type="button" onclick="addTOWishlist('<%= product._id%>')"><i class="fa fa-heart"></i> add to wishlist</button>
+                                               
                                             </div>
 
                             </div>
@@ -275,6 +322,13 @@
                         <span style="border-radius: 50%; background-color: #24c20f; padding: 9px 10px;"><i class="fa-solid fa-check fa-lg" style="color: white;">
                         </i></span>
                         <span style="margin-left: 10px;">Item successfully added to your cart!</span>
+                       
+                    </div>
+
+                    <div id="wishlist">
+                        <span style="border-radius: 50%; background-color: #24c20f; padding: 9px 10px;"><i class="fa-solid fa-check fa-lg" style="color: white;">
+                        </i></span>
+                        <span style="margin-left: 10px;">Item successfully added to your wishlist!</span>
                        
                     </div>
 
@@ -902,3 +956,5 @@
     });
 
 </script>
+
+

@@ -13,6 +13,7 @@ const review_Controller = require('../controller/reviewContoller');
 const user_middleware = require('../middleware/userAuth');
 const coupon_controller = require('../controller/couponController');
 const { loadData } = require('../middleware/userMiddilware');
+const wishlistController = require('../controller/wishlistController');
 
 const nocache = require('nocache');
 
@@ -136,6 +137,9 @@ user_route.post('/search', shop_controller.filter);
 user_route.post('/order-cancel', order_controller.orderCancelation);
 
 user_route.get('/single-orderDetails', order_controller.singleOrderDetials)
+
+user_route.get('/wishlist', wishlistController.loadWhislist);
+user_route.post('/wishlist', wishlistController.addTOWhishlist);
 
 // ==================================================================== //
 

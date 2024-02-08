@@ -638,6 +638,10 @@
                             subtotal: subtotal,
                             isCoupon: value
                         }
+                        if(paymet_method == 'COD' && subtotal >= 1000) {
+                           return fireSwal('Amount exceeds the maximum limit of 1000 choose another payment option');
+                        
+                        }
 
                         console.log(data)
                         $.ajax({
@@ -655,7 +659,11 @@
                                     location.href = '/order-success';
                                 } else if (response.fail) {
                                     fireSwal(response.massage);
-                                } else {
+                                }else if(response.remove) {
+
+                                    fireSwal(response.massage)
+
+                                } else if(response.money){
                                     console.log('money error')
                                     Swal.fire({
 

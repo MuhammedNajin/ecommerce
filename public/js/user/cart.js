@@ -106,9 +106,42 @@ function proccedTOCheckOut() {
   }
 }
 
+function addTOWishlist(productId) {
+  console.log('hello')
+  const data = {
+     productId,
+  }
+  $.ajax({
+      type:'POST',
+      url: '/wishlist',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: (response)=> {
+           if(response.already) {
+            console.log('hhhh')
+              showToWish();
+           } else if(response.wishlist) {
+            console.log('hwllo')
+            const parentElement = document.getElementById('snackbar');
+            const secondChild = parentElement.querySelector(':nth-child(2)');
+            secondChild.innerText = 'Item successfully added to your wishlist!';
+            showToast();
+
+           }
+      }
+
+  })
+}
+
 
 function showToast() {
   var x = document.getElementById("snackbar");
+  x.className = "show";
+  setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+function showToWish() {
+  var x = document.getElementById("wishlist");
   x.className = "show";
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
 }

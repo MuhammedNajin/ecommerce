@@ -93,8 +93,13 @@ module.exports.placeOrder = async (req, res) => {
             month: 'short',
             day: '2-digit'
         }).replace(/\//g, '-');
+          
+        products.forEach((el, i) => {
+            if(el.productId.variant[el.product].stock < el.quantity) {
+                res.json({remove: true, massage: 'Remove out of stocks'})
 
-
+            }
+        })
         const order = new Order({
             user: userId,
             deliveryDetails: selectedAddress,
@@ -160,7 +165,7 @@ module.exports.placeOrder = async (req, res) => {
         // Cash on delivery
         if (order_details.status === 'placed') {
             console.log('cod')
-
+            
             await Cart.deleteOne({ user: userId });
 
             for (let i = 0; i < cart.products.length; i++) {
@@ -215,7 +220,7 @@ module.exports.placeOrder = async (req, res) => {
                 res.json({ wallet: true })
 
             } else {
-                res.json({ wallet: false });
+                res.json({ money: true });
             }
 
             // razor pay
@@ -257,7 +262,7 @@ module.exports.loadMyOrder = async (req, res) => {
     try {
         const userid = req.session.user?._id;
         console.log(typeof userid, userid);
-        const order = await Order.find({ user: userid }).populate('user');
+        const order = await Order.find({ user: userid }).populate('user').sort({"products.date": -1});
         console.log(order)
         res.render('myOrder', { order: order });
     } catch (error) {
