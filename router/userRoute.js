@@ -141,6 +141,8 @@ user_route.get('/single-orderDetails', order_controller.singleOrderDetials)
 user_route.get('/wishlist', wishlistController.loadWhislist);
 user_route.post('/wishlist', wishlistController.addTOWhishlist);
 
+
+
 // ==================================================================== //
 
 user_route.post('/addReview', review_Controller.addReview)
@@ -149,11 +151,13 @@ user_route.post('/verifyPayment', order_controller.verifyPayment);
 
 user_route.post('/product-return', order_controller.productReturn);
 
-user_route.post('/check-coupon', coupon_controller.checkCoupon)
-user_route.get('/my-coupon', coupon_controller.loadMyCoupon)
+user_route.post('/check-coupon', coupon_controller.checkCoupon);
+
+user_route.get('/my-coupon', coupon_controller.loadMyCoupon);
+
+user_route.get('/invoice', order_controller.loadInvoice);
 
 module.exports = user_route;
-
 
 
 

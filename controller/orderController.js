@@ -411,3 +411,14 @@ module.exports.singleOrderDetials = async (req, res) => {
         console.log(error)
     }
 }
+
+module.exports.loadInvoice = async (req, res) => {
+    try {
+        const { orderId, index } = req.query;
+        const order = await Order.findOne({_id: orderId});
+        console.log(order[index], order)
+        res.render('invoice', { order: order.products[index], deliveryAddress: order.deliveryDetails });
+    } catch (error) {
+        console.log(error);
+    }
+}

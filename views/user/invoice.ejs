@@ -1,0 +1,112 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Invoice</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+    }
+
+    .invoice-header {
+      background-color: #f8f9fa;
+      padding: 20px;
+    }
+
+    .invoice-body {
+      padding: 20px;
+    }
+
+    .invoice-footer {
+      padding: 20px;
+      background-color: #f8f9fa;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container mt-5" id="invoice">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="invoice-header bg-dark">
+                <h2 class="text-center" style="color: #f8f9fa;">Invoice</h2>
+                <button type="button" onclick="downloadPdf()">Download</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="invoice-body" style="background-color: rgb(231, 224, 224);">
+                <h4>Bill To:</h4>
+                <p>Your Company Name<br>
+                    Your Address<br>
+                    City, State, Zip Code<br>
+                    Email: your@email.com<br>
+                    Phone: (123) 456-7890
+                </p>
+
+                <hr>
+
+                <h4>Invoice Details:</h4>
+                <p>Invoice Number: 123456<br>
+                    Invoice Date: February 10, 2024
+                </p>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th>Description</th>
+                            <th>Quantity</th>
+                            <th>Unit Price</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <tr>
+                            <td>Product 1</td>
+                            <td>2</td>
+                            <td>$50.00</td>
+                            <td>$100.00</td>
+                        </tr>
+                        <!-- Add more rows as needed -->
+                    </tbody>
+                </table>
+
+                <hr>
+
+                <h4>Total Amount: $100.00</h4>
+            </div>
+        </div>
+    </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+  <script>
+    function downloadPdf() {
+      const element = document.getElementById('invoice');
+      html2canvas(element).then(function(canvas) {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        pdf.addImage(imgData, 'PNG', 0, 0, 310, 297); // Adjust the dimensions as needed
+        pdf.save('invoice.pdf');
+      });
+    }
+  </script>
+
+</body>
+
+</html>
+
+
+
+
+
+
