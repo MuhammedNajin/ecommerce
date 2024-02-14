@@ -109,7 +109,7 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="/admin/create-coupon?_method=PUT" method="post">
+                            <form action="/admin/create-coupon" method="post">
                                 <label for="form-label">Name</label>
                                 <input type="text" name="name" placeholder="Enter coupon name" class="form-control">
 
@@ -127,18 +127,13 @@
                                 <input type="text" name="damount" placeholder="enter how many user can use"
                                     class="form-control">
 
-
-
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
                                         data-bs-dismiss="modal">Close</button>
                                     <button type="submit" class="btn btn-primary">Save changes</button>
                                 </div>
-
                             </form>
-
                         </div>
-
                     </div>
                 </div>
             </div>
@@ -153,26 +148,24 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            <form action="/admin/create-coupon?_method=PUT" method="post">
+                            <form action="/admin/edit-coupon?_method=PUT" method="post">
                                 <label for="form-label">Name</label>
-                                <input type="text" name="name" placeholder="Enter coupon name" class="form-control">
-                                <input type="text" id="couponId" name="id" hidden>
+                                <input type="text" id="name" name="name" placeholder="Enter coupon name" class="form-control">
+                                <input type="text" id="couponId"  name="id" hidden>
 
                                 <label for="form-label">Activation date</label>
-                                <input type="text" name="adate" placeholder="dd-mm-yyyy" class="form-control">
+                                <input type="text" id="adate" name="adate" placeholder="dd-mm-yyyy" class="form-control">
 
                                 <label for="form-label">Expire date</label>
-                                <input type="text" name="edate" placeholder="dd-mm-yyyy" class="form-control">
+                                <input type="text" id="edate" name="edate" placeholder="dd-mm-yyyy" class="form-control">
 
                                 <label for="form-label">Limit of use</label>
-                                <input type="text" name="limit" placeholder="enter how many user can use"
+                                <input type="text" id="limit" name="limit" placeholder="enter how many user can use"
                                     class="form-control">
 
                                 <label for="form-label">Dicount amount</label>
-                                <input type="text" name="damount" placeholder="enter how many user can use"
+                                <input type="text" id="damount" name="damount" placeholder="enter how many user can use"
                                     class="form-control">
-
-
 
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary"
@@ -189,36 +182,15 @@
             </div>
             <section class="content-main">
                 <div class="content-header">
-                    <h2 class="content-title">Sellers list</h2>
+                    <h2 class="content-title">Manage Coupon</h2>
                     <div>
-                        <button href="#" class="btn btn-primary" data-bs-toggle="modal"
+                        <button href="#" class="btn btn-dark" data-bs-toggle="modal"
                             data-bs-target="#exampleModal"><i class="material-icons md-plus"></i> Create
                             coupon</button>
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <header class="card-header">
-                        <div class="row gx-3">
-                            <div class="col-lg-4 col-md-6 me-auto">
-                                <input type="text" placeholder="Search..." class="form-control" />
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-6">
-                                <select class="form-select">
-                                    <option>Status</option>
-                                    <option>Active</option>
-                                    <option>Disabled</option>
-                                    <option>Show all</option>
-                                </select>
-                            </div>
-                            <div class="col-lg-2 col-md-3 col-6">
-                                <select class="form-select">
-                                    <option>Show 20</option>
-                                    <option>Show 30</option>
-                                    <option>Show 40</option>
-                                </select>
-                            </div>
-                        </div>
-                    </header>
+                  
                     <!-- card-header end// -->
                     <div class="card-body">
                         <div class="table-responsive" id="Reload">
@@ -279,7 +251,7 @@
                                                     </button>
                                                     <button id="button"
                                                         class="btn btn-sm btn-dark rounded font-sm mt-15"
-                                                        data-user-id="" onclick="return editCoupon('<%= c._id%>')" data-status="" data-bs-toggle="modal"
+                                                        data-user-id="" onclick="return editCoupon('<%= c._id%>', '<%= c.name%>', '<%= c.activationDate%>', '<%= c.expiresDate%>', '<%= c.discountAmount%>','<%= c.limit%>')" data-status="" data-bs-toggle="modal"
                                                         data-bs-target="#exampleModal2">
                                                          Edit
                                                     </button>
@@ -402,9 +374,14 @@
 
 </script>
 <script>
-    function editCoupon(id) {
+    function editCoupon(id, name, adate, edate, damount, limit) {
         console.log('function is called')
        document.getElementById('couponId').value = id;
+       document.getElementById('name').value = name;
+       document.getElementById('adate').value = adate;
+       document.getElementById('edate').value = edate;
+       document.getElementById('damount').value = damount;
+       document.getElementById('limit').value = limit;
         return;
     }
 </script>

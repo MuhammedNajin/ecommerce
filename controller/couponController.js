@@ -13,7 +13,7 @@ module.exports.loadCoupon = async (req, res) => {
 
 module.exports.createCoupon = async (req, res) => {
 
-    const { name, adate, edate, limit, damount, id } = req.body;
+    const { name, adate, edate, limit, damount} = req.body;
 
 
     const firstname = name.split('').slice(0, 4).join('');
@@ -22,18 +22,7 @@ module.exports.createCoupon = async (req, res) => {
 
     try {
         console.log(req.body);
-        const exists = await Coupon.findById({ _id: id });
-        if (exists) {
-            await Coupon.findByIdAndUpdate({ _id: id }, {
-                $set: {
-                    name: name,
-                    activationDate: adate,
-                    expiresDate: edate,
-                    discountAmount: damount,
-                    limit: limit,
-                }
-            })
-        } else {
+       
             const newCoupon = new Coupon({
                 name: name,
                 couponCode: `${firstname}${randomString}${radomNumber}`,
@@ -43,8 +32,6 @@ module.exports.createCoupon = async (req, res) => {
                 limit: limit,
             })
             await newCoupon.save();
-
-        }
         res.redirect('/admin/load-coupon');
     } catch (error) {
         console.log(error);
@@ -52,16 +39,31 @@ module.exports.createCoupon = async (req, res) => {
 }
 
 
+module.exports.editCoupon = async (req, res) => {
+    try {
+        const { name, adate, edate, limit, damount, id } = req.body;
+
+        await Coupon.findByIdAndUpdate({ _id: id }, {
+            $set: {
+                name: name,
+                activationDate: adate,
+                expiresDate: edate,
+                discountAmount: damount,
+                limit: limit,
+            }
+        })
+        res.redirect('/admin/load-coupon');
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 module.exports.checkCoupon = async (req, res) => {
     try {
-
         const { couponCode } = req.body;
         console.log(couponCode)
         const userId = req.session.user?._id;
-
         const coupon = await Coupon.findOne({ couponCode: couponCode });
-
-
         if (coupon) {
             const alreadyUsed = coupon.userUsed.find((user) => user === userId);
             console.log(alreadyUsed)

@@ -112,12 +112,12 @@ admin_route.post('/returns', admin_controller.returns)
 // coupon management 
 
 admin_route.get('/load-coupon', coupon_controller.loadCoupon);
-admin_route.put('/create-coupon', coupon_controller.createCoupon);
-
-
-
+admin_route.post('/create-coupon', coupon_controller.createCoupon);
+admin_route.put('/edit-coupon', coupon_controller.createCoupon);
 admin_route.post('/order-filter', admin_controller.filterDashboard)
 
+
+admin_route.get('/sales-report', )
 
 
 

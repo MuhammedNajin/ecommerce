@@ -16,13 +16,17 @@ module.exports.loadCategory = (req, res) => {
 
 // add cetagory
 
-module.exports.AddCetogory = (req, res) => {
+module.exports.AddCetogory = async (req, res) => {
     try {
-
-        const data = req.body.data;
+        const data = req.body.data
+        console.log(data, typeof data);
+        const is = await Catagery.findOne({name: data.toLowerCase()});
+        if(is) {
+          return res.json({fail: true});
+        }
         if(data) {
             const cetagory = new Catagery({
-                name: data,
+                name: data.toLowerCase(),
                 isListed: true,
 
             })

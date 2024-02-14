@@ -23,9 +23,6 @@ const couponSchema = mongoose.Schema({
         type: Number, 
          
     },
-    percentage: {
-        type: String,
-    },
     userUsed: {
         type: Array,
         ref: 'User',

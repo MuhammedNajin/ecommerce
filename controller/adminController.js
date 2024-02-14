@@ -5,6 +5,7 @@ const bcrypt = require('bcrypt');
 const product = require('../models/product');
 const Order = require('../models/order');
 const Wallet = require('../models/walletModal');
+const adminHelpers = require('../helpers/adminHelper');
 require('dotenv').config()
 // load admin home page 
 
@@ -43,7 +44,7 @@ module.exports.loadAdmin = async (req, res) => {
                 }
             }
         ])
-        const data = Array.from({ length: 12 }).fill(0);
+        const data = Array.from({ length: 12 },).fill(0);
 
         // Initialize an array with 12 elements, each set to zero
         const monthlyData = Array.from({ length: 12 }).fill(0);
@@ -58,9 +59,13 @@ module.exports.loadAdmin = async (req, res) => {
             }
         });
 
-        console.log(monthlyData);
+        console.log(monthlyData); 
+        const name = await adminHelpers.bestSelling('name');
+        const cetagory = await adminHelpers.bestSelling('cetagory');
+        const brand = await adminHelpers.bestSelling('brand');
+        console.log(name);
 
-        res.render('adminDashboard', { monthlyData, userCount, montlyEarning, revenue, orderCount, product });
+        res.render('adminDashboard', { monthlyData, userCount, montlyEarning, revenue, orderCount, product, name, cetagory, brand});
     } catch (error) {
         console.log(error);
     }

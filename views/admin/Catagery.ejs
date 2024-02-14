@@ -25,35 +25,35 @@
 
     <style>
         body {
-          font-family: Arial, sans-serif;
+            font-family: Arial, sans-serif;
         }
-    
+
         .POPUP {
-          width: 600px;
-          height: 200px;
-          display: none;
-          position: absolute;
-          
-          justify-content: center;
-          align-items: center;
+            width: 600px;
+            height: 200px;
+            display: none;
+            position: absolute;
+
+            justify-content: center;
+            align-items: center;
         }
-    
+
         .popup-content {
-          background-color: #474141;
-          padding: 10rem;
-          border-radius: 5px;
-          /* margin-bottom: 10rem; */
+            background-color: #474141;
+            padding: 10rem;
+            border-radius: 5px;
+            /* margin-bottom: 10rem; */
         }
-    
+
         .close-btn {
-          background-color: #007bff;
-          color: #fff;
-          border: none;
-          padding: 5px 10px;
-          cursor: pointer;
-          border-radius: 5px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            cursor: pointer;
+            border-radius: 5px;
         }
-      </style>
+    </style>
 
 
 </head>
@@ -148,26 +148,31 @@
                                             <input type="text" placeholder="Search..." class="form-control" />
                                         </div>
                                         <div class="col-lg-2 col-6">
-                                            
-                                            <button class="btn btn-sm btn-dark" onclick="openModal()">Add cetagory</button>
+
+                                            <button class="btn btn-sm btn-dark" onclick="openModal()">Add
+                                                cetagory</button>
                                         </div>
                                         <div id="myModal" class="POPUP">
                                             <div class="popup-content">
-                                              <span class="close-btn" onclick="closeModal()">&times;</span>
-                                              <h2 class="mt-2 text-success">Add your wish</h2>
-                                              <input type="text" class="form-control mt-2 text-primary" name="cetagory" id="messageInput" placeholder="Add cetagory">
-                                              <button   onclick="sendMessage()" class="btn btn-sm btn-primary text-end mt-2">Add</button>
+                                                <span class="close-btn" onclick="closeModal()">&times;</span>
+                                                <h2 class="mt-2 text-success">Add your wish</h2>
+                                                <input type="text" class="form-control mt-2 text-primary"
+                                                    name="cetagory" id="messageInput" placeholder="Add cetagory">
+                                                <button onclick="sendMessage()"
+                                                    class="btn btn-sm btn-primary text-end mt-2">Add</button>
                                             </div>
                                         </div>
 
 
                                         <div id="editmodal" class="POPUP">
                                             <div class="popup-content">
-                                              <span class="close-btn" onclick="closeUpdate()">&times;</span>
-                                              <h2 class="mt-2 text-success">Add your wish</h2>
-                                              <input type="text" hidden value="" id="id">
-                                              <input type="text" class="form-control mt-2 text-primary"  name="cetagory" id="editFeild">
-                                              <button   onclick="editCetagory()" class="btn btn-sm btn-primary text-end mt-2">update</button>
+                                                <span class="close-btn" onclick="closeUpdate()">&times;</span>
+                                                <h2 class="mt-2 text-success">Add your wish</h2>
+                                                <input type="text" hidden value="" id="id">
+                                                <input type="text" class="form-control mt-2 text-primary"
+                                                    name="cetagory" id="editFeild">
+                                                <button onclick="editCetagory()"
+                                                    class="btn btn-sm btn-primary text-end mt-2">update</button>
                                             </div>
                                         </div>
 
@@ -182,33 +187,47 @@
                                                 <th>ID</th>
                                                 <th>Cetagory</th>
                                                 <th>Status</th>
-                                                
+
                                                 <th class="text-end">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
 
 
-                                            <% if(Array.isArray(cetagorys) && cetagorys.length > 0) {%>
+                                            <% if(Array.isArray(cetagorys) && cetagorys.length> 0) {%>
 
-                                                <% cetagorys.map((cetagory, i) => {%>
+                                                <% cetagorys.map((cetagory, i)=> {%>
 
-                                            <tr>
-                                                <td><b><%= i + 1 %></b></td>
-                                                <td><%= cetagory.name %></td>
-                                                <td><%= cetagory.isListed ? 'List' : 'Unlist' %></td>
-                                                <td class="text-end">
-                                                    <button onclick="list('<%= cetagory._id %>')" id="list" data-id="<%= cetagory._id %>" class="btn  btn-dark font-sm "  ><%= cetagory.isListed ? 'Unlist' : 'list' %></button>
-                                                    <button onclick="edit('<%= cetagory.name %>', '<%= cetagory._id %>')" id="edit" data-id="<%= cetagory._id %>" data-update="<%= cetagory.name %>" class="btn  btn-outline-dark font-sm "  >Edit</button>
-                                                </td>
-                                            </tr>
-                                            
-                                       <% }) %>
-                                       <% }else{ %>
-                                           <tr>
-                                               <td colspan="5">No user found</td>
-                                           </tr>
-                                   <% } %>
+                                                    <tr>
+                                                        <td><b>
+                                                                <%= i + 1 %>
+                                                            </b></td>
+                                                        <td>
+                                                            <%= cetagory.name %>
+                                                        </td>
+                                                        <td>
+                                                            <%= cetagory.isListed ? 'List' : 'Unlist' %>
+                                                        </td>
+                                                        <td class="text-end">
+                                                            <button onclick="list('<%= cetagory._id %>')" id="list"
+                                                                data-id="<%= cetagory._id %>"
+                                                                class="btn  btn-dark font-sm ">
+                                                                <%= cetagory.isListed ? 'Unlist' : 'list' %>
+                                                            </button>
+                                                            <button
+                                                                onclick="edit('<%= cetagory.name %>', '<%= cetagory._id %>')"
+                                                                id="edit" data-id="<%= cetagory._id %>"
+                                                                data-update="<%= cetagory.name %>"
+                                                                class="btn  btn-outline-dark font-sm ">Edit</button>
+                                                        </td>
+                                                    </tr>
+
+                                                    <% }) %>
+                                                        <% }else{ %>
+                                                            <tr>
+                                                                <td colspan="5">No user found</td>
+                                                            </tr>
+                                                            <% } %>
 
 
 
@@ -273,145 +292,147 @@
 <script>
 
 
-function openModal() {
-    document.getElementById('myModal').style.display = 'flex';
-  }
+    function openModal() {
+        document.getElementById('myModal').style.display = 'flex';
+    }
 
-  function closeModal() {
-    document.getElementById('myModal').style.display = 'none';
-  }
+    function closeModal() {
+        document.getElementById('myModal').style.display = 'none';
+    }
 
-  function sendMessage() {
-    var data = document.getElementById('messageInput');
+    function sendMessage() {
+        var data = document.getElementById('messageInput');
 
-   var data = {data: data.value};
-    
-
-
-     if(data) {
-        $.ajax({
-            type: 'POST',
-            url: '/admin/addCetagory',
-            data: JSON.stringify(data),
-            contentType: 'application/JSON',
-            success: (res) => {
-                if(res.saved) {
-                    $('#AreaReload').load('/admin/cetagory #AreaReload');
-                } else {
-                    return console.log('error');
-                }
-            }
-
-        })
-     } else {
-        console.log('did not received data from add cetagory');
-     }
-    closeModal();
-  }
+        var data = { data: data.value };
 
 
 
-  function list(id) {
-    
-    
-    const data = {data: id}
-    console.log(data)
-
-    if(data) {
-        Swal.fire({
-            title: 'Are you sure',
-            text: 'You want to List/Unlist user',
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!',
-        })
-        .then((res) => {
-            if(res.isConfirmed) {
-                
-                console.log("ajax")
-                $.ajax({
-                    type: 'POST',
-                    url: '/admin/listCetagory',
-                    data: JSON.stringify(data),
-                    contentType: 'application/JSON',
-                    success: (res) => {
-                        if(res.listed) {
-                            $('#AreaReload').load('/admin/cetagory #AreaReload');
-                        }
+        if (data) {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/addCetagory',
+                data: JSON.stringify(data),
+                contentType: 'application/JSON',
+                success: (res) => {
+                    if (res.saved) {
+                        $('#AreaReload').load('/admin/cetagory #AreaReload');
+                    } else if (res.fail) {
+                        Swal.fire({
+                            title: 'Same name not allowed',
+                            icon: 'warning',
+                            showConformButton: false,
+                            timer: 1500,
+                        });
                     }
+                }
+            })
+        } else {
+            console.log('did not received data from add cetagory');
+        }
+        closeModal();
+    }
 
+
+
+    function list(id) {
+
+
+        const data = { data: id }
+        console.log(data)
+
+        if (data) {
+            Swal.fire({
+                title: 'Are you sure',
+                text: 'You want to List/Unlist user',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes!',
+            })
+                .then((res) => {
+                    if (res.isConfirmed) {
+
+                        console.log("ajax")
+                        $.ajax({
+                            type: 'POST',
+                            url: '/admin/listCetagory',
+                            data: JSON.stringify(data),
+                            contentType: 'application/JSON',
+                            success: (res) => {
+                                if (res.listed) {
+                                    $('#AreaReload').load('/admin/cetagory #AreaReload');
+                                }
+                            }
+
+                        })
+
+                    } else {
+                        console.log('Error in list')
+                    }
+                })
+                .catch((err) => {
+                    console.log(err)
                 })
 
-            } else {
-                console.log('Error in list')
-            }
-        })
-        .catch((err) => {
-            console.log(err)
-        })
+        }
 
     }
 
-  }
 
 
 
-  
-function edit(value, id) {
-    document.getElementById('editmodal').style.display = 'flex';
-    const btn = document.getElementById('edit');
-   
-    console.log(value);
-    console.log(id);
-    const idInput = document.getElementById('id');
-    const input = document.getElementById('editFeild');
-    // input.value = value;
-    idInput.value = id;
+    function edit(value, id) {
+        document.getElementById('editmodal').style.display = 'flex';
+        const btn = document.getElementById('edit');
+
+        console.log(value);
+        console.log(id);
+        const idInput = document.getElementById('id');
+        const input = document.getElementById('editFeild');
+        // input.value = value;
+        idInput.value = id;
 
 
-  }
+    }
 
-  function closeUpdate() {
-    document.getElementById('editmodal').style.display = 'none';
-  }
+    function closeUpdate() {
+        document.getElementById('editmodal').style.display = 'none';
+    }
 
-  function editCetagory() {
-    const id = document.getElementById('id');
-    const input = document.getElementById('editFeild');
+    function editCetagory() {
+        const id = document.getElementById('id');
+        const input = document.getElementById('editFeild');
 
-   var data = {
-    id: id.value,
-    data: input.value
-};
-    
-     console.log(input.value, 'POST')
+        var data = {
+            id: id.value,
+            data: input.value
+        };
 
-     if(data) {
-        $.ajax({
-            type: 'POST',
-            url: '/admin/editCetagory',
-            data: JSON.stringify(data),
-            contentType: 'application/JSON',
-            success: (res) => {
-                if(res.updated) {
-                    $('#AreaReload').load('/admin/cetagory #AreaReload');
-                } else {
-                    return console.log('error');
+        console.log(input.value, 'POST')
+
+        if (data) {
+            $.ajax({
+                type: 'POST',
+                url: '/admin/editCetagory',
+                data: JSON.stringify(data),
+                contentType: 'application/JSON',
+                success: (res) => {
+                    if (res.updated) {
+                        $('#AreaReload').load('/admin/cetagory #AreaReload');
+                    } else {
+                        return console.log('error');
+                    }
                 }
-            }
 
-        })
-     } else {
-        console.log('did not received data from edit cetagory');
-     }
-    closeUpdate();
-  }
+            })
+        } else {
+            console.log('did not received data from edit cetagory');
+        }
+        closeUpdate();
+    }
 
 
 </script>
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-

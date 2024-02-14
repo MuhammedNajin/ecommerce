@@ -105,18 +105,20 @@
                                 <h4>Basic</h4>
                             </div> -->
                             <div class="card-body">
-                                <form action="/admin/editVariant" onsubmit=" return editVariant()" method="post" enctype="multipart/form-data">
+                                <form action="/admin/editVariant" onsubmit=" return editVariant()" method="post"
+                                    enctype="multipart/form-data">
                                     <div class="mb-4">
                                         <label for="product_name" class="form-label">Product title</label>
                                         <input type="text" name="id" hidden value="<%= id %>">
                                         <input type="text" name="index" hidden value="<%= index %>">
-                                        <input type="text" placeholder="Type here" name="pname" class="form-control"
-                                            id="product_name" />
+
+                                        <input type="text" placeholder="Type here" value="<%= data.name%>" name="pname"
+                                            class="form-control" id="product_name" />
                                     </div>
                                     <div class="mb-4">
                                         <label class="form-label">Full description</label>
-                                        <textarea placeholder="Type here" name="description" class="form-control"
-                                            rows="4"></textarea>
+                                        <textarea placeholder="Type here" value="" name="description"
+                                            class="form-control" rows="4"><%= data.description%></textarea>
                                     </div>
                                     <div class="row">
                                         <div class="col-lg-4">
@@ -124,37 +126,40 @@
                                                 <label class="form-label">Regular price</label>
                                                 <div class="row gx-2">
                                                     <input placeholder="₹" id="price" name="price" type="text"
-                                                        class="form-control" />
+                                                        value="<%= product.price%>" class="form-control" />
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-4">
                                                 <label class="form-label">Offer price</label>
-                                                <input placeholder="₹" id="offerPrice" name="offer" type="text" class="form-control"/>
+                                                <input placeholder="₹" id="offerPrice" name="offer"
+                                                    value="<%= product.offerPrice%>" type="text" class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-4">
                                                 <label class="form-label">Color</label>
-                                                <input placeholder="eg:- red, green, yellow" id="color" name="color" type="text"
+                                                <input placeholder="eg:- red, green, yellow" id="color"
+                                                    value="<%= product.color%>" name="color" type="text"
                                                     class="form-control" />
                                             </div>
                                         </div>
                                         <div class="col-lg-4">
                                             <div class="mb-4">
                                                 <label class="form-label">Stock</label>
-                                                <input placeholder="Add stock" id="stock" name="stock" type="text"
-                                                    class="form-control" />
+                                                <input placeholder="Add stock" id="stock" name="stock"
+                                                    value="<%= product.stock%>" type="text" class="form-control" />
                                             </div>
                                         </div>
 
-                                        
+
                                     </div>
 
                                     <label class="form-label">Add Size</label>
 
-                                    <div class="row " style="margin-left: 1rem; margin-bottom: 1rem;">
+                                    <div class="row " id="sizes" data-size="<%= JSON.stringify(product.size)%>"
+                                        style="margin-left: 1rem; margin-bottom: 1rem;">
 
                                         <div class="form-check col-lg-2">
                                             <input class="form-check-input" name="size" type="checkbox" value="S"
@@ -204,23 +209,27 @@
 
                                     <div class="" style="display: flex; margin: 1rem;">
 
-                                        <%for(let i=0; i < 4; i++) {%>
-
+                                        <% for (let i=0; i < 4; i++) { %>
                                             <div class="mb-4 col-lg-3 me-2">
-                                                <img src="" id="image + <%= i %>" alt="Product image"
+                                                <img src="/img/productImage/sharp/<%= product.images[i] %>"
+                                                    id="image<%= i + 1 %>" alt="Product image"
                                                     style="width: 100px; height: 100px; margin-bottom: 1.5rem;">
 
-                                                <input type="file"  accept="image/*" placeholder="Add image"
-                                                    name="images" class="form-control" id="image<%= i + 1%>" />
-                                            </div>
+                                                <input type="file" accept="image/*" placeholder="Add image"
+                                                    onchange="previewImage(this, 'image<%= i + 1 %>', '<%= i%>')"
+                                                    name="images" value="<%= product.images[i]%>" class="form-control"
+                                                    id="file<%= i + 1 %>" />
 
-                                            <%}%>
+                                            </div>
+                                            <% } %>
+
+
 
 
                                     </div>
 
 
-                                    <button class="btn btn-dark ">Add</button>
+                                    <button class="btn btn-dark ">Edit your product</button>
                                 </form>
                             </div>
                         </div>
@@ -257,86 +266,106 @@
 
 </html>
 
+<script>
+
+
+    function previewImage(input, imageId, position) {
+        const preview = document.getElementById(imageId);
+        const file = input.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function (e) {
+                preview.src = e.target.result;
+            };
+
+            reader.readAsDataURL(file);
+        } else {
+            preview.src = "#";
+        }
+    }
+</script>
 
 <script>
 
     function editVariant() {
 
 
-        
+
         let price = document.getElementById("price");
         let oprice = document.getElementById("offerPrice");
         let color = document.getElementById('color');
         let stock = document.getElementById('stock');
         let image = document.getElementById('image1');
-        
-        
-
-
-
-
-        
-     if (price.value.trim() === '' || Number(price.value) <= 0 || isNaN(price.value) ) {
+        let size = document.querySelectorAll('[name="size"]');
+        console.log(size);
+        if (price.value.trim() === '' || Number(price.value) <= 0 || isNaN(price.value)) {
 
             price.style.border = 'solid 1px red';
-           
             setTimeout(function () {
                 price.style.border = '';
-               
             }, 3000);
             return false;
         }
-
-
-
         else if (oprice.value.trim() === '' || Number(oprice.value) <= 0 || isNaN(oprice.value)) {
             oprice.style.border = 'solid 1px red';
-           
             setTimeout(function () {
-               oprice.style.border = '';
-                
+                oprice.style.border = '';
             }, 3000);
             return false;
         }
-
-        
         else if (color.value.trim() === '') {
-                 color.style.border = 'solid 1px red';
-           
+            color.style.border = 'solid 1px red';
+
             setTimeout(function () {
                 color.style.border = '';
-                
+
             }, 3000);
             return false
 
         }
-        
         else if (stock.value.trim() === '' || Number(stock.value) <= 0 || isNaN(stock.value)) {
-                 stock.style.border = 'solid 1px red';
-           
+            stock.style.border = 'solid 1px red';
+
             setTimeout(function () {
                 stock.style.border = '';
-                
-            }, 3000);
-            return false
 
-        }
-       
-    
-        else if (!image.files[0] || !image.files[1] || !image.files[2] || !image.files[3]) {
-            console.log('erororr')
-                 image.style.border = 'solid 1px red';
-           
-            setTimeout(function () {
-                image.style.border = '';
-                
             }, 3000);
             return false
 
         }
         else {
+            let count = 0;
+            const sizes = document.querySelectorAll('[name="size"]')
+            sizes.forEach((el) => {
+                if (el.checked) {
+                    count++;
+                }
+            })
+            if (count == 0) {
+                sizes[0].style.border = 'solid 1px red';
 
-            true;
+                setTimeout(function () {
+                    size[0].style.border = '';
+                }, 3000);
+                return false
+
+            }
+            return true;
         }
     }
+</script>
+
+<script>
+    let size = document.querySelectorAll('[name="size"]');
+    const id = document.getElementById('sizes')
+    let dbSize = JSON.parse(id.getAttribute('data-size'))
+    console.log(dbSize, 'hi')
+
+    function loadSize() {
+        size.forEach((elem, i) => {
+            console.log(elem)
+            if (dbSize[i]) elem.checked = true;
+        });
+    }
+    loadSize()
 </script>

@@ -4,6 +4,7 @@ const Catagery = require('../models/cetagory');
 const path = require('node:path');
 const sharp = require('sharp');
 const Review = require('../models/reviewModal');
+const { findOne, findById } = require('../models/order');
 
 
 
@@ -190,39 +191,23 @@ module.exports.addVariant = async (req, res) => {
 
 module.exports.LoadeditVariant = async (req, res) => {
     try {
-
-
         const index = req.query.index;
         const id = req.query.id;
         console.log(id)
         console.log(index)
-
-        if (id) {
-
-
-
-            return Product.findOne({ _id: id }, { variant: 1 })
+        if(id) {
+            return Product.findOne({ _id: id },)
                 .then((data) => {
                     console.log(data);
                     const product = data.variant[index];
                     const id = data._id;
                     console.log(product);
-                    res.render('editVariant', { product: product, id: id, index: index });
+                    res.render('editVariant', { product: product, id: id, index: index, data });
                 })
                 .catch((err) => console.log(err));
-
-
-
-
-
         } else {
-            console.log('id not recieved in load variant ');
+            console.log('id not recieved in load variant');
         }
-
-
-
-
-
     } catch (error) {
         console.log(error);
     }
@@ -236,28 +221,30 @@ module.exports.editVariant = async (req, res) => {
         const name = req.body.name;
         const description = req.body.description;
         const index = req.body.index;
-        console.log(name, description);
-        console.log(req.body)
+       if(name) await Product.updateOne({ _id: id }, { $set: { name: name }});
+       if(description) await Product.updateOne({ _id: id }, { $set: { description: description }});
+       
 
         const newImage = [];
-
-        for (let i = 0; i < req.files.length; i++) {
-            newImage.push(req.files[i].filename);
-
-
-            const dirPath = path.resolve(__dirname, '..', 'public', 'img', 'productImage', 'sharp', `${req.files[i].filename}`);
-
+         const product = await Product.findById({_id: id})
+         const images = product.variant[index].images;
+         console.log(images, 'heloo')
+         console.log(req.files, 'files')
+        for (let i = 0; i < 4 ; i++) {
+            const image = req.files[i]?.filename || images[i]
+            console.log(image, 'refddddddddddddddddddddddddd')
+            newImage.push(image);
+           if(req.files[i]) {
+            const dirPath = path.resolve(__dirname, '..', 'public', 'img', 'productImage', 'sharp', `${image}`);
             await sharp(req.files[i].path).resize(500, 500).toFile(dirPath);
-
+           }
         }
-
+         console.log(newImage, 'helllssjsjjsjsjsjsjsjsjjs')
         const price = parseInt(req.body.price);
         const offerPrice = parseInt(req.body.offer);
         const stock = parseInt(req.body.stock);
-
         return Product.findOne({ _id: id }, { variant: 1 })
             .then(() => {
-
                 return Product.updateOne({ _id: id }, {
                     $set: {
                         [`variant.${index}.price`]: price,
@@ -266,7 +253,6 @@ module.exports.editVariant = async (req, res) => {
                         [`variant.${index}.size`]: req.body.size,
                         [`variant.${index}.images`]: newImage,
                         [`variant.${index}.stock`]: stock,
-
                     }
                 })
             })
@@ -276,8 +262,6 @@ module.exports.editVariant = async (req, res) => {
             .catch((err) => {
                 console.log(err, 'errr');
             })
-
-
     } catch (error) {
         console.log(error)
     }
