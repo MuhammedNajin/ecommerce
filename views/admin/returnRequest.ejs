@@ -1,34 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Nest Dashboard</title>
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="" />
-        <meta property="og:type" content="" />
-        <meta property="og:url" content="" />
-        <meta property="og:image" content="" />
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="/assets/imgs/theme/favicon.svg" />
-        <!-- Template CSS -->
-        <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
-    </head>
 
-    <body>    
-        
-        <%- include('../partials/sidenav.ejs') -%>
-        
-        
-        
+<head>
+    <meta charset="utf-8" />
+    <title>Nest Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/imgs/theme/favicon.svg" />
+    <!-- Template CSS -->
+    <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+    <%- include('../partials/sidenav.ejs') -%>
+
+
+
         <main class="main-wrap">
             <header class="main-header navbar">
                 <div class="col-search">
                     <form class="searchform">
                         <div class="input-group">
                             <input list="search_terms" type="text" class="form-control" placeholder="Search term" />
-                            <button class="btn btn-light bg" type="button"><i class="material-icons md-search"></i></button>
+                            <button class="btn btn-light bg" type="button"><i
+                                    class="material-icons md-search"></i></button>
                         </div>
                         <datalist id="search_terms">
                             <option value="Products"></option>
@@ -39,7 +41,8 @@
                     </form>
                 </div>
                 <div class="col-nav">
-                    <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"><i class="material-icons md-apps"></i></button>
+                    <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"><i
+                            class="material-icons md-apps"></i></button>
                     <ul class="nav">
                         <li class="nav-item">
                             <a class="nav-link btn-icon" href="#">
@@ -48,30 +51,44 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link btn-icon darkmode" href="#"> <i class="material-icons md-nights_stay"></i> </a>
+                            <a class="nav-link btn-icon darkmode" href="#"> <i
+                                    class="material-icons md-nights_stay"></i> </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="requestfullscreen nav-link btn-icon"><i class="material-icons md-cast"></i></a>
+                            <a href="#" class="requestfullscreen nav-link btn-icon"><i
+                                    class="material-icons md-cast"></i></a>
                         </li>
                         <li class="dropdown nav-item">
-                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage" aria-expanded="false"><i class="material-icons md-public"></i></a>
+                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
+                                aria-expanded="false"><i class="material-icons md-public"></i></a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                                <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png" alt="English" />English</a>
-                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png" alt="Français" />Français</a>
-                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png" alt="Français" />日本語</a>
-                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png" alt="Français" />中国人</a>
+                                <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png"
+                                        alt="English" />English</a>
+                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png"
+                                        alt="Français" />Français</a>
+                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png"
+                                        alt="Français" />日本語</a>
+                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png"
+                                        alt="Français" />中国人</a>
                             </div>
                         </li>
                         <li class="dropdown nav-item">
-                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount" aria-expanded="false"> <img class="img-xs rounded-circle" src="assets/imgs/people/avatar-2.png" alt="User" /></a>
+                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
+                                aria-expanded="false"> <img class="img-xs rounded-circle"
+                                    src="assets/imgs/people/avatar-2.png" alt="User" /></a>
                             <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                                <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit Profile</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account Settings</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-account_balance_wallet"></i>Wallet</a>
+                                <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
+                                    Profile</a>
+                                <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
+                                    Settings</a>
+                                <a class="dropdown-item" href="#"><i
+                                        class="material-icons md-account_balance_wallet"></i>Wallet</a>
                                 <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help center</a>
+                                <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
+                                    center</a>
                                 <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#"><i class="material-icons md-exit_to_app"></i>Logout</a>
+                                <a class="dropdown-item text-danger" href="#"><i
+                                        class="material-icons md-exit_to_app"></i>Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -80,85 +97,89 @@
             <section class="content-main">
                 <div class="content-header">
                     <div>
-                        <h2 class="content-title card-title">Order List</h2>
+                        <h2 class="content-title card-title">Return request</h2>
                         <p>Lorem ipsum dolor sit amet.</p>
-                    </div>
-                    <div>
-                        <input type="text" placeholder="Search order ID" class="form-control bg-white" />
                     </div>
                 </div>
                 <div class="card mb-4">
-                    <header class="card-header">
-                        <div class="row gx-3">
-                            <div class="col-lg-4 col-md-6 me-auto">
-                                <input type="text" placeholder="Search..." class="form-control" />
-                            </div>
-                            <div class="col-lg-2 col-6 col-md-3">
-                                <select class="form-select">
-                                    <option>Status</option>
-                                    <option>Active</option>
-                                    <option>Disabled</option>
-                                    <option>Show all</option>
-                                </select>
-                            </div>
-                            
-                        </div>
-                    </header>
+                    
                     <!-- card-header end// -->
                     <div class="card-body">
-                        <div class="table-responsive">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Index</th>
-                                        <th scope="col">Name</th>
-                                        <th scope="col">Email</th>
-                                        <th scope="col">Total</th>
-                                        <th scope="col">Status</th>
-                                        <th scope="col">Date</th>
-                                        <th scope="col">Action</th>
-                                    
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                <%if(order) {%>
-                                     <%order.forEach((item, i) => {%>
-
+                       
+                            <div class="table-responsive">
+                                <%console.log(order)%>
+                                <%if(order.length > 0) {%>
+                                <table class="table table-hover">
+                                    <thead>
                                         <tr>
-                                            <td><%= i + 1%></td>
-                                            <td><b><%= item.user.name%></b></td>
-                                            <td><%= item.user.name%></td>
-                                            <td><%= item.totalAmount%></td>
-                                            <td><span class="badge rounded-pill alert-warning"><%= item.status%></span></td>
-                                            <% const formattedDate = item.date.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }); %>
-                                            <td><%= formattedDate%></td>
-                                            <td class="">
-                                                <%const returns = true%>
-                                               <a href="/admin/single-orderDetails?orderId=<%= item._id%>&returns=<%= returns%>">More details</a>
-                                                <!-- dropdown //end -->
-                                            </td>
-                                           
+                                            <th>Index</th>
+                                            <th scope="col">Name</th>
+                                            <th scope="col">Email</th>
+                                            <th scope="col">Total</th>
+                                            <th scope="col">Status</th>
+                                            <th scope="col">Date</th>
+                                            <th scope="col">Action</th>
+
                                         </tr>
+                                    </thead>
+                                    <tbody>
+
+                                        <%order.forEach((item, i)=> {%>
+
+                                            <tr>
+                                                <td>
+                                                    <%= i + 1%>
+                                                </td>
+                                                <td><b>
+                                                        <%= item.user.name%>
+                                                    </b></td>
+                                                <td>
+                                                    <%= item.user.name%>
+                                                </td>
+                                                <td>
+                                                    <%= item.totalAmount%>
+                                                </td>
+                                                <td><span class="badge rounded-pill alert-warning">
+                                                        <%= item.status%>
+                                                    </span></td>
+                                                <% const formattedDate=item.date.toLocaleString('en-US', {
+                                                    weekday: 'short' , month: 'short' , day: 'numeric' , year: 'numeric'
+                                                    , hour: 'numeric' , minute: 'numeric' , second: 'numeric' , hour12:
+                                                    true }); %>
+                                                    <td>
+                                                        <%= formattedDate%>
+                                                    </td>
+                                                    <td class="">
+                                                        <%const returns=true%>
+                                                            <a
+                                                                href="/admin/single-orderDetails?orderId=<%= item._id%>&returns=<%= returns%>">More
+                                                                details</a>
+                                                            <!-- dropdown //end -->
+                                                    </td>
+
+                                            </tr>
 
 
 
-                                     <%})%>
-                                    
+                                            <%})%>
 
+
+
+                                    </tbody>
+                                </table>
                                 <%} else {%>
-                                    
-                                           <p>No return requests</p>
 
-                                <%}%>
-
-                                    
-                                   
-                                </tbody>
-                            </table>
-                        </div>
-                        <!-- table-responsive //end -->
+                                    <p class="text-center" style="margin: 2rem 0; font-weight: 900;">No return requests</p>
+            
+                                    <%}%>
+                            </div>
+                            <!-- table-responsive //end -->
                     </div>
                     <!-- card-body end// -->
+
+
+                  
+
                 </div>
                 <!-- card end// -->
                 <div class="pagination-area mt-15 mb-50">
@@ -198,5 +219,6 @@
         <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
         <!-- Main Script -->
         <script src="assets/js/main.js?v=1.1" type="text/javascript"></script>
-    </body>
+</body>
+
 </html>

@@ -22,11 +22,6 @@
 <body class="bg-info-subtle">
     <main class="">
 
-
-        <!-- ... Your existing code ... -->
-
-        <!-- ... Your existing code ... -->
-
         <section class="content-main bg-body-tertiary">
             <div class="content-header justify-content-center py-3">
                 <div class="text-center">
@@ -104,16 +99,18 @@
                                                     </td>
                                                     <td class="text-end">
 
-                                                        <button onclick="deny('<%= order._id%>', '<%= el.productId?._id%>', '<%= i %>')" class="btn btn-outline-danger btn-sm me-2">
+                                                       <%if(el.returnRequest != 'accepted') {%>
+                                                        <button  id="deny" onclick="deny('<%= order._id%>', '<%= el.productId?._id%>', '<%= i %>')" class="btn btn-outline-danger btn-sm me-2">
                                                             <span class="me-2"><i class="fa-solid fa-xmark" style="color: #ae0505; font-size: 1rem;"></i></span>
-                                                            Deny
+                                                            <%= el.returnRequest == 'denied' ? 'denied' : 'deny'%>
                                                         </button>
-                                                        <button onclick=" return accept('<%= order._id%>', '<%= el.productId?._id%>', '<%= i %>');" class="btn btn-outline-success btn-sm">
+                                                       <%}%>
+                                                       <%if(el.returnRequest != 'denied' ) {%>
+                                                        <button <%= (el.status == 'returned') ? disabled='disabled' : ''%> id="accept" onclick=" return accept('<%= order._id%>', '<%= el.productId?._id%>', '<%= i %>');"  class="btn btn-outline-success btn-sm">
                                                             <span class="me-2"><i class="fa-solid fa-check" style="color: #029611;"></i></span>
-                                                            Accept
+                                                            <%= (el.status == 'returned') ? 'accepted' : 'accept'%>
                                                         </button>
-    
-                                                       
+                                                       <%}%>  
                                                     </td>
                                             </tr>
                                          <%}%>
@@ -179,11 +176,13 @@
             },
             success: (res) => {
                 if(res.success) {
-                  
-                }
+                    console.log('succes')
+                    location.reload();
             }
+        }
         })
     }
+
     function deny(orderId, productId, index,) {
         const decision = 'denied'
         $.ajax({
@@ -197,7 +196,8 @@
             },
             success: (res) => {
                 if(res.success) {
-                    
+                   
+                    location.reload();     
                 }
             }
         })

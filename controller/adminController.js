@@ -264,7 +264,7 @@ module.exports.loadOrder = async (req, res) => {
             .populate('products.productId')
             .sort({ date: -1 });
         console.log(order);
-        res.render('order-details', { order: order });
+        res.render('order-details', { order: order }).sort({date: -1});
     } catch (error) {
         console.log(error)
     }
@@ -367,15 +367,43 @@ module.exports.returns = async (req, res) => {
                     })
 
                 })
+                .then(() => {
+                    res.json({success: true})
+                })
+               
         } else {
             await Order.findByIdAndUpdate({ _id: orderId, "products.productId": productId }, {
                 $set: {
                     [`products.${index}. returnRequest`]: decision,
                 }
             })
+            res.json({success: true})
 
         }
     } catch (error) {
         console.log(error)
+    }
+}
+
+module.exports.loadSalesReport = async (req, res) => {
+    try {
+        let query = ''
+        if(req.query.startDate) {
+            const { startDate , endDate } = req.query;
+            console.log(req.query)
+            const sDate = new Date(startDate);
+            const eDate = new Date(endDate);
+          query = {
+            date: {$gte: sDate, $lt: eDate }
+          }
+        } else {
+            query = {}
+        }
+        console.log(query)
+        const report = await Order.find(query).populate('user');
+        console.log(report)
+        res.render('salesreport', { report });
+    } catch (error) {
+        console.log(error);
     }
 }

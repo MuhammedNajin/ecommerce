@@ -1,6 +1,4 @@
 const mongoose = require('mongoose');
-const { array } = require('../middleware/multer');
-
 
 const wallet = mongoose.Schema({
      
@@ -21,6 +19,5 @@ const wallet = mongoose.Schema({
     }
 
 });
-
 
 module.exports = mongoose.model('wallet', wallet);

@@ -94,7 +94,10 @@ module.exports.editCetagory = async (req, res) => {
         const data = req.body.data
 
         console.log(id, data);
-
+        const sameName = await Catagery.findOne({name: data});
+        if(sameName) {
+           return res.json({fail: true})
+        }
         if(id) {
             const update = await Catagery.updateOne({_id: id},{$set:{name: data}})
             if(update) {

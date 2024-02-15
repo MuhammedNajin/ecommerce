@@ -135,18 +135,13 @@
                 <div class="content-header col-4">
                     <h2 class="content-title">Cetagory</h2>
                 </div>
-
-
-
                 <div class="card">
                     <div class="card-body" id="AreaReload">
                         <div class="row">
                             <div class="col-lg-9">
                                 <header class="border-bottom mb-4 pb-4">
                                     <div class="row">
-                                        <div class="col-lg-5 col-6 me-auto">
-                                            <input type="text" placeholder="Search..." class="form-control" />
-                                        </div>
+                                      
                                         <div class="col-lg-2 col-6">
 
                                             <button class="btn btn-sm btn-dark" onclick="openModal()">Add
@@ -162,8 +157,6 @@
                                                     class="btn btn-sm btn-primary text-end mt-2">Add</button>
                                             </div>
                                         </div>
-
-
                                         <div id="editmodal" class="POPUP">
                                             <div class="popup-content">
                                                 <span class="close-btn" onclick="closeUpdate()">&times;</span>
@@ -175,29 +168,22 @@
                                                     class="btn btn-sm btn-primary text-end mt-2">update</button>
                                             </div>
                                         </div>
-
-
                                     </div>
                                 </header>
                                 <!-- card-header end// -->
                                 <div class="table-responsive">
-                                    <table class="table table-hover">
+                                    <table class="table table-hover"  id="catTable">
                                         <thead>
                                             <tr>
                                                 <th>ID</th>
                                                 <th>Cetagory</th>
                                                 <th>Status</th>
-
                                                 <th class="text-end">Action</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-
-
                                             <% if(Array.isArray(cetagorys) && cetagorys.length> 0) {%>
-
                                                 <% cetagorys.map((cetagory, i)=> {%>
-
                                                     <tr>
                                                         <td><b>
                                                                 <%= i + 1 %>
@@ -221,16 +207,12 @@
                                                                 class="btn  btn-outline-dark font-sm ">Edit</button>
                                                         </td>
                                                     </tr>
-
                                                     <% }) %>
                                                         <% }else{ %>
                                                             <tr>
                                                                 <td colspan="5">No user found</td>
                                                             </tr>
                                                             <% } %>
-
-
-
                                         </tbody>
                                     </table>
                                 </div>
@@ -293,19 +275,19 @@
 
 
     function openModal() {
+
         document.getElementById('myModal').style.display = 'flex';
     }
 
     function closeModal() {
+
         document.getElementById('myModal').style.display = 'none';
     }
 
     function sendMessage() {
+
         var data = document.getElementById('messageInput');
-
         var data = { data: data.value };
-
-
 
         if (data) {
             $.ajax({
@@ -332,14 +314,9 @@
         closeModal();
     }
 
-
-
     function list(id) {
-
-
         const data = { data: id }
         console.log(data)
-
         if (data) {
             Swal.fire({
                 title: 'Are you sure',
@@ -352,7 +329,6 @@
             })
                 .then((res) => {
                     if (res.isConfirmed) {
-
                         console.log("ajax")
                         $.ajax({
                             type: 'POST',
@@ -364,9 +340,7 @@
                                     $('#AreaReload').load('/admin/cetagory #AreaReload');
                                 }
                             }
-
                         })
-
                     } else {
                         console.log('Error in list')
                     }
@@ -374,13 +348,8 @@
                 .catch((err) => {
                     console.log(err)
                 })
-
         }
-
     }
-
-
-
 
     function edit(value, id) {
         document.getElementById('editmodal').style.display = 'flex';
@@ -390,7 +359,7 @@
         console.log(id);
         const idInput = document.getElementById('id');
         const input = document.getElementById('editFeild');
-        // input.value = value;
+        input.value = value;
         idInput.value = id;
 
 
@@ -420,6 +389,13 @@
                 success: (res) => {
                     if (res.updated) {
                         $('#AreaReload').load('/admin/cetagory #AreaReload');
+                    } else if (res.fail) {
+                        Swal.fire({
+                            title: 'Same name is not allowed',
+                            icon: 'error',
+                            showConformButton: false,
+                            timer: 1500,
+                        })
                     } else {
                         return console.log('error');
                     }
@@ -435,4 +411,71 @@
 
 </script>
 
+<!-- <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      let searchInput=document.getElementById('searchInput');
+  
+      searchInput.addEventListener('keyup', function () {
+        let searchTerm = searchInput.value.toLowerCase();
+        let tableRows = document.querySelectorAll('#catTable tbody tr');
+        console.log(tableRows)
+          if(tableRows.length === 0) {
+            console.log('ree')
+            const tr = document.createElement('tr')
+            const td = document.createElement('td');
+            tr.setAttribute('colspan', '4');
+            td.classList.add('text-center')
+            td.innerHTML= 'no result'
+            tr.appendChild(td)
+            document.querySelector('#catTable tbody').appendChild(tr)
+          }
+        tableRows.forEach((row) => {
+          
+          let nameColumn = row.querySelector('td:nth-child(2) '); // Adjust the index based on your table structure
+  
+          if (nameColumn) {
+            let nameText = nameColumn.textContent.toLowerCase();
+            row.style.display = nameText.includes(searchTerm) ? '' : 'none';
+          }
+        });
+      });
+    });
+  </script> -->
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+    let searchInput = document.getElementById('searchInput');
+    let noResultRow = document.createElement('tr');
+
+    // Create the "no result found" row
+    noResultRow.innerHTML = '<td colspan="4" class="text-center">No result found</td>';
+    noResultRow.style.display = 'none';
+    noResultRow.style.fontSize = '20px';
+    document.querySelector('#catTable tbody').appendChild(noResultRow);
+
+    searchInput.addEventListener('keyup', function () {
+        let searchTerm = searchInput.value.toLowerCase();
+        let tableRows = document.querySelectorAll('#catTable tbody tr');
+
+        let hasResults = false;
+
+        tableRows.forEach((row) => {
+            let nameColumn = row.querySelector('td:nth-child(2)'); // Adjust the index based on your table structure
+
+            if (nameColumn) {
+                let nameText = nameColumn.textContent.toLowerCase();
+                row.style.display = nameText.includes(searchTerm) ? '' : 'none';
+
+                // Check if there are matching results
+                if (nameText.includes(searchTerm)) {
+                    hasResults = true;
+                }
+            }
+        });
+
+        // Toggle the display of the "no result found" row based on search results
+        noResultRow.style.display = hasResults ? 'none' : 'block';
+    });
+});
+
+  </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

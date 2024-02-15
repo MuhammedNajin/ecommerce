@@ -37,7 +37,7 @@
 
         a {
             text-decoration: none;
-            
+
         }
 
         .status-checkboxes {
@@ -70,7 +70,8 @@
             <!-- <div class="container-fluid"> -->
             <div class="row">
                 <div class="col-md-3" style="">
-                    <div style="padding: 16px; margin-bottom: 12px; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);">
+                    <div
+                        style="padding: 16px; margin-bottom: 12px; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);">
                         <div class="d-flex" style="flex-wrap: wrap;  padding: 16px; margin-bottom: 12px;">
 
                             <div style="display: flex; flex-grow: 1;">
@@ -80,9 +81,10 @@
                                 </div>
                             </div>
                         </div>
-                      
-                        </div>
-                    <div style="padding: 16px; margin-bottom: 12px; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);">
+
+                    </div>
+                    <div
+                        style="padding: 16px; margin-bottom: 12px; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);">
                         <div class="d-flex" style="flex-wrap: wrap;  padding: 16px; margin-bottom: 12px;">
 
                             <div style="display: flex; flex-grow: 1;">
@@ -131,95 +133,105 @@
 
                         <%if(myOrder) {%>
 
-                  
 
-                                       
-                                <%myOrder.products.forEach( (el, i) => {%>
 
-                                    <div onclick="singleOrder('<%= el.productId._id%>', '<%= i%>', '<%= el.size%>', '<%= myOrder._id%>')" style="background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08); margin-top: 2rem;">
-                                        <div style="padding: 16px;">
-                                           
+
+                            <%myOrder.products.forEach( (el, i)=> {%>
+
+                                <div onclick="singleOrder('<%= el.productId._id%>', '<%= i%>', '<%= el.size%>', '<%= myOrder._id%>')"
+                                    style="background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08); margin-top: 2rem;">
+                                    <div style="padding: 16px;">
+
+                                        <div class="row">
+
+                                            <div class="col-6">
                                                 <div class="row">
-                                                   
-                                                    <div class="col-6">
-                                                        <div class="row">
-                                                            <div class="col-3">
-                                                                <div class="d-flex" style="">
-                                                                    <div style="margin: 0 auto;">
-                                                                        <img src="/img/productImage/sharp/<%= el.productId.variant[el.product].images[0]%>" style="width: 75%; height: 75%;" alt="">
-                                                                        
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col-8">
-                                                                <div>
-                                                                    <span><%= el.productId.name%></span>
-                                                            <div class="d-flex">
-                                                                <% const match = [['S', 'Small'], ['M', 'Medium'], ['L', "Large"], ['XL', 'Exel'], ['XXL', 'Double exel']]%>
-                                                                <%const size = match.find((size) => (size[0] === el.size)) %>
-                                                                <p class="me-2"><span>Color: </span><%= el.productId.variant[el.product].color%></p>
-                                                                <p><span>Size: </span><%= size[1]%></p>
-                                                            </div>
-                                                                </div>
+                                                    <div class="col-3">
+                                                        <div class="d-flex" style="">
+                                                            <div style="margin: 0 auto;">
+                                                                <img src="/img/productImage/sharp/<%= el.productId.variant[el.product].images[0]%>"
+                                                                    style="width: 75%; height: 75%;" alt="">
+
                                                             </div>
                                                         </div>
-            
                                                     </div>
-                                                    <div class="col-2">
-                                                       ₹<%= el.price%>
-            
+                                                    <div class="col-8">
+                                                        <div>
+                                                            <span>
+                                                                <%= el.productId.name%>
+                                                            </span>
+                                                            <div class="d-flex">
+                                                                <% const match=[['S', 'Small' ], ['M', 'Medium' ],
+                                                                    ['L', "Large" ], ['XL', 'Exel' ],
+                                                                    ['XXL', 'Double exel' ]]%>
+                                                                    <%const size=match.find((size)=> (size[0] ===
+                                                                        el.size)) %>
+                                                                        <p class="me-2"><span>Color: </span>
+                                                                            <%= el.productId.variant[el.product].color%>
+                                                                        </p>
+                                                                        <p><span>Size: </span>
+                                                                            <%= size[1]%>
+                                                                        </p>
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div class="col-4">
-                                                        <div class="d-flex" style="align-items: center; ">
-                                                            <div class="<%= el.status === 'delivered' ? 'bg-success' : ''%>  <%= el.status === 'placed' ? 'border border-success' : '' %> <%= el.status === 'canceled' ? 'bg-danger' : '' %> <%= el.status === 'returned' ? 'fa-solid fa-arrow-left fa-2xs' : '' %>  " style="width: 10px; height: 10px;  margin-bottom: 13px; margin-right: 1rem; border-radius: 50%; border: 2px;"></div>
-
-                                                            <% const status = [['placed', 'your product as placed'], ['outfordelivery', 'your seems to come soon'], ['shipped', 'your product is shipped'], ['delivered', 'your product as delivered'], ['canceled', 'product as canceled'], ['returned', 'product as returned']]%>
-                                                            <%const text = status.find(( text ) => ( text[0] === el.status)) %>
-                                                            
-                                                            <div> <p class="text-muted"><%= text[1]%></p></div>
-            
-                                                       
-                                                        <!-- <div class="d-flex">
-                                                            <span class="me-2"><i class="fa-solid fa-star" style="color: #00328a;"></i></i></span>
-                                                            
-                                                           <a href="" style="text-decoration: none;">
-                                                           
-                                                            <span style="color: #00328a;">Rate & review product</span>
-                                                           </a>
-                                                        </div> -->
-                                                    </div>
-            
-                                                    <div>
-            
-                                                    </div>
-                                                    <div>
-            
-                                                    </div>
-                                          
                                                 </div>
-                                            
+
+                                            </div>
+                                            <div class="col-2">
+                                                ₹<%= el.price%>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="d-flex" style="align-items: center; ">
+                                                    <div class="<%= el.status === 'delivered' ? 'bg-success' : ''%>  <%= el.status === 'placed' ? 'border border-success' : '' %> <%= el.status === 'canceled' ? 'bg-danger' : '' %> <%= el.status === 'returned' ? 'fa-solid fa-arrow-left fa-2xs' : '' %>  "
+                                                        style="width: 10px; height: 10px;  margin-bottom: 13px; margin-right: 1rem; border-radius: 50%; border: 2px;">
+                                                    </div>
+
+                                                    <% const status=[['placed', 'your product as placed' ],
+                                                        ['outfordelivery', 'your seems to come soon' ],
+                                                        ['shipped', 'your product is shipped' ],
+                                                        ['delivered', 'your product as delivered' ],
+                                                        ['canceled', 'product as canceled' ],
+                                                        ['returned', 'product as returned' ]]%>
+                                                        <%const text=status.find(( text )=> ( text[0] === el.status)) %>
+
+                                                            <div>
+                                                                <p class="text-muted">
+                                                                    <%= text[1]%>
+                                                                </p>
+                                                            </div>
+
+
+                                                </div>
+
+
+
+                                            </div>
+
                                         </div>
-            
                                     </div>
-                                    
+
+                                </div>
+
                                 <%})%>
 
 
-                                
 
 
 
-                             
 
-                        <%} else {%>
-                             
-                            <div style="background-color: #111111;">
-                                <p style="color: #fff;">No order found</p>
-                            </div>
 
-                        <%}%>
 
-                        
+                                    <%} else {%>
+
+                                        <div style="background-color: #111111;">
+                                            <p style="color: #fff;">No order found</p>
+                                        </div>
+
+                                        <%}%>
+
+
 
                     </div>
 

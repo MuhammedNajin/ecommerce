@@ -621,7 +621,7 @@
 
                                         <%}%>
 
-                                            <%if(product.status !=='canceled' && product.status !=='delivered' ) {%>
+                                            <%if(product.status !=='canceled' && product.status !=='delivered' && product.status !=='returned' ) {%>
 
                                                 <div class="d-flex justify-content-center align-items-center"
                                                     style="margin-right: 6rem;">
@@ -899,7 +899,7 @@
 
         }, 11000);
     }
-    if (status === 'canceled') {
+    if (status === 'canceled' || status === 'returned') {
 
         setTimeout(() => {
             step[1].classList.add('active');
