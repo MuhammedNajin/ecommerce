@@ -35,6 +35,7 @@ user_route.use(session({
     resave: false,
     saveUninitialized: true
 }));
+
 user_route.use(express.json());
 user_route.use(express.urlencoded({extended: true}));
 
@@ -141,6 +142,7 @@ user_route.get('/single-orderDetails', order_controller.singleOrderDetials)
 user_route.get('/wishlist', wishlistController.loadWhislist);
 user_route.post('/wishlist', wishlistController.addTOWhishlist);
 
+user_route.get('/manage-address', user_controller.loadManageAddress);
 
 
 // ==================================================================== //
@@ -156,6 +158,10 @@ user_route.post('/check-coupon', coupon_controller.checkCoupon);
 user_route.get('/my-coupon', coupon_controller.loadMyCoupon);
 
 user_route.get('/invoice', order_controller.loadInvoice);
+
+user_route.put('/edit-address', user_controller.editAddress);
+
+user_route.delete('/delete-address/:index', user_controller.deleteAddress);
 
 module.exports = user_route;
 

@@ -51,9 +51,8 @@ module.exports.addAddress = async (req, res) => {
                 await address.save();
 
             }
-
-
-            res.redirect('/check-out');
+   
+            req.body.account ? res.redirect('/manage-address') : res.redirect('/check-out');
 
         } else {
             console.log('id didt recived');
@@ -129,9 +128,7 @@ module.exports.placeOrder = async (req, res) => {
                 console.log(coupon.discountAmount, "discount amount")
 
                 if (coupon.percentage) {
-
-
-
+                    
                 } else if (coupon.discountAmount) {
 
                     console.log(coupon.discountAmount, cart.products.length)

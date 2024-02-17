@@ -50,6 +50,27 @@ $(document).ready(function () {
         searchFilterSort(searchData);
     })
 
+    // pagination function
+    // const paginator = document.querySelectorAll('.paginator');
+    // paginator.forEach((el) => {
+    //    el.addEventListener('click', (event) => {
+    //     console.log(event.target.innerHTML);
+    //        data.page = event.target.innerHTML;
+    //        searchFilterSort();
+    //    })
+    // })
+   
+    paginationContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('paginator')) {
+            
+           
+            console.log(event.target.innerHTML, 'heeee');
+            data.page = event.target.innerHTML;
+            searchFilterSort();
+        }
+    });
+ 
+
 
     console.log('goot here')
 
@@ -179,9 +200,49 @@ $(document).ready(function () {
 
                     });
                 }
+              
+                renderPagination(response.totalPage, response.page)
             }
         })
     }
 });
 
 
+    function renderPagination(pages, currentPage,) {
+       console.log(pages, currentPage)
+        const paginationContainer = document.getElementById('paginationContainer');
+        paginationContainer.innerHTML = '';
+
+        if (pages !== 0) {
+            const ul = document.createElement('ul');
+            ul.className = 'pagination';
+
+        
+
+            for (let i = 1; i <= pages; i++) {
+                const pageButton = createPaginationButton(i, pages);
+                ul.appendChild(pageButton);
+            }
+
+          
+
+            paginationContainer.appendChild(ul);
+        }
+    }
+
+    function createPaginationButton(text, totalPage) {
+        const li = document.createElement('li');
+        li.className = 'page-item';
+
+        const button = document.createElement('button');
+        button.className = 'btn btn-outline-dark paginator';
+        button.type = 'button';
+        button.textContent = text;
+        button.dataset.totalPage = totalPage;
+
+        li.appendChild(button);
+
+        return li;
+    }
+
+    

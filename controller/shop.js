@@ -3,13 +3,16 @@ const Product = require('../models/product');
 
 module.exports.loadShop = async (req, res) => {
     try {
+        const page = 1;
         const cetagory = await Catagery.find({isListed: true});
         const product = await Product.find({isListed: true, }).populate('cetagory');
         const brand = await Product.find({}, { brand: 1 });
 
         console.log(product);
         console.log(brand, brand);
-        res.render('shop', { cetagory: cetagory, product: product, brand: brand });
+        const totalPage = product.length / 2
+        console.log(totalPage)
+        res.render('shop', { cetagory: cetagory, product: product, brand: brand, page, totalPage, results: product.length });
     } catch (error) {
         console.log(error);
     }
@@ -27,10 +30,17 @@ module.exports.filter = async (req, res) => {
          const cetagory = req.body.cetagory ? req.body.cetagory : false;
          const brand = req.body.brand ? req.body.brand : false;
          const price = req.body.price ? req.body.price.split('-') : false;
+         const page = req.body.page;
          
-         const products = await Product.find({
+         console.log(page)
+         
+         const productCount = await Product.find({
             name: {$regex: search, $options: 'i'},
         }).sort({"variant.0.price": sort}).populate('cetagory')
+        const totalPage = productCount.length / 6;
+         const products = await Product.find({
+            name: {$regex: search, $options: 'i'},
+        }).sort({"variant.0.price": sort}).populate('cetagory').skip(page * 6).limit(6)
         console.log(products);
         if(products) {
             if( cetagory || brand || price ) {
@@ -56,7 +66,7 @@ module.exports.filter = async (req, res) => {
               }
                 res.status(200).json({pass: true, product: product});
             } else {
-                res.status(200).json({pass: true, product: products})
+                res.status(200).json({pass: true, product: products, page, totalPage})
 
             }
         }

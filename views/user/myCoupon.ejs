@@ -66,7 +66,8 @@
         <div class="container" style="background-color: #fff;">
             <div class="container-fluid">
                 <div class="row">
-                    <div class="col-md-3" style="padding: 16px; margin-bottom: 12px;">
+                    <%- include('../partials/profileNav.ejs') -%>
+                    <!-- <div class="col-md-3" style="padding: 16px; margin-bottom: 12px;">
                         <div style="">
                             <div class="d-flex"
                                 style="flex-wrap: wrap; background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08); padding: 16px; margin-bottom: 12px;">
@@ -129,31 +130,26 @@
 
 
                         </div>
-                    </div>
-                    <div class="col-md-9">
+                    </div> -->
+                    <div class="col-md-9" style="padding: 24px;">
                         <div class="div row " style="background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08);">
                            
-                                <%if(coupon) {%>
-                                    <%for(let el of coupon) {%>
-                                        
-                                        <div class="card ms-2 mt-2 mb-3 me-2 col-4" style="">
-                                            <div class="card-body">
-                                                <h5 class="card-title">
-                                                    <%= el.name%>
-                                                </h5>
-                                                <p class="card-text">Coupons start from <%= el.activationDate%></p>
-                                                <p class="card-text mb-1">Coupons expres on <%= el.expiresDate%></p>
-                                                <p class="card-text"><%= el.couponCode%></p>
-                                                <button id="copyButton" class="btn btn-primary btn-sm" data-clipboard-text="<%= el.couponCode %>">Copy</button>
-
-                                            </div>
+                            <% if (coupon) { %>
+                                <% coupon.forEach((el, i) => { %>
+                                    <div class="card ms-1 mt-2 mb-3 me-1" style="width: 19rem;">
+                                        <div class="card-body">
+                                            <h5 class="card-title">
+                                                <%= el.name %>
+                                            </h5>
+                                            <p class="card-text">Coupons start from <%= el.activationDate %></p>
+                                            <p class="card-text mb-1">Coupons expire on <%= el.expiresDate %></p>
+                                            <p class="card-text"><%= el.couponCode %></p>
+                                            <button class="btn btn-dark btn-sm copyButton" data-clipboard-text="<%= el.couponCode %>">Copy</button>
                                         </div>
-                                   <%}%>
-
-                                        <%}else {%>
-
-                                    <%}%>
-
+                                    </div>
+                                <% }) %>
+                            <% } else { %>
+                                <% } %>
 
 
 
@@ -165,21 +161,23 @@
             </div>
 
 
-            
             <script>
                 document.addEventListener('DOMContentLoaded', function () {
-                    var clipboard = new ClipboardJS('#copyButton');
+                    var clipboardButtons = document.querySelectorAll('.copyButton');
             
-                    clipboard.on('success', function (e) {
-                         document.getElementById('copyButton').innerText = 'Copied'
-                    });
+                    clipboardButtons.forEach( (button, i) => {
+                        var clipboard = new ClipboardJS(button);
             
-                    clipboard.on('error', function (e) {
-                        console.error('Error copying to clipboard: ', e);
+                        clipboard.on('success', function (e) {
+                            button.innerText = 'Copied';
+                        });
+            
+                        clipboard.on('error', function (e) {
+                            console.error('Error copying to clipboard: ', e);
+                        });
                     });
                 });
             </script>
-            
 
            <!-- Include Clipboard.js from CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.8/clipboard.min.js"></script>

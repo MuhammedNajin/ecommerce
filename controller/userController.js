@@ -4,6 +4,7 @@ const nodemailer = require('nodemailer');
 const verifyOtp = require('../models/otpVerification');
 const Product = require('../models/product');
 const Wallect = require('../models/walletModal');
+const Address = require('../models/address');
 
 
 
@@ -164,16 +165,15 @@ const sentOtp = async (email) => {
                 pass: 'dnkc erej pptj fnif'
             }
 
-        })
-
+        });
+        
         const createdOTP = `${Math.floor(1000 + Math.random() * 9000)}`;
-
 
         const mailOption = {
             from: 'najinn675@gmail.com',
             to: email,
             subject: 'OTP Verification',
-            html: `Your otp is ${createdOTP}`
+            html: `Your otp is ${createdOTP}`,
         }
 
         await transport.sendMail(mailOption);
@@ -384,4 +384,95 @@ module.exports.loadMyAccount = async(req, res) => {
     } catch (error) {
         console.log(error)
     }
+}
+
+module.exports.loadManageAddress = async(req, res) => {
+    try {
+        const userId = req.session.user?._id;
+        if(!userId) {
+            // res.status(500).render('opps');
+        }
+        const addresses = await Address.findOne({user: userId});
+        if(!addresses) {
+            // res.status(404).render('oops');
+        }
+        res.render('manageAddress', { address: addresses.address });
+    } catch (error) {
+        console.log(error);
+        // res.status(404).render('oops');
+       
+    }
+}
+
+module.exports.editAddress = async (req, res) => {
+
+    try {
+
+        console.log(req.body);
+        const userid = req.session.user?._id;
+        const index = req.body.index;
+
+        if (!userid) {
+        //    res.status(500).render('oops');
+        console.log('user not found');
+        } 
+
+        if(!index) {
+            // res.status(500).render('oops');
+            console.log('index not found');
+         }
+
+        const fullname = req.body.fname + " " + req.body.lname;
+       
+
+        const userAddress = {
+            fullName: fullname,
+            country: req.body.country,
+            address: req.body.address,
+            state: req.body.state,
+            city: req.body.city,
+            pincode: req.body.pin,
+            phone: req.body.phone,
+            email: req.body.email
+        }
+
+        await Address.findOneAndUpdate({user: userid}, {
+            $set: {
+                [`address.${index}`] : userAddress,
+            }
+        })
+        res.redirect('/manage-address');
+    } catch (error) {
+        //  res.status(500).render('oops');
+        console.log(error)
+    }
+}
+
+
+module.exports.deleteAddress = async (req, res) => {
+   try {
+    console.log('delete request')
+    const { index } = req.params;
+    const userId = req.session.user?._id;
+    console.log(index)
+    if(!index) {
+        console.log('index not recived')
+    }
+    
+    await Address.findOneAndUpdate({ user: userId }, {
+        $unset: {
+            [`address.${index}`] : 1,
+        },
+    })
+    
+    await Address.findOneAndUpdate({ user: userId }, {
+        $pull: {
+            address: null
+          }
+    })
+    res.status(200).json({success: true});
+
+   } catch (error) {
+    console.log(error)
+   }
 }
