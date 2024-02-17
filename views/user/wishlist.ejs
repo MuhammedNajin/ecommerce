@@ -22,6 +22,101 @@
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <style>
+        #snackbar {
+          visibility: hidden;
+          min-width: 400px;
+          margin-left: -125px;
+          background-color: #000000;
+          color: #fff;
+          text-align: center;
+          border-radius: 2px;
+          padding: 40px;
+          position: fixed;
+          z-index: 1;
+          left: 50%;
+          bottom: 30px;
+          font-size: 17px;
+        }
+        
+        #snackbar.show {
+          visibility: visible;
+          -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+          animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        .show {
+            visibility: visible;
+          -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+          animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        
+        @-webkit-keyframes fadein {
+          from {bottom: 0; opacity: 0;} 
+          to {bottom: 30px; opacity: 1;}
+        }
+        
+        @keyframes fadein {
+          from {bottom: 0; opacity: 0;}
+          to {bottom: 30px; opacity: 1;}
+        }
+        
+        @-webkit-keyframes fadeout {
+          from {bottom: 30px; opacity: 1;} 
+          to {bottom: 0; opacity: 0;}
+        }
+        
+        @keyframes fadeout {
+          from {bottom: 30px; opacity: 1;}
+          to {bottom: 0; opacity: 0;}
+        }
+
+        #wishlist {
+          visibility: hidden;
+          min-width: 400px;
+          margin-left: -125px;
+          background-color: #000000;
+          color: #fff;
+          text-align: center;
+          border-radius: 2px;
+          padding: 40px;
+          position: fixed;
+          z-index: 1;
+          left: 50%;
+          bottom: 30px;
+          font-size: 17px;
+        }
+        
+        #wishlist.show {
+          visibility: visible;
+          -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+          animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        .show {
+            visibility: visible;
+          -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+          animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        }
+        
+        @-webkit-keyframes fadein {
+          from {bottom: 0; opacity: 0;} 
+          to {bottom: 30px; opacity: 1;}
+        }
+        
+        @keyframes fadein {
+          from {bottom: 0; opacity: 0;}
+          to {bottom: 30px; opacity: 1;}
+        }
+        
+        @-webkit-keyframes fadeout {
+          from {bottom: 30px; opacity: 1;} 
+          to {bottom: 0; opacity: 0;}
+        }
+        
+        @keyframes fadeout {
+          from {bottom: 30px; opacity: 1;}
+          to {bottom: 0; opacity: 0;}
+        }
+        </style>
 </head>
 
 <body>
@@ -90,61 +185,59 @@
 
         <section class="shopping-cart spad" id="ReloadArea">
 
-            <%if(products && products.length > 0) {%>
+            <%if(product && product.length > 0) {%>
             <div class="container">
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-12">
                         <div class="shopping__cart__table" id="Reload">
                             <table>
                                 <thead>
                                     <tr>
                                         <th>image</th>
-                                      
-                                        <th>Quantity</th>
-                                        <th>Total</th>
                                         <th></th>
+                                        <th>select size</th>
+                                        <th>Action</th>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
     
-                                    
-                                       <% let totalAmount = 0%>
-                                       <% let total = 0%>
-                                       <% let items = 0%>
-                                    <%products.forEach((item, i) => {%>
-    
-                                       
+                                    <%console.log(product)%>
+                                    <%product.forEach((item, i) => {%>  
                                     <tr>
                                         <td class="product__cart__item">
                                             <div class="product__cart__item__pic">
     
-                                                <img class="" style="width: 100px; height: 100px;" src="/img/productImage/sharp/<%= item.productId.variant[item.product].images[0] %>" alt="">
+                                                <img class="" style="width: 100px; height: 100px;" src="/img/productImage/sharp/<%= item.productId.variant[item.index].images[0]%>" alt="">
                                             </div>
                                             <div class="product__cart__item__text">
                                                 <h6 style="font-size: 12px;"><%= item.productId.name %></h6>
-                                                <h5 style="font-size: 15px;">₹<%= item.price%></h5>
-                                                 
-                                                <% const match = [['S', 'Small'], ['M', 'Medium'], ['L', "Large"], ['XL', 'Exel'], ['XXL', 'Double exel']]%>
-                                                <%const size = match.find((size) => (size[0] === item.size)) %>
-                                                <%console.log(size)%>
-                                                <span>Size: <%= size[1]%></span>
+                                                <h5 style="font-size: 15px;">₹<%= item.productId.variant[item.index].offerPrice%></h5>
                                             </div>
                                         </td>
                                         <td class="quantity__item">
-                                            <div class="quantity">
-                                                <div class="pro-qty-2" id="newID">
-                                                    <span  id="minus" class="fa fa-angle-left   counter"></span>
-                                                    <input type="text" id="ctn" value="<%= item.quantity%>" data-productId="<%= item.productId._id%>" data-size="<%= item.size%>" readonly data-index="<%= item.product%>">
-                                                    <span  id="plus" class="fa fa-angle-right  counter"></span>
-                                                </div>
+                                           
+                                        </td>
+                                         
+                                               
+                                                    <td class="product__details__option__size" style="position: relative;">
+                                            <%item.productId.variant[item.index].size.forEach((el) => {%>
+                                                <label class="" for="<%= el%>">
+                                                    <%= el%>
+                                                        <input type="radio" id="<%= el %>" value="<%= el%>"
+                                                            name="size">
+                                                </label>
+                                            <%})%>
+                                            <div id="size" style="position: absolute; left: 50px;">
+
                                             </div>
                                         </td>
-                                        <%total += (item.productId.variant[item.product].price * item.quantity)%>
-                                        <% items += item.quantity%>
-                                        <%totalAmount += item.totalPrice%>
-                                        <td class="cart__price">₹<%= item.totalPrice%></td>
-                                       
-                                        <td class="cart__close" onclick="remove_from_cart('<%= item.productId._id%>','<%= item.product%>', '<%= item.size%>')"><i class="fa fa-close"></i></td>
+                                        <td class="" >
+                                            <button onclick="removeFromWishlist('<%= item.productId._id%>', '<%= item.index%>')" class="btn  btn-dark">Remove</button>
+                                            <button type="button" onclick="addToCart('<%= item.productId._id%>', '<%= item.index%>')" class="btn  btn-dark">Add to cart</button>
+                                           
+                                        </td>
+                                      
                                     </tr>
     
                                     <%})%>
@@ -157,6 +250,13 @@
                                     <a class="btn btn-outline-dark" href="/shop">Continue Shopping</a>
                                 </div>
                             </div>
+                             
+                    <div id="snackbar">
+                        <span style="border-radius: 50%; background-color: #24c20f; padding: 9px 10px;"><i class="fa-solid fa-check fa-lg" style="color: white;">
+                        </i></span>
+                        <span style="margin-left: 10px;">Item successfully added to your cart!</span>
+                       
+                    </div>
                             
                         </div>
                     </div>
@@ -266,6 +366,8 @@
     <!-- Search End -->
 
     <!-- Js Plugins -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="js/user/cart.js"></script>
     <script src="/js/jquery-3.3.1.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/jquery.nice-select.min.js"></script>
@@ -276,8 +378,8 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="/js/main.js"></script>
-    <script src="js/user/cart.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+   
+   
 </body>
 
 </html>

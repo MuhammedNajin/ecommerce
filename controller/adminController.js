@@ -58,19 +58,17 @@ module.exports.loadAdmin = async (req, res) => {
                 monthlyData[monthIndex] = item.totalAmount;
             }
         });
-
         console.log(monthlyData); 
+
         const name = await adminHelpers.bestSelling('name');
-        const cetagory = await adminHelpers.bestSelling('cetagory');
-        const brand = await adminHelpers.bestSelling('brand');
+
         console.log(name);
 
-        res.render('adminDashboard', { monthlyData, userCount, montlyEarning, revenue, orderCount, product, name, cetagory, brand});
+        res.render('adminDashboard', { monthlyData, userCount, montlyEarning, revenue, orderCount, product, name,});
     } catch (error) {
         console.log(error);
     }
 }
-
 
 module.exports.filterDashboard = async (req, res) => {
     try {

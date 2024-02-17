@@ -200,17 +200,6 @@
                                     <% } %>
                             </ul>
                         </div>
-                        <!-- <div class="col-lg-4 col-md-9">
-                        <div class="tab-content">
-                            <% for (let i = 0; i < product.variant[index].images.length; i++) { %>
-                                <div class="tab-pane <%= i === 0 ? 'active' : '' %>" id="tabs-<%= i + 1 %>" role="tabpanel">
-                                    <div class="product__details__pic__item image-zoom-container" style="overflow: hidden;">
-                                        <img class="zoom-image" src="/img/productImage/<%= product.variant[index].images[i] %>" alt="">
-                                    </div>
-                                </div>
-                            <% } %>
-                        </div>
-                    </div> -->
 
                         <div class="col-lg-4 col-md-9">
                             <div class="tab-content">
@@ -248,8 +237,8 @@
                                     product.variant[index].price%>
                                     <%const percentageDiscount=discount * 100%>
                                         <%const off=Math.floor(percentageDiscount)%>
-                                            <h3 class="p-2">₹<%= product.variant[index].offerPrice%><span> ₹<%=
-                                                            product.variant[index].price%></span> <span class=""
+                                            <h3 class="p-2">₹<del><%=
+                                                product.variant[index].price%></del><span> ₹<%= product.variant[index].offerPrice%></span> <span class=""
                                                         style="color: rgb(51, 181, 51); text-decoration: none; font-size: 16px;">
                                                         <%= off %>% off
                                                     </span></h3>
@@ -289,14 +278,10 @@
                                                 </div>
                                             </div>
                                             <div class="product__details__cart__option">
-                                                <!-- <div class="quantity">
-                                                <div class="pro-qty">
-                                                    <input id="quantity" type="text" value="1" name="quantity">
-                                                </div>
-                                            </div> -->
+                                               
                                                 <div class="quantity">
                                                     <div class="pro-qty">
-                                                        <input id="quantity" type="text"
+                                                        <input id="quantity" type="text" placeholder="1"
                                                             data-stock="<%= product.variant[index].stock %>"
                                                             name="quantity">
                                                         <span style="transform: rotate(90deg ); margin-top: 6px;"
@@ -309,7 +294,7 @@
                                                     class="primary-btn">add to cart</button>
                                             </div>
                                             <div class="product__details__btns__option">
-                                                <button type="button" onclick="addTOWishlist('<%= product._id%>')"><i class="fa fa-heart"></i> add to wishlist</button>
+                                                <button type="button" class="btn" onclick="addTOWishlist('<%= product._id%>')"><i class="fa fa-heart"></i> add to wishlist</button>
                                                
                                             </div>
 

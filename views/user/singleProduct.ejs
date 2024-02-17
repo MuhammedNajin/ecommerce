@@ -406,24 +406,12 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-3"><span class="">Your Rewards</span><a class="">
-                                <div class=""><img
-                                        src="https://rukminim1.flixcart.com/www/80/80/promos/15/07/2022/b24f2613-b89e-4e0a-8140-1316ad11f394.png?q=100"
-                                        class="">
-                                    <div class="_2kcozy">
-                                        <div>8 SuperCoins Cashback</div>
-                                        <div class="-gBnNp">Use it to save on your next order</div>
-                                    </div>
+                      
+                        <div class="col-8">
+                            <div class="d-flex">
+                                <a style="margin-left: 38rem;"  href="/invoice?orderId=<%= orderId%>&index=<%=index%>" class="btn btn-primary col-3 "><span>Download invoice</span></a>
                                 </div>
-                            </a></div>
-                        <div class="col-5"><span class="">More actions</span>
-                            <div class="row ">
-                                <div class=""><img
-                                        src="//static-assets-web.flixcart.com/fk-p-linchpin-web/fk-cp-zion/img/downloadInvoice_e0f744.png"
-                                        class="">
-                                    <div><span class="">Download Invoice</span></div>
-                                </div><a href="/invoice?orderId=<%= orderId%>&index=<%=index%>" class=""><span>Download</span></a>
-                            </div>
+                            
                         </div>
                     </div>
 
@@ -438,14 +426,14 @@
                             <div class="row">
                                 <div class="col-3">
                                     <div class="row" style="position: relative;">
-                                        <div class="col-4"><a href="" target="_blank" rel="noopener noreferrer">
+                                        <div class="col-4"><a href="" rel="noopener noreferrer">
                                                 <div class="" style="height: 75px; width: 75px;">
                                                     <img class="" alt=""
                                                         src="/img/productImage/sharp/<%= product.productId.variant[product.product].images[0]%>">
                                                 </div>
                                             </a></div>
-                                        <div class="col-8"><a class="" href="" id="productId" target="_blank"
-                                                style="font-size: 12px;" data-productId="<%= product.productId._id%>">
+                                        <div class="col-8"><a class="btn" href="" id="productId" target="_blank"
+                                                style="font-size: 12px; text-decoration: none !important;" data-productId="<%= product.productId._id%>">
                                                 <%= product.productId.name%>
                                             </a>
                                             <div class="d-flex ">
@@ -461,9 +449,9 @@
                                             </div>
                                             <div class="">
                                                 <div class="d-flex">
-                                                    <span class="">₹451</span>
-                                                    <span class="">6 Offers Applied</span>
-                                                    <span class="">?</span>
+                                                    <span class="">₹ <%= product.productId.variant[product.product].offerPrice%></span>
+                                                 
+                                                  
 
                                                 </div>
                                             </div>
@@ -593,8 +581,6 @@
                                                                                 <%= formattedDate3%>
                                                                             </span>
                                                                         </div>
-
-
                                                 </div>
                                             </div>
 
@@ -659,9 +645,6 @@
                                                     </div>
 
                                                 <%}%>
-
-                                                
-
                                                 <%}%>              
                                 </div>
                             </div>

@@ -141,6 +141,7 @@ user_route.get('/single-orderDetails', order_controller.singleOrderDetials)
 
 user_route.get('/wishlist', wishlistController.loadWhislist);
 user_route.post('/wishlist', wishlistController.addTOWhishlist);
+user_route.post('/remove-wishlist', wishlistController.removeFromWishlist);
 
 user_route.get('/manage-address', user_controller.loadManageAddress);
 
@@ -162,6 +163,8 @@ user_route.get('/invoice', order_controller.loadInvoice);
 user_route.put('/edit-address', user_controller.editAddress);
 
 user_route.delete('/delete-address/:index', user_controller.deleteAddress);
+
+
 
 module.exports = user_route;
 

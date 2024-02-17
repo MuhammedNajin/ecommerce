@@ -1,13 +1,16 @@
 
 
 
-function addToDb(productid, vIndex) {
+function addToDb(productid, vIndex,) {
 
  
     // Get the selected size value
     var selectedSize = document.querySelector('input[name="size"]:checked');
-     
-    const qunt = document.getElementById('quantity').value;
+     let qunt
+    const quanti = document.getElementById('quantity')
+    if(quanti) {
+      qunt = quanti.value;
+    }
     console.log(qunt);
 
     // Check if a size is selected
@@ -50,10 +53,15 @@ function addToDb(productid, vIndex) {
 
 
 
-const addToCart = (productid,) =>  {
-
-    const index = document.getElementById('productName').getAttribute('data-index')
-    console.log(productid, index)
+const addToCart = (productid, indexs = null) =>  {
+    let index = '';
+    if(indexs == null) {
+      index = document.getElementById('productName').getAttribute('data-index')
+      console.log(productid, index)
+    } else {
+      index = indexs;
+    }
+   
   try {
     
     
@@ -82,34 +90,19 @@ function proccedTOCheckOut() {
   try {
       const session = document.getElementById('btn').getAttribute('data-session');
       console.log(session)
-      // if(!session) {
-
-      //   Swal.fire({
-      //     title: "LogIn",
-      //     text: "Please login to procced",
-      //     icon: "warning"
-      //   }).then((result) => {
-      //      if(result.isConfirmed) {
-      //         window.location = '/login';
-      //      }
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   })
-      // }
-    
         window.location = '/check-out'
-    
-      
+ 
   } catch (error) {
     console.log(error)
   }
 }
 
-function addTOWishlist(productId) {
+function addTOWishlist(productId,) {
   console.log('hello')
+  const index = document.getElementById('productName').getAttribute('data-index');
   const data = {
      productId,
+     index
   }
   $.ajax({
       type:'POST',
@@ -118,8 +111,18 @@ function addTOWishlist(productId) {
       contentType: 'application/json',
       success: (response)=> {
            if(response.already) {
-            console.log('hhhh')
-              showToWish();
+             console.log('already')
+             console.log('hwllo')
+             const parentElement = document.getElementById('snackbar');
+             const secondChild = parentElement.querySelector(':nth-child(2)');
+             secondChild.innerText = 'Item is already in the cart';
+             
+             setTimeout(() => {
+              const parentElement = document.getElementById('snackbar');
+             const secondChild = parentElement.querySelector(':nth-child(2)');
+             secondChild.innerText = 'Item successfully added to your wishlist!';
+             }, 4000)
+            showToast();
            } else if(response.wishlist) {
             console.log('hwllo')
             const parentElement = document.getElementById('snackbar');
@@ -133,7 +136,6 @@ function addTOWishlist(productId) {
   })
 }
 
-
 function showToast() {
   var x = document.getElementById("snackbar");
   x.className = "show";
@@ -144,4 +146,33 @@ function showToWish() {
   var x = document.getElementById("wishlist");
   x.className = "show";
   setTimeout(function(){ x.className = x.className.replace("show", ""); }, 3000);
+}
+
+
+function removeFromWishlist(productId, index) {
+  console.log('remove')
+   try {
+    if(!productId && !index) {
+      return;
+    }
+  
+    const data = {
+      productId,
+      index
+    }
+  
+    $.ajax({
+      type: 'post',
+      url: 'remove-wishlist',
+      data: JSON.stringify(data),
+      contentType: 'application/json',
+      success: (response) => {
+        if(response.success) {
+          window.location.reload();
+        }
+      }
+    });
+   } catch (error) {
+     console.log(error);
+   }
 }

@@ -1,23 +1,9 @@
 const Order = require('../models/order')
 
-function bestSelling(item) {
+function bestSelling() {
 
     try {
 
-        if(!item || typeof item != 'string') {
-            return new Error('argument must be string')
-         } else {
-             const type = ['brand', 'cetagory', 'name'];
-             let flag = false
-             for(let i = 0; i < 3; i++) {
-                 if(item === type[i]) {
-                     flag = true
-                 }
-             }
-     
-            if(flag === true ) new Error('incorrect field name')
-         }
-     
          return new Promise( async (resolve, reject) => {
              const bestSellingTopTen = await Order.aggregate([
                  {
@@ -39,7 +25,7 @@ function bestSelling(item) {
                   
                    {
                      $group: {
-                       _id: { category: `$products.${item}` },
+                       _id: { category: `$products._id` },
                        count: { $sum: 1 },
                        data: { $first: '$$ROOT'}
                      },

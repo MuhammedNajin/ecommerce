@@ -1,9 +1,15 @@
 const Wishlist = require('../models/wishlistModel');
 
 
-module.exports.loadWhislist = (req, res) => {
+module.exports.loadWhislist = async (req, res) => {
     try {
-        res.render('wishlist')
+        const userId = req.session.user?._id;
+        if(!userId) {
+            res.status(500).send('user not found');
+        }
+        const products = await Wishlist.find({user: userId}).populate('products.productId');
+        const product = products[0].products
+        res.render('wishlist', { product})
     } catch (error) {
         console.log(error);
     }
@@ -15,26 +21,35 @@ module.exports.addTOWhishlist = async (req, res) => {
         console.log('recived');
 
         const userId = req.session.user?._id;
+        if(!userId) {
+            res.status(500).send('user not found')
+        }
         const wishlist = await Wishlist.findOne({ user: userId })
-        const { productId } = req.body;
+        const { productId, index } = req.body;
         if (wishlist) {
-
-            const exists = wishlist.filter((el) => el.products === productId);
-
+            console.log(wishlist)
+            const exists = await Wishlist.findOne({ user: userId, 'products.productId': productId, 'products.index': index });
+            console.log(exists)
             if (!exists) {
+                const data = {
+                    productId: productId,
+                    index: index
+                }
                 await Wishlist.updateOne({ user: userId }, {
 
                     $push: {
-                        products: productId,
+                        products: data,
+
                     }
 
                 })
             } else {
-                res.json({ already: true, });
+                return res.json({ already: true, });
             }
         } else {
             const data = {
-                productId: productId
+                productId: productId,
+                index: index
             }
             const newWishlist = new Wishlist({
                 user: userId,
@@ -51,21 +66,23 @@ module.exports.addTOWhishlist = async (req, res) => {
     }
 }
 
-module.exports.removeWishlist = async (req, res) => {
+
+
+module.exports.removeFromWishlist = async (req, res) => {
     try {
+       console.log('remove wish')
         const userId = req.session.user?._id;
-        if (userId) {
-            const { productId } = req.body;
-            await Wishlist.findOneAndUpdate({ 'products.productId': productId }, {
-                $pull: {
-                    products: productId
-                }
-
-            })
-            res.json({ seccess: true });
+        const {productId, index} = req.body;
+        if(!userId) {
+            res.status(500).send('user not found');
         }
-
+        await Wishlist.updateOne({user: userId}, {
+            $pull: {
+                products: { productId: productId, index: index }
+            }
+        });
+        res.json({ success: true });
     } catch (error) {
-        console.log(error)
+        console.log(error);
     }
 }

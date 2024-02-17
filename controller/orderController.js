@@ -194,8 +194,8 @@ module.exports.placeOrder = async (req, res) => {
                     date: new Date(),
                 }
 
-                await Wallet.findOneAndUpdate({ user: userId }, { $inc: { amount: -subtotal } }, { $pull: { wallectHistory: data } });
-                await Order.findOneAndUpdate({ user: userId }, { $set: { status: "placed" } });
+                await Wallet.findOneAndUpdate({ user: userId }, { $inc: { amount: -subtotal } }, { $push: { wallectHistory: data } });
+                await Order.findOneAndUpdate({ _id: oderId }, { $set: { status: "placed" } });
 
 
                 for (let i = 0; i < cart.products.length; i++) {
