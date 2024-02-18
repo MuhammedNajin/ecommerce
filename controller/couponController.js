@@ -3,8 +3,14 @@ const Coupon = require('../models/couponModel');
 
 module.exports.loadCoupon = async (req, res) => {
     try {
-        const coupon = await Coupon.find()
-        res.render('couponManagement', { coupon })
+        let page = '';
+
+        if(req.query.page) {
+            page = req.query.page
+        }
+        const coupon = await Coupon.find().skip(page * 4).limit(4);
+        const couponLenght = await Coupon.find()
+        res.render('couponManagement', { coupon, couponLength: couponLenght.length })
     } catch (error) {
         console.log(error);
     }

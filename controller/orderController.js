@@ -209,9 +209,7 @@ module.exports.placeOrder = async (req, res) => {
                                 [`variant.${index}.stock`]: - productQuantity
                             }
                         })
-
                     }
-
                 }
                 await Cart.deleteOne({ user: userId });
                 res.json({ wallet: true })
@@ -229,7 +227,6 @@ module.exports.placeOrder = async (req, res) => {
                 receipt: "" + order_details._id,
 
             }
-
             instance.orders.create(options, function (err, order) {
                 if (err) {
                     console.log(err);
@@ -238,10 +235,6 @@ module.exports.placeOrder = async (req, res) => {
                 res.json({ order });
             });
         }
-
-
-
-
     } catch (error) {
         console.log(error)
     }
