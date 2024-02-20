@@ -8,10 +8,12 @@ const Wallet = require('../models/walletModal');
 const Coupon = require('../models/couponModel');
 const Razorpay = require('razorpay');
 const crypto = require('crypto');
+require('dotenv').config()
 
+const key_id = process.env.KEY_ID;
+const key_secret = process.env.KEY_SECRET;
 
-
-var instance = new Razorpay({ key_id: 'rzp_test_at0lMzCavdHpBO', key_secret: 'ggKTkKRDipDAjKdXuYDXs6XH' });
+const instance = new Razorpay({ key_id: key_id, key_secret: key_secret });
 
 module.exports.addAddress = async (req, res) => {
     try {
@@ -250,11 +252,13 @@ module.exports.loadOrderSucces = (req, res) => {
 
 module.exports.loadMyOrder = async (req, res) => {
     try {
+        const page = req.query.page;
         const userid = req.session.user?._id;
         console.log(typeof userid, userid);
-        const order = await Order.find({ user: userid }).populate('user').sort({"products.date": -1});
+        const orderLength = await Order.find({ user: userid });
+        const order = await Order.find({ user: userid }).populate('user').sort({"products.date": -1}).skip(page * 4).limit(4)
         console.log(order)
-        res.render('myOrder', { order: order });
+        res.render('myOrder', { order: order, page: parseInt(page), orderLength: orderLength.length });
     } catch (error) {
         console.log(error);
     }

@@ -1,11 +1,13 @@
 const Catagery = require('../models/cetagory')
 
-module.exports.loadCategory = (req, res) => {
+module.exports.loadCategory = async (req, res) => {
     try {
-        return Catagery.find()
+        const page = req.query.page;
+        const CetageryLength = await Catagery.find();
+        return Catagery.find().skip(page * 4).limit(4)
         .then((data) => {
             if(data) {
-            res.render('Catagery', {cetagorys: data});
+            res.render('Catagery', {cetagorys: data, page: parseInt(page), cetagoryLength: CetageryLength.length });
             } 
         })
         

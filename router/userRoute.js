@@ -1,26 +1,26 @@
 const express = require('express');
 const session = require('express-session');
-const user_route = express();
-const user_controller = require('../controller/userController');
-const product_controller = require('../controller/product');
-user_route.set('view engine', 'ejs');
-user_route.set('views', './views/user');
-const shop_controller = require('../controller/shop');
+const userRoute = express();
+const userController = require('../controller/userController');
+const productController = require('../controller/product');
+userRoute.set('view engine', 'ejs');
+userRoute.set('views', './views/user');
+const shopController = require('../controller/shop');
 const User = require('../models/userModel');
-const cart_controller = require('../controller/cartCotroller');
-const order_controller = require('../controller/orderController')
+const cartController = require('../controller/cartCotroller');
+const orderController = require('../controller/orderController')
 const review_Controller = require('../controller/reviewContoller');
-const user_middleware = require('../middleware/userAuth');
-const coupon_controller = require('../controller/couponController');
+const userMiddleware = require('../middleware/userAuth');
+const couponController = require('../controller/couponController');
 const { loadData } = require('../middleware/userMiddilware');
 const wishlistController = require('../controller/wishlistController');
 
 const nocache = require('nocache');
 
 
-user_route.use(nocache());
+userRoute.use(nocache());
 
-user_route.use((req, res, next) => {
+userRoute.use((req, res, next) => {
     res.header('Cache-Control', 'no-store, private, must-revalidate');
     next();
 });
@@ -28,18 +28,19 @@ user_route.use((req, res, next) => {
 
 
 const path = require('node:path');
-user_route.use(express.static(path.join(__dirname, 'image/product')));
+userRoute.use(express.static(path.join(__dirname, 'image/product')));
 
-user_route.use(session({
+userRoute.use(session({
     secret: "sessionscret",
     resave: false,
     saveUninitialized: true
 }));
 
-user_route.use(express.json());
-user_route.use(express.urlencoded({extended: true}));
+userRoute.use(express.json());
+userRoute.use(express.urlencoded({extended: true}));
 
-user_route.use(async (req, res , next) => {
+
+userRoute.use(async (req, res , next) => {
     const id = req.session.user?._id;
     console.log(id, 'middleware')
     
@@ -47,130 +48,124 @@ user_route.use(async (req, res , next) => {
 
         if(user) {
             if(user.isBlocked) {
-                
-
                 fetch('http://localhost:3000/logout', {
                     method: 'POST'
                 })
                 .catch((err) => {
                     console.log(err)
                 })
-                
- 
              } 
- 
-
         }    
             next();
 })
 
-user_route.use((req, res, next) => {
+userRoute.use((req, res, next) => {
     res.locals.user = req.session.user || null; 
     res.locals.logedIn = req.session.user ? true : false;
     next();
 }); 
 
-user_route.use(loadData);
+userRoute.use(loadData);
 
 // load home
-user_route.get('/', user_controller.loadHome);
+userRoute.get('/', userController.loadHome);
 
 // load login
-user_route.get('/login', user_middleware.isLogined, user_controller.loadLogin);
+userRoute.get('/login', userMiddleware.isLogined, userController.loadLogin);
 
-user_route.post('/login', user_controller.userLogin);
+userRoute.post('/login', userController.userLogin);
 
 // load register
-user_route.get('/signUp', user_middleware.isLogined, user_controller.loadRegister);
+userRoute.get('/signUp', userMiddleware.isLogined, userController.loadRegister);
 
 // load otp
-user_route.get('/otp', user_middleware.isLogined, user_controller.loadotp);
+userRoute.get('/otp', userMiddleware.isLogined, userController.loadotp);
 
 // otp post || verify
 
-user_route.post('/otp', user_controller.verifyOTP);
+userRoute.post('/otp', userController.verifyOTP);
 
 // register form sumbit
-user_route.post('/signUp', user_controller.insertUser);
+userRoute.post('/signUp', userController.insertUser);
 
 // login with otp
-user_route.post('/otpLogin', user_controller.otpLogin);
+userRoute.post('/otpLogin', userController.otpLogin);
 // load login with otp page
 
-user_route.get('/otpLogin', user_middleware.isLogined, user_controller.OTPlogin)
+userRoute.get('/otpLogin', userMiddleware.isLogined, userController.OTPlogin)
 
 // Logout the user
-user_route.post('/logout', user_controller.userLogout);
+userRoute.post('/logout', userController.userLogout);
 
-user_route.post('/resend', user_controller.resend);
+userRoute.post('/resend', userController.resend);
 
-user_route.get('/productDetails' , product_controller.productdetiles );
-
-
-user_route.get('/shop', shop_controller.loadShop);
+userRoute.get('/productDetails' , productController.productdetiles );
 
 
-user_route.get('/cart', user_middleware.userAuth, cart_controller.loadCart);
-
-user_route.post('/add-cart', cart_controller.addToCart);
-
-user_route.post('/removeFormCart', cart_controller.removeFromCart);
-
-user_route.post('/counter', cart_controller.changeQuantity);
-
-user_route.post('/checkSession', user_controller.checkSession);
-
-user_route.get('/check-out', user_middleware.userAuth, cart_controller.proceedToCheckout);
-
-user_route.get('/account', user_middleware.userAuth, user_controller.loadMyAccount);
-user_route.get('/my-order', user_middleware.userAuth, order_controller.loadMyOrder);
-
-user_route.get('/single-product', user_middleware.userAuth, order_controller.loadSingleProduct)
+userRoute.get('/shop', shopController.loadShop);
 
 
-user_route.post('/add-Address', order_controller.addAddress );
+userRoute.get('/cart', userMiddleware.userAuth, cartController.loadCart);
 
-user_route.post('/place-order', order_controller.placeOrder );
-user_route.get('/order-success', order_controller.loadOrderSucces );
+userRoute.post('/add-cart', cartController.addToCart);
+
+userRoute.post('/removeFormCart', cartController.removeFromCart);
+
+userRoute.post('/counter', cartController.changeQuantity);
+
+userRoute.post('/checkSession', userController.checkSession);
+
+userRoute.get('/check-out', userMiddleware.userAuth, cartController.proceedToCheckout);
+
+userRoute.get('/account', userMiddleware.userAuth, userController.loadMyAccount);
+userRoute.get('/my-order', userMiddleware.userAuth, orderController.loadMyOrder);
+
+userRoute.get('/single-product', userMiddleware.userAuth, orderController.loadSingleProduct)
 
 
-user_route.post('/search', shop_controller.filter);
-user_route.post('/order-cancel', order_controller.orderCancelation);
+userRoute.post('/add-Address', orderController.addAddress );
 
-user_route.get('/single-orderDetails', order_controller.singleOrderDetials)
+userRoute.post('/place-order', orderController.placeOrder );
+userRoute.get('/order-success', orderController.loadOrderSucces );
 
-user_route.get('/wishlist', wishlistController.loadWhislist);
-user_route.post('/wishlist', wishlistController.addTOWhishlist);
-user_route.post('/remove-wishlist', wishlistController.removeFromWishlist);
 
-user_route.get('/manage-address', user_controller.loadManageAddress);
+userRoute.post('/search', shopController.filter);
+userRoute.post('/order-cancel', orderController.orderCancelation);
+
+userRoute.get('/single-orderDetails', orderController.singleOrderDetials)
+
+userRoute.get('/wishlist', wishlistController.loadWhislist);
+userRoute.post('/wishlist', wishlistController.addTOWhishlist);
+userRoute.post('/remove-wishlist', wishlistController.removeFromWishlist);
+
+userRoute.get('/manage-address', userController.loadManageAddress);
 
 
 // ==================================================================== //
 
-user_route.post('/addReview', review_Controller.addReview)
+userRoute.post('/addReview', review_Controller.addReview)
 
-user_route.post('/verifyPayment', order_controller.verifyPayment);
+userRoute.post('/verifyPayment', orderController.verifyPayment);
 
-user_route.post('/product-return', order_controller.productReturn);
+userRoute.post('/product-return', orderController.productReturn);
 
-user_route.post('/check-coupon', coupon_controller.checkCoupon);
+userRoute.post('/check-coupon', couponController.checkCoupon);
 
-user_route.get('/my-coupon', coupon_controller.loadMyCoupon);
+userRoute.get('/my-coupon', couponController.loadMyCoupon);
 
-user_route.get('/invoice', order_controller.loadInvoice);
+userRoute.get('/invoice', orderController.loadInvoice);
 
-user_route.put('/edit-address', user_controller.editAddress);
+userRoute.put('/edit-address', userController.editAddress);
 
-user_route.delete('/delete-address/:index', user_controller.deleteAddress);
+userRoute.delete('/delete-address/:index', userController.deleteAddress);
 
-user_route.put('/change-password', user_controller.changePassword);
+userRoute.put('/change-password', userController.changePassword);
 
-user_route.post('/change-details', user_controller.personalDetails);
+userRoute.post('/change-details', userController.personalDetails);
 
 
 
-module.exports = user_route;
+module.exports = userRoute;
 
 
 

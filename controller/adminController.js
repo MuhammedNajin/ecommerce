@@ -164,10 +164,11 @@ module.exports.login = async (req, res) => {
 
 module.exports.loadUser = async (req, res) => {
     try {
-
-        return User.find()
+        const page = req.query.page;
+        const userCount = await User.find();
+        return User.find().skip(page * 4).limit(4)
             .then((user) => {
-                res.render('userManagement', { users: user });
+                res.render('userManagement', { users: user, userLength: userCount.length, page: parseInt(page) });
             })
             .catch((err) => {
                 console.log(err)
@@ -212,11 +213,13 @@ module.exports.blockUser = (req, res) => {
 
 
 // load product management page 
-module.exports.loadPoduct = (req, res) => {
+module.exports.loadPoduct = async (req, res) => {
     try {
-        return product.find().populate('cetagory')
+        const page = req.query.page;
+        const productLength = await product.find();
+        return product.find().populate('cetagory').skip(page * 4).limit(4)
             .then((data) => {
-                res.render('adminProducts', { products: data });
+                res.render('adminProducts', { products: data, productLength: productLength.length, page: parseInt(page) });
             })
 
     } catch (error) {
@@ -255,14 +258,18 @@ module.exports.logout = (req, res) => {
 
 module.exports.loadOrder = async (req, res) => {
     try {
-
+        const page = req.query.page;
+        const orderLength = await Order.find();
         const order = await Order
             .find()
             .populate('user')
             .populate('products.productId')
-            .sort({ date: -1 });
+            .sort({ date: -1 })
+            .skip(page * 8)
+            .limit(8);
+
         console.log(order);
-        res.render('order-details', { order: order }).sort({date: -1});
+        res.render('order-details', { order: order, page: parseInt(page), orderLength: orderLength.length });
     } catch (error) {
         console.log(error)
     }

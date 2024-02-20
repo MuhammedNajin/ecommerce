@@ -17,19 +17,29 @@ const flash = require('express-flash');
 app.use(flash());
 
 app.set('view engine', 'ejs');
+app.set('views', './views/user');
 
 
 const path = require('node:path');
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public/assets')));
 
-// user route 
-const user_route = require('./router/userRoute');
-app.use('/', user_route);
 
+
+// user route 
 //admin route
-const admin_route = require('./router/adminRoute');
-app.use('/admin', admin_route);
+
+const userRoute = require('./router/userRoute');
+app.use('/', userRoute);
+
+const adminRoute = require('./router/adminRoute');
+app.use('/admin', adminRoute);
+
+
+
+app.use('*', (req, res) => {
+    res.render('404');
+})
 
 mongoose.connect('mongodb://127.0.0.1:27017/E-commers')
 .then(() => {

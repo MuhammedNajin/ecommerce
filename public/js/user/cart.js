@@ -58,13 +58,8 @@ function addToDb(productid, vIndex,) {
         size.textContent = ''; 
       }, 6000)
       return;
-    }
-  
-
-  
+    }  
 }
-
-
 
 const addToCart = (productid, indexs = null) =>  {
     let index = '';
@@ -74,10 +69,7 @@ const addToCart = (productid, indexs = null) =>  {
     } else {
       index = indexs;
     }
-   
   try {
-    
-    
     $.ajax({
         type: "POST",
         url: '/checkSession',
@@ -95,8 +87,6 @@ const addToCart = (productid, indexs = null) =>  {
   } catch (error) {
     console.log(error);
   }
-   
-
 }
 
 function proccedTOCheckOut() {
@@ -109,7 +99,6 @@ function proccedTOCheckOut() {
     console.log(error)
   }
 }
-
 function addTOWishlist(productId,) {
   console.log('hello')
   const index = document.getElementById('productName').getAttribute('data-index');
@@ -145,7 +134,6 @@ function addTOWishlist(productId,) {
 
            }
       }
-
   })
 }
 
@@ -168,12 +156,10 @@ function removeFromWishlist(productId, index) {
     if(!productId && !index) {
       return;
     }
-  
     const data = {
       productId,
       index
-    }
-  
+    } 
     $.ajax({
       type: 'post',
       url: 'remove-wishlist',

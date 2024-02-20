@@ -1,16 +1,16 @@
 const express = require('express');
-const admin_route = express();
-const admin_controller = require('../controller/adminController');
-const product_controller = require('../controller/product');
-const cetagory_contorller = require('../controller/cetagoryController');
-const coupon_controller = require('../controller/couponController');
+const adminRoute = express();
+const adminController = require('../controller/adminController');
+const productController = require('../controller/product');
+const cetagoryContorller = require('../controller/cetagoryController');
+const couponController = require('../controller/couponController');
 const helper = require('../middleware/helper');
 const nocache = require('nocache');
 
 
-admin_route.use(nocache());
+adminRoute.use(nocache());
 
-admin_route.use((req, res, next) => {
+adminRoute.use((req, res, next) => {
     res.header('Cache-Control', 'no-store, private, must-revalidate');
     next();
 });
@@ -20,113 +20,114 @@ const adminAuth = require('../middleware/adminAuth');
 const multer = require('../middleware/multer');
 
 
-admin_route.use(express.json());
-admin_route.use(express.urlencoded({extended: true}));
+adminRoute.use(express.json());
+adminRoute.use(express.urlencoded({extended: true}));
 
 
-admin_route.set('veiw engine', 'ejs');
-admin_route.set('views', './views/admin')
+adminRoute.set('veiw engine', 'ejs');
+adminRoute.set('views', './views/admin')
 // load home page
-admin_route.get('/', adminAuth.islogin, admin_controller.loadAdmin);
+adminRoute.get('/', adminAuth.islogin, adminController.loadAdmin);
 
 // load user management
 
-admin_route.get('/user',adminAuth.islogin, admin_controller.loadUser);
+adminRoute.get('/user',adminAuth.islogin, adminController.loadUser);
 
 // block user
 
-admin_route.post('/blockUser', admin_controller.blockUser);
+adminRoute.post('/blockUser', adminController.blockUser);
 
 
 // load product 
 
-admin_route.get('/product',adminAuth.islogin, admin_controller.loadPoduct);
+adminRoute.get('/product',adminAuth.islogin, adminController.loadPoduct);
 
 // load add Product 
 
-admin_route.get('/addProduct',adminAuth.islogin, admin_controller.loadAddProduct);
+adminRoute.get('/addProduct',adminAuth.islogin, adminController.loadAddProduct);
 
 // load cetagory 
 
-admin_route.get('/cetagory',adminAuth.islogin, cetagory_contorller.loadCategory);
+adminRoute.get('/cetagory',adminAuth.islogin, cetagoryContorller.loadCategory);
 
 // load add cetagory
 
-admin_route.post('/addCetagory', cetagory_contorller.AddCetogory);
+adminRoute.post('/addCetagory', cetagoryContorller.AddCetogory);
 
 // cetagory list / Unlist
 
-admin_route.post('/listCetagory', cetagory_contorller.listCetagory);
+adminRoute.post('/listCetagory', cetagoryContorller.listCetagory);
 
 // edit cetagory 
 
-admin_route.post('/editCetagory', cetagory_contorller.editCetagory);
+adminRoute.post('/editCetagory', cetagoryContorller.editCetagory);
 
 // add-product 
 
-admin_route.post('/add-product',multer.array('images'), product_controller.addproduct);
+adminRoute.post('/add-product',multer.array('images'), productController.addproduct);
 
 // list / unlist product 
-admin_route.post('/listProduct', product_controller.listProduct);
+adminRoute.post('/listProduct', productController.listProduct);
 
 
 // load variant
-admin_route.get('/loadVariant/:id',adminAuth.islogin, product_controller.loadVariant);
+adminRoute.get('/loadVariant/:id',adminAuth.islogin, productController.loadVariant);
 
 // add variant 
 
-admin_route.post('/addVariant', multer.array('images'), product_controller.addVariant);
+adminRoute.post('/addVariant', multer.array('images'), productController.addVariant);
 
 // load edit variant
 
-admin_route.get('/edit-variant',adminAuth.islogin, product_controller.LoadeditVariant);
+adminRoute.get('/edit-variant',adminAuth.islogin, productController.LoadeditVariant);
 
 // edit variant
 
 
 
-admin_route.post('/editVariant', multer.array('images'), product_controller.editVariant);
+adminRoute.post('/editVariant', multer.array('images'), productController.editVariant);
 
 // load admin login
-admin_route.get('/login', adminAuth.logged, admin_controller.loadLogin);
+adminRoute.get('/login', adminAuth.logged, adminController.loadLogin);
 
 
 // login
-admin_route.post('/login',  admin_controller.login);
+adminRoute.post('/login',  adminController.login);
 
 
-admin_route.post('/logout', admin_controller.logout);
+adminRoute.post('/logout', adminController.logout);
 
 
 // order 
 
-admin_route.get('/order', adminAuth.islogin, admin_controller.loadOrder)
-admin_route.get('/single-orderDetails', adminAuth.islogin, admin_controller.loadsingleOrder );
+adminRoute.get('/order', adminAuth.islogin, adminController.loadOrder)
+adminRoute.get('/single-orderDetails', adminAuth.islogin, adminController.loadsingleOrder );
 
-admin_route.post('/change-orderStatus', admin_controller.changeOrderStatus)
+adminRoute.post('/change-orderStatus', adminController.changeOrderStatus)
 
-admin_route.get('/returns', admin_controller.loadReturns);
-admin_route.post('/returns', admin_controller.returns)
+adminRoute.get('/returns', adminAuth.islogin, adminController.loadReturns);
+
+adminRoute.post('/returns', adminController.returns)
 
 
 // coupon management 
 
-admin_route.get('/load-coupon', coupon_controller.loadCoupon);
+adminRoute.get('/load-coupon', adminAuth.islogin, couponController.loadCoupon);
 
-admin_route.post('/create-coupon', coupon_controller.createCoupon);
+adminRoute.post('/create-coupon', couponController.createCoupon);
 
-admin_route.put('/edit-coupon', coupon_controller.createCoupon);
+adminRoute.put('/edit-coupon', couponController.createCoupon);
 
-admin_route.post('/order-filter', admin_controller.filterDashboard)
-
-
-admin_route.get('/sales-report', admin_controller.loadSalesReport);
+adminRoute.post('/order-filter', adminController.filterDashboard)
 
 
+adminRoute.get('/sales-report', adminAuth.islogin, adminController.loadSalesReport);
 
 
 
 
 
 
-module.exports = admin_route;
+
+
+module.exports = adminRoute;

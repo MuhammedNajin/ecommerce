@@ -228,11 +228,36 @@
                         
 
                     </div>
+                    <div class="pagination-area mt-15 mb-50">
+                        <nav aria-label="Page navigation example">
+                            <ul class="pagination">
+                                <%if(page != 0) {%>
+                                    <a class="page-link btn btn-dark" href="?page=<%= page - 1%>"><i class="material-icons md-chevron_left">Previous</i></a>
+                                <%}%>
+                                <% for (let i = 0; i < orderLength; i++) { %>
+                                  <% if (i === 0 || i === orderLength - 1 || (i >= page - 2 && i <= page + 2)) { %>
+                                    <li class="btn btn-outline-dark <%= page == i ? 'active' : '' %>">
+                                      <a class="" href="?page=<%= i %>"><%= i + 1 %></a>
+                                    </li>
+                                  <% } else if (i === page - 3 || i === page + 3) { %>
+                                    <li class="page-item disabled">
+                                      <span class="page-link">...</span>
+                                    </li>
+                                  <% } %>
+                                <% } %>
+                                <%if(page != orderLength) {%>
+                                    <a class="p btn btn-dark" href="?page=<%= page + 1%>"><i class="material-icons md-chevron_right">Next</i></a>
+                                <%}%>
+                              </ul>
+                              
+                        </nav>
+                    </div>
 
                 </div>
 
                 <!-- </div> -->
             </div>
+           
         </div>
         <script src="js/jquery-3.3.1.min.js"></script>
         <!-- <script src="js/bootstrap.min.js"></script> -->

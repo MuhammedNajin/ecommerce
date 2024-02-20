@@ -167,18 +167,28 @@
                   
                 </div>
                 <!-- card end// -->
-                <div class="pagination-area mt-30 mb-50">
+                <div class="pagination-area mt-15 mb-50">
                     <nav aria-label="Page navigation example">
-                        <ul class="pagination justify-content-start">
-                            <li class="page-item active"><a class="page-link" href="#">01</a></li>
-                            <li class="page-item"><a class="page-link" href="#">02</a></li>
-                            <li class="page-item"><a class="page-link" href="#">03</a></li>
-                            <li class="page-item"><a class="page-link dot" href="#">...</a></li>
-                            <li class="page-item"><a class="page-link" href="#">16</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#"><i class="material-icons md-chevron_right"></i></a>
-                            </li>
-                        </ul>
+                        <ul class="pagination">
+                            <%if(page != 0) {%>
+                                <a class="page-link" href="?page=<%= page - 1%>"><i class="material-icons md-chevron_left"></i></a>
+                            <%}%>
+                            <% for (let i = 0; i < productLength; i++) { %>
+                              <% if (i === 0 || i === productLength - 1 || (i >= page - 2 && i <= page + 2)) { %>
+                                <li class="page-item <%= page == i ? 'active' : '' %>">
+                                  <a class="page-link" href="?page=<%= i %>"><%= i + 1 %></a>
+                                </li>
+                              <% } else if (i === page - 3 || i === page + 3) { %>
+                                <li class="page-item disabled">
+                                  <span class="page-link">...</span>
+                                </li>
+                              <% } %>
+                            <% } %>
+                            <%if(page != productLength ) {%>
+                                <a class="page-link" href="?page=<%= page + 1%>"><i class="material-icons md-chevron_right"></i></a>
+                            <%}%>
+                          </ul>
+                          
                     </nav>
                 </div>
             </section>
