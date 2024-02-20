@@ -15,7 +15,6 @@ function validate(){
     let email = document.getElementById('email')
     console
 
-    const emailRegex = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/;
     
     
     if( !/^\w+$/.test(username.value)){

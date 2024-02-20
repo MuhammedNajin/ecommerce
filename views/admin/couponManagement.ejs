@@ -389,3 +389,186 @@
     }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+
+<!-- Add this script after your form -->
+<!-- <script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.querySelector("#exampleModal form");
+
+        form.addEventListener("submit", function (event) {
+            // Prevent the form from submitting by default
+            event.preventDefault();
+
+            // Remove previous error messages
+            clearErrorMessages();
+
+            // Perform validation
+            const name = form.elements.name.value.trim();
+            const adate = form.elements.adate.value.trim();
+            const edate = form.elements.edate.value.trim();
+            const limit = form.elements.limit.value.trim();
+            const damount = form.elements.damount.value.trim();
+
+            if (name === "") {
+                displayErrorMessage("name", "Please enter a coupon name.");
+                return;
+            }
+
+            if (adate === "") {
+                displayErrorMessage("adate", "Please enter an activation date.");
+                return;
+            }
+
+            if (edate === "") {
+                displayErrorMessage("edate", "Please enter an expiration date.");
+                return;
+            }
+
+            if (limit === "") {
+                displayErrorMessage("limit", "Please enter a limit of use.");
+                return;
+            }
+
+            if (damount === "") {
+                displayErrorMessage("damount", "Please enter a discount amount.");
+                return;
+            }
+
+            // Validate date format (dd-mm-yyyy)
+            const dateRegex = /^\d{2}-\d{2}-\d{4}$/;
+            if (!dateRegex.test(adate) ) {
+                displayErrorMessage("adate", "Invalid date format. Please use dd-mm-yyyy.");
+                return;
+            } 
+            if( !dateRegex.test(edate)) {
+                displayErrorMessage("adate", "Invalid date format. Please use dd-mm-yyyy.");
+                return
+            }
+
+            // Validate discount amount is a number
+            if (isNaN(parseFloat(damount))) {
+                displayErrorMessage("damount", "Discount amount must be a valid number.");
+                return;
+            }
+
+            // If all validations pass, you can submit the form
+            form.submit();
+        });
+
+        function displayErrorMessage(fieldName, message) {
+            const field = form.elements[fieldName];
+            const errorDiv = document.createElement("div");
+            errorDiv.className = "error-message";
+            errorDiv.style.color = "red"; // Set color to red
+            errorDiv.textContent = message;
+            field.parentNode.insertBefore(errorDiv, field);
+
+            // Remove error message after 3000 milliseconds (3 seconds)
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 3000);
+        }
+
+        function clearErrorMessages() {
+            const errorMessages = form.querySelectorAll(".error-message");
+            errorMessages.forEach((errorMessage) => {
+                errorMessage.remove();
+            });
+        }
+    });
+</script> -->
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        // Attach validation to the first form
+        attachFormValidation("#exampleModal form");
+
+        // Attach validation to the second form
+        attachFormValidation("#exampleModal2 form");
+
+        function attachFormValidation(formSelector) {
+            const form = document.querySelector(formSelector);
+
+            form.addEventListener("submit", function (event) {
+                // Prevent the form from submitting by default
+                event.preventDefault();
+
+                // Remove previous error messages
+                clearErrorMessages(form);
+
+                // Perform validation
+                const name = form.elements.name.value.trim();
+                const adate = form.elements.adate.value.trim();
+                const edate = form.elements.edate.value.trim();
+                const limit = form.elements.limit.value.trim();
+                const damount = form.elements.damount.value.trim();
+
+                if (name === "") {
+                    displayErrorMessage(form, "name", "Please enter a coupon name.");
+                    return;
+                }
+
+                if (adate === "") {
+                    displayErrorMessage(form, "adate", "Please enter an activation date.");
+                    return;
+                }
+
+                if (edate === "") {
+                    displayErrorMessage(form, "edate", "Please enter an expiration date.");
+                    return;
+                }
+
+                if (limit === "") {
+                    displayErrorMessage(form, "limit", "Please enter a limit of use.");
+                    return;
+                }
+
+                if (damount === "") {
+                    displayErrorMessage(form, "damount", "Please enter a discount amount.");
+                    return;
+                }
+
+                // Validate date format (dd-mm-yyyy)
+                const dateRegex = /^\d{2}-\d{2}-\d{4}$/;
+                if (!dateRegex.test(adate) || !dateRegex.test(edate)) {
+                    alert("Invalid date format. Please use dd-mm-yyyy.");
+                    return;
+                }
+
+                // Validate discount amount is a number
+                if (isNaN(parseFloat(damount))) {
+                    displayErrorMessage(form, "damount", "Discount amount must be a valid number.");
+                    return;
+                }
+
+                // If all validations pass, you can submit the form
+                form.submit();
+            });
+        }
+
+        function displayErrorMessage(form, fieldName, message) {
+            const field = form.elements[fieldName];
+            const errorDiv = document.createElement("div");
+            errorDiv.className = "error-message";
+            errorDiv.style.color = "red"; // Set color to red
+            errorDiv.textContent = message;
+            field.parentNode.insertBefore(errorDiv, field);
+
+            // Remove error message after 3000 milliseconds (3 seconds)
+            setTimeout(() => {
+                errorDiv.remove();
+            }, 3000);
+        }
+
+        function clearErrorMessages(form) {
+            const errorMessages = form.querySelectorAll(".error-message");
+            errorMessages.forEach((errorMessage) => {
+                errorMessage.remove();
+            });
+        }
+    });
+</script>
+
+
+

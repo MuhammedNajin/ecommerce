@@ -4,7 +4,7 @@ const Catagery = require('../models/cetagory');
 const path = require('node:path');
 const sharp = require('sharp');
 const Review = require('../models/reviewModal');
-const { findOne, findById } = require('../models/order');
+
 
 
 
@@ -280,8 +280,15 @@ module.exports.productdetiles = async (req, res) => {
                 console.log('ajax')
                 res.json({product: product, index: index});
             } else {
-                const review = await Review.find({productId: id}).populate('user').populate('productId');
-                res.render('productDetails', {product: product, index: index, review: review});
+                let totalRating = 0;
+                const review = await Review.find({ productId: id });
+                if(review) {
+                    const sumOfRating = review.reduce((acc, crr) => acc += crr.rating, 0)
+                    totalRating = sumOfRating / review.length;
+                    console.log('helloo', totalRating, sumOfRating, review.length)
+                }
+                 
+                res.render('productDetails', {product: product, index: index, review: review, image: product.variant[index].images[0], totalRating });
             }
 
     } catch (error) {

@@ -9,7 +9,7 @@ module.exports.loadCart = async (req, res) => {
     try {
         const userId = req.session.user?._id
         const product = await Cart.find({ user: userId }, { products: 1 }).populate('products.productId');
-               const products = product[0]?.products;
+        const products = product[0]?.products;
         console.log(products, 'cart')
         res.render('cart', { products: products });
     } catch (error) {
@@ -22,7 +22,9 @@ module.exports.addToCart = async (req, res) => {
 
         const { productId, index, size, quantity } = req.body;
         const userId = req.session.user?._id;
-
+        if (!userId) {
+            return res.json({user: true});
+        }
 
         console.log(productId, index, userId, size, quantity);
 
@@ -31,29 +33,15 @@ module.exports.addToCart = async (req, res) => {
         const price = product.variant[index].price;
         const offerPrice = product.variant[index].offerPrice;
         console.log(offerPrice, price)
-
-
         const qnt = quantity ? quantity : 1;
 
         if (userId) {
-
-
             const cart = await Cart.findOne({ user: userId });
-
             if (cart) {
-
                 const exsisting = cart.products.filter((product, i) => product.productId.toString() === productId);
                 console.log(exsisting, ' product')
                 const exits = exsisting.find((pro) => pro.product === index && pro.size === size);
-
-
-                console.log();
-                console.log(exits, 'index');
-                console.log('real index', index)
-                console.log(typeof index)
-
                 if (!exits) {
-
                     console.log('addd')
                     await Cart.findOneAndUpdate({ user: userId }, {
                         $push: {
@@ -64,17 +52,13 @@ module.exports.addToCart = async (req, res) => {
                                 quantity: qnt,
                                 totalPrice: offerPrice * qnt,
                                 size: size
-
                             }
                         }
                     })
 
                 } else {
-
-                    console.log('already in the cart');
-                    req.flash('exists', 'Product is already in the cart');
-
-
+                    console.log('hello')
+                    return res.json({ already: true })
                 }
             } else {
                 console.log('created')
@@ -122,14 +106,14 @@ module.exports.removeFromCart = async (req, res) => {
 
         const userId = req.session.user?._id;
         const { productId, index, size } = req.body;
-         console.log(req.body)
+        console.log(req.body)
 
         if (userId) {
-        const result = await Cart.updateOne(
-            { 'user': userId, "products.productId": productId, "products.product": index, "products.size": size },
-            { $pull: { 'products': { 'productId': productId, 'product': index, 'size': size } } },
-            { arrayFilters: [{ 'elem.productId': productId, 'elem.product': index, 'elem.size': size }] }
-        );
+            const result = await Cart.updateOne(
+                { 'user': userId, "products.productId": productId, "products.product": index, "products.size": size },
+                { $pull: { 'products': { 'productId': productId, 'product': index, 'size': size } } },
+                { arrayFilters: [{ 'elem.productId': productId, 'elem.product': index, 'elem.size': size }] }
+            );
             res.json({ removed: true });
         }
 
@@ -147,7 +131,7 @@ module.exports.proceedToCheckout = async (req, res) => {
     try {
         const userid = req.session.user?._id;
         const address = await Address.findOne({ user: userid });
-          console.log(address);
+        console.log(address);
         const cart = await Cart.findOne({ user: userid }).populate('products.productId');
         console.log(cart)
         res.render('checkOut', { address: address, products: cart.products });
@@ -175,9 +159,9 @@ module.exports.changeQuantity = async (req, res) => {
         console.log(quantity);
 
         console.log(variant, 'ghhghghghhghghghhghgh')
-        if (status === 'plus' ) {
-                 console.log('plus')
-            if(stock > quantity) {
+        if (status === 'plus') {
+            console.log('plus')
+            if (stock > quantity) {
                 const he = await Cart.updateOne(
                     { user: userId, "products.productId": productId, "products.product": index, "products.size": size },
                     {
@@ -193,7 +177,7 @@ module.exports.changeQuantity = async (req, res) => {
                 );
                 const productQuantity = await Cart.findOne({ user: userId, "products.productId": productId }, { "products.quantity": 1 });
                 console.log(productQuantity, 'update quantity',)
-    
+
                 console.log(he);
                 await Cart.updateOne({ user: userId, "products.productId": productId, "products.product": index, "products.size": size }, {
                     $set: {
@@ -212,9 +196,9 @@ module.exports.changeQuantity = async (req, res) => {
             } else {
                 console.log('out of stock');
             }
-        } else if( status === 'minus') {
-                        console.log('minus')
-            if( quantity > 1){
+        } else if (status === 'minus') {
+            console.log('minus')
+            if (quantity > 1) {
                 const he = await Cart.updateOne(
                     { user: userId, "products.productId": productId, "products.product": index, "products.size": size },
                     {
@@ -228,17 +212,17 @@ module.exports.changeQuantity = async (req, res) => {
                         ]
                     }
                 );
-                   
+
 
 
                 const productQuantity = await Cart.findOne({ user: userId, "products.productId": productId }, { "products.quantity": 1 });
-                    console.log(productQuantity, 'update quantity',)
+                console.log(productQuantity, 'update quantity',)
                 cnsole.log(he);
                 await Cart.updateOne({ user: userId, "products.productId": productId, "products.product": index, "products.size": size }, {
                     $set: {
                         "products.$[elem].totalPrice": price * productQuantity.products[0].quantity,
                     },
-    
+
                 },
                     {
                         arrayFilters: [
@@ -246,9 +230,9 @@ module.exports.changeQuantity = async (req, res) => {
                         ]
                     }
                 );
-            }   
+            }
         }
-             res.json({changed: true});
+        res.json({ changed: true });
     } catch (error) {
         console.log(error)
     }

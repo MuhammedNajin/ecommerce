@@ -164,6 +164,10 @@ user_route.put('/edit-address', user_controller.editAddress);
 
 user_route.delete('/delete-address/:index', user_controller.deleteAddress);
 
+user_route.put('/change-password', user_controller.changePassword);
+
+user_route.post('/change-details', user_controller.personalDetails);
+
 
 
 module.exports = user_route;

@@ -11,25 +11,17 @@ const Address = require('../models/address');
 
 // load home page
 module.exports.loadHome = async (req, res) => {
+
     try {
+        const product = await Product.find({ isListed: true }).populate('cetagory');
 
-         
-           
-
-      const product = await Product.find({ isListed: true }).populate('cetagory')
-
-    //   console.log(product)`
-
-
-      if(product) {
-        res.render('home', { product: product,});
-      }
-       
+        if (product) {
+            res.render('home', { product: product, });
+        }
     } catch (error) {
         console.log(error)
     }
 }
-
 
 // ================================== User login ===============================================\\
 
@@ -64,7 +56,7 @@ module.exports.userLogin = async (req, res) => {
                             name: user.name,
                             email: user.email
                         }
-                        
+
                         res.redirect(`/`);
                     } else {
                         req.flash('pass', 'Enter correct password');
@@ -138,7 +130,7 @@ module.exports.insertUser = async (req, res) => {
             // console.log(user.email);
             if (save) {
                 sentOtp(user.email);
-                res.redirect(`/otp?email=${ user.email }`);
+                res.redirect(`/otp?email=${user.email}`);
             } else {
                 console.log('not saved....');
             }
@@ -166,7 +158,7 @@ const sentOtp = async (email) => {
             }
 
         });
-        
+
         const createdOTP = `${Math.floor(1000 + Math.random() * 9000)}`;
 
         const mailOption = {
@@ -201,18 +193,18 @@ const sentOtp = async (email) => {
 // load otp page
 module.exports.loadotp = async (req, res) => {
     try {
-        console.log(req.query.is,'is');
+        console.log(req.query.is, 'is');
         if (req.query.is && req.query.first) {
             sentOtp(req.query.email);
         }
         console.log(req.query.email);
         const email = req.query.email || '******gmail.com';
-        
+
         const user1 = await User.findOne({ email: email })
         console.log(user1)
-          const verify = user1.verified; 
-          console.log(verify);
-        res.render('otp', { email: email, verify: verify});
+        const verify = user1.verified;
+        console.log(verify);
+        res.render('otp', { email: email, verify: verify });
 
     } catch (error) {
         console.log(error);
@@ -259,10 +251,10 @@ module.exports.verifyOTP = async (req, res) => {
                         name: user.name
                     }
 
-                    await User.updateOne({_id: user._id}, {$set: {session: true}});
+                    await User.updateOne({ _id: user._id }, { $set: { session: true } });
                     await verifyOtp.deleteOne({ email: email })
-                    const wallect = new Wallect({user: user._id});
-                    await wallect.save();    
+                    const wallect = new Wallect({ user: user._id });
+                    await wallect.save();
                     res.redirect(`/`);
 
                 } else {
@@ -274,8 +266,8 @@ module.exports.verifyOTP = async (req, res) => {
                 console.log('OTP is incorrect');
             }
         } else {
-                req.flash('expired', 'OTP experied resend ');
-                res.redirect(`/otp?email=${email}`);
+            req.flash('expired', 'OTP experied resend ');
+            res.redirect(`/otp?email=${email}`);
             console.log('otp expired')
         }
 
@@ -307,7 +299,7 @@ module.exports.otpLogin = async (req, res) => {
                     email: user.email
                 }
 
-                
+
                 res.redirect('/');
 
             } else {
@@ -334,10 +326,10 @@ module.exports.otpLogin = async (req, res) => {
 
 module.exports.userLogout = async (req, res) => {
     try {
-         
-            req.session.user = null;
-            res.redirect('/');
-       
+
+        req.session.user = null;
+        res.redirect('/');
+
     } catch (error) {
         console.log(error)
     }
@@ -348,14 +340,14 @@ module.exports.resend = async (req, res) => {
     try {
         const email = req.query.email;
         console.log(email);
-        if(email) {
-          await verifyOtp.deleteMany({Email: email});
-             sentOtp(email);
-             res.json({ok: true});
+        if (email) {
+            await verifyOtp.deleteMany({ Email: email });
+            sentOtp(email);
+            res.json({ ok: true });
         } else {
             console.log('Email doest receiced');
         }
-          
+
     } catch (error) {
         console.log(error)
     }
@@ -367,40 +359,42 @@ module.exports.resend = async (req, res) => {
 
 module.exports.checkSession = (req, res) => {
     try {
-        if(req.session) {
-            res.json({session: true});
+        if (req.session) {
+            res.json({ session: true });
         } else {
-            res.json({session: false});
+            res.json({ session: false });
         }
-        
+
     } catch (error) {
         console.log(error);
     }
 }
 
-module.exports.loadMyAccount = async(req, res) => {
+module.exports.loadMyAccount = async (req, res) => {
     try {
-        res.render('myAccount');
+        const userId = req.session.user?._id;
+        const userDetails = await User.findById({ _id: userId });
+        res.render('myAccount', { userDetails });
     } catch (error) {
         console.log(error)
     }
 }
 
-module.exports.loadManageAddress = async(req, res) => {
+module.exports.loadManageAddress = async (req, res) => {
     try {
         const userId = req.session.user?._id;
-        if(!userId) {
+        if (!userId) {
             // res.status(500).render('opps');
         }
-        const addresses = await Address.findOne({user: userId});
-        if(!addresses) {
+        const addresses = await Address.findOne({ user: userId });
+        if (!addresses) {
             // res.status(404).render('oops');
         }
         res.render('manageAddress', { address: addresses.address });
     } catch (error) {
         console.log(error);
         // res.status(404).render('oops');
-       
+
     }
 }
 
@@ -413,17 +407,17 @@ module.exports.editAddress = async (req, res) => {
         const index = req.body.index;
 
         if (!userid) {
-        //    res.status(500).render('oops');
-        console.log('user not found');
-        } 
+            //    res.status(500).render('oops');
+            console.log('user not found');
+        }
 
-        if(!index) {
+        if (!index) {
             // res.status(500).render('oops');
             console.log('index not found');
-         }
+        }
 
         const fullname = req.body.fname + " " + req.body.lname;
-       
+
 
         const userAddress = {
             fullName: fullname,
@@ -436,9 +430,9 @@ module.exports.editAddress = async (req, res) => {
             email: req.body.email
         }
 
-        await Address.findOneAndUpdate({user: userid}, {
+        await Address.findOneAndUpdate({ user: userid }, {
             $set: {
-                [`address.${index}`] : userAddress,
+                [`address.${index}`]: userAddress,
             }
         })
         res.redirect('/manage-address');
@@ -450,29 +444,152 @@ module.exports.editAddress = async (req, res) => {
 
 
 module.exports.deleteAddress = async (req, res) => {
-   try {
-    console.log('delete request')
-    const { index } = req.params;
-    const userId = req.session.user?._id;
-    console.log(index)
-    if(!index) {
-        console.log('index not recived')
-    }
-    
-    await Address.findOneAndUpdate({ user: userId }, {
-        $unset: {
-            [`address.${index}`] : 1,
-        },
-    })
-    
-    await Address.findOneAndUpdate({ user: userId }, {
-        $pull: {
-            address: null
-          }
-    })
-    res.status(200).json({success: true});
+    try {
+        console.log('delete request')
+        const { index } = req.params;
+        const userId = req.session.user?._id;
+        console.log(index)
+        if (!index) {
+            console.log('index not recived')
+        }
 
-   } catch (error) {
-    console.log(error)
-   }
+        await Address.findOneAndUpdate({ user: userId }, {
+            $unset: {
+                [`address.${index}`]: 1,
+            },
+        })
+
+        await Address.findOneAndUpdate({ user: userId }, {
+            $pull: {
+                address: null
+            }
+        })
+        res.status(200).json({ success: true });
+
+    } catch (error) {
+        console.log(error)
+    }
+}
+
+
+module.exports.changePassword = async (req, res) => {
+    try {
+        console.log('hellooo')
+        const userId = req.session.user?._id;
+        const { oldPassword, newPassword, confirmPassword, } = req.body;
+        console.log(req.body);
+        if (!userId) {
+            return res.status(500).send('user not found');
+        }
+
+        const user = await User.findById({ _id: userId });
+        const oldpass = await bcrypt.compare(oldPassword, user.password);
+
+        if (!oldpass) {
+            console.log(oldpass, 'heloo2')
+            return res.json({ old: true, massage: 'enter correct old password' });
+        }
+        if (oldpass === newPassword) {
+
+            return res.json({ old: true, massage: 'Enter new password' })
+        }
+
+        if (newPassword !== confirmPassword) {
+            return res.json({ notSame: true, massage: 'conform your password' });
+        }
+
+        if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{6,}$/.test(newPassword)) {
+            return res.json({ new: true, massage: 'Enter strong password' });
+        }
+
+        const hashPass = await bcrypt.hash(newPassword, 10);
+        const changePassword = await User.findByIdAndUpdate({ _id: userId }, {
+            $set: {
+                password: hashPass,
+            }
+        });
+        if (changePassword) {
+            return res.json({ success: true });
+        }
+
+    } catch (error) {
+
+    }
+}
+
+module.exports.personalDetails = async (req, res) => {
+    try {
+        const userId = req.session.user?._id;
+        const { value, cls } = req.body;
+        console.log(req.body)
+        if (!userId) {
+            res.redirect('/');
+        }
+
+        if (cls === 'editUserName') {
+            if (!/^\w+$/.test(value)) {
+                res.json({ username: true, massage: 'enter correct username' });
+            } else {
+
+                const username = await User.findOne({ name: value });
+
+                if (username) {
+                    res.json({ username: true, massage: 'username alreay exist' });
+                } else {
+                    const username = await User.findByIdAndUpdate({ _id: userId }, {
+                        $set: {
+                            name: value,
+                        }
+                    });
+                    if (username) {
+                        return res.json({ success: true, massage: 'username successfully updated' });
+                    }
+                }
+            }
+        } else if (cls === 'editEmail') {
+            if (value.indexOf('@') == -1 || !value.endsWith('gmail.com')) {
+                res.json({ email: true, massage: 'enter correct email' });
+            } else {
+
+                const email = await User.findOne({ email: value });
+
+                if (email) {
+                    res.json({ email: true, massage: 'email alreay exist' });
+                } else {
+                    const username = await User.findByIdAndUpdate({ _id: userId }, {
+                        $set: {
+                            email: value,
+                        }
+                    });
+                    if (username) {
+                        return res.json({ success: true, massage: 'email successfully updated' });
+                    }
+                }
+            }
+
+
+        } else if (cls === 'editPhone') {
+
+            if (value.trim().length < 10 || !/^\d+$/.test(value)) {
+                res.json({ phone: true, massage: 'enter correct phone number' });
+            } else {
+                const phone = await User.findOne({ mobile: value });
+
+                if (phone) {
+                    res.json({ phone: true, massage: 'phone number alreay exist' });
+                } else {
+                    const username = await User.findByIdAndUpdate({ _id: userId }, {
+                        $set: {
+                            mobile: value,
+                        }
+                    });
+                    if (username) {
+                        return res.json({ success: true, massage: 'phone number successfully updated' });
+                    }
+                }
+            }
+        }
+    } catch (error) {
+        console.log(error);
+    }
 }

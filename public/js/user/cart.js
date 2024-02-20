@@ -12,7 +12,6 @@ function addToDb(productid, vIndex,) {
       qunt = quanti.value;
     }
     console.log(qunt);
-
     // Check if a size is selected
     if (selectedSize) {
       console.log('Selected size:', selectedSize.value);
@@ -32,6 +31,20 @@ function addToDb(productid, vIndex,) {
                   console.log('hi')
                   showToast();   
                  
+                } else if(response.already) {
+                  const parentElement = document.getElementById('snackbar');
+             const secondChild = parentElement.querySelector(':nth-child(2)');
+             secondChild.innerText = 'Item is already in the cart';
+             
+             setTimeout(() => {
+              const parentElement = document.getElementById('snackbar');
+             const secondChild = parentElement.querySelector(':nth-child(2)');
+             secondChild.innerText = 'Item successfully added to your cart!';
+             }, 4000)
+             showToast();
+
+                } else if(response.user) {
+                  window.location.href = '/'
                 }
             }
         });
@@ -115,12 +128,12 @@ function addTOWishlist(productId,) {
              console.log('hwllo')
              const parentElement = document.getElementById('snackbar');
              const secondChild = parentElement.querySelector(':nth-child(2)');
-             secondChild.innerText = 'Item is already in the cart';
+             secondChild.innerText = 'Item is already in the wishlist';
              
              setTimeout(() => {
               const parentElement = document.getElementById('snackbar');
              const secondChild = parentElement.querySelector(':nth-child(2)');
-             secondChild.innerText = 'Item successfully added to your wishlist!';
+             secondChild.innerText = 'Item successfully added to your cart!';
              }, 4000)
             showToast();
            } else if(response.wishlist) {
