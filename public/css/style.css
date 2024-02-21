@@ -183,7 +183,7 @@ ol {
 
 /* Preloder */
 
-#preloder {
+/* #preloder {
 	position: fixed;
 	width: 100%;
 	height: 100%;
@@ -191,9 +191,9 @@ ol {
 	left: 0;
 	z-index: 999999;
 	background: #000;
-}
+} */
 
-.loader {
+/* .loader {
 	width: 40px;
 	height: 40px;
 	position: absolute;
@@ -204,7 +204,7 @@ ol {
 	border-radius: 60px;
 	animation: loader 0.8s linear infinite;
 	-webkit-animation: loader 0.8s linear infinite;
-}
+} */
 
 @keyframes loader {
 	0% {

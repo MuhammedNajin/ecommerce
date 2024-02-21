@@ -409,7 +409,7 @@ module.exports.singleOrderDetials = async (req, res) => {
 module.exports.loadInvoice = async (req, res) => {
     try {
         const { orderId, index } = req.query;
-        const order = await Order.findOne({_id: orderId});
+        const order = await Order.findOne({_id: orderId}).populate('user').populate('products.productId');
         console.log(order[index], order)
         res.render('invoice', { order: order.products[index], deliveryAddress: order.deliveryDetails });
     } catch (error) {

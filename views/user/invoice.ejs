@@ -33,11 +33,6 @@
       margin-top: 20px;
      
     }
-    @media screen and (min-width: 992px) {
-      .container {
-        margin-left: 25%;
-      }
-    }
   </style>
 </head>
 
@@ -45,7 +40,7 @@
 
   <div class="container mt-5" id="invoice">
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="invoice-header bg-dark">
           <h2 class="text-center" style="color: #f8f9fa;">Invoice</h2>
         </div>
@@ -53,13 +48,13 @@
     </div>
 
     <div class="row">
-      <div class="col-md-8">
+      <div class="col-md-12">
         <div class="invoice-body" style="background-color: rgb(231, 224, 224);">
           <h4>Bill To:</h4>
-          <p>Your Company Name<br>
-              Your Address<br>
-              City, State, Zip Code<br>
-              Email: your@email.com<br>
+          <p>Mens fashion<br>
+            <br>
+              calicut, kerala, 54685854<br>
+              Email: menfashion123@gmail.com<br>
               Phone: (123) 456-7890
           </p>
         
@@ -67,13 +62,15 @@
         
           <h4>Invoice Details:</h4>
           <p>Invoice Number: 123456<br>
-              Invoice Date: February 10, 2024
+            <%const invoiceDate = new Date()%>
+            <%const formattedDate = invoiceDate.toLocaleDateString('en-US', { year: 'numeric', month: 'long',day: 'numeric'})%>
+              Invoice Date:<%= formattedDate%>
           </p>
         
           <table class="table table-bordered">
               <thead>
                   <tr>
-                      <th>Description</th>
+                      <th>name</th>
                       <th>Quantity</th>
                       <th>Unit Price</th>
                       <th>Total</th>
@@ -82,10 +79,10 @@
               <tbody>
         
                   <tr>
-                      <td>Product 1</td>
-                      <td>2</td>
-                      <td>$50.00</td>
-                      <td>$100.00</td>
+                      <td><%= order.productId.name%></td>
+                      <td><%= order.quantity%></td>
+                      <td>₹<%= order.price%></td>
+                      <td>₹<%= order.price * order.quantity%></td>
                   </tr>
                   <!-- Add more rows as needed -->
               </tbody>
@@ -93,7 +90,7 @@
         
           <hr>
         
-          <h4>Total Amount: $100.00</h4>
+          <h4>Total Amount: ₹<%= order.totalPrice%></h4>
         </div>
         </div>
 
@@ -109,17 +106,44 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-  <script>
+  <!-- <script>
     function downloadPdf() {
       const element = document.getElementById('invoice');
       html2canvas(element).then(function(canvas) {
         const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdf = new jsPDF('p', 'mm', 'a4', true);
         pdf.addImage(imgData, 'PNG', 0, 0, 310, 297); // Adjust the dimensions as needed
         pdf.save('invoice.pdf');
       });
     }
+  </script> -->
+  <script>
+    function downloadPdf() {
+      const element = document.getElementById('invoice');
+      html2canvas(element, { scrollY: 0 }).then(function(canvas) {
+        const imgData = canvas.toDataURL('image/png');
+        const pdf = new jsPDF('p', 'mm', 'a4');
+        const pdfWidth = pdf.internal.pageSize.getWidth(); // Get the width of the PDF
+        const pdfHeight = pdf.internal.pageSize.getHeight(); // Get the height of the PDF
+        const imgAspectRatio = canvas.width / canvas.height;
+  
+        // Calculate the new width and height to maintain aspect ratio
+        let imgWidth = pdfWidth;
+        let imgHeight = pdfWidth / imgAspectRatio;
+  
+        // Adjust if the calculated height is greater than the height of the PDF
+        if (imgHeight > pdfHeight) {
+          imgHeight = pdfHeight;
+          imgWidth = pdfHeight * imgAspectRatio;
+        }
+  
+        pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+        pdf.save('invoice.pdf');
+      });
+    }
   </script>
+  
+  
 
 </body>
 
