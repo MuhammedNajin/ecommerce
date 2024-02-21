@@ -164,6 +164,10 @@ userRoute.put('/change-password', userController.changePassword);
 userRoute.post('/change-details', userController.personalDetails);
 
 
+userRoute.get('/about', userController.loadAbout);
+userRoute.get('/contact', userController.loadContact);
+
+
 
 module.exports = userRoute;
 
