@@ -1,157 +1,218 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Male_Fashion Template">
-    <meta name="keywords" content="Male_Fashion, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Male_Fashion Template" />
+    <meta name="keywords" content="Male_Fashion, unica, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Male-Fashion | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
     <style>
-        #snackbar {
-          visibility: hidden;
-          min-width: 400px;
-          margin-left: -125px;
-          background-color: #000000;
-          color: #fff;
-          text-align: center;
-          border-radius: 2px;
-          padding: 40px;
-          position: fixed;
-          z-index: 1;
-          left: 50%;
-          bottom: 30px;
-          font-size: 17px;
-        }
-        
-        #snackbar.show {
-          visibility: visible;
-          -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-          animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-        .show {
-            visibility: visible;
-          -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-          animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-        
-        @-webkit-keyframes fadein {
-          from {bottom: 0; opacity: 0;} 
-          to {bottom: 30px; opacity: 1;}
-        }
-        
-        @keyframes fadein {
-          from {bottom: 0; opacity: 0;}
-          to {bottom: 30px; opacity: 1;}
-        }
-        
-        @-webkit-keyframes fadeout {
-          from {bottom: 30px; opacity: 1;} 
-          to {bottom: 0; opacity: 0;}
-        }
-        
-        @keyframes fadeout {
-          from {bottom: 30px; opacity: 1;}
-          to {bottom: 0; opacity: 0;}
-        }
+      #snackbar {
+        visibility: hidden;
+        min-width: 400px;
+        margin-left: -125px;
+        background-color: #000000;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 40px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+      }
 
-        #wishlist {
-          visibility: hidden;
-          min-width: 400px;
-          margin-left: -125px;
-          background-color: #000000;
-          color: #fff;
-          text-align: center;
-          border-radius: 2px;
-          padding: 40px;
-          position: fixed;
-          z-index: 1;
-          left: 50%;
-          bottom: 30px;
-          font-size: 17px;
-        }
-        
-        #wishlist.show {
-          visibility: visible;
-          -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-          animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-        .show {
-            visibility: visible;
-          -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-          animation: fadein 0.5s, fadeout 0.5s 2.5s;
-        }
-        
-        @-webkit-keyframes fadein {
-          from {bottom: 0; opacity: 0;} 
-          to {bottom: 30px; opacity: 1;}
-        }
-        
-        @keyframes fadein {
-          from {bottom: 0; opacity: 0;}
-          to {bottom: 30px; opacity: 1;}
-        }
-        
-        @-webkit-keyframes fadeout {
-          from {bottom: 30px; opacity: 1;} 
-          to {bottom: 0; opacity: 0;}
-        }
-        
-        @keyframes fadeout {
-          from {bottom: 30px; opacity: 1;}
-          to {bottom: 0; opacity: 0;}
-        }
-        </style>
-</head>
+      #snackbar.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+      .show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
 
-<body>
+      @-webkit-keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+        to {
+          bottom: 30px;
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+        to {
+          bottom: 30px;
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
+        }
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
+        }
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+
+      #wishlist {
+        visibility: hidden;
+        min-width: 400px;
+        margin-left: -125px;
+        background-color: #000000;
+        color: #fff;
+        text-align: center;
+        border-radius: 2px;
+        padding: 40px;
+        position: fixed;
+        z-index: 1;
+        left: 50%;
+        bottom: 30px;
+        font-size: 17px;
+      }
+
+      #wishlist.show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+      .show {
+        visibility: visible;
+        -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+        animation: fadein 0.5s, fadeout 0.5s 2.5s;
+      }
+
+      @-webkit-keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+        to {
+          bottom: 30px;
+          opacity: 1;
+        }
+      }
+
+      @keyframes fadein {
+        from {
+          bottom: 0;
+          opacity: 0;
+        }
+        to {
+          bottom: 30px;
+          opacity: 1;
+        }
+      }
+
+      @-webkit-keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
+        }
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+
+      @keyframes fadeout {
+        from {
+          bottom: 30px;
+          opacity: 1;
+        }
+        to {
+          bottom: 0;
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
     <!-- Page Preloder -->
     <div id="preloder">
-        <div class="loader"></div>
+      <div class="loader"></div>
     </div>
 
     <!-- Offcanvas Menu Begin -->
     <div class="offcanvas-menu-overlay"></div>
     <div class="offcanvas-menu-wrapper">
-        <div class="offcanvas__option">
-            <div class="offcanvas__links">
-                <a href="#">Sign in</a>
-                <a href="#">FAQs</a>
-            </div>
-            <div class="offcanvas__top__hover">
-                <span>Usd <i class="arrow_carrot-down"></i></span>
-                <ul>
-                    <li>USD</li>
-                    <li>EUR</li>
-                    <li>USD</li>
-                </ul>
-            </div>
+      <div class="offcanvas__option">
+        <div class="offcanvas__links">
+          <a href="#">Sign in</a>
+          <a href="#">FAQs</a>
         </div>
-        <div class="offcanvas__nav__option">
-            <a href="#" class="search-switch"><img src="img/icon/search.png" alt=""></a>
-            <a href="#"><img src="img/icon/heart.png" alt=""></a>
-            <a href="#"><img src="img/icon/cart.png" alt=""> <span id="CartItemCount">0</span></a>
-            <div class="price">$0.00</div>
+        <div class="offcanvas__top__hover">
+          <span>Usd <i class="arrow_carrot-down"></i></span>
+          <ul>
+            <li>USD</li>
+            <li>EUR</li>
+            <li>USD</li>
+          </ul>
         </div>
-        <div id="mobile-menu-wrap"></div>
-        <div class="offcanvas__text">
-            <p>Free shipping, 30-day return or refund guarantee.</p>
-        </div>
+      </div>
+      <div class="offcanvas__nav__option">
+        <a href="#" class="search-switch"
+          ><img src="img/icon/search.png" alt=""
+        /></a>
+        <a href="#"><img src="img/icon/heart.png" alt="" /></a>
+        <a href="#"
+          ><img src="img/icon/cart.png" alt="" />
+          <span id="CartItemCount">0</span></a
+        >
+        <div class="price">$0.00</div>
+      </div>
+      <div id="mobile-menu-wrap"></div>
+      <div class="offcanvas__text">
+        <p>Free shipping, 30-day return or refund guarantee.</p>
+      </div>
     </div>
     <!-- Offcanvas Menu End -->
 
@@ -161,207 +222,247 @@
 
     <!-- Breadcrumb Section Begin -->
     <section class="breadcrumb-option">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-12">
-                    <div class="breadcrumb__text">
-                        <h4>Shopping Cart</h4>
-                        <div class="breadcrumb__links">
-                            <a href="/">Home</a>
-                            <a href="/account">account</a>
-                            <span>wishlist</span>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="breadcrumb__text">
+              <h4>Wishlist</h4>
+              <div class="breadcrumb__links">
+                <a href="/">Home</a>
+                <a href="/account">account</a>
+                <span>wishlist</span>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </section>
     <!-- Breadcrumb Section End -->
-     
 
-    
-           
+    <section class="shopping-cart spad" id="ReloadArea">
+      <%if(product && product.length > 0) {%>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="shopping__cart__table" id="Reload">
+              <table>
+                <thead>
+                  <tr>
+                    <th>image</th>
+                    <th></th>
+                    <th>select size</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%console.log(product)%> <%product.forEach((item, i) => {%>
+                  <tr>
+                    <td class="product__cart__item">
+                      <div class="product__cart__item__pic">
+                        <img
+                          class=""
+                          style="width: 100px; height: 100px"
+                          src="/img/productImage/sharp/<%= item.productId.variant[item.index].images[0]%>"
+                          alt=""
+                        />
+                      </div>
+                      <div class="product__cart__item__text">
+                        <h6 style="font-size: 12px">
+                          <%= item.productId.name %>
+                        </h6>
+                        <h5 style="font-size: 15px">
+                          ₹<%= item.productId.variant[item.index].offerPrice%>
+                        </h5>
+                      </div>
+                    </td>
+                    <td class="quantity__item"></td>
 
+                    <td
+                      class="product__details__option__size"
+                      style="position: relative"
+                    >
+                      <%item.productId.variant[item.index].size.forEach((el) =>
+                      {%>
+                      <label class="" for="<%= el%>">
+                        <%= el%>
+                        <input
+                          type="radio"
+                          id="<%= el %>"
+                          value="<%= el%>"
+                          name="size"
+                        />
+                      </label>
+                      <%})%>
+                      <div
+                        id="size"
+                        style="position: absolute; left: 50px"
+                      ></div>
+                    </td>
+                    <td class="">
+                      <button
+                        onclick="removeFromWishlist('<%= item.productId._id%>', '<%= item.index%>')"
+                        class="btn btn-dark"
+                      >
+                        Remove
+                      </button>
+                      <button
+                        type="button"
+                        onclick="addToCart('<%= item.productId._id%>', '<%= item.index%>')"
+                        class="btn btn-dark"
+                      >
+                        Add to cart
+                      </button>
+                    </td>
+                  </tr>
 
-        <section class="shopping-cart spad" id="ReloadArea">
-
-            <%if(product && product.length > 0) {%>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="shopping__cart__table" id="Reload">
-                            <table>
-                                <thead>
-                                    <tr>
-                                        <th>image</th>
-                                        <th></th>
-                                        <th>select size</th>
-                                        <th>Action</th>
-                                        
-                                    </tr>
-                                </thead>
-                                <tbody>
-    
-                                    <%console.log(product)%>
-                                    <%product.forEach((item, i) => {%>  
-                                    <tr>
-                                        <td class="product__cart__item">
-                                            <div class="product__cart__item__pic">
-    
-                                                <img class="" style="width: 100px; height: 100px;" src="/img/productImage/sharp/<%= item.productId.variant[item.index].images[0]%>" alt="">
-                                            </div>
-                                            <div class="product__cart__item__text">
-                                                <h6 style="font-size: 12px;"><%= item.productId.name %></h6>
-                                                <h5 style="font-size: 15px;">₹<%= item.productId.variant[item.index].offerPrice%></h5>
-                                            </div>
-                                        </td>
-                                        <td class="quantity__item">
-                                           
-                                        </td>
-                                         
-                                               
-                                                    <td class="product__details__option__size" style="position: relative;">
-                                            <%item.productId.variant[item.index].size.forEach((el) => {%>
-                                                <label class="" for="<%= el%>">
-                                                    <%= el%>
-                                                        <input type="radio" id="<%= el %>" value="<%= el%>"
-                                                            name="size">
-                                                </label>
-                                            <%})%>
-                                            <div id="size" style="position: absolute; left: 50px;">
-
-                                            </div>
-                                        </td>
-                                        <td class="" >
-                                            <button onclick="removeFromWishlist('<%= item.productId._id%>', '<%= item.index%>')" class="btn  btn-dark">Remove</button>
-                                            <button type="button" onclick="addToCart('<%= item.productId._id%>', '<%= item.index%>')" class="btn  btn-dark">Add to cart</button>
-                                           
-                                        </td>
-                                      
-                                    </tr>
-    
-                                    <%})%>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-6 col-md-6 col-sm-6">
-                                <div class="continue__btn">
-                                    <a class="btn btn-outline-dark" href="/shop">Continue Shopping</a>
-                                </div>
-                            </div>
-                             
-                    <div id="snackbar">
-                        <span style="border-radius: 50%; background-color: #24c20f; padding: 9px 10px;"><i class="fa-solid fa-check fa-lg" style="color: white;">
-                        </i></span>
-                        <span style="margin-left: 10px;">Item successfully added to your cart!</span>
-                       
-                    </div>
-                            
-                        </div>
-                    </div>
-                </div>
+                  <%})%>
+                </tbody>
+              </table>
             </div>
-
-
-            
-        <%} else {%>
-           
-
-            <div style="display: flex; justify-content: center; align-items: center; height: 30rem;">
-                <div style="text-align: center;">
-                    <img src="/img/emptycart.webp" alt="Empty Cart Image" style="width: 150px; height: 150px; margin-bottom: 20px;">
-                    <p style="font-size: 1.5rem; color: #555;">Your wishlist is currently empty.</p>
-                    <a href="/shop" class="btn btn-outline-dark btn-lg">Explore Our Shop</a>
+            <div class="row">
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <div class="continue__btn">
+                  <a class="btn btn-outline-dark" href="/shop"
+                    >Continue Shopping</a
+                  >
                 </div>
+              </div>
+
+              <div id="snackbar">
+                <span
+                  style="
+                    border-radius: 50%;
+                    background-color: #24c20f;
+                    padding: 9px 10px;
+                  "
+                  ><i class="fa-solid fa-check fa-lg" style="color: white"> </i
+                ></span>
+                <span style="margin-left: 10px"
+                  >Item successfully added to your cart!</span
+                >
+              </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-        <%}%>
-     </section>
+      <%} else {%>
 
+      <div
+        style="
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 30rem;
+        "
+      >
+        <div style="text-align: center">
+          <img
+            src="/img/emptycart.webp"
+            alt="Empty Cart Image"
+            style="width: 150px; height: 150px; margin-bottom: 20px"
+          />
+          <p style="font-size: 1.5rem; color: #555">
+            Your wishlist is currently empty.
+          </p>
+          <a href="/shop" class="btn btn-outline-dark btn-lg"
+            >Explore Our Shop</a
+          >
+        </div>
+      </div>
 
-
-
+      <%}%>
+    </section>
 
     <!-- Shopping Cart Section Begin -->
-    
+
     <!-- Shopping Cart Section End -->
 
     <!-- Footer Section Begin -->
     <footer class="footer">
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-3 col-md-6 col-sm-6">
-                    <div class="footer__about">
-                        <div class="footer__logo">
-                            <a href="#"><img src="img/footer-logo.png" alt=""></a>
-                        </div>
-                        <p>The customer is at the heart of our unique business model, which includes design.</p>
-                        <a href="#"><img src="img/payment.png" alt=""></a>
-                    </div>
-                </div>
-                <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>Shopping</h6>
-                        <ul>
-                            <li><a href="#">Clothing Store</a></li>
-                            <li><a href="#">Trending Shoes</a></li>
-                            <li><a href="#">Accessories</a></li>
-                            <li><a href="#">Sale</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-2 col-md-3 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>Shopping</h6>
-                        <ul>
-                            <li><a href="#">Contact Us</a></li>
-                            <li><a href="#">Payment Methods</a></li>
-                            <li><a href="#">Delivary</a></li>
-                            <li><a href="#">Return & Exchanges</a></li>
-                        </ul>
-                    </div>
-                </div>
-                <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
-                    <div class="footer__widget">
-                        <h6>NewLetter</h6>
-                        <div class="footer__newslatter">
-                            <p>Be the first to know about new arrivals, look books, sales & promos!</p>
-                            <form action="#">
-                                <input type="text" placeholder="Your email">
-                                <button type="submit"><span class="icon_mail_alt"></span></button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+            <div class="footer__about">
+              <div class="footer__logo">
+                <a href="#"><img src="img/footer-logo.png" alt="" /></a>
+              </div>
+              <p>
+                The customer is at the heart of our unique business model, which
+                includes design.
+              </p>
+              <a href="#"><img src="img/payment.png" alt="" /></a>
             </div>
-            <div class="row">
-                <div class="col-lg-12 text-center">
-                    <div class="footer__copyright__text">
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                        <p>Copyright ©
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>2020
-                            All rights reserved | This template is made with <i class="fa fa-heart-o"
-                            aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank">Colorlib</a>
-                        </p>
-                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                    </div>
-                </div>
+          </div>
+          <div class="col-lg-2 offset-lg-1 col-md-3 col-sm-6">
+            <div class="footer__widget">
+              <h6>Shopping</h6>
+              <ul>
+                <li><a href="#">Clothing Store</a></li>
+                <li><a href="#">Trending Shoes</a></li>
+                <li><a href="#">Accessories</a></li>
+                <li><a href="#">Sale</a></li>
+              </ul>
             </div>
+          </div>
+          <div class="col-lg-2 col-md-3 col-sm-6">
+            <div class="footer__widget">
+              <h6>Shopping</h6>
+              <ul>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">Payment Methods</a></li>
+                <li><a href="#">Delivary</a></li>
+                <li><a href="#">Return & Exchanges</a></li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-lg-3 offset-lg-1 col-md-6 col-sm-6">
+            <div class="footer__widget">
+              <h6>NewLetter</h6>
+              <div class="footer__newslatter">
+                <p>
+                  Be the first to know about new arrivals, look books, sales &
+                  promos!
+                </p>
+                <form action="#">
+                  <input type="text" placeholder="Your email" />
+                  <button type="submit">
+                    <span class="icon_mail_alt"></span>
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
         </div>
+        <div class="row">
+          <div class="col-lg-12 text-center">
+            <div class="footer__copyright__text">
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+              <p>
+                Copyright ©
+                <script>
+                  document.write(new Date().getFullYear());
+                </script>
+                2020 All rights reserved | This template is made with
+                <i class="fa fa-heart-o" aria-hidden="true"></i> by
+                <a href="https://colorlib.com" target="_blank">Colorlib</a>
+              </p>
+              <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+            </div>
+          </div>
+        </div>
+      </div>
     </footer>
     <!-- Footer Section End -->
 
     <!-- Search Begin -->
     <div class="search-model">
-        <div class="h-100 d-flex align-items-center justify-content-center">
-            <div class="search-close-switch">+</div>
-            <form class="search-model-form">
-                <input type="text" id="search-input" placeholder="Search here.....">
-            </form>
-        </div>
+      <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+          <input type="text" id="search-input" placeholder="Search here....." />
+        </form>
+      </div>
     </div>
     <!-- Search End -->
 
@@ -378,127 +479,66 @@
     <script src="js/mixitup.min.js"></script>
     <script src="js/owl.carousel.min.js"></script>
     <script src="/js/main.js"></script>
-   
-   
-</body>
-
+  </body>
 </html>
 
-
-
 <script>
-     function remove_from_cart(productId, index, size) {
-
-        console.log(productId, index)
-         const data = {productId: productId, index: index, size: size}
-         console.log(data)
-       try {
-
-        $.ajax({
-            type: 'POST',
-            url: '/removeFormCart',
-            data: JSON.stringify(data),
-            contentType: 'application/Json',
-            success: (response) => {
-                   
-                if(response.removed) {
-                    $('#Reload').load('/cart #Reload');
-                    $('#price').load('/cart #price');
-                    $('#ReloadArea').load('/cart #ReloadArea');
-                }
-            }
-        })
-        
-       } catch (error) {
-        console.log(error)
-       }
-
-     }
+  function remove_from_cart(productId, index, size) {
+    console.log(productId, index);
+    const data = { productId: productId, index: index, size: size };
+    console.log(data);
+    try {
+      $.ajax({
+        type: "POST",
+        url: "/removeFormCart",
+        data: JSON.stringify(data),
+        contentType: "application/Json",
+        success: (response) => {
+          if (response.removed) {
+            $("#Reload").load("/cart #Reload");
+            $("#price").load("/cart #price");
+            $("#ReloadArea").load("/cart #ReloadArea");
+          }
+        },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+  }
 </script>
 
 <script>
+  const parentElement = document.querySelector(".pro-qty-2");
 
-
-const parentElement = document.querySelector('.pro-qty-2');
-
-parentElement.addEventListener('click', (event) => {
+  parentElement.addEventListener("click", (event) => {
     try {
-        const input = document.getElementById('ctn');
-        const productId = input.getAttribute('data-productId');
-        const index = input.getAttribute('data-index');
-        const size = input.getAttribute('data-size');
-        
-        if (event.target.classList.contains('counter')) {
-            const decision = event.target.id === "plus" ? 'plus' : 'minus';
-            
-            const data = { status: decision, productId, index, size };
+      const input = document.getElementById("ctn");
+      const productId = input.getAttribute("data-productId");
+      const index = input.getAttribute("data-index");
+      const size = input.getAttribute("data-size");
 
-            $.ajax({
-                type: 'POST',
-                url: '/counter',
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                success: (response) => {
-                    if (response.changed) {
-                      $('#newID').load('/cart #newID');
-                      $('#price').load('/cart #price');
-                    } else {
-                        console.log('Error');
-                    }
-                }
-            });
-        }
+      if (event.target.classList.contains("counter")) {
+        const decision = event.target.id === "plus" ? "plus" : "minus";
+
+        const data = { status: decision, productId, index, size };
+
+        $.ajax({
+          type: "POST",
+          url: "/counter",
+          data: JSON.stringify(data),
+          contentType: "application/json",
+          success: (response) => {
+            if (response.changed) {
+              $("#newID").load("/cart #newID");
+              $("#price").load("/cart #price");
+            } else {
+              console.log("Error");
+            }
+          },
+        });
+      }
     } catch (error) {
-        console.log(error);
+      console.log(error);
     }
-});
-
-
-
-
-
-
-    // const btn = document.querySelectorAll('.counter')
-    //  btn.forEach((el) => {
-    //     el.addEventListener('click', (event) => {
-    //     try {
-
-    //         const input = document.getElementById('ctn')
-    //         const productId = input.getAttribute('data-productId');
-    //         const index = input.getAttribute('data-index');
-    //         const size = input.getAttribute('data-size');
-
-
-    //           var decition = '';
-    //         if(event.target.id === "plus") {
-    //             console.log('plus');
-    //             decition = 'plus';
-    //         } else if(event.target.id === 'minus') {
-    //             console.log('minus');
-    //             decition = 'minus';
-    //         }
-    //         const data = {status: decition, productId: productId, index: index, size: size};
-    //         $.ajax({
-    //             type: 'POST',
-    //             url: '/counter',
-    //             data: JSON.stringify(data),
-    //             contentType: 'application/Json',
-    //             success:(response) => {
-
-    //                 if(response.changed) {
-    //                     $('#ctn').load('/cart #ctn');
-    //                     $('#price').load('/cart #price');
-                   
-                        
-    //                 } else {
-    //                     console.log('errrrrrrrrrrrrrrrrr')
-    //                 }
-
-    //             }
-    //         })
-    //     } catch (error) {
-    //         console.log(error);
-    //     }
-    // })
-    //  })
+  });
 </script>

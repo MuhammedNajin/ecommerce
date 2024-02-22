@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Nest Dashboard</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -12,301 +11,386 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/imgs/theme/favicon.svg"
+    />
     <!-- Template CSS -->
     <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
-</head>
+  </head>
 
-<body>
-
+  <body>
     <%- include('../partials/sidenav.ejs') -%>
-        <main class="main-wrap">
-            <!-- Modal -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Create coupon</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/admin/create-coupon" method="post">
-                                <label for="form-label">Name</label>
-                                <input type="text" name="name" placeholder="Enter coupon name" class="form-control">
-
-                                <label for="form-label">Activation date</label>
-                                <input type="text" name="adate" placeholder="dd-mm-yyyy" class="form-control">
-
-                                <label for="form-label">Expire date</label>
-                                <input type="text" name="edate" placeholder="dd-mm-yyyy" class="form-control">
-
-                                <label for="form-label">Limit of use</label>
-                                <input type="text" name="limit" placeholder="enter how many user can use"
-                                    class="form-control">
-
-                                <label for="form-label">Dicount amount</label>
-                                <input type="text" name="damount" placeholder="enter how many user can use"
-                                    class="form-control">
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+    <main class="main-wrap">
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="exampleModal"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Create coupon
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
             </div>
+            <div class="modal-body">
+              <form action="/admin/create-coupon" method="post">
+                <label for="form-label">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter coupon name"
+                  class="form-control"
+                />
 
-            <!-- edit coupon modal -->
-            <div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Edit coupon</h1>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form action="/admin/edit-coupon?_method=PUT" method="post">
-                                <label for="form-label">Name</label>
-                                <input type="text" id="name" name="name" placeholder="Enter coupon name" class="form-control">
-                                <input type="text" id="couponId"  name="id" hidden>
+                <label for="form-label">Activation date</label>
+                <input
+                  type="text"
+                  name="adate"
+                  placeholder="dd-mm-yyyy"
+                  class="form-control"
+                />
 
-                                <label for="form-label">Activation date</label>
-                                <input type="text" id="adate" name="adate" placeholder="dd-mm-yyyy" class="form-control">
+                <label for="form-label">Expire date</label>
+                <input
+                  type="text"
+                  name="edate"
+                  placeholder="dd-mm-yyyy"
+                  class="form-control"
+                />
 
-                                <label for="form-label">Expire date</label>
-                                <input type="text" id="edate" name="edate" placeholder="dd-mm-yyyy" class="form-control">
+                <label for="form-label">Limit of use</label>
+                <input
+                  type="text"
+                  name="limit"
+                  placeholder="enter how many user can use"
+                  class="form-control"
+                />
 
-                                <label for="form-label">Limit of use</label>
-                                <input type="text" id="limit" name="limit" placeholder="enter how many user can use"
-                                    class="form-control">
+                <label for="form-label">Dicount amount</label>
+                <input
+                  type="text"
+                  name="damount"
+                  placeholder="enter how many user can use"
+                  class="form-control"
+                />
 
-                                <label for="form-label">Dicount amount</label>
-                                <input type="text" id="damount" name="damount" placeholder="enter how many user can use"
-                                    class="form-control">
-
-                                <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary"
-                                        data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
-                                </div>
-
-                            </form>
-
-                        </div>
-
-                    </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save changes
+                  </button>
                 </div>
+              </form>
             </div>
-            <section class="content-main">
-                <div class="content-header">
-                    <h2 class="content-title">Manage Coupon</h2>
-                    <div>
-                        <button href="#" class="btn btn-dark" data-bs-toggle="modal"
-                            data-bs-target="#exampleModal"><i class="material-icons md-plus"></i> Create
-                            coupon</button>
-                    </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- edit coupon modal -->
+      <div
+        class="modal fade"
+        id="exampleModal2"
+        tabindex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">
+                Edit coupon
+              </h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <form action="/admin/edit-coupon?_method=PUT" method="post">
+                <label for="form-label">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="name"
+                  placeholder="Enter coupon name"
+                  class="form-control"
+                />
+                <input type="text" id="couponId" name="id" hidden />
+
+                <label for="form-label">Activation date</label>
+                <input
+                  type="text"
+                  id="adate"
+                  name="adate"
+                  placeholder="dd-mm-yyyy"
+                  class="form-control"
+                />
+
+                <label for="form-label">Expire date</label>
+                <input
+                  type="text"
+                  id="edate"
+                  name="edate"
+                  placeholder="dd-mm-yyyy"
+                  class="form-control"
+                />
+
+                <label for="form-label">Limit of use</label>
+                <input
+                  type="text"
+                  id="limit"
+                  name="limit"
+                  placeholder="enter how many user can use"
+                  class="form-control"
+                />
+
+                <label for="form-label">Dicount amount</label>
+                <input
+                  type="text"
+                  id="damount"
+                  name="damount"
+                  placeholder="enter how many user can use"
+                  class="form-control"
+                />
+
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="submit" class="btn btn-primary">
+                    Save changes
+                  </button>
                 </div>
-                <div class="card mb-4">
-                  
-                    <!-- card-header end// -->
-                    <div class="card-body">
-                        <div class="table-responsive" id="Reload">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Coupon code</th>
-                                       
-                                    
-                                      
-                                        
-                                        <th>Activation date</th>
-                                        <th>Expire date</th>
-                                        <th>Discount amount</th>
-                                        <th class="text-end">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      <section class="content-main">
+        <div class="content-header">
+          <h2 class="content-title">Manage Coupon</h2>
+          <div>
+            <button
+              href="#"
+              class="btn btn-dark"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            >
+              <i class="material-icons md-plus"></i> Create coupon
+            </button>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <!-- card-header end// -->
+          <div class="card-body">
+            <div class="table-responsive" id="Reload">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Coupon code</th>
 
-                                    <% if(Array.isArray(coupon) && coupon.length> 0) {%>
-
-                                        <% coupon.map((c)=> {%>
-                                            <tr>
-                                                <td width="40%">
-                                                    <a href="#" class="itemside">
-                                                        <div class="left">
-
-                                                            <img src="/img/profile.jpg" class="img-sm" alt="Userpic" />
-                                                        </div>
-                                                        <div class="info pl-3">
-                                                            <h6 class="mb-0 title" style="text-transform: capitalize;">
-                                                                <%= c.name %>
-                                                            </h6>
-                                                            <small class="text-muted">Seller ID: #439</small>
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                                <td>
-                                                    <%= c.couponCode%>
-                                                </td>
-                                                <td>
-                                                    <%= c.activationDate%>
-                                                </td>
-                                                <td>
-                                                    <%= c.expiresDate%>
-                                                </td>
-                                                <td>
-                                                    <%= c.discountAmount%>
-                                                </td>
-                                                
-                                                
-                                                <td class="text-end">
-                                                    <button id="button"
-                                                        class="btn btn-sm btn-dark rounded font-sm mt-15"
-                                                        data-user-id="" data-status="" onclick="block('<%= c._id%>')">
-                                                        <%= c.active ? "List" : "Unlist" %>
-                                                    </button>
-                                                    <button id="button"
-                                                        class="btn btn-sm btn-dark rounded font-sm mt-15"
-                                                        data-user-id="" onclick="return editCoupon('<%= c._id%>', '<%= c.name%>', '<%= c.activationDate%>', '<%= c.expiresDate%>', '<%= c.discountAmount%>','<%= c.limit%>')" data-status="" data-bs-toggle="modal"
-                                                        data-bs-target="#exampleModal2">
-                                                         Edit
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                            <% }) %>
-                                                <% }else{ %>
-                                                    <tr>
-                                                        <td colspan="5">No coupon found</td>
-                                                    </tr>
-                                                    <% } %>
-                                </tbody>
-                            </table>
-                            <!-- table-responsive.// -->
+                    <th>Activation date</th>
+                    <th>Expire date</th>
+                    <th>Discount amount</th>
+                    <th class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(Array.isArray(coupon) && coupon.length> 0) {%> <%
+                  coupon.map((c)=> {%>
+                  <tr>
+                    <td width="40%">
+                      <a href="#" class="itemside">
+                        <div class="left">
+                          <img
+                            src="/img/profile.jpg"
+                            class="img-sm"
+                            alt="Userpic"
+                          />
                         </div>
-                    </div>
-                    <!-- card-body end// -->
-                </div>
-                <!-- card end// -->
-                <div class="pagination-area mt-15 mb-50">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <%if(page != 0) {%>
-                                <a class="page-link" href="?page=<%= page - 1%>"><i class="material-icons md-chevron_left"></i></a>
-                            <%}%>
-                            <% for (let i = 0; i < couponLength; i++) { %>
-                              <% if (i === 0 || i === couponLength - 1 || (i >= page - 2 && i <= page + 2)) { %>
-                                <li class="page-item <%= page == i ? 'active' : '' %>">
-                                  <a class="page-link" href="?page=<%= i %>"><%= i + 1 %></a>
-                                </li>
-                              <% } else if (i === page - 3 || i === page + 3) { %>
-                                <li class="page-item disabled">
-                                  <span class="page-link">...</span>
-                                </li>
-                              <% } %>
-                            <% } %>
-                            <%if(page != couponLength) {%>
-                                <a class="page-link" href="?page=<%= page + 1%>"><i class="material-icons md-chevron_right"></i></a>
-                            <%}%>
-                          </ul>
-                          
-                    </nav>
-                </div>
-            </section>
-            <!-- content-main end// -->
-            <%- include('../partials/adminFooter.ejs') -%>
-        </main>
+                        <div class="info pl-3">
+                          <h6
+                            class="mb-0 title"
+                            style="text-transform: capitalize"
+                          >
+                            <%= c.name %>
+                          </h6>
+                          <small class="text-muted">Seller ID: #439</small>
+                        </div>
+                      </a>
+                    </td>
+                    <td><%= c.couponCode%></td>
+                    <td><%= c.activationDate%></td>
+                    <td><%= c.expiresDate%></td>
+                    <td><%= c.discountAmount%></td>
 
-        <script src="/assets/js/vendors/jquery-3.6.0.min.js"></script>
-        <script src="/assets/js/vendors/bootstrap.bundle.min.js"></script>
-        <script src="/assets/js/vendors/select2.min.js"></script>
-        <script src="/assets/js/vendors/perfect-scrollbar.js"></script>
-        <script src="/assets/js/vendors/jquery.fullscreen.min.js"></script>
-        <!-- // sweat alert -->
-        <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-        <!-- Main Script -->
-        <script src="/assets/js/main.js?v=1.1" type="text/javascript"></script>
+                    <td class="text-end">
+                      <button
+                        id="button"
+                        class="btn btn-sm btn-dark rounded font-sm mt-15"
+                        data-user-id=""
+                        data-status=""
+                        onclick="block('<%= c._id%>')"
+                      >
+                        <%= c.active ? "List" : "Unlist" %>
+                      </button>
+                      <button
+                        id="button"
+                        class="btn btn-sm btn-dark rounded font-sm mt-15"
+                        data-user-id=""
+                        onclick="return editCoupon('<%= c._id%>', '<%= c.name%>', '<%= c.activationDate%>', '<%= c.expiresDate%>', '<%= c.discountAmount%>','<%= c.limit%>')"
+                        data-status=""
+                        data-bs-toggle="modal"
+                        data-bs-target="#exampleModal2"
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
 
-</body>
+                  <% }) %> <% }else{ %>
+                  <tr>
+                    <td colspan="5">No coupon found</td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+              <!-- table-responsive.// -->
+            </div>
+          </div>
+          <!-- card-body end// -->
+        </div>
+        <!-- card end// -->
+        <div class="pagination-area mt-15 mb-50">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <%if(page != 0) {%>
+              <a class="page-link" href="?page=<%= page - 1%>"
+                ><i class="material-icons md-chevron_left"></i
+              ></a>
+              <%}%> <% for (let i = 0; i < couponLength; i++) { %> <% if (i ===
+              0 || i === couponLength - 1 || (i >= page - 2 && i <= page + 2)) {
+              %>
+              <li class="page-item <%= page == i ? 'active' : '' %>">
+                <a class="page-link" href="?page=<%= i %>"><%= i + 1 %></a>
+              </li>
+              <% } else if (i === page - 3 || i === page + 3) { %>
+              <li class="page-item disabled">
+                <span class="page-link">...</span>
+              </li>
+              <% } %> <% } %> <%if(page != couponLength) {%>
+              <a class="page-link" href="?page=<%= page + 1%>"
+                ><i class="material-icons md-chevron_right"></i
+              ></a>
+              <%}%>
+            </ul>
+          </nav>
+        </div>
+      </section>
+      <!-- content-main end// -->
+      <%- include('../partials/adminFooter.ejs') -%>
+    </main>
 
+    <script src="/assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/vendors/select2.min.js"></script>
+    <script src="/assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="/assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- // sweat alert -->
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <!-- Main Script -->
+    <script src="/assets/js/main.js?v=1.1" type="text/javascript"></script>
+  </body>
 </html>
 
-
-
-
 <script>
+  function block(id) {
+    const data = { id: id };
+    const btn = document.getElementById("button");
+    let stat;
+    btn.addEventListener("click", () => {
+      const status = btn.getAttribute("data-status");
+      console.log(status, "hii");
 
-    function block(id) {
-        const data = { id: id }
-        const btn = document.getElementById('button');
-        let stat;
-        btn.addEventListener('click', () => {
+      if (status) {
+        console.log("unbock");
+        stat = "Unblock";
+        console.log(stat + "111");
+      } else {
+        console.log("block");
+        stat = "block";
+        console.log(stat + " 00000");
+      }
+    });
 
-            const status = btn.getAttribute('data-status');
-            console.log(status, 'hii');
-
-            if (status) {
-                console.log('unbock')
-                stat = 'Unblock';
-                console.log(stat + "111");
-            } else {
-                console.log('block')
-                stat = 'block'
-                console.log(stat + " 00000");
+    Swal.fire({
+      title: "Are you sure",
+      text: `do you want to ${stat} this user!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((decision) => {
+      if (decision.isConfirmed) {
+        $.ajax({
+          method: "POST",
+          url: "/admin/blockUser",
+          data: JSON.stringify(data),
+          contentType: "application/json",
+          success: (response) => {
+            if (response.block === true) {
+              $("#Reload").load("/admin/user #Reload", null, () => {
+                Swal.fire({
+                  title: `${stat}`,
+                  icon: "success",
+                });
+              });
             }
-        })
-
-        Swal.fire({
-            title: 'Are you sure',
-            text: `do you want to ${stat} this user!`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes!',
-        }).then((decision) => {
-            if (decision.isConfirmed) {
-                $.ajax({
-                    method: 'POST',
-                    url: '/admin/blockUser',
-                    data: JSON.stringify(data),
-                    contentType: 'application/json',
-                    success: (response) => {
-                        if (response.block === true) {
-                            $('#Reload').load('/admin/user #Reload', null, () => {
-                                Swal.fire({
-                                    title: `${stat}`,
-                                    icon: 'success'
-                                });
-                            });
-                        }
-                    }
-                })
-            }
-        })
-    }
-
+          },
+        });
+      }
+    });
+  }
 </script>
 <script>
-    function editCoupon(id, name, adate, edate, damount, limit) {
-        console.log('function is called')
-       document.getElementById('couponId').value = id;
-       document.getElementById('name').value = name;
-       document.getElementById('adate').value = adate;
-       document.getElementById('edate').value = edate;
-       document.getElementById('damount').value = damount;
-       document.getElementById('limit').value = limit;
-        return;
-    }
+  function editCoupon(id, name, adate, edate, damount, limit) {
+    console.log("function is called");
+    document.getElementById("couponId").value = id;
+    document.getElementById("name").value = name;
+    document.getElementById("adate").value = adate;
+    document.getElementById("edate").value = edate;
+    document.getElementById("damount").value = damount;
+    document.getElementById("limit").value = limit;
+    return;
+  }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
 <!-- Add this script after your form -->
 <!-- <script>
@@ -397,95 +481,108 @@
 </script> -->
 
 <script>
-    document.addEventListener("DOMContentLoaded", function () {
-        // Attach validation to the first form
-        attachFormValidation("#exampleModal form");
+  document.addEventListener("DOMContentLoaded", function () {
+    // Attach validation to the first form
+    attachFormValidation("#exampleModal form");
 
-        // Attach validation to the second form
-        attachFormValidation("#exampleModal2 form");
+    // Attach validation to the second form
+    attachFormValidation("#exampleModal2 form");
 
-        function attachFormValidation(formSelector) {
-            const form = document.querySelector(formSelector);
+    function attachFormValidation(formSelector) {
+      const form = document.querySelector(formSelector);
 
-            form.addEventListener("submit", function (event) {
-                // Prevent the form from submitting by default
-                event.preventDefault();
+      form.addEventListener("submit", function (event) {
+        // Prevent the form from submitting by default
+        event.preventDefault();
 
-                // Remove previous error messages
-                clearErrorMessages(form);
+        // Remove previous error messages
+        clearErrorMessages(form);
 
-                // Perform validation
-                const name = form.elements.name.value.trim();
-                const adate = form.elements.adate.value.trim();
-                const edate = form.elements.edate.value.trim();
-                const limit = form.elements.limit.value.trim();
-                const damount = form.elements.damount.value.trim();
+        // Perform validation
+        const name = form.elements.name.value.trim();
+        const adate = form.elements.adate.value.trim();
+        const edate = form.elements.edate.value.trim();
+        const limit = form.elements.limit.value.trim();
+        const damount = form.elements.damount.value.trim();
 
-                if (name === "") {
-                    displayErrorMessage(form, "name", "Please enter a coupon name.");
-                    return;
-                }
-
-                if (adate === "") {
-                    displayErrorMessage(form, "adate", "Please enter an activation date.");
-                    return;
-                }
-
-                if (edate === "") {
-                    displayErrorMessage(form, "edate", "Please enter an expiration date.");
-                    return;
-                }
-
-                if (limit === "") {
-                    displayErrorMessage(form, "limit", "Please enter a limit of use.");
-                    return;
-                }
-
-                if (damount === "") {
-                    displayErrorMessage(form, "damount", "Please enter a discount amount.");
-                    return;
-                }
-
-                // Validate date format (dd-mm-yyyy)
-                const dateRegex = /^\d{2}-\d{2}-\d{4}$/;
-                if (!dateRegex.test(adate) || !dateRegex.test(edate)) {
-                    alert("Invalid date format. Please use dd-mm-yyyy.");
-                    return;
-                }
-
-                // Validate discount amount is a number
-                if (isNaN(parseFloat(damount))) {
-                    displayErrorMessage(form, "damount", "Discount amount must be a valid number.");
-                    return;
-                }
-
-                // If all validations pass, you can submit the form
-                form.submit();
-            });
+        if (name === "") {
+          displayErrorMessage(form, "name", "Please enter a coupon name.");
+          return;
         }
 
-        function displayErrorMessage(form, fieldName, message) {
-            const field = form.elements[fieldName];
-            const errorDiv = document.createElement("div");
-            errorDiv.className = "error-message";
-            errorDiv.style.color = "red"; // Set color to red
-            errorDiv.textContent = message;
-            field.parentNode.insertBefore(errorDiv, field);
-
-            // Remove error message after 3000 milliseconds (3 seconds)
-            setTimeout(() => {
-                errorDiv.remove();
-            }, 3000);
+        if (adate === "") {
+          displayErrorMessage(
+            form,
+            "adate",
+            "Please enter an activation date."
+          );
+          return;
         }
 
-        function clearErrorMessages(form) {
-            const errorMessages = form.querySelectorAll(".error-message");
-            errorMessages.forEach((errorMessage) => {
-                errorMessage.remove();
-            });
+        if (edate === "") {
+          displayErrorMessage(
+            form,
+            "edate",
+            "Please enter an expiration date."
+          );
+          return;
         }
-    });
+
+        if (limit === "") {
+          displayErrorMessage(form, "limit", "Please enter a limit of use.");
+          return;
+        }
+
+        if (damount === "") {
+          displayErrorMessage(
+            form,
+            "damount",
+            "Please enter a discount amount."
+          );
+          return;
+        }
+
+        // Validate date format (dd-mm-yyyy)
+        const dateRegex = /^\d{2}-\d{2}-\d{4}$/;
+        if (!dateRegex.test(adate) || !dateRegex.test(edate)) {
+          alert("Invalid date format. Please use dd-mm-yyyy.");
+          return;
+        }
+
+        // Validate discount amount is a number
+        if (isNaN(parseFloat(damount))) {
+          displayErrorMessage(
+            form,
+            "damount",
+            "Discount amount must be a valid number."
+          );
+          return;
+        }
+
+        // If all validations pass, you can submit the form
+        form.submit();
+      });
+    }
+
+    function displayErrorMessage(form, fieldName, message) {
+      const field = form.elements[fieldName];
+      const errorDiv = document.createElement("div");
+      errorDiv.className = "error-message";
+      errorDiv.style.color = "red"; // Set color to red
+      errorDiv.textContent = message;
+      field.parentNode.insertBefore(errorDiv, field);
+
+      // Remove error message after 3000 milliseconds (3 seconds)
+      setTimeout(() => {
+        errorDiv.remove();
+      }, 3000);
+    }
+
+    function clearErrorMessages(form) {
+      const errorMessages = form.querySelectorAll(".error-message");
+      errorMessages.forEach((errorMessage) => {
+        errorMessage.remove();
+      });
+    }
+  });
 </script>
-
-
-

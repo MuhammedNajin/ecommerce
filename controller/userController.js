@@ -563,19 +563,14 @@ module.exports.personalDetails = async (req, res) => {
   }
 };
 
-
 module.exports.loadAbout = (req, res) => {
-    try {
-        res.render('aboutUs')
-    } catch (error) {
-        
-    }
-}
+  try {
+    res.render("aboutUs");
+  } catch (error) {}
+};
 
 module.exports.loadContact = (req, res) => {
-    try {
-        res.render('contact')
-    } catch (error) {
-        
-    }
-}
+  try {
+    res.render("contact");
+  } catch (error) {}
+};

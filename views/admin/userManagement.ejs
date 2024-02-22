@@ -1,186 +1,199 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8" />
-        <title>Nest Dashboard</title>
-        <meta http-equiv="x-ua-compatible" content="ie=edge" />
-        <meta name="description" content="" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta property="og:title" content="" />
-        <meta property="og:type" content="" />
-        <meta property="og:url" content="" />
-        <meta property="og:image" content="" />
-        <!-- Favicon -->
-        <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
-        <!-- Template CSS -->
-        <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
-    </head>
+  <head>
+    <meta charset="utf-8" />
+    <title>Nest Dashboard</title>
+    <meta http-equiv="x-ua-compatible" content="ie=edge" />
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta property="og:title" content="" />
+    <meta property="og:type" content="" />
+    <meta property="og:url" content="" />
+    <meta property="og:image" content="" />
+    <!-- Favicon -->
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/imgs/theme/favicon.svg"
+    />
+    <!-- Template CSS -->
+    <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
+  </head>
 
-    <body>
-     
-        <%- include('../partials/sidenav.ejs') -%>
-        <main class="main-wrap">
-            <section class="content-main">
-                <div class="content-header">
-                    <h2 class="content-title">Customer detials</h2>
-                  
-                </div>
-                <div class="card mb-4">
-                    
-                    <!-- card-header end// -->
-                    <div class="card-body">
-                        <div class="table-responsive" id="Reload">
-                            <table class="table table-hover">
-                                <thead>
-                                    <tr>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Mobile</th>
-                                        <th>Status</th>
-                                        <th>Registered</th>
-                                        <th class="text-end">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody >
-                                    
-
-                                    <% if(Array.isArray(users) && users.length > 0) {%>
-
-                                        <% users.map((user) => {%>
-                                            <tr>
-                                                <td width="40%">
-                                                    <a href="#" class="itemside">
-                                                        <div class="left">
-                                                            
-                                                            <img src="/img/profile.jpg" class="img-sm" alt="Userpic" />
-                                                        </div>
-                                                        <div class="info pl-3">
-                                                            <h6 class="mb-0 title" style="text-transform: capitalize;"><%= user.name %></h6>
-                                                            <small class="text-muted">Seller ID: #439</small>
-                                                        </div>
-                                                    </a>
-                                                </td>
-                                                <td><%= user.email %></td>
-                                                <td><%= user.mobile %></td>
-                                                <td><span class="badge rounded-pill alert-success">Active</span></td>
-                                                <% const formattedDate = user.created.toLocaleString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric', hour: 'numeric', minute: 'numeric', second: 'numeric', hour12: true }); %>
-                                                <td><%= formattedDate %></td>
-                                                <td class="text-end">
-                                                    <button id="button" class="btn btn-sm btn-danger rounded font-sm mt-15" data-user-id="<%= user._id %>" data-status="<%= user.isBlocked %>" onclick="block('<%= user._id %>')">
-                                                        <%= user.isBlocked ? "Unblock" : "Block" %>
-                                                    </button>
-                                                </td>
-                                            </tr>
-
-                                       <% }) %>
-                                        <% }else{ %>
-                                            <tr>
-                                                <td colspan="5">No user found</td>
-                                            </tr>
-                                    <% } %>
-                                </tbody>
-                            </table>
-                            <!-- table-responsive.// -->
+  <body>
+    <%- include('../partials/sidenav.ejs') -%>
+    <main class="main-wrap">
+      <section class="content-main">
+        <div class="content-header">
+          <h2 class="content-title">Customer detials</h2>
+        </div>
+        <div class="card mb-4">
+          <!-- card-header end// -->
+          <div class="card-body">
+            <div class="table-responsive" id="Reload">
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Mobile</th>
+                    <th>Status</th>
+                    <th>Registered</th>
+                    <th class="text-end">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% if(Array.isArray(users) && users.length > 0) {%> <%
+                  users.map((user) => {%>
+                  <tr>
+                    <td width="40%">
+                      <a href="#" class="itemside">
+                        <div class="left">
+                          <img
+                            src="/img/profile.jpg"
+                            class="img-sm"
+                            alt="Userpic"
+                          />
                         </div>
-                    </div>
-                    <!-- card-body end// -->
-                </div>
-                <!-- card end// -->
-                <div class="pagination-area mt-15 mb-50">
-                    <nav aria-label="Page navigation example">
-                        <ul class="pagination">
-                            <%if(page != 0) {%>
-                                <a class="page-link" href="?page=<%= page - 1%>"><i class="material-icons md-chevron_left"></i></a>
-                            <%}%>
-                            <% for (let i = 0; i < userLength; i++) { %>
-                              <% if (i === 0 || i === userLength - 1 || (i >= page - 2 && i <= page + 2)) { %>
-                                <li class="page-item <%= page == i ? 'active' : '' %>">
-                                  <a class="page-link" href="?page=<%= i %>"><%= i + 1 %></a>
-                                </li>
-                              <% } else if (i === page - 3 || i === page + 3) { %>
-                                <li class="page-item disabled">
-                                  <span class="page-link">...</span>
-                                </li>
-                              <% } %>
-                            <% } %>
-                            <%if(page != userLength) {%>
-                                <a class="page-link" href="?page=<%= page + 1%>"><i class="material-icons md-chevron_right"></i></a>
-                            <%}%>
-                          </ul>
-                    </nav>
-                </div>
-            </section>
-            <!-- content-main end// -->
-            <%- include('../partials/adminFooter.ejs') -%>
-        </main>
+                        <div class="info pl-3">
+                          <h6
+                            class="mb-0 title"
+                            style="text-transform: capitalize"
+                          >
+                            <%= user.name %>
+                          </h6>
+                          <small class="text-muted">Seller ID: #439</small>
+                        </div>
+                      </a>
+                    </td>
+                    <td><%= user.email %></td>
+                    <td><%= user.mobile %></td>
+                    <td>
+                      <span class="badge rounded-pill alert-success"
+                        >Active</span
+                      >
+                    </td>
+                    <% const formattedDate =
+                    user.created.toLocaleString('en-US', { weekday: 'short',
+                    month: 'short', day: 'numeric', year: 'numeric', hour:
+                    'numeric', minute: 'numeric', second: 'numeric', hour12:
+                    true }); %>
+                    <td><%= formattedDate %></td>
+                    <td class="text-end">
+                      <button
+                        id="button"
+                        class="btn btn-sm btn-danger rounded font-sm mt-15"
+                        data-user-id="<%= user._id %>"
+                        data-status="<%= user.isBlocked %>"
+                        onclick="block('<%= user._id %>')"
+                      >
+                        <%= user.isBlocked ? "Unblock" : "Block" %>
+                      </button>
+                    </td>
+                  </tr>
 
-        <script src="/assets/js/vendors/jquery-3.6.0.min.js"></script>
-        <script src="/assets/js/vendors/bootstrap.bundle.min.js"></script>
-        <script src="/assets/js/vendors/select2.min.js"></script>
-        <script src="/assets/js/vendors/perfect-scrollbar.js"></script>
-        <script src="/assets/js/vendors/jquery.fullscreen.min.js"></script>
-        <!-- // sweat alert -->
-        <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
-        <!-- Main Script -->
-        <script src="/assets/js/main.js?v=1.1" type="text/javascript"></script>
-         
-    </body>
+                  <% }) %> <% }else{ %>
+                  <tr>
+                    <td colspan="5">No user found</td>
+                  </tr>
+                  <% } %>
+                </tbody>
+              </table>
+              <!-- table-responsive.// -->
+            </div>
+          </div>
+          <!-- card-body end// -->
+        </div>
+        <!-- card end// -->
+        <div class="pagination-area mt-15 mb-50">
+          <nav aria-label="Page navigation example">
+            <ul class="pagination">
+              <%if(page != 0) {%>
+              <a class="page-link" href="?page=<%= page - 1%>"
+                ><i class="material-icons md-chevron_left"></i
+              ></a>
+              <%}%> <% for (let i = 0; i < userLength; i++) { %> <% if (i === 0
+              || i === userLength - 1 || (i >= page - 2 && i <= page + 2)) { %>
+              <li class="page-item <%= page == i ? 'active' : '' %>">
+                <a class="page-link" href="?page=<%= i %>"><%= i + 1 %></a>
+              </li>
+              <% } else if (i === page - 3 || i === page + 3) { %>
+              <li class="page-item disabled">
+                <span class="page-link">...</span>
+              </li>
+              <% } %> <% } %> <%if(page != userLength) {%>
+              <a class="page-link" href="?page=<%= page + 1%>"
+                ><i class="material-icons md-chevron_right"></i
+              ></a>
+              <%}%>
+            </ul>
+          </nav>
+        </div>
+      </section>
+      <!-- content-main end// -->
+      <%- include('../partials/adminFooter.ejs') -%>
+    </main>
+
+    <script src="/assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="/assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="/assets/js/vendors/select2.min.js"></script>
+    <script src="/assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="/assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- // sweat alert -->
+    <script src="/node_modules/sweetalert2/dist/sweetalert2.all.min.js"></script>
+    <!-- Main Script -->
+    <script src="/assets/js/main.js?v=1.1" type="text/javascript"></script>
+  </body>
 </html>
 
-
-
-
 <script>
+  function block(id) {
+    const data = { id: id };
+    const btn = document.getElementById("button");
+    let stat;
+    btn.addEventListener("click", () => {
+      const status = btn.getAttribute("data-status");
+      console.log(status, "hii");
 
-    function block(id) {
-        const data = {id: id}
-        const btn = document.getElementById('button');
-        let stat;
-        btn.addEventListener('click', () => {
-             
-        const status = btn.getAttribute('data-status');
-        console.log(status, 'hii');
-       
-        if(status){
-            console.log('unbock')
-           stat = 'Unblock';
-           console.log(stat+ "111");
-        } else {
-            console.log('block')
-            stat = 'block'
-            console.log(stat+" 00000");
-        }
-        })
-        
-        Swal.fire({
-            title: 'Are you sure',
-            text: `do you want to ${stat} this user!`,
-            icon: 'warning',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-           confirmButtonText: 'Yes!',
-        }).then((decision) => {
-                 if(decision.isConfirmed) {
-                    $.ajax({
-                        method: 'POST',
-                        url: '/admin/blockUser',
-                        data: JSON.stringify(data),
-                        contentType: 'application/json',
-                        success: (response) => {
-                            if(response.block === true){
-                              $('#Reload').load('/admin/user #Reload', null, () => {
-                                Swal.fire({
-                                    title: `${stat}`,
-                                    icon: 'success'
-                                });
-                              });
-                            }
-                        }
-                    })
-                 }
-        })
-    }
-   
+      if (status) {
+        console.log("unbock");
+        stat = "Unblock";
+        console.log(stat + "111");
+      } else {
+        console.log("block");
+        stat = "block";
+        console.log(stat + " 00000");
+      }
+    });
+
+    Swal.fire({
+      title: "Are you sure",
+      text: `do you want to ${stat} this user!`,
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes!",
+    }).then((decision) => {
+      if (decision.isConfirmed) {
+        $.ajax({
+          method: "POST",
+          url: "/admin/blockUser",
+          data: JSON.stringify(data),
+          contentType: "application/json",
+          success: (response) => {
+            if (response.block === true) {
+              $("#Reload").load("/admin/user #Reload", null, () => {
+                Swal.fire({
+                  title: `${stat}`,
+                  icon: "success",
+                });
+              });
+            }
+          },
+        });
+      }
+    });
+  }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

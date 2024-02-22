@@ -1,104 +1,136 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
     <title>Sales Report</title>
-</head>
-<body>
-
+  </head>
+  <body>
     <div class="container mt-5">
-        <div class="row">
-            <div class="col-md-6 offset-md-3">
-                <div class="card">
-                    <div class="card-body">
-                        <h5 class="card-title text-center mb-4">Sales Report</h5>
-                        
-                        <form action="/admin/sales-report" method="get">
-                            <div class="form-group">
-                                <label for="startDate">Start Date</label>
-                                <input type="date" class="form-control" name="startDate" id="sDate">
-                            </div>
-                            <div class="form-group">
-                                <label for="endDate">End Date</label>
-                                <input type="date" name="endDate" class="form-control" id="eDate">
-                            </div>
-                            <button type="submit" onclick="applyFilter()" class="btn btn-dark btn-block">Apply Filter</button>
-                            <button type="button" onclick="download()" class="btn btn-dark btn-block">Download</button>
-                        </form>
-                    </div>
+      <div class="row">
+        <div class="col-md-6 offset-md-3">
+          <div class="card">
+            <div class="card-body">
+              <h5 class="card-title text-center mb-4">Sales Report</h5>
+
+              <form action="/admin/sales-report" method="get">
+                <div class="form-group">
+                  <label for="startDate">Start Date</label>
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="startDate"
+                    id="sDate"
+                  />
                 </div>
+                <div class="form-group">
+                  <label for="endDate">End Date</label>
+                  <input
+                    type="date"
+                    name="endDate"
+                    class="form-control"
+                    id="eDate"
+                  />
+                </div>
+                <button
+                  type="submit"
+                  onclick="applyFilter()"
+                  class="btn btn-dark btn-block"
+                >
+                  Apply Filter
+                </button>
+                <button
+                  type="button"
+                  onclick="download()"
+                  class="btn btn-dark btn-block"
+                >
+                  Download
+                </button>
+              </form>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <div class="" id="salesReport"  style="border: 2px solid black; max-width: 800px; margin: 0 auto; padding: 0 15px">
-        <div class="row">
-            <div class="col-12 text-center p-3" style="background-color: black; font-size: larger; color: aliceblue;">
-                SALE REPORT 
-            </div>
+    <div
+      class=""
+      id="salesReport"
+      style="
+        border: 2px solid black;
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 0 15px;
+      "
+    >
+      <div class="row">
+        <div
+          class="col-12 text-center p-3"
+          style="background-color: black; font-size: larger; color: aliceblue"
+        >
+          SALE REPORT
         </div>
-        <table class="table" style="border: 2px;">
-            <thead>
-              <tr>
-                <th scope="col">index</th>
-                <th scope="col">product</th>
-                <th scope="col">payment method</th>
-                <th scope="col">status</th>
-              </tr>
-            </thead>
-            <tbody>
-                <% report.forEach((el, i) => {%>
-                    <tr>
-                        <th scope="row"><%= i + 1%></th>
-                        <td style="offset: 2px;"><%= el.user.name%></td>
-                        <td><%= el.paymentMethod%></td>
-                        <td><%= el.totalAmount%></td>
-                      </tr>
-                <%})%>
-              
-             
-              
-            </tbody>
-          </table>
+      </div>
+      <table class="table" style="border: 2px">
+        <thead>
+          <tr>
+            <th scope="col">index</th>
+            <th scope="col">product</th>
+            <th scope="col">payment method</th>
+            <th scope="col">status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% report.forEach((el, i) => {%>
+          <tr>
+            <th scope="row"><%= i + 1%></th>
+            <td style="offset: 2px"><%= el.user.name%></td>
+            <td><%= el.paymentMethod%></td>
+            <td><%= el.totalAmount%></td>
+          </tr>
+          <%})%>
+        </tbody>
+      </table>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/1.5.3/jspdf.debug.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 
-  <script>
-    function download() {
-      const element = document.getElementById('salesReport');
-      html2canvas(element).then(function(canvas) {
-        const imgData = canvas.toDataURL('image/png');
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        const pageWidth = 210;
-const pageHeight = 297;
-const imageWidth = 200;
-const imageHeight = (imageWidth / pageWidth) * pageHeight;
-
-pdf.addImage(imgData, 'PNG', 5, 5, imageWidth, imageHeight);
- // Adjust the dimensions as needed
-        pdf.save('invoice.pdf');
-      });
-    }
-  </script>
     <script>
-        function applyFilter() {
-            // Add your filtering logic here based on the selected start and end dates
-            var startDate = document.getElementById('startDate').value;
-            var endDate = document.getElementById('endDate').value;
+      function download() {
+        const element = document.getElementById("salesReport");
+        html2canvas(element).then(function (canvas) {
+          const imgData = canvas.toDataURL("image/png");
+          const pdf = new jsPDF("p", "mm", "a4");
+          const pageWidth = 210;
+          const pageHeight = 297;
+          const imageWidth = 200;
+          const imageHeight = (imageWidth / pageWidth) * pageHeight;
 
-            // You can use startDate and endDate for filtering the sales report
-            console.log('Start Date:', startDate);
-            console.log('End Date:', endDate);
-            
-            // Add logic to update the sales report content based on the selected date range
-        }
+          pdf.addImage(imgData, "PNG", 5, 5, imageWidth, imageHeight);
+          // Adjust the dimensions as needed
+          pdf.save("invoice.pdf");
+        });
+      }
     </script>
+    <script>
+      function applyFilter() {
+        // Add your filtering logic here based on the selected start and end dates
+        var startDate = document.getElementById("startDate").value;
+        var endDate = document.getElementById("endDate").value;
 
-</body>
+        // You can use startDate and endDate for filtering the sales report
+        console.log("Start Date:", startDate);
+        console.log("End Date:", endDate);
+
+        // Add logic to update the sales report content based on the selected date range
+      }
+    </script>
+  </body>
 </html>

@@ -643,7 +643,6 @@
                                                     style="">
                                                     <p style="color:  #00328a;">request has been sent</p>
                                                     </div>
-
                                                 <%}%>
                                                 <%}%>              
                                 </div>
@@ -655,7 +654,7 @@
                 </div>
             </div>
         </div>
-
+        <%- include('../layout/userTemplateFooter.ejs') -%>
         <script src="js/jquery-3.3.1.min.js"></script>
         <script src="js/bootstrap.min.js"></script>
         <script src="js/jquery.nice-select.min.js"></script>
@@ -749,26 +748,6 @@
 
             }
         })
-
-
-
-        // if (userRating > 0) {
-        //     const reviewElement = document.createElement("div");
-        //     reviewElement.classList.add("review");
-        //     reviewElement.innerHTML =
-        //         `<p><strong>Rating: ${userRating}/5</strong></p><p>${review}</p>`;
-        //     reviewsContainer.appendChild(reviewElement);
-
-        //     // Reset styles after submitting
-        //     reviewText.value = "";
-        //     rating.innerText = "0";
-        //     stars.forEach((s) => s.classList.remove("one",
-        //         "two",
-        //         "three",
-        //         "four",
-        //         "five",
-        //         "selected"));
-        // }
     });
 
     function getStarColorClass(value) {

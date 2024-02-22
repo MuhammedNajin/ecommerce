@@ -1,69 +1,101 @@
 <%- include('../layout/header.ejs') -%>
 
-    <div class="wrapper">
+<div class="wrapper">
+  <div class="" style="margin-left: 4rem; margin-bottom: 2rem">
+    <img src="img/logo.png" alt="" />
+  </div>
 
-        <div class="" style="margin-left: 4rem; margin-bottom: 2rem;">
-            <img src="img/logo.png" alt="">
-        </div>
+  <!-- <h2></h2> -->
+  <div class="text-center">
+    <h6>
+      Please enter the one-time password <br />
+      to verify your account
+    </h6>
+    <div>
+      <span>A code has been sent to </span>
+      <%= email %>
+    </div>
+  </div>
 
-        <!-- <h2></h2> -->
-        <div class="text-center">
-            <h6>Please enter the one-time password <br> to verify your account</h6>
-            <div><span>A code has been sent to </span>
-                <%= email %>
-            </div>
-        </div>
+  <%if(messages.incorrect) {%>
 
+  <div class="text text-danger" style="text-align: center; margin-top: 2rem">
+    <span><%= messages.incorrect %></span>
+  </div>
 
+  <%}%> <%if(messages.expired) {%>
 
+  <div class="text text-danger" style="text-align: center; margin-top: 2rem">
+    <span><%= messages.expired %></span>
+  </div>
 
-          <%if(messages.incorrect) {%>
+  <%}%> <% const route = verify ? '/otpLogin?email=' + encodeURIComponent(email)
+  : '/otp?email=' + encodeURIComponent(email); %>
 
-                    <div class="text text-danger" style="text-align: center; margin-top: 2rem;">
-                        <span><%= messages.incorrect %></span>
-                   </div>
-
-                <%}%>
-
-                <%if(messages.expired) {%>
-
-                    <div class="text text-danger" style="text-align: center; margin-top: 2rem;">
-                        <span><%= messages.expired %></span>
-                   </div>
-
-                <%}%>
-        
-                <% const route = verify ? '/otpLogin?email=' + encodeURIComponent(email) : '/otp?email=' + encodeURIComponent(email); %>
-
-            <form action="<%= route %>" method="post">
-
-                <div class="d-flex pt-2" id="inputs">
-                    <input class="otp m-2 text-center form-control rounded py-4" type="text" name="otp1" placeholder=""
-                        inputmode="numeric" maxlength="1" required>
-                    <input class="otp m-2 text-center form-control rounded" type="text" name="otp2" placeholder=""
-                        inputmode="numeric" maxlength="1" required>
-                    <input class="otp m-2 text-center form-control rounded" type="text" name="otp3" placeholder=""
-                        inputmode="numeric" maxlength="1" required>
-                    <input class="otp m-2 text-center form-control rounded" type="text" name="otp4" placeholder=""
-                        inputmode="numeric" maxlength="1" required>
-                </div>
-
-                <div class="input-box button">
-                    <input type="Submit" value="Log in">
-                </div>
-                                               
-                <div class="text pt-2" style="text-align: center; margin-top: 2rem; display: flex; flex-direction: column;">     
-                    <span id="timer" class="time"></span>
-                    <span type="button" id="resend" style="color: rgb(48, 94, 150); margin: 5px;">Resend</span>
-                </div>
-                   
-              
-               
-
-            </form>
+  <form action="<%= route %>" method="post">
+    <div class="d-flex pt-2" id="inputs">
+      <input
+        class="otp m-2 text-center form-control rounded py-4"
+        type="text"
+        name="otp1"
+        placeholder=""
+        inputmode="numeric"
+        maxlength="1"
+        required
+      />
+      <input
+        class="otp m-2 text-center form-control rounded"
+        type="text"
+        name="otp2"
+        placeholder=""
+        inputmode="numeric"
+        maxlength="1"
+        required
+      />
+      <input
+        class="otp m-2 text-center form-control rounded"
+        type="text"
+        name="otp3"
+        placeholder=""
+        inputmode="numeric"
+        maxlength="1"
+        required
+      />
+      <input
+        class="otp m-2 text-center form-control rounded"
+        type="text"
+        name="otp4"
+        placeholder=""
+        inputmode="numeric"
+        maxlength="1"
+        required
+      />
     </div>
 
+    <div class="input-box button">
+      <input type="Submit" value="Log in" />
+    </div>
 
-    <script src="js/user/otp.js"></script>
+    <div
+      class="text pt-2"
+      style="
+        text-align: center;
+        margin-top: 2rem;
+        display: flex;
+        flex-direction: column;
+      "
+    >
+      <span id="timer" class="time"></span>
+      <span
+        type="button"
+        id="resend"
+        style="color: rgb(48, 94, 150); margin: 5px"
+        >Resend</span
+      >
+    </div>
+  </form>
+</div>
 
-    <%- include('../layout/footer.ejs') -%>
+<script src="js/user/otp.js"></script>
+
+<%- include('../layout/footer.ejs') -%>

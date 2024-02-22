@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Nest Dashboard</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -12,290 +11,363 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/imgs/theme/favicon.svg"
+    />
     <!-- Template CSS -->
     <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <%- include('../partials/sidenav.ejs') -%>
 
-        <main class="main-wrap">
-            <section class="content-main">
-                <div class="row">
-                    <div class="col-9">
-                        <div class="content-header">
-                            <h2 class="content-title">Edit variant</h2>
-
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="card mb-4">
-                            <!-- <div class="card-header">
+    <main class="main-wrap">
+      <section class="content-main">
+        <div class="row">
+          <div class="col-9">
+            <div class="content-header">
+              <h2 class="content-title">Edit variant</h2>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card mb-4">
+              <!-- <div class="card-header">
                                 <h4>Basic</h4>
                             </div> -->
-                            <div class="card-body">
-                                <form action="/admin/editVariant" onsubmit=" return editVariant()" method="post"
-                                    enctype="multipart/form-data">
-                                    <div class="mb-4">
-                                        <label for="product_name" class="form-label">Product title</label>
-                                        <input type="text" name="id" hidden value="<%= id %>">
-                                        <input type="text" name="index" hidden value="<%= index %>">
+              <div class="card-body">
+                <form
+                  action="/admin/editVariant"
+                  onsubmit=" return editVariant()"
+                  method="post"
+                  enctype="multipart/form-data"
+                >
+                  <div class="mb-4">
+                    <label for="product_name" class="form-label"
+                      >Product title</label
+                    >
+                    <input type="text" name="id" hidden value="<%= id %>" />
+                    <input
+                      type="text"
+                      name="index"
+                      hidden
+                      value="<%= index %>"
+                    />
 
-                                        <input type="text" placeholder="Type here" value="<%= data.name%>" name="pname"
-                                            class="form-control" id="product_name" />
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Full description</label>
-                                        <textarea placeholder="Type here" value="" name="description"
-                                            class="form-control" rows="4"><%= data.description%></textarea>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Regular price</label>
-                                                <div class="row gx-2">
-                                                    <input placeholder="₹" id="price" name="price" type="text"
-                                                        value="<%= product.price%>" class="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Offer price</label>
-                                                <input placeholder="₹" id="offerPrice" name="offer"
-                                                    value="<%= product.offerPrice%>" type="text" class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Color</label>
-                                                <input placeholder="eg:- red, green, yellow" id="color"
-                                                    value="<%= product.color%>" name="color" type="text"
-                                                    class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Stock</label>
-                                                <input placeholder="Add stock" id="stock" name="stock"
-                                                    value="<%= product.stock%>" type="text" class="form-control" />
-                                            </div>
-                                        </div>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      value="<%= data.name%>"
+                      name="pname"
+                      class="form-control"
+                      id="product_name"
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <label class="form-label">Full description</label>
+                    <textarea
+                      placeholder="Type here"
+                      value=""
+                      name="description"
+                      class="form-control"
+                      rows="4"
+                    >
+<%= data.description%></textarea
+                    >
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="mb-4">
+                        <label class="form-label">Regular price</label>
+                        <div class="row gx-2">
+                          <input
+                            placeholder="₹"
+                            id="price"
+                            name="price"
+                            type="text"
+                            value="<%= product.price%>"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="mb-4">
+                        <label class="form-label">Offer price</label>
+                        <input
+                          placeholder="₹"
+                          id="offerPrice"
+                          name="offer"
+                          value="<%= product.offerPrice%>"
+                          type="text"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="mb-4">
+                        <label class="form-label">Color</label>
+                        <input
+                          placeholder="eg:- red, green, yellow"
+                          id="color"
+                          value="<%= product.color%>"
+                          name="color"
+                          type="text"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="mb-4">
+                        <label class="form-label">Stock</label>
+                        <input
+                          placeholder="Add stock"
+                          id="stock"
+                          name="stock"
+                          value="<%= product.stock%>"
+                          type="text"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                  </div>
 
+                  <label class="form-label">Add Size</label>
 
-                                    </div>
+                  <div
+                    class="row"
+                    id="sizes"
+                    data-size="<%= JSON.stringify(product.size)%>"
+                    style="margin-left: 1rem; margin-bottom: 1rem"
+                  >
+                    <div class="form-check col-lg-2">
+                      <input
+                        class="form-check-input"
+                        name="size"
+                        type="checkbox"
+                        value="S"
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        S
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-2">
+                      <input
+                        class="form-check-input"
+                        name="size"
+                        type="checkbox"
+                        value="M"
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        M
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-2">
+                      <input
+                        class="form-check-input"
+                        name="size"
+                        type="checkbox"
+                        value="L"
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        L
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-2">
+                      <input
+                        class="form-check-input"
+                        name="size"
+                        type="checkbox"
+                        value="XL"
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        XL
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-2">
+                      <input
+                        class="form-check-input"
+                        name="size"
+                        type="checkbox"
+                        value="XXL"
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        XXL
+                      </label>
+                    </div>
+                  </div>
 
-                                    <label class="form-label">Add Size</label>
-
-                                    <div class="row " id="sizes" data-size="<%= JSON.stringify(product.size)%>"
-                                        style="margin-left: 1rem; margin-bottom: 1rem;">
-
-                                        <div class="form-check col-lg-2">
-                                            <input class="form-check-input" name="size" type="checkbox" value="S"
-                                                id="defaultCheck1">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                                S
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-lg-2">
-                                            <input class="form-check-input" name="size" type="checkbox" value="M"
-                                                id="defaultCheck1">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                                M
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-lg-2">
-                                            <input class="form-check-input" name="size" type="checkbox" value="L"
-                                                id="defaultCheck1">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                                L
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-lg-2">
-                                            <input class="form-check-input" name="size" type="checkbox" value="XL"
-                                                id="defaultCheck1">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                                XL
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-lg-2">
-                                            <input class="form-check-input" name="size" type="checkbox" value="XXL"
-                                                id="defaultCheck1">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                                XXL
-                                            </label>
-                                        </div>
-
-                                    </div>
-
-
-                                    <!-- <div class="mb-4">
+                  <!-- <div class="mb-4">
                                         <label class="form-label">Tax rate</label>
                                         <input type="text" placeholder="%" class="form-control" id="product_name" />
                                     </div> -->
 
-                                    <label class="form-label">Add images</label>
+                  <label class="form-label">Add images</label>
 
-                                    <div class="" style="display: flex; margin: 1rem;">
+                  <div class="" style="display: flex; margin: 1rem">
+                    <% for (let i=0; i < 4; i++) { %>
+                    <div class="mb-4 col-lg-3 me-2">
+                      <img
+                        src="/img/productImage/sharp/<%= product.images[i] %>"
+                        id="image<%= i + 1 %>"
+                        alt="Product image"
+                        style="
+                          width: 100px;
+                          height: 100px;
+                          margin-bottom: 1.5rem;
+                        "
+                      />
 
-                                        <% for (let i=0; i < 4; i++) { %>
-                                            <div class="mb-4 col-lg-3 me-2">
-                                                <img src="/img/productImage/sharp/<%= product.images[i] %>"
-                                                    id="image<%= i + 1 %>" alt="Product image"
-                                                    style="width: 100px; height: 100px; margin-bottom: 1.5rem;">
-
-                                                <input type="file" accept="image/*" placeholder="Add image"
-                                                    onchange="previewImage(this, 'image<%= i + 1 %>', '<%= i%>')"
-                                                    name="images" value="<%= product.images[i]%>" class="form-control"
-                                                    id="file<%= i + 1 %>" />
-
-                                            </div>
-                                            <% } %>
-
-
-
-
-                                    </div>
-
-
-                                    <button class="btn btn-dark ">Edit your product</button>
-                                </form>
-                            </div>
-                        </div>
-
-
-                        <!-- card end// -->
+                      <input
+                        type="file"
+                        accept="image/*"
+                        placeholder="Add image"
+                        onchange="previewImage(this, 'image<%= i + 1 %>', '<%= i%>')"
+                        name="images"
+                        value="<%= product.images[i]%>"
+                        class="form-control"
+                        id="file<%= i + 1 %>"
+                      />
                     </div>
+                    <% } %>
+                  </div>
 
-                </div>
-            </section>
-            <!-- content-main end// -->
-            <footer class="main-footer font-xs">
-                <div class="row pb-30 pt-15">
-                    <div class="col-sm-6">
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        &copy; Nest - HTML Ecommerce Template .
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="text-sm-end">All rights reserved</div>
-                    </div>
-                </div>
-            </footer>
-        </main>
-        <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
-        <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/vendors/select2.min.js"></script>
-        <script src="assets/js/vendors/perfect-scrollbar.js"></script>
-        <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
-        <!-- Main Script -->
-        <script src="assets/js/main.js?v=1.1" type="text/javascript"></script>
-</body>
+                  <button class="btn btn-dark">Edit your product</button>
+                </form>
+              </div>
+            </div>
 
+            <!-- card end// -->
+          </div>
+        </div>
+      </section>
+      <!-- content-main end// -->
+      <footer class="main-footer font-xs">
+        <div class="row pb-30 pt-15">
+          <div class="col-sm-6">
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            &copy; Nest - HTML Ecommerce Template .
+          </div>
+          <div class="col-sm-6">
+            <div class="text-sm-end">All rights reserved</div>
+          </div>
+        </div>
+      </footer>
+    </main>
+    <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendors/select2.min.js"></script>
+    <script src="assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="assets/js/main.js?v=1.1" type="text/javascript"></script>
+  </body>
 </html>
 
 <script>
+  function previewImage(input, imageId, position) {
+    const preview = document.getElementById(imageId);
+    const file = input.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        preview.src = e.target.result;
+      };
 
-
-    function previewImage(input, imageId, position) {
-        const preview = document.getElementById(imageId);
-        const file = input.files[0];
-        if (file) {
-            const reader = new FileReader();
-            reader.onload = function (e) {
-                preview.src = e.target.result;
-            };
-
-            reader.readAsDataURL(file);
-        } else {
-            preview.src = "#";
-        }
+      reader.readAsDataURL(file);
+    } else {
+      preview.src = "#";
     }
+  }
 </script>
 
 <script>
-
-    function editVariant() {
-
-
-
-        let price = document.getElementById("price");
-        let oprice = document.getElementById("offerPrice");
-        let color = document.getElementById('color');
-        let stock = document.getElementById('stock');
-        let image = document.getElementById('image1');
-        let size = document.querySelectorAll('[name="size"]');
-        console.log(size);
-        if (price.value.trim() === '' || Number(price.value) <= 0 || isNaN(price.value)) {
-
-            price.style.border = 'solid 1px red';
-            setTimeout(function () {
-                price.style.border = '';
-            }, 3000);
-            return false;
-        }
-        else if (oprice.value.trim() === '' || Number(oprice.value) <= 0 || isNaN(oprice.value)) {
-            oprice.style.border = 'solid 1px red';
-            setTimeout(function () {
-                oprice.style.border = '';
-            }, 3000);
-            return false;
-        }
-        else if (color.value.trim() === '') {
-            color.style.border = 'solid 1px red';
-
-            setTimeout(function () {
-                color.style.border = '';
-
-            }, 3000);
-            return false
-
-        }
-        else if (stock.value.trim() === '' || Number(stock.value) <= 0 || isNaN(stock.value)) {
-            stock.style.border = 'solid 1px red';
-
-            setTimeout(function () {
-                stock.style.border = '';
-
-            }, 3000);
-            return false
-
-        }
-        else {
-            let count = 0;
-            const sizes = document.querySelectorAll('[name="size"]')
-            sizes.forEach((el) => {
-                if (el.checked) {
-                    count++;
-                }
-            })
-            if (count == 0) {
-                sizes[0].style.border = 'solid 1px red';
-
-                setTimeout(function () {
-                    size[0].style.border = '';
-                }, 3000);
-                return false
-
-            }
-            return true;
-        }
-    }
-</script>
-
-<script>
+  function editVariant() {
+    let price = document.getElementById("price");
+    let oprice = document.getElementById("offerPrice");
+    let color = document.getElementById("color");
+    let stock = document.getElementById("stock");
+    let image = document.getElementById("image1");
     let size = document.querySelectorAll('[name="size"]');
-    const id = document.getElementById('sizes')
-    let dbSize = JSON.parse(id.getAttribute('data-size'))
-    console.log(dbSize, 'hi')
+    console.log(size);
+    if (
+      price.value.trim() === "" ||
+      Number(price.value) <= 0 ||
+      isNaN(price.value)
+    ) {
+      price.style.border = "solid 1px red";
+      setTimeout(function () {
+        price.style.border = "";
+      }, 3000);
+      return false;
+    } else if (
+      oprice.value.trim() === "" ||
+      Number(oprice.value) <= 0 ||
+      isNaN(oprice.value)
+    ) {
+      oprice.style.border = "solid 1px red";
+      setTimeout(function () {
+        oprice.style.border = "";
+      }, 3000);
+      return false;
+    } else if (color.value.trim() === "") {
+      color.style.border = "solid 1px red";
 
-    function loadSize() {
-        size.forEach((elem, i) => {
-            console.log(elem)
-            if (dbSize[i]) elem.checked = true;
-        });
+      setTimeout(function () {
+        color.style.border = "";
+      }, 3000);
+      return false;
+    } else if (
+      stock.value.trim() === "" ||
+      Number(stock.value) <= 0 ||
+      isNaN(stock.value)
+    ) {
+      stock.style.border = "solid 1px red";
+
+      setTimeout(function () {
+        stock.style.border = "";
+      }, 3000);
+      return false;
+    } else {
+      let count = 0;
+      const sizes = document.querySelectorAll('[name="size"]');
+      sizes.forEach((el) => {
+        if (el.checked) {
+          count++;
+        }
+      });
+      if (count == 0) {
+        sizes[0].style.border = "solid 1px red";
+
+        setTimeout(function () {
+          size[0].style.border = "";
+        }, 3000);
+        return false;
+      }
+      return true;
     }
-    loadSize()
+  }
+</script>
+
+<script>
+  let size = document.querySelectorAll('[name="size"]');
+  const id = document.getElementById("sizes");
+  let dbSize = JSON.parse(id.getAttribute("data-size"));
+  console.log(dbSize, "hi");
+
+  function loadSize() {
+    size.forEach((elem, i) => {
+      console.log(elem);
+      if (dbSize[i]) elem.checked = true;
+    });
+  }
+  loadSize();
 </script>

@@ -76,7 +76,6 @@ module.exports.loadAdmin = async (req, res) => {
     const brand = await adminHelpers.bestSelling("brand");
     const topTenCetagory = await adminHelpers.mapCategory(cetagory);
 
-
     res.render("adminDashboard", {
       monthlyData,
       userCount,
@@ -320,7 +319,6 @@ module.exports.loadsingleOrder = async (req, res) => {
 };
 
 module.exports.changeOrderStatus = async (req, res) => {
-  
   try {
     const { orderId, productId, index, status, userId } = req.body;
 

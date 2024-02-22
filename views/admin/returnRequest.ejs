@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Nest Dashboard</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -12,117 +11,97 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="/assets/imgs/theme/favicon.svg" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="/assets/imgs/theme/favicon.svg"
+    />
     <!-- Template CSS -->
     <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
-</head>
+  </head>
 
-<body>
-
+  <body>
     <%- include('../partials/sidenav.ejs') -%>
 
+    <main class="main-wrap">
+      <section class="content-main">
+        <div class="content-header">
+          <div>
+            <h2 class="content-title card-title">Return request</h2>
+            <p>Lorem ipsum dolor sit amet.</p>
+          </div>
+        </div>
+        <div class="card mb-4">
+          <!-- card-header end// -->
+          <div class="card-body">
+            <div class="table-responsive">
+              <%console.log(order)%> <%if(order.length > 0) {%>
+              <table class="table table-hover">
+                <thead>
+                  <tr>
+                    <th>Index</th>
+                    <th scope="col">Name</th>
+                    <th scope="col">Email</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <%order.forEach((item, i)=> {%>
 
+                  <tr>
+                    <td><%= i + 1%></td>
+                    <td><b> <%= item.user.name%> </b></td>
+                    <td><%= item.user.name%></td>
+                    <td><%= item.totalAmount%></td>
+                    <td>
+                      <span class="badge rounded-pill alert-warning">
+                        <%= item.status%>
+                      </span>
+                    </td>
+                    <% const formattedDate=item.date.toLocaleString('en-US', {
+                    weekday: 'short' , month: 'short' , day: 'numeric' , year:
+                    'numeric' , hour: 'numeric' , minute: 'numeric' , second:
+                    'numeric' , hour12: true }); %>
+                    <td><%= formattedDate%></td>
+                    <td class="">
+                      <%const returns=true%>
+                      <a
+                        href="/admin/single-orderDetails?orderId=<%= item._id%>&returns=<%= returns%>"
+                        >More details</a
+                      >
+                      <!-- dropdown //end -->
+                    </td>
+                  </tr>
 
-        <main class="main-wrap">
-            <section class="content-main">
-                <div class="content-header">
-                    <div>
-                        <h2 class="content-title card-title">Return request</h2>
-                        <p>Lorem ipsum dolor sit amet.</p>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    
-                    <!-- card-header end// -->
-                    <div class="card-body">
-                       
-                            <div class="table-responsive">
-                                <%console.log(order)%>
-                                <%if(order.length > 0) {%>
-                                <table class="table table-hover">
-                                    <thead>
-                                        <tr>
-                                            <th>Index</th>
-                                            <th scope="col">Name</th>
-                                            <th scope="col">Email</th>
-                                            <th scope="col">Total</th>
-                                            <th scope="col">Status</th>
-                                            <th scope="col">Date</th>
-                                            <th scope="col">Action</th>
+                  <%})%>
+                </tbody>
+              </table>
+              <%} else {%>
 
-                                        </tr>
-                                    </thead>
-                                    <tbody>
+              <p class="text-center" style="margin: 2rem 0; font-weight: 900">
+                No return requests
+              </p>
 
-                                        <%order.forEach((item, i)=> {%>
-
-                                            <tr>
-                                                <td>
-                                                    <%= i + 1%>
-                                                </td>
-                                                <td><b>
-                                                        <%= item.user.name%>
-                                                    </b></td>
-                                                <td>
-                                                    <%= item.user.name%>
-                                                </td>
-                                                <td>
-                                                    <%= item.totalAmount%>
-                                                </td>
-                                                <td><span class="badge rounded-pill alert-warning">
-                                                        <%= item.status%>
-                                                    </span></td>
-                                                <% const formattedDate=item.date.toLocaleString('en-US', {
-                                                    weekday: 'short' , month: 'short' , day: 'numeric' , year: 'numeric'
-                                                    , hour: 'numeric' , minute: 'numeric' , second: 'numeric' , hour12:
-                                                    true }); %>
-                                                    <td>
-                                                        <%= formattedDate%>
-                                                    </td>
-                                                    <td class="">
-                                                        <%const returns=true%>
-                                                            <a
-                                                                href="/admin/single-orderDetails?orderId=<%= item._id%>&returns=<%= returns%>">More
-                                                                details</a>
-                                                            <!-- dropdown //end -->
-                                                    </td>
-
-                                            </tr>
-
-
-
-                                            <%})%>
-
-
-
-                                    </tbody>
-                                </table>
-                                <%} else {%>
-
-                                    <p class="text-center" style="margin: 2rem 0; font-weight: 900;">No return requests</p>
-            
-                                    <%}%>
-                            </div>
-                            <!-- table-responsive //end -->
-                    </div>
-                    <!-- card-body end// -->
-
-
-                  
-
-                </div>
-                <!-- card end// -->
-            </section>
-            <!-- content-main end// -->
-            <%- include('../partials/adminFooter.ejs') -%>
-        </main>
-        <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
-        <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/vendors/select2.min.js"></script>
-        <script src="assets/js/vendors/perfect-scrollbar.js"></script>
-        <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
-        <!-- Main Script -->
-        <script src="assets/js/main.js?v=1.1" type="text/javascript"></script>
-</body>
-
+              <%}%>
+            </div>
+            <!-- table-responsive //end -->
+          </div>
+          <!-- card-body end// -->
+        </div>
+        <!-- card end// -->
+      </section>
+      <!-- content-main end// -->
+      <%- include('../partials/adminFooter.ejs') -%>
+    </main>
+    <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendors/select2.min.js"></script>
+    <script src="assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="assets/js/main.js?v=1.1" type="text/javascript"></script>
+  </body>
 </html>

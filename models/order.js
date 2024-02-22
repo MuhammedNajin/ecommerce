@@ -1,10 +1,10 @@
 const mongoose = require("mongoose");
 
 const orderSchema = new mongoose.Schema({
-  user:{
-   type: mongoose.Schema.Types.ObjectId,
-   required: true,
-   ref: 'User'
+  user: {
+    type: mongoose.Schema.Types.ObjectId,
+    required: true,
+    ref: "User",
   },
   deliveryDetails: {
     type: Object,
@@ -12,68 +12,75 @@ const orderSchema = new mongoose.Schema({
   },
   products: [
     {
-        productId: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'Product',
-        },
-        
-        product: {
-            type: String,
-        },
+      productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: "Product",
+      },
 
-        price: {
-            type: Number,
-            required: true,
-        },
+      product: {
+        type: String,
+      },
 
-        quantity: {
-            type: Number,
-            default: 1,
-        },
+      price: {
+        type: Number,
+        required: true,
+      },
 
-        totalPrice: {
-            type: Number,
-            required: true,
-        },
+      quantity: {
+        type: Number,
+        default: 1,
+      },
 
-        size: {
-            type: String
-        },
+      totalPrice: {
+        type: Number,
+        required: true,
+      },
 
-        status: {
-           type: String,
-           enum: ['placed', 'outfordelivery', 'shipped', 'delivered', 'canceled', 'returned',],
-           default: 'placed',
-        },
+      size: {
+        type: String,
+      },
 
-        cancelReason: {
-          type: String
-        },
+      status: {
+        type: String,
+        enum: [
+          "placed",
+          "outfordelivery",
+          "shipped",
+          "delivered",
+          "canceled",
+          "returned",
+        ],
+        default: "placed",
+      },
 
-        returnReason: {
-          type: String
-        },
+      cancelReason: {
+        type: String,
+      },
 
-        returnRequest: {
-          type: String,
-          enum: ['requested', 'accepted', 'denied'],
-        },
+      returnReason: {
+        type: String,
+      },
 
-        coupon: {
-          type: Number,
-          default: 0,
-        },
+      returnRequest: {
+        type: String,
+        enum: ["requested", "accepted", "denied"],
+      },
 
-        offer: {
-           type: Number,
-        },
-        date: {
-           type: Date,
-           default: Date.now()
-        }
-    }
-],
+      coupon: {
+        type: Number,
+        default: 0,
+      },
+
+      offer: {
+        type: Number,
+      },
+      date: {
+        type: Date,
+        default: Date.now(),
+      },
+    },
+  ],
 
   totalAmount: {
     type: Number,
@@ -81,22 +88,22 @@ const orderSchema = new mongoose.Schema({
   },
   date: {
     type: Date,
-    required: true
+    required: true,
   },
   expected_delivery: {
     type: String,
-    required: true
+    required: true,
   },
   status: {
     type: String,
-    required: true
+    required: true,
   },
   paymentMethod: {
     type: String,
-    required: true
+    required: true,
   },
   paymentId: {
-    type: String
+    type: String,
   },
 });
 

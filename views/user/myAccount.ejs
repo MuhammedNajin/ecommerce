@@ -1,308 +1,462 @@
 <!DOCTYPE html>
 <html lang="zxx">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="description" content="Male_Fashion Template">
-    <meta name="keywords" content="Male_Fashion, unica, creative, html">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="Male_Fashion Template" />
+    <meta name="keywords" content="Male_Fashion, unica, creative, html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
     <title>Male-Fashion | Template</title>
 
     <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
-        rel="stylesheet">
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Css Styles -->
-    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
-    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
-    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css">
-    <link rel="stylesheet" href="css/nice-select.css" type="text/css">
-    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
-    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
-    <link rel="stylesheet" href="css/style.css" type="text/css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
-        integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css" />
+    <link rel="stylesheet" href="css/magnific-popup.css" type="text/css" />
+    <link rel="stylesheet" href="css/nice-select.css" type="text/css" />
+    <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/slicknav.min.css" type="text/css" />
+    <link rel="stylesheet" href="css/style.css" type="text/css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"
+      integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
 
     <style>
-        a {
-            text-decoration: none;
-        }
+      a {
+        text-decoration: none;
+      }
 
-        .menu-itemmm {
+      .menu-itemmm {
+        margin-bottom: 20px;
+        padding-left: 21px;
+      }
 
-            margin-bottom: 20px;
-            padding-left: 21px
-        }
+      .menu-itemmm a {
+        color: black;
+        text-decoration: none;
+        text-transform: capitalize;
+        font-size: 0.9rem;
+        font-family: "Quicksand";
+      }
 
-        .menu-itemmm a {
-            color: black;
-            text-decoration: none;
-            text-transform: capitalize;
-            font-size: .9rem;
-            font-family: 'Quicksand';
-        }
-
-        .menu-headinggg {
-            font-size: .7rem;
-            font-weight: bold;
-            margin-bottom: 10px;
-            color: rgba(127, 127, 127, 1);
-            padding-left: 10px;
-        }
+      .menu-headinggg {
+        font-size: 0.7rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+        color: rgba(127, 127, 127, 1);
+        padding-left: 10px;
+      }
     </style>
-</head>
+  </head>
 
-<body>
-
+  <body>
     <%- include('../partials/nav.ejs') -%>
-        <div class="container" style="background-color: #fff;">
-            <div class="container-fluid">
-                <div class="row">
-                    <%- include('../partials/profileNav.ejs') -%>
-                        <div class="col-md-9">
-                            <div class="div row"
-                                style="background-color: #fff; box-shadow: 0 2px 4px 0 rgba(0,0,0,.08); padding: 16px;">
-
-                                <div class="col-md-6">
-                                    <div
-                                        style="display: flex; flex-direction: column; max-width: 300px; margin-top: 2rem;">
-                                        <label for="">Personal information <button onclick="edit('editUserName')"
-                                                class="btn editUserName"
-                                                style="color: rgb(46, 92, 171); font-size: 16px; font-weight: 600;">edit</button></label>
-                                        <div class="d-flex" style="position: relative;">
-                                            <span id="uError" class="editUserName"
-                                                style="position: absolute; top: -23px; color: red; font-size: 12px;"></span>
-                                            <input type="text" class="form-control editUserName" disabled value="<%= userDetails.name%>">
-                                            <button onclick="save('editUserName')"
-                                                style="margin-left: 5px; display: none;"
-                                                class="btn btn-dark editUserName">Save</button>
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="display: flex; flex-direction: column; max-width: 300px; margin-top: 2rem;">
-                                        <label for="">Email address <button class="btn editEmail"
-                                                onclick="edit('editEmail')"
-                                                style="color: rgb(46, 92, 171); font-size: 16px; font-weight: 600;">edit</button></label>
-                                        <div class="d-flex" style="position: relative;">
-                                            <span id="eError" class="editEmail"
-                                                style="position: absolute; top: -23px; font-size: 12px; color: red;"></span>
-                                            <input disabled type="text" class="form-control editEmail" value="<%= userDetails.email%>">
-                                            <button onclick="save('editEmail')" style="margin-left: 5px; display: none;"
-                                                class="btn btn-dark editEmail">Save</button>
-                                        </div>
-                                    </div>
-                                    <div
-                                        style="display: flex; flex-direction: column; max-width: 300px; margin-top: 2rem;">
-                                        <label for="">Phone number<button class="btn editPhone"
-                                                onclick="edit('editPhone')"
-                                                style="color: rgb(46, 92, 171); font-size: 16px; font-weight: 600;">edit</button></label>
-                                        <div class="d-flex" style="position: relative;">
-                                            <span id="pError" class="editPhone"
-                                                style="position: absolute; top: -23px; font-size: 12px; color: red;"></span>
-                                            <input type="text" class="form-control editPhone" value="<%= userDetails.mobile%>" disabled>
-                                            <button onclick="save('editPhone')" style="margin-left: 5px; display: none;"
-                                                class="btn btn-dark editPhone">Save</button>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-md-6">
-                                    <div class="col-md-6">
-                                        <div>
-                                            <h5>change password</h5>
-                                        </div>
-                                    </div>
-                                    <div>
-                                        <button onclick="showForm()" class="btn btn-dark">change</button>
-                                    </div>
-                                    <div id="passwords" style="margin-top: 2rem; display: none;">
-                                        <div style="display: flex; flex-direction: column; position: relative">
-                                            <label style="margin-bottom: 1rem;" for="">old password</label>
-                                            <span id="oldError"
-                                                style="color: red; position: absolute; top: 17px;"></span>
-                                            <input class="form-control" id="oldPassword" type="text"
-                                                placeholder="Enter your old password">
-                                        </div>
-                                        <div style="display: flex; flex-direction: column; position: relative; ">
-                                            <label style="margin-bottom: 1rem;" for="">new password</label>
-                                            <span id="newError"
-                                                style="color: red; position: absolute; top: 17px;"></span>
-                                            <input class="form-control" id="newPassword" type="text"
-                                                placeholder="Enter your old password">
-                                        </div>
-                                        <div style="display: flex; flex-direction: column; position: relative; ">
-                                            <label style="margin-bottom: 1rem;" for="">confirm password</label>
-                                            <span id="confirmError"
-                                                style="color: red; position: absolute; top: 17px;"></span>
-                                            <input class="form-control" id="confirmPassword" type="text"
-                                                placeholder="Enter your old password">
-                                        </div>
-                                        <div class="mt-2">
-                                            <button onclick="changePassword();" class="btn btn-dark">save</button>
-                                            <button onclick="hideForm()" class="btn btn-dark">cancel</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+    <div class="container" style="background-color: #fff">
+      <div class="container-fluid">
+        <div class="row">
+          <%- include('../partials/profileNav.ejs') -%>
+          <div class="col-md-9">
+            <div
+              class="div row"
+              style="
+                background-color: #fff;
+                box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.08);
+                padding: 16px;
+              "
+            >
+              <div class="col-md-6">
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    max-width: 300px;
+                    margin-top: 2rem;
+                  "
+                >
+                  <label for=""
+                    >Personal information
+                    <button
+                      onclick="edit('editUserName')"
+                      class="btn editUserName"
+                      style="
+                        color: rgb(46, 92, 171);
+                        font-size: 16px;
+                        font-weight: 600;
+                      "
+                    >
+                      edit
+                    </button></label
+                  >
+                  <div class="d-flex" style="position: relative">
+                    <span
+                      id="uError"
+                      class="editUserName"
+                      style="
+                        position: absolute;
+                        top: -23px;
+                        color: red;
+                        font-size: 12px;
+                      "
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control editUserName"
+                      disabled
+                      value="<%= userDetails.name%>"
+                    />
+                    <button
+                      onclick="save('editUserName')"
+                      style="margin-left: 5px; display: none"
+                      class="btn btn-dark editUserName"
+                    >
+                      Save
+                    </button>
+                  </div>
                 </div>
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    max-width: 300px;
+                    margin-top: 2rem;
+                  "
+                >
+                  <label for=""
+                    >Email address
+                    <button
+                      class="btn editEmail"
+                      onclick="edit('editEmail')"
+                      style="
+                        color: rgb(46, 92, 171);
+                        font-size: 16px;
+                        font-weight: 600;
+                      "
+                    >
+                      edit
+                    </button></label
+                  >
+                  <div class="d-flex" style="position: relative">
+                    <span
+                      id="eError"
+                      class="editEmail"
+                      style="
+                        position: absolute;
+                        top: -23px;
+                        font-size: 12px;
+                        color: red;
+                      "
+                    ></span>
+                    <input
+                      disabled
+                      type="text"
+                      class="form-control editEmail"
+                      value="<%= userDetails.email%>"
+                    />
+                    <button
+                      onclick="save('editEmail')"
+                      style="margin-left: 5px; display: none"
+                      class="btn btn-dark editEmail"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+                <div
+                  style="
+                    display: flex;
+                    flex-direction: column;
+                    max-width: 300px;
+                    margin-top: 2rem;
+                  "
+                >
+                  <label for=""
+                    >Phone number<button
+                      class="btn editPhone"
+                      onclick="edit('editPhone')"
+                      style="
+                        color: rgb(46, 92, 171);
+                        font-size: 16px;
+                        font-weight: 600;
+                      "
+                    >
+                      edit
+                    </button></label
+                  >
+                  <div class="d-flex" style="position: relative">
+                    <span
+                      id="pError"
+                      class="editPhone"
+                      style="
+                        position: absolute;
+                        top: -23px;
+                        font-size: 12px;
+                        color: red;
+                      "
+                    ></span>
+                    <input
+                      type="text"
+                      class="form-control editPhone"
+                      value="<%= userDetails.mobile%>"
+                      disabled
+                    />
+                    <button
+                      onclick="save('editPhone')"
+                      style="margin-left: 5px; display: none"
+                      class="btn btn-dark editPhone"
+                    >
+                      Save
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="col-md-6">
+                  <div>
+                    <h5>change password</h5>
+                  </div>
+                </div>
+                <div>
+                  <button onclick="showForm()" class="btn btn-dark">
+                    change
+                  </button>
+                </div>
+                <div id="passwords" style="margin-top: 2rem; display: none">
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      position: relative;
+                    "
+                  >
+                    <label style="margin-bottom: 1rem" for=""
+                      >old password</label
+                    >
+                    <span
+                      id="oldError"
+                      style="color: red; position: absolute; top: 17px"
+                    ></span>
+                    <input
+                      class="form-control"
+                      id="oldPassword"
+                      type="text"
+                      placeholder="Enter your old password"
+                    />
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      position: relative;
+                    "
+                  >
+                    <label style="margin-bottom: 1rem" for=""
+                      >new password</label
+                    >
+                    <span
+                      id="newError"
+                      style="color: red; position: absolute; top: 17px"
+                    ></span>
+                    <input
+                      class="form-control"
+                      id="newPassword"
+                      type="text"
+                      placeholder="Enter your old password"
+                    />
+                  </div>
+                  <div
+                    style="
+                      display: flex;
+                      flex-direction: column;
+                      position: relative;
+                    "
+                  >
+                    <label style="margin-bottom: 1rem" for=""
+                      >confirm password</label
+                    >
+                    <span
+                      id="confirmError"
+                      style="color: red; position: absolute; top: 17px"
+                    ></span>
+                    <input
+                      class="form-control"
+                      id="confirmPassword"
+                      type="text"
+                      placeholder="Enter your old password"
+                    />
+                  </div>
+                  <div class="mt-2">
+                    <button onclick="changePassword();" class="btn btn-dark">
+                      save
+                    </button>
+                    <button onclick="hideForm()" class="btn btn-dark">
+                      cancel
+                    </button>
+                  </div>
+                </div>
+              </div>
             </div>
+          </div>
         </div>
-        <script src="/js/jquery-3.3.1.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-            crossorigin="anonymous"></script>
-</body>
-
+      </div>
+    </div>
+    <%- include('../layout/userTemplateFooter.ejs') -%>
+    <script src="/js/jquery-3.3.1.min.js"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
 </html>
 
 <script>
+  function showForm() {
+    document.getElementById("passwords").style.display = "block";
+  }
 
-    function showForm() {
-        document.getElementById('passwords')
-            .style.display = 'block';
+  function hideForm() {
+    document.getElementById("passwords").style.display = "none";
+  }
 
+  function changePassword() {
+    console.log("hello");
+    const oldPassword = document.getElementById("oldPassword").value;
+    const newPassword = document.getElementById("newPassword").value;
+    const confirmPassword = document.getElementById("confirmPassword").value;
+
+    if (!oldPassword) {
+      document.getElementById("oldError").textContent = "Enter old password";
+      hideMassage("oldError");
+    } else if (!newPassword) {
+      document.getElementById("newError").textContent = "Enter new password";
+      hideMassage("newError");
+    } else if (!confirmPassword) {
+      document.getElementById("confirmError").textContent =
+        "Enter confirm password";
+      hideMassage("confirmError");
+    } else {
+      const data = {
+        oldPassword,
+        newPassword,
+        confirmPassword,
+      };
+
+      const url = "/change-password";
+      $.ajax({
+        type: "PUT",
+        url: url,
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: (response) => {
+          if (response.success) {
+            Swal.fire({
+              title: "Password changed successfully",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+            hideForm();
+          } else if (response.old) {
+            showMassage("oldError", response.massage);
+          } else if (response.new) {
+            showMassage("newError", response.massage);
+          } else if (response.notSame) {
+            showMassage("confirmError", response.massage);
+          }
+        },
+      });
     }
+  }
 
-    function hideForm() {
-        document.getElementById('passwords').style.display = 'none';
+  function hideMassage(id) {
+    setTimeout(() => {
+      document.getElementById(`${id}`).textContent = "";
+    }, 3000);
+  }
+
+  function showMassage(id, massage) {
+    document.getElementById(`${id}`).textContent = massage;
+  }
+
+  function edit(cls) {
+    console.log("hin kj");
+    const arr = document.querySelectorAll(`.${cls}`);
+    const text = arr[0].innerHTML;
+    console.log(text);
+    if (text === "edit") {
+      arr[0].textContent = "cancel";
+      arr[2].disabled = false;
+      arr[3].style.display = "block";
+    } else {
+      arr[0].textContent = "edit";
+      arr[2].disabled = true;
+      arr[3].style.display = "none";
     }
+  }
 
-    function changePassword() {
-        console.log('hello')
-        const oldPassword = document.getElementById('oldPassword').value;
-        const newPassword = document.getElementById('newPassword').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-
-        if (!oldPassword) {
-            document.getElementById('oldError').textContent = 'Enter old password';
-            hideMassage('oldError');
-        } else if (!newPassword) {
-
-            document.getElementById('newError').textContent = 'Enter new password';
-            hideMassage('newError');
-
-        } else if (!confirmPassword) {
-
-            document.getElementById('confirmError').textContent = 'Enter confirm password';
-            hideMassage('confirmError');
-
-        } else {
-            const data = {
-                oldPassword,
-                newPassword,
-                confirmPassword,
-            }
-
-            const url = '/change-password'
-            $.ajax({
-                type: 'PUT',
-                url: url,
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                success: (response) => {
-                    if (response.success) {
-                        Swal.fire({
-                            title: 'Password changed successfully',
-                            showConfirmButton: false,
-                            timer: 1500
-                        })
-                        hideForm();
-                    } else if (response.old) {
-                        showMassage('oldError', response.massage);
-                    } else if (response.new) {
-                        showMassage('newError', response.massage);
-                    } else if (response.notSame) {
-                        showMassage('confirmError', response.massage);
-                    }
-                }
-            })
-
-        }
+  function save(cls) {
+    console.log("hi9");
+    const arr = document.querySelectorAll(`.${cls}`);
+    const value = arr[2].value;
+    if (cls === "editUserName" && value.trim() === "") {
+      console.log("heloo");
+      arr[1].textContent = "Enter your the username";
+      hideMassage("uError");
+      return false;
+    } else if (cls === "editEmail" && value.trim() === "") {
+      arr[1].textContent = "Enter your the Email";
+      hideMassage("eError");
+      return false;
+    } else if (cls === "editPhone" && value.trim() === "") {
+      arr[1].textContent = "Enter your the Phone";
+      hideMassage("pError");
+      return false;
+    } else {
+      const data = {
+        value,
+        cls,
+      };
+      $.ajax({
+        type: "POST",
+        url: "/change-details",
+        data: JSON.stringify(data),
+        contentType: "application/json",
+        success: (response) => {
+          if (response.username) {
+            arr[1].textContent = response.massage;
+            hideMassage("uError");
+          } else if (response.email) {
+            arr[1].textContent = response.massage;
+            hideMassage("eError");
+          } else if (response.phone) {
+            arr[1].textContent = response.massage;
+            hideMassage("pError");
+          } else if (response.success) {
+            Swal.fire({
+              title: response.massage,
+              icon: "success",
+              showConfirmButton: false,
+              timer: 1500,
+            });
+          }
+        },
+      });
     }
-
-    function hideMassage(id) {
-
-        setTimeout(() => {
-            document.getElementById(`${id}`).textContent = '';
-        }, 3000)
-    }
-
-    function showMassage(id, massage) {
-        document.getElementById(`${id}`).textContent = massage;
-    }
-
-
-    function edit(cls) {
-        console.log('hin kj');
-        const arr = document.querySelectorAll(`.${cls}`);
-        const text = arr[0].innerHTML;
-        console.log(text);
-        if (text === 'edit') {
-            arr[0].textContent = 'cancel';
-            arr[2].disabled = false;
-            arr[3].style.display = 'block';
-        } else {
-            arr[0].textContent = 'edit';
-            arr[2].disabled = true;
-            arr[3].style.display = 'none';
-        }
-    }
-
-
-    function save(cls) {
-        console.log('hi9')
-        const arr = document.querySelectorAll(`.${cls}`);
-        const value = arr[2].value;
-        if (cls === 'editUserName' && value.trim() === '') {
-            console.log('heloo')
-            arr[1].textContent = 'Enter your the username';
-            hideMassage('uError')
-            return false;
-        } else if (cls === 'editEmail' && value.trim() === '') {
-            arr[1].textContent = 'Enter your the Email';
-            hideMassage('eError')
-            return false;
-        } else if (cls === 'editPhone' && value.trim() === '') {
-            arr[1].textContent = 'Enter your the Phone';
-            hideMassage('pError')
-            return false;
-        } else {
-            const data = {
-                value,
-                cls
-            }
-            $.ajax({
-                type: 'POST',
-                url: '/change-details',
-                data: JSON.stringify(data),
-                contentType: 'application/json',
-                success: (response) => {
-                    if (response.username) {
-                        arr[1].textContent = response.massage;
-                        hideMassage('uError')
-                    } else if (response.email) {
-                        arr[1].textContent = response.massage;
-                        hideMassage('eError')
-
-                    } else if (response.phone) {
-                        arr[1].textContent = response.massage;
-                        hideMassage('pError')
-                    } else if(response.success) {
-                        Swal.fire({
-                            title: response.massage,
-                            icon: 'success',
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                    }
-                }
-            })
-        }
-    }
+  }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

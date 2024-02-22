@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="utf-8" />
     <title>Nest Dashboard</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
@@ -12,392 +11,499 @@
     <meta property="og:url" content="" />
     <meta property="og:image" content="" />
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/x-icon" href="assets/imgs/theme/favicon.svg" />
+    <link
+      rel="shortcut icon"
+      type="image/x-icon"
+      href="assets/imgs/theme/favicon.svg"
+    />
     <!-- Template CSS -->
     <link href="/assets/css/main.css?v=1.1" rel="stylesheet" type="text/css" />
-</head>
+  </head>
 
-<body>
+  <body>
     <%- include('../partials/sidenav.ejs') -%>
 
-        <main class="main-wrap">
-            <header class="main-header navbar">
-                <div class="col-search">
-                    <form class="searchform">
-                        <div class="input-group">
-                            <input list="search_terms" type="text" class="form-control" placeholder="Search term" />
-                            <button class="btn btn-light bg" type="button"><i
-                                    class="material-icons md-search"></i></button>
-                        </div>
-                        <datalist id="search_terms">
-                            <option value="Products"></option>
-                            <option value="New orders"></option>
-                            <option value="Apple iphone"></option>
-                            <option value="Ahmed Hassan"></option>
-                        </datalist>
-                    </form>
-                </div>
-                <div class="col-nav">
-                    <button class="btn btn-icon btn-mobile me-auto" data-trigger="#offcanvas_aside"><i
-                            class="material-icons md-apps"></i></button>
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link btn-icon" href="#">
-                                <i class="material-icons md-notifications animation-shake"></i>
-                                <span class="badge rounded-pill">3</span>
-                            </a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link btn-icon darkmode" href="#"> <i
-                                    class="material-icons md-nights_stay"></i> </a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="requestfullscreen nav-link btn-icon"><i
-                                    class="material-icons md-cast"></i></a>
-                        </li>
-                        <li class="dropdown nav-item">
-                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownLanguage"
-                                aria-expanded="false"><i class="material-icons md-public"></i></a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownLanguage">
-                                <a class="dropdown-item text-brand" href="#"><img src="assets/imgs/theme/flag-us.png"
-                                        alt="English" />English</a>
-                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-fr.png"
-                                        alt="Français" />Français</a>
-                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-jp.png"
-                                        alt="Français" />日本語</a>
-                                <a class="dropdown-item" href="#"><img src="assets/imgs/theme/flag-cn.png"
-                                        alt="Français" />中国人</a>
-                            </div>
-                        </li>
-                        <li class="dropdown nav-item">
-                            <a class="dropdown-toggle" data-bs-toggle="dropdown" href="#" id="dropdownAccount"
-                                aria-expanded="false"> <img class="img-xs rounded-circle"
-                                    src="assets/imgs/people/avatar-2.png" alt="User" /></a>
-                            <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownAccount">
-                                <a class="dropdown-item" href="#"><i class="material-icons md-perm_identity"></i>Edit
-                                    Profile</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-settings"></i>Account
-                                    Settings</a>
-                                <a class="dropdown-item" href="#"><i
-                                        class="material-icons md-account_balance_wallet"></i>Wallet</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-receipt"></i>Billing</a>
-                                <a class="dropdown-item" href="#"><i class="material-icons md-help_outline"></i>Help
-                                    center</a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="#"><i
-                                        class="material-icons md-exit_to_app"></i>Logout</a>
-                            </div>
-                        </li>
-                    </ul>
-                </div>
-            </header>
-            <section class="content-main">
-                <div class="row">
-                    <div class="col-9">
-                        <div class="content-header">
-                            <h2 class="content-title">Add New Product</h2>
-                            <div>
-                                <button class="btn btn-dark font-sm mr-5 ">Save to draft</button>
-                                <!-- <button class="btn btn-md rounded font-sm hover-up">Publich</button> -->
-                            </div>
-                        </div>
-                    </div>
-                    <div class="col-lg-8">
-                        <div class="card mb-4">
-                            <!-- <div class="card-header">
+    <main class="main-wrap">
+      <header class="main-header navbar">
+        <div class="col-search">
+          <form class="searchform">
+            <div class="input-group">
+              <input
+                list="search_terms"
+                type="text"
+                class="form-control"
+                placeholder="Search term"
+              />
+              <button class="btn btn-light bg" type="button">
+                <i class="material-icons md-search"></i>
+              </button>
+            </div>
+            <datalist id="search_terms">
+              <option value="Products"></option>
+              <option value="New orders"></option>
+              <option value="Apple iphone"></option>
+              <option value="Ahmed Hassan"></option>
+            </datalist>
+          </form>
+        </div>
+        <div class="col-nav">
+          <button
+            class="btn btn-icon btn-mobile me-auto"
+            data-trigger="#offcanvas_aside"
+          >
+            <i class="material-icons md-apps"></i>
+          </button>
+          <ul class="nav">
+            <li class="nav-item">
+              <a class="nav-link btn-icon" href="#">
+                <i class="material-icons md-notifications animation-shake"></i>
+                <span class="badge rounded-pill">3</span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link btn-icon darkmode" href="#">
+                <i class="material-icons md-nights_stay"></i>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="#" class="requestfullscreen nav-link btn-icon"
+                ><i class="material-icons md-cast"></i
+              ></a>
+            </li>
+            <li class="dropdown nav-item">
+              <a
+                class="dropdown-toggle"
+                data-bs-toggle="dropdown"
+                href="#"
+                id="dropdownLanguage"
+                aria-expanded="false"
+                ><i class="material-icons md-public"></i
+              ></a>
+              <div
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="dropdownLanguage"
+              >
+                <a class="dropdown-item text-brand" href="#"
+                  ><img
+                    src="assets/imgs/theme/flag-us.png"
+                    alt="English"
+                  />English</a
+                >
+                <a class="dropdown-item" href="#"
+                  ><img
+                    src="assets/imgs/theme/flag-fr.png"
+                    alt="Français"
+                  />Français</a
+                >
+                <a class="dropdown-item" href="#"
+                  ><img
+                    src="assets/imgs/theme/flag-jp.png"
+                    alt="Français"
+                  />日本語</a
+                >
+                <a class="dropdown-item" href="#"
+                  ><img
+                    src="assets/imgs/theme/flag-cn.png"
+                    alt="Français"
+                  />中国人</a
+                >
+              </div>
+            </li>
+            <li class="dropdown nav-item">
+              <a
+                class="dropdown-toggle"
+                data-bs-toggle="dropdown"
+                href="#"
+                id="dropdownAccount"
+                aria-expanded="false"
+              >
+                <img
+                  class="img-xs rounded-circle"
+                  src="assets/imgs/people/avatar-2.png"
+                  alt="User"
+              /></a>
+              <div
+                class="dropdown-menu dropdown-menu-end"
+                aria-labelledby="dropdownAccount"
+              >
+                <a class="dropdown-item" href="#"
+                  ><i class="material-icons md-perm_identity"></i>Edit
+                  Profile</a
+                >
+                <a class="dropdown-item" href="#"
+                  ><i class="material-icons md-settings"></i>Account Settings</a
+                >
+                <a class="dropdown-item" href="#"
+                  ><i class="material-icons md-account_balance_wallet"></i
+                  >Wallet</a
+                >
+                <a class="dropdown-item" href="#"
+                  ><i class="material-icons md-receipt"></i>Billing</a
+                >
+                <a class="dropdown-item" href="#"
+                  ><i class="material-icons md-help_outline"></i>Help center</a
+                >
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item text-danger" href="#"
+                  ><i class="material-icons md-exit_to_app"></i>Logout</a
+                >
+              </div>
+            </li>
+          </ul>
+        </div>
+      </header>
+      <section class="content-main">
+        <div class="row">
+          <div class="col-9">
+            <div class="content-header">
+              <h2 class="content-title">Add New Product</h2>
+              <div>
+                <button class="btn btn-dark font-sm mr-5">Save to draft</button>
+                <!-- <button class="btn btn-md rounded font-sm hover-up">Publich</button> -->
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-8">
+            <div class="card mb-4">
+              <!-- <div class="card-header">
                                 <h4>Basic</h4>
                             </div> -->
-                            <div class="card-body">
-                                <form action="/admin/add-product" method="post" onsubmit="return productValidation()"
-                                    enctype="multipart/form-data">
-                                    <div class="mb-4">
-                                        <label for="product_name" class="form-label">Product title</label>
-                                        <div class="text-danger " id="pError"
-                                            style="position: absolute; top: -22px; left: 6px;"></div>
-                                        <input type="text" placeholder="Type here" name="pname" class="form-control"
-                                            id="product_name" style="padding: 10px; margin: 1rem, 0; " />
-                                    </div>
-                                    <div class="mb-4">
-                                        <label class="form-label">Full description</label>
-                                        <textarea placeholder="Type here" name="description" id="description"
-                                            class="form-control" rows="4"></textarea>
+              <div class="card-body">
+                <form
+                  action="/admin/add-product"
+                  method="post"
+                  onsubmit="return productValidation()"
+                  enctype="multipart/form-data"
+                >
+                  <div class="mb-4">
+                    <label for="product_name" class="form-label"
+                      >Product title</label
+                    >
+                    <div
+                      class="text-danger"
+                      id="pError"
+                      style="position: absolute; top: -22px; left: 6px"
+                    ></div>
+                    <input
+                      type="text"
+                      placeholder="Type here"
+                      name="pname"
+                      class="form-control"
+                      id="product_name"
+                      style="padding: 10px; margin: 1rem, 0"
+                    />
+                  </div>
+                  <div class="mb-4">
+                    <label class="form-label">Full description</label>
+                    <textarea
+                      placeholder="Type here"
+                      name="description"
+                      id="description"
+                      class="form-control"
+                      rows="4"
+                    ></textarea>
+                  </div>
+                  <div class="row">
+                    <div class="col-lg-4">
+                      <div class="mb-4">
+                        <label class="form-label">Regular price</label>
+                        <div class="row gx-2">
+                          <input
+                            placeholder="₹"
+                            id="price"
+                            name="price"
+                            type="text"
+                            class="form-control"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="mb-4">
+                        <label class="form-label">Offer price</label>
+                        <input
+                          placeholder="₹"
+                          name="offer"
+                          id="offerPrice"
+                          type="text"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="mb-4">
+                        <label class="form-label">Color</label>
+                        <input
+                          placeholder="eg:- red, green, yellow"
+                          id="color"
+                          name="color"
+                          type="text"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="mb-4">
+                        <label class="form-label">Stock</label>
+                        <input
+                          placeholder="Add stock"
+                          id="stock"
+                          name="stock"
+                          type="text"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
+                    <div class="col-lg-4">
+                      <div class="mb-4">
+                        <label class="form-label">Brand</label>
+                        <input
+                          placeholder="Add Brand"
+                          id="brand"
+                          name="brand"
+                          type="text"
+                          class="form-control"
+                        />
+                      </div>
+                    </div>
 
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Regular price</label>
-                                                <div class="row gx-2">
-                                                    <input placeholder="₹" id="price" name="price" type="text"
-                                                        class="form-control" />
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Offer price</label>
-                                                <input placeholder="₹" name="offer" id="offerPrice" type="text" class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Color</label>
-                                                <input placeholder="eg:- red, green, yellow" id="color" name="color" type="text"
-                                                    class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Stock</label>
-                                                <input placeholder="Add stock" id="stock" name="stock" type="text"
-                                                    class="form-control" />
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-4">
-                                            <div class="mb-4">
-                                                <label class="form-label">Brand</label>
-                                                <input placeholder="Add Brand" id="brand" name="brand" type="text"
-                                                    class="form-control" />
-                                            </div>
-                                        </div>
+                    <div class="col-sm-6 mb-3">
+                      <label class="form-label">Category</label>
+                      <select class="form-select" id="category" name="cetagory">
+                        <%for(let i=0; i < cetagory.length; i++) {%>
 
-                                        <div class="col-sm-6 mb-3">
-                                            <label class="form-label">Category</label>
-                                            <select class="form-select" id="category" name="cetagory">
+                        <option value="<%= cetagory[i].name %>">
+                          <%= cetagory[i].name %>
+                        </option>
 
-                                                <%for(let i=0; i < cetagory.length; i++) {%>
-
-                                                    <option value="<%= cetagory[i].name %>">
-                                                        <%= cetagory[i].name %>
-                                                    </option>
-
-
-                                                    <%}%>
-
-                                                        <%console.log( cetagory[0].name) %>
-
-                                            </select>
-                                        </div>
-                                        <!-- <div class="col-lg-4">
+                        <%}%> <%console.log( cetagory[0].name) %>
+                      </select>
+                    </div>
+                    <!-- <div class="col-lg-4">
                                             <label class="form-label"></label>
                                             <input class=""></input>
                                         </div> -->
-                                    </div>
+                  </div>
 
-                                    <label class="form-label">Add Size</label>
+                  <label class="form-label">Add Size</label>
 
-                                    <div class="row " style="margin-left: 1rem; margin-bottom: 1rem;">
+                  <div
+                    class="row"
+                    style="margin-left: 1rem; margin-bottom: 1rem"
+                  >
+                    <div class="form-check col-lg-2">
+                      <input
+                        class="form-check-input"
+                        name="size"
+                        type="checkbox"
+                        value="S"
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        S
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-2">
+                      <input
+                        class="form-check-input"
+                        name="size"
+                        type="checkbox"
+                        value="M"
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        M
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-2">
+                      <input
+                        class="form-check-input"
+                        name="size"
+                        type="checkbox"
+                        value="L"
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        L
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-2">
+                      <input
+                        class="form-check-input"
+                        name="size"
+                        type="checkbox"
+                        value="XL"
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        XL
+                      </label>
+                    </div>
+                    <div class="form-check col-lg-2">
+                      <input
+                        class="form-check-input"
+                        name="size"
+                        type="checkbox"
+                        value="XXL"
+                        id="defaultCheck1"
+                      />
+                      <label class="form-check-label" for="defaultCheck1">
+                        XXL
+                      </label>
+                    </div>
+                  </div>
 
-                                        <div class="form-check col-lg-2">
-                                            <input class="form-check-input" name="size" type="checkbox" value="S"
-                                                id="defaultCheck1">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                                S
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-lg-2">
-                                            <input class="form-check-input" name="size" type="checkbox" value="M"
-                                                id="defaultCheck1">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                                M
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-lg-2">
-                                            <input class="form-check-input" name="size" type="checkbox" value="L"
-                                                id="defaultCheck1">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                                L
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-lg-2">
-                                            <input class="form-check-input" name="size" type="checkbox" value="XL"
-                                                id="defaultCheck1">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                                XL
-                                            </label>
-                                        </div>
-                                        <div class="form-check col-lg-2">
-                                            <input class="form-check-input" name="size" type="checkbox" value="XXL"
-                                                id="defaultCheck1">
-                                            <label class="form-check-label" for="defaultCheck1">
-                                                XXL
-                                            </label>
-                                        </div>
+                  <label class="form-label">Add images</label>
 
-                                    </div>
+                  <div class="" style="display: flex; margin: 1rem">
+                    <%for(let i=0; i < 4; i++) {%>
 
+                    <div class="mb-4 col-lg-3 me-2">
+                      <img
+                        src=""
+                        id="image + <%= i %>"
+                        alt="Product image"
+                        style="
+                          width: 100px;
+                          height: 100px;
+                          margin-bottom: 1.5rem;
+                        "
+                      />
 
-                                    
-
-                                    <label class="form-label">Add images</label>
-
-                                    <div class="" style="display: flex; margin: 1rem;">
-
-                                        <%for(let i=0; i < 4; i++) {%>
-
-                                            <div class="mb-4 col-lg-3 me-2">
-                                                <img src="" id="image + <%= i %>" alt="Product image"
-                                                    style="width: 100px; height: 100px; margin-bottom: 1.5rem;">
-
-                                                <input type="file" accept="image/*" placeholder="Add image"
-                                                    name="images" class="form-control" id="image<%= i + 1%>"  />
-                                            </div>
-
-                                            <%}%>
-
-
-                                    </div>
-
-
-                                    <button class="btn btn-dark ">Add</button>
-                                </form>
-                            </div>
-                        </div>
-
-
-                        <!-- card end// -->
+                      <input
+                        type="file"
+                        accept="image/*"
+                        placeholder="Add image"
+                        name="images"
+                        class="form-control"
+                        id="image<%= i + 1%>"
+                      />
                     </div>
 
-                </div>
-            </section>
-            <!-- content-main end// -->
-            <footer class="main-footer font-xs">
-                <div class="row pb-30 pt-15">
-                    <div class="col-sm-6">
-                        <script>
-                            document.write(new Date().getFullYear());
-                        </script>
-                        &copy; Nest - HTML Ecommerce Template .
-                    </div>
-                    <div class="col-sm-6">
-                        <div class="text-sm-end">All rights reserved</div>
-                    </div>
-                </div>
-            </footer>
-        </main>
-        <!-- <script src="/js/admin/adminValidation.js"></script> -->
-        <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
-        <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
-        <script src="assets/js/vendors/select2.min.js"></script>
-        <script src="assets/js/vendors/perfect-scrollbar.js"></script>
-        <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
-        <!-- Main Script -->
-        <script src="assets/js/main.js?v=1.1" type="text/javascript"></script>
-</body>
+                    <%}%>
+                  </div>
 
+                  <button class="btn btn-dark">Add</button>
+                </form>
+              </div>
+            </div>
+
+            <!-- card end// -->
+          </div>
+        </div>
+      </section>
+      <!-- content-main end// -->
+      <footer class="main-footer font-xs">
+        <div class="row pb-30 pt-15">
+          <div class="col-sm-6">
+            <script>
+              document.write(new Date().getFullYear());
+            </script>
+            &copy; Nest - HTML Ecommerce Template .
+          </div>
+          <div class="col-sm-6">
+            <div class="text-sm-end">All rights reserved</div>
+          </div>
+        </div>
+      </footer>
+    </main>
+    <!-- <script src="/js/admin/adminValidation.js"></script> -->
+    <script src="assets/js/vendors/jquery-3.6.0.min.js"></script>
+    <script src="assets/js/vendors/bootstrap.bundle.min.js"></script>
+    <script src="assets/js/vendors/select2.min.js"></script>
+    <script src="assets/js/vendors/perfect-scrollbar.js"></script>
+    <script src="assets/js/vendors/jquery.fullscreen.min.js"></script>
+    <!-- Main Script -->
+    <script src="assets/js/main.js?v=1.1" type="text/javascript"></script>
+  </body>
 </html>
 
-
 <script>
+  function productValidation() {
+    let pname = document.getElementById("product_name");
+    let pdiscription = document.getElementById("description");
+    let price = document.getElementById("price");
+    let oprice = document.getElementById("offerPrice");
+    let brand = document.getElementById("brand");
+    let color = document.getElementById("color");
+    let stock = document.getElementById("stock");
+    let category = document.getElementById("category");
+    let image = document.getElementById("image1");
 
-    function productValidation() {
+    if (pname.value.trim() === "") {
+      pname.style.border = "solid 1px red";
+      setTimeout(function () {
+        pname.style.border = "";
+      }, 3000);
 
+      return false;
+    } else if (
+      pdiscription.value.trim() === "" ||
+      pdiscription.value.trim().length < 20
+    ) {
+      pdiscription.style.border = "solid 1px red";
 
-        let pname = document.getElementById("product_name");
-        let pdiscription = document.getElementById("description");
-        let price = document.getElementById("price");
-        let oprice = document.getElementById("offerPrice");
-        let brand = document.getElementById('brand');
-        let color = document.getElementById('color');
-        let stock = document.getElementById('stock');
-        let category = document.getElementById('category');
-        let image = document.getElementById('image1');
-        
-        
+      setTimeout(() => {
+        pdiscription.style.border = "";
+      }, 3000);
 
+      return false;
+    } else if (
+      price.value.trim() === "" ||
+      Number(price.value) <= 0 ||
+      isNaN(price.value)
+    ) {
+      price.style.border = "solid 1px red";
 
+      setTimeout(function () {
+        price.style.border = "";
+      }, 3000);
+      return false;
+    } else if (
+      oprice.value.trim() === "" ||
+      Number(oprice.value) <= 0 ||
+      isNaN(oprice.value)
+    ) {
+      oprice.style.border = "solid 1px red";
 
+      setTimeout(function () {
+        oprice.style.border = "";
+      }, 3000);
+      return false;
+    } else if (color.value.trim() === "") {
+      color.style.border = "solid 1px red";
 
-        if (pname.value.trim() === '') {
-            pname.style.border = 'solid 1px red'
-            setTimeout(function () {
-                pname.style.border = '';
-               
-            }, 3000);
+      setTimeout(function () {
+        color.style.border = "";
+      }, 3000);
+      return false;
+    } else if (
+      stock.value.trim() === "" ||
+      Number(stock.value) <= 0 ||
+      isNaN(stock.value)
+    ) {
+      stock.style.border = "solid 1px red";
 
-            return false;
-        }
-        else if (pdiscription.value.trim() === '' || pdiscription.value.trim().length < 20) {
+      setTimeout(function () {
+        stock.style.border = "";
+      }, 3000);
+      return false;
+    } else if (brand.value.trim() === "") {
+      brand.style.border = "solid 1px red";
 
-            pdiscription.style.border = 'solid 1px red';
+      setTimeout(function () {
+        brand.style.border = "";
+      }, 3000);
+      return false;
+    } else if (!category.value) {
+      category.style.border = "solid 1px red";
 
-
-            setTimeout(() => {
-                pdiscription.style.border = '';
-                
-            }, 3000);
-
-            return false;
-
-        }
-        else if (price.value.trim() === '' || Number(price.value) <= 0 || isNaN(price.value)) {
-
-            price.style.border = 'solid 1px red';
-           
-            setTimeout(function () {
-                price.style.border = '';
-               
-            }, 3000);
-            return false;
-        }
-
-
-
-        else if (oprice.value.trim() === '' || Number(oprice.value) <= 0 || isNaN(oprice.value)) {
-            oprice.style.border = 'solid 1px red';
-           
-            setTimeout(function () {
-               oprice.style.border = '';
-                
-            }, 3000);
-            return false;
-        }
-
-        
-        else if (color.value.trim() === '') {
-                 color.style.border = 'solid 1px red';
-           
-            setTimeout(function () {
-                color.style.border = '';
-                
-            }, 3000);
-            return false
-
-        }
-        
-        else if (stock.value.trim() === '' || Number(stock.value) <= 0 || isNaN(stock.value)) {
-                 stock.style.border = 'solid 1px red';
-           
-            setTimeout(function () {
-                stock.style.border = '';
-                
-            }, 3000);
-            return false
-
-        }
-        else if (brand.value.trim() === '') {
-                 brand.style.border = 'solid 1px red';
-           
-            setTimeout(function () {
-                brand.style.border = '';
-                
-            }, 3000);
-            return false
-
-        }
-        else if (!category.value) {
-                 category.style.border = 'solid 1px red';
-           
-            setTimeout(function () {
-                category.style.border = '';
-                
-            }, 3000);
-            return false
-
-        }
-        else {
-
-            true;
-        }
+      setTimeout(function () {
+        category.style.border = "";
+      }, 3000);
+      return false;
+    } else {
+      true;
     }
+  }
 </script>

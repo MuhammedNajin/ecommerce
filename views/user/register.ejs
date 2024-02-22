@@ -1,62 +1,148 @@
 <%- include('../layout/header.ejs') -%>
 
 <div class="wrapper">
-   
-    <div class="" style="margin-left: 4rem; margin-bottom: 2rem;">                         
-        <img src="img/logo.png" alt="">
-    </div>
-    
-    <form action="/signUp" method="post" onsubmit="return validate()">
-
-        <div class="input-box">
-            <%if(messages.uname) {%> 
-              <div class="text-danger serverError" style="position: absolute; top: -22px; left: 6px;"><%= messages.uname %></div> 
-            <%}%>
-            <div class="text-danger " id="userError" style="position: absolute; top: -22px; left: 6px;"></div>
-            <input type="text" name="uname" id="uname" placeholder="Enter your name"  style="padding: 10px; margin: 1rem, 0; ">
-        </div>
-
-        <div class="input-box">
-          <%if(messages.email) {%>
-             <div class="text-danger serverError"  style="position: absolute; top: -22px; left: 6px;"><%= messages.email %></div> 
-            <%}%>
-          <div class="text-danger" id="emailError" style="position: absolute; top: -22px; left: 6px;"></div>
-            <input type="text" name="email" id="email" placeholder="Enter your email"  style="padding: 10px; margin: 1rem, 0; ">
-          </div>
-
-        <div class="input-box">
-          <div class="text-danger" id="phoneErr" style="position: absolute; top: -22px; left: 6px;"></div>
-            <input type="tel" name="phone" id="phone" placeholder="Enter your phone"  style="padding: 10px; margin: 1rem, 0; ">
-          </div>
-     
-      <div class="input-box">
-        <div class="text-danger" id="passwordError" style="position: absolute; top: -22px; left: 6px;"></div>
-        <input type="password" name="password" id="password" placeholder="Create password"  style="padding: 10px; margin: 1rem, 0; ">
-      </div>
-      <div class="input-box">
-        <div class="text-danger" id="passwordError2" style="position: absolute; top: -22px; left: 6px;"></div>
-        <input type="password"  name="conform" id="conform" placeholder="Comform password" style="padding: 10px; margin: 1rem, 0; ">
-      </div>
-     
-      
-
-      <div class="input-box button">
-        <input type="Submit" value="Sign up" style=":hover{background-color: #ffff;}; margin-top: 1.3rem; ">
-      </div>
-
-      <div class="input-box" style="position: relative; ">
-        <img src="/img/google.png" alt="google logo"  style=" position:absolute; width: 30px; height:30px; top: 1.9rem; left: 9px;">
-        <a href="" class="btn btn-outline-dark" style="padding-top: .7rem;  padding-bottom: .7rem;  width: 22.5rem; margin-top: 1.3rem;">Log in with google</a>
-      </div>
-
-      <div class="text pt-2" style="">
-        <h3>have an account? <a href="/login" style="color: rgb(48, 94, 150); ">Log in</a></h3>
-      </div>
-    </form>
+  <div class="" style="margin-left: 4rem; margin-bottom: 2rem">
+    <img src="img/logo.png" alt="" />
   </div>
 
-  <script src="js/user/form-validation.js"></script>
+  <form action="/signUp" method="post" onsubmit="return validate()">
+    <div class="input-box">
+      <%if(messages.uname) {%>
+      <div
+        class="text-danger serverError"
+        style="position: absolute; top: -22px; left: 6px"
+      >
+        <%= messages.uname %>
+      </div>
+      <%}%>
+      <div
+        class="text-danger"
+        id="userError"
+        style="position: absolute; top: -22px; left: 6px"
+      ></div>
+      <input
+        type="text"
+        name="uname"
+        id="uname"
+        placeholder="Enter your name"
+        style="padding: 10px; margin: 1rem, 0"
+      />
+    </div>
+
+    <div class="input-box">
+      <%if(messages.email) {%>
+      <div
+        class="text-danger serverError"
+        style="position: absolute; top: -22px; left: 6px"
+      >
+        <%= messages.email %>
+      </div>
+      <%}%>
+      <div
+        class="text-danger"
+        id="emailError"
+        style="position: absolute; top: -22px; left: 6px"
+      ></div>
+      <input
+        type="text"
+        name="email"
+        id="email"
+        placeholder="Enter your email"
+        style="padding: 10px; margin: 1rem, 0"
+      />
+    </div>
+
+    <div class="input-box">
+      <div
+        class="text-danger"
+        id="phoneErr"
+        style="position: absolute; top: -22px; left: 6px"
+      ></div>
+      <input
+        type="tel"
+        name="phone"
+        id="phone"
+        placeholder="Enter your phone"
+        style="padding: 10px; margin: 1rem, 0"
+      />
+    </div>
+
+    <div class="input-box">
+      <div
+        class="text-danger"
+        id="passwordError"
+        style="position: absolute; top: -22px; left: 6px"
+      ></div>
+      <input
+        type="password"
+        name="password"
+        id="password"
+        placeholder="Create password"
+        style="padding: 10px; margin: 1rem, 0"
+      />
+    </div>
+    <div class="input-box">
+      <div
+        class="text-danger"
+        id="passwordError2"
+        style="position: absolute; top: -22px; left: 6px"
+      ></div>
+      <input
+        type="password"
+        name="conform"
+        id="conform"
+        placeholder="Comform password"
+        style="padding: 10px; margin: 1rem, 0"
+      />
+    </div>
+
+    <div class="input-box button">
+      <input
+        type="Submit"
+        value="Sign up"
+        style="
+          :hover {
+            background-color: #ffff;
+          }
+          margin-top: 1.3rem;
+        "
+      />
+    </div>
+
+    <div class="input-box" style="position: relative">
+      <img
+        src="/img/google.png"
+        alt="google logo"
+        style="
+          position: absolute;
+          width: 30px;
+          height: 30px;
+          top: 1.9rem;
+          left: 9px;
+        "
+      />
+      <a
+        href=""
+        class="btn btn-outline-dark"
+        style="
+          padding-top: 0.7rem;
+          padding-bottom: 0.7rem;
+          width: 22.5rem;
+          margin-top: 1.3rem;
+        "
+        >Log in with google</a
+      >
+    </div>
+
+    <div class="text pt-2" style="">
+      <h3>
+        have an account?
+        <a href="/login" style="color: rgb(48, 94, 150)">Log in</a>
+      </h3>
+    </div>
+  </form>
+</div>
+
+<script src="js/user/form-validation.js"></script>
 
 <%- include('../layout/footer.ejs') -%>
-
-
