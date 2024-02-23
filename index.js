@@ -36,7 +36,7 @@ app.use("*", (req, res) => {
 });
 
 mongoose
-  .connect("mongodb://127.0.0.1:27017/E-commers")
+  .connect("mongodb+srv://najinn675:naji123@cluster0.lvu9ql4.mongodb.net/")
   .then(() => {
     console.log("DB connected");
   })
