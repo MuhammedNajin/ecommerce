@@ -263,7 +263,7 @@
 <body class="bg-body-tertiary">
 
     <%- include('../partials/nav.ejs') -%>
-        <div class="container">
+        <div class="container" style="margin-bottom: 1rem;">
             <div class="container-fluid">
 
                
@@ -409,7 +409,9 @@
                       
                         <div class="col-8">
                             <div class="d-flex">
-                                <a style="margin-left: 38rem;"  href="/invoice?orderId=<%= orderId%>&index=<%=index%>" class="btn btn-primary col-3 "><span>Download invoice</span></a>
+                                <%if(product.status === 'delivered') {%>
+                                    <a style="margin-left: 38rem;"  href="/invoice?orderId=<%= orderId%>&index=<%=index%>" class="btn btn-primary col-3 "><span>Download invoice</span></a>
+                                <%}%>
                                 </div>
                             
                         </div>
@@ -510,9 +512,7 @@
                                                     <div class="step active">
                                                         <% const options={ weekday: 'short' , month: 'short' ,
                                                             day: 'numeric' }%>
-                                                            <% const
-                                                                formattedDate=order.date.toLocaleDateString('en-US',
-                                                                options)%>
+                                                            <% const formattedDate = order.date.toLocaleDateString('en-US', options)%>
                                                                 <div class="text-muted"
                                                                     style="position: absolute; top: 25px; left: -14px; font-size: 15px;">
                                                                     <%= formattedDate%>

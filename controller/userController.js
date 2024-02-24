@@ -134,7 +134,8 @@ const sentOtp = async (email) => {
       secure: true,
       auth: {
         user: "najinn675@gmail.com",
-        pass: "dnkc erej pptj fnif",
+        pass: 'cxty fwre zatm qdgl',
+
       },
     });
 

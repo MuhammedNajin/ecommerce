@@ -225,10 +225,8 @@
                         <div>
                           <span> <%= el.productId.name%> </span>
                           <div class="d-flex">
-                            <% const match=[['S', 'Small' ], ['M', 'Medium' ],
-                            ['L', "Large" ], ['XL', 'Exel' ], ['XXL', 'Double
-                            exel' ]]%> <%const size=match.find((size)=> (size[0]
-                            === el.size)) %>
+                            <% const match=[['S', 'Small' ], ['M', 'Medium' ], ['L', "Large" ], ['XL', 'Exel' ], ['XXL', 'Double exel' ]]%> 
+                            <%const size=match.find((size)=> (size[0] === el.size)) %>
                             <p class="me-2">
                               <span>Color: </span>
                               <%= el.productId.variant[el.product].color%>
@@ -257,13 +255,8 @@
                         "
                       ></div>
 
-                      <% const status=[['placed', 'your product as placed' ],
-                      ['outfordelivery', 'your seems to come soon' ],
-                      ['shipped', 'your product is shipped' ], ['delivered',
-                      'your product as delivered' ], ['canceled', 'product as
-                      canceled' ], ['returned', 'product as returned' ]]%>
-                      <%const text=status.find(( text )=> ( text[0] ===
-                      el.status)) %>
+                      <% const status=[['placed', 'your product as placed' ], ['outfordelivery', 'your seems to come soon' ], ['shipped', 'your product is shipped' ], ['delivered', 'your product as delivered' ], ['canceled', 'product as canceled' ], ['returned', 'product as returned' ]]%>
+                      <%const text=status.find(( text )=> ( text[0] ===  el.status)) %>
 
                       <div>
                         <p class="text-muted"><%= text[1]%></p>

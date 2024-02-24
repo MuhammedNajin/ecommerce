@@ -14,7 +14,7 @@
     <div class="row">
       <div class="col-lg-3 col-md-3">
         <div class="header__logo">
-          <a href="./index.html"><img src="img/logo.png" alt="" /></a>
+          <a href="/"><img src="img/logo.png" alt="" /></a>
         </div>
       </div>
       <div class="col-lg-6 col-md-6">
@@ -24,7 +24,7 @@
             <li><a href="/shop">Shop</a></li>
 
             <li><a href="/contact">Contacts</a></li>
-            <li><a href="./about.html">About Us</a></li>
+            <li><a href="/about">About Us</a></li>
           </ul>
         </nav>
       </div>
@@ -45,13 +45,9 @@
             </button>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="/account">Account</a></li>
-
               <%if(!locals.logedIn) {%>
-
               <li><a class="dropdown-item" href="/login">Login</a></li>
-
               <%}%>
-
               <li>
                 <%if(locals.logedIn) {%>
                 <form action="/logout" method="post">
