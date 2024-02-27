@@ -4,7 +4,7 @@ const mongoose = require("mongoose");
 
 app.use((req, res, next) => {
   console.log(req.path, req.method);
-  next();
+  next(); 
 });
 // make other http verbs with form
 const methodOverried = require("method-override");
