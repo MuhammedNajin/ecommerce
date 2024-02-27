@@ -6,7 +6,6 @@ app.use((req, res, next) => {
   console.log(req.path, req.method);
   next();
 });
-
 // make other http verbs with form
 const methodOverried = require("method-override");
 app.use(methodOverried("_method"));
