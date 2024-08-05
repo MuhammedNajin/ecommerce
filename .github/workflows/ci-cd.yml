@@ -42,12 +42,6 @@ jobs:
       with:
         version: 'latest'
 
-    - name: Create kubeconfig
-      run: |
-        mkdir -p $HOME/.kube
-        echo "${{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
-        chmod 600 $HOME/.kube/config
-
     - name: Debug information
       run: |
         kubectl config view --raw
