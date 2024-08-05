@@ -48,12 +48,6 @@ jobs:
     - name: Set up kubeconfig
       run: echo "${{ secrets.KUBECONFIG_DATA }}" > $HOME/.kube/config
 
-    - name: Debug information
-      run: |
-        kubectl config view --raw
-        kubectl cluster-info
-        kubectl get nodes
-
     - name: Deploy to Kubernetes
       run: |
         kubectl apply -f deployment.yaml
