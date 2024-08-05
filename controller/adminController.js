@@ -169,7 +169,9 @@ module.exports.login = async (req, res) => {
       res.redirect("/admin/login");
       console.log("incorrect email");
     }
-  } catch (error) {}
+  } catch (error) {
+    throw new Error();
+  }
 };
 
 module.exports.loadUser = async (req, res) => {
