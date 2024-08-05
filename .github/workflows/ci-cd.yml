@@ -42,9 +42,11 @@ jobs:
       with:
         version: 'latest'
 
+    - name: Create .kube directory
+      run: mkdir -p $HOME/.kube
+
     - name: Set up kubeconfig
-      run: |
-        echo "${{ secrets.KUBECONFIG_DATA }}" > $HOME/.kube/config
+      run: echo "${{ secrets.KUBECONFIG_DATA }}" > $HOME/.kube/config
 
     - name: Debug information
       run: |
