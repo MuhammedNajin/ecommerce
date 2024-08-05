@@ -170,8 +170,8 @@ module.exports.login = async (req, res) => {
       console.log("incorrect email");
     }
   } catch (error) {
-    throw new Error();
-    console.log(error)
+   console.log('heloo')
+   console.dir()
   }
 };
 
