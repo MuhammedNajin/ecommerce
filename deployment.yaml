@@ -18,7 +18,7 @@ spec:
         - name: ecommerce
           image: najinn675943/ecommerce:latest
           ports:
-            - containerPort: 8080  # Adjust the port number as per your application
+            - containerPort: 8001 # Adjust the port number as per your application
           env:
             - name: ENVIRONMENT_VARIABLE_NAME
               value: "value_of_the_variable"
