@@ -42,6 +42,10 @@ jobs:
       with:
         version: 'latest'
 
+    - name: Set up kubeconfig
+      run: |
+        echo "${{ secrets.KUBECONFIG_DATA }}" > $HOME/.kube/config
+
     - name: Debug information
       run: |
         kubectl config view --raw
