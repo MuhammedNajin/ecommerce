@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: ecommerce
-          image: najinn675943/ecommerce:v1.0.0
+          image: najinn675943/ecommerce:v1.1.2
           ports:
             - containerPort: 8001 # Adjust the port number as per your application
           env:
