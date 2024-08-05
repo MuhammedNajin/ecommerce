@@ -13,6 +13,7 @@ module.exports.loadCart = async (req, res) => {
     res.render("cart", { products: products });
   } catch (error) {
     console.log(error);
+    throw new Error(error);
   }
 };
 
@@ -61,7 +62,6 @@ module.exports.addToCart = async (req, res) => {
             }
           );
         } else {
-          console.log("hello");
           return res.json({ already: true });
         }
       } else {
