@@ -44,6 +44,9 @@ jobs:
         kubeconfig: ${{ secrets.KUBECONFIG }}
         context: docker-desktop
 
+    - name: Set Kubectl Context
+      run: kubectl config use-context docker-desktop
+
     - name: Deploy to Kubernetes
       run: |
         kubectl apply -f deployment.yaml --validate=false
