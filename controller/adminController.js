@@ -171,6 +171,7 @@ module.exports.login = async (req, res) => {
     }
   } catch (error) {
     throw new Error();
+    console.log(error)
   }
 };
 
