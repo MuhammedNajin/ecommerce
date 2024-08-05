@@ -42,9 +42,25 @@ jobs:
       with:
         version: 'latest'
 
+    - name: Create kubeconfig
+      run: |
+        mkdir -p $HOME/.kube
+        echo "${{ secrets.KUBECONFIG }}" | base64 -d > $HOME/.kube/config
+        chmod 600 $HOME/.kube/config
+
+    - name: Debug information
+      run: |
+        kubectl config view --raw
+        kubectl cluster-info
+        kubectl get nodes
+
     - name: Deploy to Kubernetes
-      env:
-        KUBECONFIG: ${{ secrets.KUBECONFIG }}
       run: |
         kubectl apply -f deployment.yaml
         kubectl apply -f service.yaml
+
+    - name: Verify deployment
+      run: |
+        kubectl get deployments
+        kubectl get services
+        kubectl get pods
