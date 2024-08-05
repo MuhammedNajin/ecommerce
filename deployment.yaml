@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ecommerce
+  labels:
+    app: ecommerce
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: ecommerce
+  template:
+    metadata:
+      labels:
+        app: ecommerce
+    spec:
+      containers:
+        - name: ecommerce
+          image: najinn675943/ecommerce:latest
+          ports:
+            - containerPort: 8080  # Adjust the port number as per your application
+          env:
+            - name: ENVIRONMENT_VARIABLE_NAME
+              value: "value_of_the_variable"
+          resources:
+            limits:
+              cpu: "0.5"   # Adjust CPU limit as needed
+              memory: "512Mi"  # Adjust memory limit as needed
+            requests:
+              cpu: "0.2"   # Adjust CPU request as needed
+              memory: "256Mi"  # Adjust memory request as needed

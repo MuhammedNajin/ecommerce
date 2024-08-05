@@ -1,6 +1,6 @@
 const User = require("../models/userModel");
 const Catagery = require("../models/cetagory");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const product = require("../models/product");
 const Order = require("../models/order");
 const Wallet = require("../models/walletModal");

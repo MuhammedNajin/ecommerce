@@ -1,5 +1,5 @@
 const User = require("../models/userModel");
-const bcrypt = require("bcrypt");
+// const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const verifyOtp = require("../models/otpVerification");
 const Product = require("../models/product");
@@ -43,9 +43,9 @@ module.exports.userLogin = async (req, res) => {
         } else {
           const enteredPass = req.body.password;
           const databasePass = user.password;
-          const pass = await bcrypt.compare(enteredPass, databasePass);
+          // const pass = await bcrypt.compare(enteredPass, databasePass);
           console.log(pass);
-          if (pass) {
+          if (enteredPass === databasePass) {
             req.session.user = {
               _id: user._id,
               name: user.name,
@@ -97,13 +97,13 @@ module.exports.insertUser = async (req, res) => {
       req.flash("email", "Email already exists");
       res.redirect("/signUp");
     } else {
-      const passHash = await bcrypt.hash(req.body.password, 10);
+      // const passHash = await bcrypt.hash(req.body.password, 10);
 
       const user = new User({
         name: req.body.uname,
         email: req.body.email,
         mobile: req.body.phone,
-        password: passHash,
+        password: req.body.password,
         isAdmin: false,
         isBlocked: false,
         verified: false,
@@ -149,11 +149,11 @@ const sentOtp = async (email) => {
     };
 
     await transport.sendMail(mailOption);
-    const hashOTP = await bcrypt.hash(createdOTP, 10);
+    // const hashOTP = await bcrypt.hash(createdOTP, 10);
 
     const otp = new verifyOtp({
       Email: email,
-      otp: hashOTP,
+      otp: createdOTP,
     });
 
     await otp.save();
@@ -210,9 +210,9 @@ module.exports.verifyOTP = async (req, res) => {
 
     if (verify) {
       const { otp: hashed } = verify;
-      const compare = await bcrypt.compare(otp, hashed);
+      // const compare = await bcrypt.compare(otp, hashed);
       console.log(compare);
-      if (compare) {
+      if (otp == hashed) {
         const user = await User.findOne({ email: email });
 
         if (user) {
@@ -259,9 +259,9 @@ module.exports.otpLogin = async (req, res) => {
     const find = await verifyOtp.findOne({ Email: email });
 
     if (find) {
-      const compare = await bcrypt.compare(otp, find.otp);
+      // const compare = await bcrypt.compare(otp, find.otp);
       const user = await User.findOne({ email: email });
-      if (compare) {
+      if (otp == find?.otp) {
         req.session.user = {
           _id: user._id,
           name: user.name,
@@ -441,9 +441,9 @@ module.exports.changePassword = async (req, res) => {
     }
 
     const user = await User.findById({ _id: userId });
-    const oldpass = await bcrypt.compare(oldPassword, user.password);
+    // const oldpass = await bcrypt.compare(oldPassword, user.password);
 
-    if (!oldpass) {
+    if (oldPassword === user.password) {
       console.log(oldpass, "heloo2");
       return res.json({ old: true, massage: "enter correct old password" });
     }
@@ -459,12 +459,12 @@ module.exports.changePassword = async (req, res) => {
       return res.json({ new: true, massage: "Enter strong password" });
     }
 
-    const hashPass = await bcrypt.hash(newPassword, 10);
+    // const hashPass = await bcrypt.hash(newPassword, 10);
     const changePassword = await User.findByIdAndUpdate(
       { _id: userId },
       {
         $set: {
-          password: hashPass,
+          password: newPassword,
         },
       }
     );
